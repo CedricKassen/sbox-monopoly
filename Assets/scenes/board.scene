@@ -1,5 +1,5 @@
 {
-  "__guid": "325a4042-0696-43dd-a79d-dcc314299ba3",
+  "__guid": "defd1c17-b5ed-4782-a598-24cd34ee0cc6",
   "GameObjects": [
     {
       "__guid": "bfc59c12-1ed2-4f91-8956-a95a315eac3c",
@@ -65,7 +65,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "0b6a18bf-fdb8-4661-970e-ef635bfa9baa",
           "BodyGroups": 18446744073709551615,
-          "MaterialOverride": "materials/default.vmat",
+          "MaterialOverride": "materials/board.vmat",
           "Model": "models/dev/plane.vmdl",
           "RenderType": "On",
           "Tint": "0.39546,0.51163,0.27128,1"
@@ -77,126 +77,6 @@
           "IsTrigger": false,
           "Scale": "100,100,10",
           "Static": false
-        }
-      ]
-    },
-    {
-      "__guid": "3c2490ef-54a0-49bb-8f13-490e40aa51d1",
-      "Flags": 0,
-      "Name": "Cube",
-      "Position": "21.41682,74.1244,14.40159",
-      "Rotation": "0.00000001819328,-0.00000000000000008235059,0.3052325,0.952278",
-      "Scale": "0.5632889,0.5632889,0.5632889",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "b9121ffa-617c-4ccc-a2aa-8acc98727590",
-          "BodyGroups": 18446744073709551615,
-          "MaterialOverride": "materials/default.vmat",
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "1,0,0.93333,1"
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "8bb3ebcf-1ec9-4b20-bf31-4aece0950008",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "50,50,50",
-          "Static": false
-        },
-        {
-          "__type": "Sandbox.Rigidbody",
-          "__guid": "4aaa0334-6785-4716-9bae-869559ea6e10",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {},
-          "MassOverride": 0,
-          "MotionEnabled": true,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        }
-      ]
-    },
-    {
-      "__guid": "523e3e8f-a4ec-4ec1-af9a-d86ffc9c17e1",
-      "Flags": 0,
-      "Name": "Cube (1)",
-      "Position": "40.81348,46.97572,14.40159",
-      "Rotation": "0.00000001819328,-0.00000000000000008235059,0.3052325,0.952278",
-      "Scale": "0.5632889,0.5632889,0.5632889",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "9e8a546d-a41d-44b5-9906-22cea00e1066",
-          "BodyGroups": 18446744073709551615,
-          "MaterialOverride": "materials/default.vmat",
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "1,0,0.93333,1"
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "adf22580-7a25-4d7f-b1c3-3fb8fabf1612",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "50,50,50",
-          "Static": false
-        },
-        {
-          "__type": "Sandbox.Rigidbody",
-          "__guid": "e53bfcb0-7f44-41d0-8d51-263bdc173a57",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {},
-          "MassOverride": 0,
-          "MotionEnabled": true,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        }
-      ]
-    },
-    {
-      "__guid": "5b483a09-bbf2-4949-98c7-a73b789d0ee7",
-      "Flags": 0,
-      "Name": "Cube (2)",
-      "Position": "49.53707,34.08896,43.67614",
-      "Rotation": "0.00000001819328,-0.00000000000000008235059,0.3052325,0.952278",
-      "Scale": "0.5632889,0.5632889,0.5632889",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "ac284ab8-cdb7-4ba6-92de-d9be36088b1b",
-          "BodyGroups": 18446744073709551615,
-          "MaterialOverride": "materials/default.vmat",
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "1,0,0.93333,1"
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "ca4eb284-231e-4c84-9bc4-7ba89962f307",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "50,50,50",
-          "Static": false
-        },
-        {
-          "__type": "Sandbox.Rigidbody",
-          "__guid": "61ef15dd-3eb2-4f52-8b9a-315f477f79b7",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {},
-          "MassOverride": 0,
-          "MotionEnabled": true,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
         }
       ]
     },
@@ -270,6 +150,91 @@
           "__type": "Sandbox.Sharpen",
           "__guid": "0bffee5e-19f2-41c4-88f9-faefbcce6bf4",
           "Scale": 0.2
+        }
+      ]
+    },
+    {
+      "__guid": "aead691d-0924-4b81-aa49-050395445eed",
+      "Flags": 0,
+      "Name": "Car",
+      "Position": "-192,-196.9641,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "0188f4c0-ae78-4230-ba33-3c4dc8fe7438",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/car.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "fac064ac-ba99-4741-bd80-9e615fe6eae4",
+      "Flags": 0,
+      "Name": "Ship",
+      "Position": "-210.3275,-192,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "30f6c90b-a6b2-407b-93d5-ed1d47b0c918",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/ship.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "bcf4067d-926a-412f-a165-01fcd2c16013",
+      "Flags": 0,
+      "Name": "Thimble",
+      "Position": "-202.5445,-226.2621,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "61a11385-6e3d-4133-ada2-4a0c0702ea5b",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/thimble.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "8403da3d-4511-4464-a296-5083fd865115",
+      "Flags": 0,
+      "Name": "Tophead",
+      "Position": "-226.4753,-194.3915,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "172edb99-1bef-456f-bb97-03ffd330681e",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/tophat.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "85038edd-4cde-44bb-82bf-e2c07f5b1bf7",
+      "Flags": 0,
+      "Name": "Object",
+      "Position": "-220.4864,-230.2912,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "2830436a-3675-46a9-917f-b536ed927435",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/wheelbarrow.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
         }
       ]
     }
