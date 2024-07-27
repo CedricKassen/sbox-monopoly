@@ -164,6 +164,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "0188f4c0-ae78-4230-ba33-3c4dc8fe7438",
           "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/game_piece.vmat",
           "Model": "models/car.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
@@ -181,6 +182,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "30f6c90b-a6b2-407b-93d5-ed1d47b0c918",
           "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/game_piece.vmat",
           "Model": "models/ship.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
@@ -198,6 +200,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "61a11385-6e3d-4133-ada2-4a0c0702ea5b",
           "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/game_piece.vmat",
           "Model": "models/thimble.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
@@ -215,6 +218,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "172edb99-1bef-456f-bb97-03ffd330681e",
           "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/game_piece.vmat",
           "Model": "models/tophat.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
@@ -232,6 +236,7 @@
           "__type": "Sandbox.ModelRenderer",
           "__guid": "2830436a-3675-46a9-917f-b536ed927435",
           "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/game_piece.vmat",
           "Model": "models/wheelbarrow.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
