@@ -12,7 +12,8 @@
 {
 
 	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
-	public bool Visible { get; set; } = false;
+	[Property] public bool Visible { get; set; } = false;
+	[Property] GameObject GameObject { get; set; }
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
