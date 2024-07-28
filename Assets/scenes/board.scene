@@ -1,5 +1,5 @@
 {
-  "__guid": "bf048b2e-1f67-4495-87db-b20875a72ebb",
+  "__guid": "ac45d296-4247-41ad-a979-a07d457b0457",
   "GameObjects": [
     {
       "__guid": "bfc59c12-1ed2-4f91-8956-a95a315eac3c",
@@ -206,32 +206,6 @@
       ]
     },
     {
-      "__guid": "dee468be-285b-4063-b660-c31ef8e11411",
-      "Flags": 0,
-      "Name": "Camera",
-      "Position": "-319.2052,-12.50265,162.3727",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.CameraComponent",
-          "__guid": "e0b2ed75-701c-464e-ad2a-bfc589d48c7b",
-          "BackgroundColor": "0.33333,0.46275,0.52157,1",
-          "ClearFlags": "All",
-          "FieldOfView": 102.66,
-          "IsMainCamera": false,
-          "Orthographic": false,
-          "OrthographicHeight": 1204,
-          "Priority": 1,
-          "RenderExcludeTags": "",
-          "RenderTags": "",
-          "TargetEye": "None",
-          "Viewport": "0,0,1,1",
-          "ZFar": 10000,
-          "ZNear": 10
-        }
-      ]
-    },
-    {
       "__guid": "72c8d5ec-b1e1-4a66-953a-eb259093d148",
       "Flags": 0,
       "Name": "Game Pieces",
@@ -260,7 +234,7 @@
               "__guid": "dc463266-ba4b-4d8d-90ad-89b113d0c864",
               "Flags": 0,
               "Name": "Camera",
-              "Position": "-114.9357,4.825165,126.0824",
+              "Position": "-115.2446,5.413605,124.8364",
               "Rotation": "-0.00000001031975,0.3826834,-0.000000004274582,0.9238797",
               "Tags": "maincamera",
               "Enabled": true,
@@ -268,10 +242,11 @@
                 {
                   "__type": "Sandbox.CameraComponent",
                   "__guid": "ba1272c2-60ac-41d4-8bb7-cf80e4c650cd",
+                  "__enabled": false,
                   "BackgroundColor": "0.33333,0.46275,0.52157,1",
                   "ClearFlags": "All",
                   "FieldOfView": 60,
-                  "IsMainCamera": true,
+                  "IsMainCamera": false,
                   "Orthographic": false,
                   "OrthographicHeight": 1204,
                   "Priority": 1,
@@ -316,10 +291,11 @@
                 {
                   "__type": "Sandbox.CameraComponent",
                   "__guid": "32e5735a-3095-48ad-a806-000fdd326e78",
+                  "__enabled": false,
                   "BackgroundColor": "0.33333,0.46275,0.52157,1",
                   "ClearFlags": "All",
                   "FieldOfView": 60,
-                  "IsMainCamera": true,
+                  "IsMainCamera": false,
                   "Orthographic": false,
                   "OrthographicHeight": 1204,
                   "Priority": 1,
@@ -364,10 +340,11 @@
                 {
                   "__type": "Sandbox.CameraComponent",
                   "__guid": "4bc55f65-b166-44b5-8eae-12da8f48bf1e",
+                  "__enabled": false,
                   "BackgroundColor": "0.33333,0.46275,0.52157,1",
                   "ClearFlags": "All",
                   "FieldOfView": 60,
-                  "IsMainCamera": true,
+                  "IsMainCamera": false,
                   "Orthographic": false,
                   "OrthographicHeight": 1204,
                   "Priority": 1,
@@ -412,10 +389,11 @@
                 {
                   "__type": "Sandbox.CameraComponent",
                   "__guid": "5074275c-1171-4272-b39b-622e28790fd9",
+                  "__enabled": false,
                   "BackgroundColor": "0.33333,0.46275,0.52157,1",
                   "ClearFlags": "All",
                   "FieldOfView": 60,
-                  "IsMainCamera": true,
+                  "IsMainCamera": false,
                   "Orthographic": false,
                   "OrthographicHeight": 1204,
                   "Priority": 1,
@@ -460,10 +438,11 @@
                 {
                   "__type": "Sandbox.CameraComponent",
                   "__guid": "ead6dec7-19d1-4433-b337-f2122d7cb25d",
+                  "__enabled": false,
                   "BackgroundColor": "0.33333,0.46275,0.52157,1",
                   "ClearFlags": "All",
                   "FieldOfView": 60,
-                  "IsMainCamera": true,
+                  "IsMainCamera": false,
                   "Orthographic": false,
                   "OrthographicHeight": 1204,
                   "Priority": 1,
