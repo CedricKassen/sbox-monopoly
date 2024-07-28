@@ -21,6 +21,75 @@
       ]
     },
     {
+      "__guid": "659efa50-4b32-4efc-a4f3-28917e4d503c",
+      "Flags": 0,
+      "Name": "CameraManager",
+      "Position": "-1586.981,21.80964,1559.919",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CameraManager",
+          "__guid": "275dd3c1-f95f-4bad-a7ac-bd0acca3ed33",
+          "Cameras": [
+            {
+              "Name": "topdown",
+              "Camera": {
+                "_type": "component",
+                "component_id": "cf3cbf96-22b6-4be4-a5d0-672a96c17f9f",
+                "go": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
+                "component_type": "CameraComponent"
+              }
+            },
+            {
+              "Name": "pTophead",
+              "Camera": {
+                "_type": "component",
+                "component_id": "32e5735a-3095-48ad-a806-000fdd326e78",
+                "go": "3d90eec4-745d-49bf-bde7-fe96a3772520",
+                "component_type": "CameraComponent"
+              }
+            },
+            {
+              "Name": "pWheelbarrow",
+              "Camera": {
+                "_type": "component",
+                "component_id": "ba1272c2-60ac-41d4-8bb7-cf80e4c650cd",
+                "go": "dc463266-ba4b-4d8d-90ad-89b113d0c864",
+                "component_type": "CameraComponent"
+              }
+            },
+            {
+              "Name": "pThimble",
+              "Camera": {
+                "_type": "component",
+                "component_id": "4bc55f65-b166-44b5-8eae-12da8f48bf1e",
+                "go": "1c74defe-5315-4d2e-b711-61b0dfc510a7",
+                "component_type": "CameraComponent"
+              }
+            },
+            {
+              "Name": "pShip",
+              "Camera": {
+                "_type": "component",
+                "component_id": "5074275c-1171-4272-b39b-622e28790fd9",
+                "go": "046a832b-0f2d-428a-b61d-b5de440c5db9",
+                "component_type": "CameraComponent"
+              }
+            },
+            {
+              "Name": "pCar",
+              "Camera": {
+                "_type": "component",
+                "component_id": "ead6dec7-19d1-4433-b337-f2122d7cb25d",
+                "go": "5874bb2e-c209-4bc7-bafb-b8e6ed79e481",
+                "component_type": "CameraComponent"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "__guid": "00344a8c-fa5e-45ae-b12a-10bb781a1dc3",
       "Flags": 0,
       "Name": "2D Skybox",
@@ -175,16 +244,6 @@
               "Model": "models/wheelbarrow.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "InputHandler",
-              "__guid": "d20d28e5-11d0-4c1f-86e8-506b0f3704b1",
-              "Camera": {
-                "_type": "component",
-                "component_id": "ba1272c2-60ac-41d4-8bb7-cf80e4c650cd",
-                "go": "dc463266-ba4b-4d8d-90ad-89b113d0c864",
-                "component_type": "CameraComponent"
-              }
             }
           ],
           "Children": [
