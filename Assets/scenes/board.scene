@@ -164,7 +164,7 @@
           "__guid": "85038edd-4cde-44bb-82bf-e2c07f5b1bf7",
           "Flags": 0,
           "Name": "Wheelbarrow",
-          "Position": "-190.243,0.08163452,144.9811",
+          "Position": "-190.243,1.936279,144.9811",
           "Enabled": true,
           "Components": [
             {
@@ -175,6 +175,46 @@
               "Model": "models/wheelbarrow.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "InputHandler",
+              "__guid": "d20d28e5-11d0-4c1f-86e8-506b0f3704b1",
+              "Camera": {
+                "_type": "component",
+                "component_id": "ba1272c2-60ac-41d4-8bb7-cf80e4c650cd",
+                "go": "dc463266-ba4b-4d8d-90ad-89b113d0c864",
+                "component_type": "CameraComponent"
+              }
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "dc463266-ba4b-4d8d-90ad-89b113d0c864",
+              "Flags": 0,
+              "Name": "Camera",
+              "Position": "-114.9357,4.825165,126.0824",
+              "Rotation": "-0.00000001031975,0.3826834,-0.000000004274582,0.9238797",
+              "Tags": "maincamera",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.CameraComponent",
+                  "__guid": "ba1272c2-60ac-41d4-8bb7-cf80e4c650cd",
+                  "BackgroundColor": "0.33333,0.46275,0.52157,1",
+                  "ClearFlags": "All",
+                  "FieldOfView": 60,
+                  "IsMainCamera": true,
+                  "Orthographic": false,
+                  "OrthographicHeight": 1204,
+                  "Priority": 1,
+                  "RenderExcludeTags": "",
+                  "RenderTags": "",
+                  "TargetEye": "None",
+                  "Viewport": "0,0,1,1",
+                  "ZFar": 10000,
+                  "ZNear": 10
+                }
+              ]
             }
           ]
         },
@@ -194,6 +234,36 @@
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
+          ],
+          "Children": [
+            {
+              "__guid": "3d90eec4-745d-49bf-bde7-fe96a3772520",
+              "Flags": 0,
+              "Name": "Camera",
+              "Position": "-108.9467,0.8657837,126.0826",
+              "Rotation": "-0.00000001031975,0.3826834,-0.000000004274582,0.9238797",
+              "Tags": "maincamera",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.CameraComponent",
+                  "__guid": "32e5735a-3095-48ad-a806-000fdd326e78",
+                  "BackgroundColor": "0.33333,0.46275,0.52157,1",
+                  "ClearFlags": "All",
+                  "FieldOfView": 60,
+                  "IsMainCamera": true,
+                  "Orthographic": false,
+                  "OrthographicHeight": 1204,
+                  "Priority": 1,
+                  "RenderExcludeTags": "",
+                  "RenderTags": "",
+                  "TargetEye": "None",
+                  "Viewport": "0,0,1,1",
+                  "ZFar": 10000,
+                  "ZNear": 10
+                }
+              ]
+            }
           ]
         },
         {
@@ -211,6 +281,36 @@
               "Model": "models/thimble.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "1c74defe-5315-4d2e-b711-61b0dfc510a7",
+              "Flags": 0,
+              "Name": "Camera",
+              "Position": "-118.0037,10.41444,123.4108",
+              "Rotation": "-0.00000001031975,0.3826834,-0.000000004274582,0.9238797",
+              "Tags": "maincamera",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.CameraComponent",
+                  "__guid": "4bc55f65-b166-44b5-8eae-12da8f48bf1e",
+                  "BackgroundColor": "0.33333,0.46275,0.52157,1",
+                  "ClearFlags": "All",
+                  "FieldOfView": 60,
+                  "IsMainCamera": true,
+                  "Orthographic": false,
+                  "OrthographicHeight": 1204,
+                  "Priority": 1,
+                  "RenderExcludeTags": "",
+                  "RenderTags": "",
+                  "TargetEye": "None",
+                  "Viewport": "0,0,1,1",
+                  "ZFar": 10000,
+                  "ZNear": 10
+                }
+              ]
             }
           ]
         },
@@ -230,6 +330,36 @@
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
+          ],
+          "Children": [
+            {
+              "__guid": "046a832b-0f2d-428a-b61d-b5de440c5db9",
+              "Flags": 0,
+              "Name": "Camera",
+              "Position": "-108.6916,-1.525726,123.9748",
+              "Rotation": "-0.00000001031975,0.3826834,-0.000000004274582,0.9238797",
+              "Tags": "maincamera",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.CameraComponent",
+                  "__guid": "5074275c-1171-4272-b39b-622e28790fd9",
+                  "BackgroundColor": "0.33333,0.46275,0.52157,1",
+                  "ClearFlags": "All",
+                  "FieldOfView": 60,
+                  "IsMainCamera": true,
+                  "Orthographic": false,
+                  "OrthographicHeight": 1204,
+                  "Priority": 1,
+                  "RenderExcludeTags": "",
+                  "RenderTags": "",
+                  "TargetEye": "None",
+                  "Viewport": "0,0,1,1",
+                  "ZFar": 10000,
+                  "ZNear": 10
+                }
+              ]
+            }
           ]
         },
         {
@@ -247,6 +377,36 @@
               "Model": "models/car.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "5874bb2e-c209-4bc7-bafb-b8e6ed79e481",
+              "Flags": 0,
+              "Name": "Camera",
+              "Position": "-104.7906,3.43837,124.2825",
+              "Rotation": "-0.00000001031975,0.3826834,-0.000000004274582,0.9238797",
+              "Tags": "maincamera",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.CameraComponent",
+                  "__guid": "ead6dec7-19d1-4433-b337-f2122d7cb25d",
+                  "BackgroundColor": "0.33333,0.46275,0.52157,1",
+                  "ClearFlags": "All",
+                  "FieldOfView": 60,
+                  "IsMainCamera": true,
+                  "Orthographic": false,
+                  "OrthographicHeight": 1204,
+                  "Priority": 1,
+                  "RenderExcludeTags": "",
+                  "RenderTags": "",
+                  "TargetEye": "None",
+                  "Viewport": "0,0,1,1",
+                  "ZFar": 10000,
+                  "ZNear": 10
+                }
+              ]
             }
           ]
         }
