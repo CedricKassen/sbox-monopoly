@@ -1,5 +1,5 @@
 {
-  "__guid": "defd1c17-b5ed-4782-a598-24cd34ee0cc6",
+  "__guid": "bf048b2e-1f67-4495-87db-b20875a72ebb",
   "GameObjects": [
     {
       "__guid": "bfc59c12-1ed2-4f91-8956-a95a315eac3c",
@@ -30,62 +30,44 @@
         {
           "__type": "CameraManager",
           "__guid": "275dd3c1-f95f-4bad-a7ac-bd0acca3ed33",
-          "Cameras": [
-            {
-              "Name": "topdown",
-              "Camera": {
-                "_type": "component",
-                "component_id": "cf3cbf96-22b6-4be4-a5d0-672a96c17f9f",
-                "go": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
-                "component_type": "CameraComponent"
-              }
+          "Cameras": {
+            "topdown": {
+              "_type": "component",
+              "component_id": "cf3cbf96-22b6-4be4-a5d0-672a96c17f9f",
+              "go": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
+              "component_type": "CameraComponent"
             },
-            {
-              "Name": "pTophead",
-              "Camera": {
-                "_type": "component",
-                "component_id": "32e5735a-3095-48ad-a806-000fdd326e78",
-                "go": "3d90eec4-745d-49bf-bde7-fe96a3772520",
-                "component_type": "CameraComponent"
-              }
+            "pTophat": {
+              "_type": "component",
+              "component_id": "32e5735a-3095-48ad-a806-000fdd326e78",
+              "go": "3d90eec4-745d-49bf-bde7-fe96a3772520",
+              "component_type": "CameraComponent"
             },
-            {
-              "Name": "pWheelbarrow",
-              "Camera": {
-                "_type": "component",
-                "component_id": "ba1272c2-60ac-41d4-8bb7-cf80e4c650cd",
-                "go": "dc463266-ba4b-4d8d-90ad-89b113d0c864",
-                "component_type": "CameraComponent"
-              }
+            "p\u0027Wheelbarrow": {
+              "_type": "component",
+              "component_id": "ba1272c2-60ac-41d4-8bb7-cf80e4c650cd",
+              "go": "dc463266-ba4b-4d8d-90ad-89b113d0c864",
+              "component_type": "CameraComponent"
             },
-            {
-              "Name": "pThimble",
-              "Camera": {
-                "_type": "component",
-                "component_id": "4bc55f65-b166-44b5-8eae-12da8f48bf1e",
-                "go": "1c74defe-5315-4d2e-b711-61b0dfc510a7",
-                "component_type": "CameraComponent"
-              }
+            "pThimble": {
+              "_type": "component",
+              "component_id": "4bc55f65-b166-44b5-8eae-12da8f48bf1e",
+              "go": "1c74defe-5315-4d2e-b711-61b0dfc510a7",
+              "component_type": "CameraComponent"
             },
-            {
-              "Name": "pShip",
-              "Camera": {
-                "_type": "component",
-                "component_id": "5074275c-1171-4272-b39b-622e28790fd9",
-                "go": "046a832b-0f2d-428a-b61d-b5de440c5db9",
-                "component_type": "CameraComponent"
-              }
+            "pShip": {
+              "_type": "component",
+              "component_id": "5074275c-1171-4272-b39b-622e28790fd9",
+              "go": "046a832b-0f2d-428a-b61d-b5de440c5db9",
+              "component_type": "CameraComponent"
             },
-            {
-              "Name": "pCar",
-              "Camera": {
-                "_type": "component",
-                "component_id": "ead6dec7-19d1-4433-b337-f2122d7cb25d",
-                "go": "5874bb2e-c209-4bc7-bafb-b8e6ed79e481",
-                "component_type": "CameraComponent"
-              }
+            "pCar": {
+              "_type": "component",
+              "component_id": "ead6dec7-19d1-4433-b337-f2122d7cb25d",
+              "go": "5874bb2e-c209-4bc7-bafb-b8e6ed79e481",
+              "component_type": "CameraComponent"
             }
-          ]
+          }
         }
       ]
     },
