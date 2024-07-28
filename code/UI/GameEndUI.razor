@@ -1,12 +1,17 @@
 @using System.ComponentModel.Design.Serialization
 @using System.Diagnostics
 @using Sandbox;
+@using Sandbox.Events
+@using Sandbox.Events.GameStateEvents
 @using Sandbox.UI;
 @inherits PanelComponent
 
+
 <root class="@(Visible ? "" : "hide")">
-	<div class="title">@MyStringValue</div>
-</root>
+       	<div class="title">@MyStringValue</div>
+       	<button onclick=@PressEnd>Quit</button>
+       	<button onclick=@PressNew>New Round</button>
+       </root> 
 
 @code
 {
@@ -22,6 +27,17 @@
 	{ 
 		return System.HashCode.Combine(Visible);
 	}
+	
+	void PressNew()
+	{
+		GameObject.Dispatch(new JoinLobbyEvent());
+	}
+	
+	void PressEnd()
+	{
+		GameObject.Dispatch(new LeaveLobbyEvent());
+	}	
+	
 	
 }
 

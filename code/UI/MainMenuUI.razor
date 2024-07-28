@@ -1,10 +1,16 @@
 @using System.Diagnostics
 @using Sandbox;
+@using Sandbox.Events
+@using Sandbox.Events.GameStateEvents
 @using Sandbox.UI;
-@inherits PanelComponent
+@inherits PanelComponent 
+
 
 <root class="@(Visible ? "" : "hide")">
 	<div class="title">@MyStringValue</div>
+	
+	<button onclick="@PressHost">Host</button>
+	<button onclick="@PressJoin">Join</button>
 </root>
 
 @code
@@ -20,8 +26,18 @@
 	/// </summary>
 	protected override int BuildHash()
 	{
-		Log.Info("Start");
 		return System.HashCode.Combine(Visible);
 	}
+
+
+	void PressHost()
+	{
+		GameObject.Dispatch(new CreateLobbyEvent());
+	}
 	
+	void PressJoin()
+	{
+		GameObject.Dispatch(new JoinLobbyEvent());
+	}
+
 }
