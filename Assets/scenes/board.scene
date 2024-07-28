@@ -137,6 +137,7 @@
       "Name": "Camera",
       "Position": "0.667574,-1.854534,1017.005",
       "Rotation": "0.00000002652705,0.7071068,-0.00000002652705,0.7071068",
+      "Tags": "maincamera",
       "Enabled": true,
       "Components": [
         {
@@ -145,7 +146,7 @@
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
-          "IsMainCamera": true,
+          "IsMainCamera": false,
           "Orthographic": false,
           "OrthographicHeight": 1204,
           "Priority": 1,
@@ -201,6 +202,32 @@
           "__type": "Sandbox.Sharpen",
           "__guid": "0bffee5e-19f2-41c4-88f9-faefbcce6bf4",
           "Scale": 0.2
+        }
+      ]
+    },
+    {
+      "__guid": "dee468be-285b-4063-b660-c31ef8e11411",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "-319.2052,-12.50265,162.3727",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "e0b2ed75-701c-464e-ad2a-bfc589d48c7b",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 102.66,
+          "IsMainCamera": false,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
         }
       ]
     },
@@ -851,6 +878,202 @@
           "Name": "Blue2",
           "Position": "68.12912,-176.6429,-61.09317",
           "Enabled": true
+        }
+      ]
+    },
+    {
+      "__guid": "6ec7a419-1af6-4ba3-9324-f17037999c7a",
+      "Flags": 0,
+      "Name": "UI",
+      "Position": "-548.0097,-103.9391,235.213",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "6980e3d6-6586-4183-b5a5-330b92e9c25b",
+          "Flags": 0,
+          "Name": "LobbyCreation",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "d939d0ed-6505-41cd-a271-c303839846c4",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
+              "__type": "LobbyCreationUI",
+              "__guid": "91e5f689-0a03-4b70-a121-8cf1ac52b1ac",
+              "MyStringValue": "Host!",
+              "Visible": false
+            }
+          ]
+        },
+        {
+          "__guid": "6cc29126-657e-444c-a958-21f76baabf55",
+          "Flags": 0,
+          "Name": "LobbyHub",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "dd977d51-0442-4562-ab62-698f1ec7ad58",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
+              "__type": "LobbyHubUI",
+              "__guid": "bfcac26e-abee-4eb3-852e-3a40c0958248",
+              "MyStringValue": "Join!",
+              "Visible": false
+            }
+          ]
+        },
+        {
+          "__guid": "02791e92-fb19-4ca1-a5a2-78f2c99cfc8a",
+          "Flags": 0,
+          "Name": "Ingame",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "8ecf6c86-49e0-49e0-b36d-b6e3ba2f8db6",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
+              "__type": "IngameUI",
+              "__guid": "8a21c3a9-28d5-40b1-afda-112e9978ee09",
+              "MyStringValue": "Play!",
+              "Visible": false
+            }
+          ]
+        },
+        {
+          "__guid": "d0dbf866-9ea1-44b3-896c-70ad700cfbc3",
+          "Flags": 0,
+          "Name": "GameEndScreen",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "2b9f6516-cc79-45b7-8fb9-a6918eb4ba50",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
+              "__type": "GameEndUI",
+              "__guid": "577d3b70-a612-44c1-bc73-dc334356865a",
+              "MyStringValue": "Cedruu win!",
+              "Visible": false
+            }
+          ]
+        },
+        {
+          "__guid": "67facf4e-d079-4980-9ba5-78588aed10f0",
+          "Flags": 0,
+          "Name": "MainMenu",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "01f674f9-ff5a-4c48-b8a2-f3e9067afe5d",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
+              "__type": "MainMenuUI",
+              "__guid": "246f6b76-e998-44f8-a4ed-2e17ad8bb3de",
+              "MyStringValue": "Menu!",
+              "Visible": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__guid": "129d0411-3327-4456-91b2-c34a354928e0",
+      "Flags": 0,
+      "Name": "GameLoop",
+      "Position": "-319.2052,-12.50265,162.3727",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "4d880113-7b4d-4756-ad95-7eed4744d084",
+          "Flags": 0,
+          "Name": "GameStateManager",
+          "Position": "-228.8045,-91.43645,72.84029",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameStateManager",
+              "__guid": "380afe52-8c9a-4bc9-8792-640927fe2252",
+              "CurrentState": "INGAME",
+              "UiManager": {
+                "_type": "component",
+                "component_id": "d581e82e-944e-4fd2-b998-735961c5bd1c",
+                "go": "6ab68362-7c7a-4dc1-b7b1-1b1d597d8677",
+                "component_type": "UiManager"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "6ab68362-7c7a-4dc1-b7b1-1b1d597d8677",
+          "Flags": 0,
+          "Name": "UiManager",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "UiManager",
+              "__guid": "d581e82e-944e-4fd2-b998-735961c5bd1c",
+              "GameEndUi": {
+                "_type": "component",
+                "component_id": "577d3b70-a612-44c1-bc73-dc334356865a",
+                "go": "d0dbf866-9ea1-44b3-896c-70ad700cfbc3",
+                "component_type": "GameEndUI"
+              },
+              "HubUi": {
+                "_type": "component",
+                "component_id": "bfcac26e-abee-4eb3-852e-3a40c0958248",
+                "go": "6cc29126-657e-444c-a958-21f76baabf55",
+                "component_type": "LobbyHubUI"
+              },
+              "IngameUi": {
+                "_type": "component",
+                "component_id": "8a21c3a9-28d5-40b1-afda-112e9978ee09",
+                "go": "02791e92-fb19-4ca1-a5a2-78f2c99cfc8a",
+                "component_type": "IngameUI"
+              },
+              "LobbyCreationUi": {
+                "_type": "component",
+                "component_id": "91e5f689-0a03-4b70-a121-8cf1ac52b1ac",
+                "go": "6980e3d6-6586-4183-b5a5-330b92e9c25b",
+                "component_type": "LobbyCreationUI"
+              },
+              "MainMenuUi": {
+                "_type": "component",
+                "component_id": "246f6b76-e998-44f8-a4ed-2e17ad8bb3de",
+                "go": "67facf4e-d079-4980-9ba5-78588aed10f0",
+                "component_type": "MainMenuUI"
+              }
+            }
+          ]
         }
       ]
     }
