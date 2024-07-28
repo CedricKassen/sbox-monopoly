@@ -1,0 +1,43 @@
+@using System.ComponentModel.Design.Serialization
+@using System.Diagnostics
+@using Sandbox;
+@using Sandbox.Events
+@using Sandbox.Events.GameStateEvents
+@using Sandbox.UI;
+@inherits PanelComponent
+
+
+<root class="@(Visible ? "" : "hide")">
+       	<div class="title">@MyStringValue</div>
+       	<button onclick=@PressEnd>Quit</button>
+       	<button onclick=@PressNew>New Round</button>
+       </root> 
+
+@code
+{
+
+	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
+	[Property] public bool Visible { get; set; } = false;
+	[Property] GameObject Parent { get; set; }
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash()
+	{ 
+		return System.HashCode.Combine(Visible);
+	}
+	
+	void PressNew()
+	{
+		Parent.Dispatch(new JoinLobbyEvent());
+	}
+	
+	void PressEnd()
+	{
+		Parent.Dispatch(new LeaveLobbyEvent());
+	}	
+	
+	
+}
+
