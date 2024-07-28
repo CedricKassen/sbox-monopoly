@@ -84,8 +84,8 @@
       "__guid": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "-267.452,-379.653,297.7903",
-      "Rotation": "-0.1448582,0.2860239,0.4279631,0.8450171",
+      "Position": "0.667574,-1.854534,1017.005",
+      "Rotation": "0.00000002652705,0.7071068,-0.00000002652705,0.7071068",
       "Enabled": true,
       "Components": [
         {
@@ -361,6 +361,295 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "__guid": "024eb414-bc10-4ad9-885d-eae5e42de48d",
+      "Flags": 0,
+      "Name": "Locations",
+      "Position": "-222.5124,-42.72841,61.09317",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "69d2bf3c-4940-40d9-a192-d28075f7ebb6",
+          "Flags": 0,
+          "Name": "Start",
+          "Position": "12.91069,-165.1257,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "be16af03-40a6-4655-9699-6e7e24e64f29",
+          "Flags": 0,
+          "Name": "Brown1",
+          "Position": "1.111725,-112.6371,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "a589e0f1-4009-4887-970e-2e59222206f1",
+          "Flags": 0,
+          "Name": "CommunityChest1",
+          "Position": "1.111725,-73.50697,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "05fe5d72-2678-441f-8ab7-c770e75ec2e6",
+          "Flags": 0,
+          "Name": "Brown2",
+          "Position": "1.111725,-35.30772,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "3c6ca99d-999a-4d4c-a3c4-2ba9938b77ff",
+          "Flags": 0,
+          "Name": "IncomeTax",
+          "Position": "1.111725,2.866219,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "e473eab9-fefd-4dde-b39f-415a54208ffb",
+          "Flags": 0,
+          "Name": "Railroad1",
+          "Position": "1.111725,42.4017,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "43793b8f-b8fa-4b5b-8ac7-7c80864c289d",
+          "Flags": 0,
+          "Name": "LightBlue1",
+          "Position": "1.111725,81.49652,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "5b93ea35-ffba-4961-81a9-170f218a2027",
+          "Flags": 0,
+          "Name": "Chance1",
+          "Position": "1.111725,121.4953,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "bfbee061-ca1c-4955-a357-03e19b47870b",
+          "Flags": 0,
+          "Name": "LightBlue2",
+          "Position": "1.111725,158.7676,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "0ab3c9cb-e719-488e-be15-a86e50c64abc",
+          "Flags": 0,
+          "Name": "LightBlue3",
+          "Position": "1.111725,198.2553,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "a81f03ef-8d98-48db-9704-14b414a4d530",
+          "Flags": 0,
+          "Name": "Jail",
+          "Position": "15.69002,250.7109,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "54142386-c8fb-40a0-9084-eb80dce87ad3",
+          "Flags": 0,
+          "Name": "Pink1",
+          "Position": "68.20039,259.7269,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "4429305f-adf4-4c31-bd84-ea50af9986be",
+          "Flags": 0,
+          "Name": "ElectricCompany",
+          "Position": "104.2864,259.7269,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "de87ea96-4c4c-4653-9145-8aef35598c42",
+          "Flags": 0,
+          "Name": "Pink2",
+          "Position": "145.2036,259.7269,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "e09a06e9-27ca-4515-b0d9-8ade5e8efa3b",
+          "Flags": 0,
+          "Name": "Pink3",
+          "Position": "182.7813,259.7269,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "2b28f563-7d20-44cf-9ebc-88a40246f605",
+          "Flags": 0,
+          "Name": "Railroad2",
+          "Position": "224.817,259.7269,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "1d20c0b1-e63c-4724-9638-50c83fb3f4da",
+          "Flags": 0,
+          "Name": "Orange1",
+          "Position": "261.5884,259.7269,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "9315be49-dfba-45e4-a87d-b3a7c0cbdbf3",
+          "Flags": 0,
+          "Name": "CommunityChest2",
+          "Position": "299.9954,259.7269,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "d96d4e0c-3df5-4c01-a115-40a6e48e5212",
+          "Flags": 0,
+          "Name": "Orange2",
+          "Position": "339.0019,259.7269,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "ebe562f4-1d55-43cb-bf69-77ab7f16b169",
+          "Flags": 0,
+          "Name": "Orange3",
+          "Position": "377.5777,259.7269,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "fade20d1-25c5-419e-bd9f-3823152352b1",
+          "Flags": 0,
+          "Name": "FreeParking",
+          "Position": "430.2625,250.8535,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "4ce5a2a2-03ee-43a4-8cb3-85c0ddf5931e",
+          "Flags": 0,
+          "Name": "Red1",
+          "Position": "443.824,196.5553,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "242701a4-7b73-4052-8d30-f58c4bb54401",
+          "Flags": 0,
+          "Name": "Chance2",
+          "Position": "443.824,157.5074,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "4cdc3b45-b2e8-403c-87b5-33a1a7020fbf",
+          "Flags": 0,
+          "Name": "Red2",
+          "Position": "443.824,118.9885,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "302c03f1-265c-482d-ae59-508de6e5c573",
+          "Flags": 0,
+          "Name": "Red3",
+          "Position": "443.824,81.07051,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "861703b1-00de-4959-884b-4e0ee84fec1e",
+          "Flags": 0,
+          "Name": "Railroad3",
+          "Position": "443.824,42.89046,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "0b0c4a73-2dca-44e3-b10c-011a3925dfcb",
+          "Flags": 0,
+          "Name": "Yellow1",
+          "Position": "443.824,3.786041,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "650a5286-64ec-40e6-a8a7-af3262ce3f19",
+          "Flags": 0,
+          "Name": "Yellow2",
+          "Position": "443.824,-36.18573,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "b0d14978-84e5-44c6-a3b7-91375b3bbb9e",
+          "Flags": 0,
+          "Name": "WaterCompany",
+          "Position": "443.824,-73.9437,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "af269b1c-649b-4106-9e53-b0af38f0801f",
+          "Flags": 0,
+          "Name": "Yellow3",
+          "Position": "443.824,-112.5264,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "8eebf108-ade5-470a-be42-1d5a09256bcd",
+          "Flags": 0,
+          "Name": "GoToJail",
+          "Position": "429.9303,-165.7601,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "c323c06f-74b8-482a-b7f9-1bd8b47d8ff6",
+          "Flags": 0,
+          "Name": "Green1",
+          "Position": "377.6019,-176.6429,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "38444516-43e4-476d-8d2e-84a74223fea9",
+          "Flags": 0,
+          "Name": "Green2",
+          "Position": "338.8383,-176.6429,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "4f689089-08fd-467f-b30e-e13e5e91914c",
+          "Flags": 0,
+          "Name": "CommunityChest3",
+          "Position": "300.7648,-176.6429,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "d3460535-765f-42bb-b631-689e1f10737d",
+          "Flags": 0,
+          "Name": "Green3",
+          "Position": "261.61,-176.6429,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "03acd3d3-6e22-492d-854c-d53091b68754",
+          "Flags": 0,
+          "Name": "Railroad4",
+          "Position": "222.3676,-176.6429,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "90b94eba-a375-4db0-a7c6-19c71a24cc02",
+          "Flags": 0,
+          "Name": "Chance3",
+          "Position": "183.6045,-176.6429,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "729f9184-3260-453d-8cc8-213ad66cd5bf",
+          "Flags": 0,
+          "Name": "Blue1",
+          "Position": "144.8873,-176.6429,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "0424be78-b4be-4925-bf04-3f8cbdaade11",
+          "Flags": 0,
+          "Name": "LuxuryTax",
+          "Position": "107.085,-176.6429,-61.09317",
+          "Enabled": true
+        },
+        {
+          "__guid": "321cbec3-533a-4980-a2c7-7a517153d12a",
+          "Flags": 0,
+          "Name": "Blue2",
+          "Position": "68.12912,-176.6429,-61.09317",
+          "Enabled": true
         }
       ]
     }
