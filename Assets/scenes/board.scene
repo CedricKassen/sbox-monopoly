@@ -502,32 +502,6 @@
       ]
     },
     {
-      "__guid": "dee468be-285b-4063-b660-c31ef8e11411",
-      "Flags": 0,
-      "Name": "Camera",
-      "Position": "-319.2052,-12.50265,162.3727",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.CameraComponent",
-          "__guid": "e0b2ed75-701c-464e-ad2a-bfc589d48c7b",
-          "BackgroundColor": "0.33333,0.46275,0.52157,1",
-          "ClearFlags": "All",
-          "FieldOfView": 102.66,
-          "IsMainCamera": false,
-          "Orthographic": false,
-          "OrthographicHeight": 1204,
-          "Priority": 1,
-          "RenderExcludeTags": "",
-          "RenderTags": "",
-          "TargetEye": "None",
-          "Viewport": "0,0,1,1",
-          "ZFar": 10000,
-          "ZNear": 10
-        }
-      ]
-    },
-    {
       "__guid": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
       "Flags": 0,
       "Name": "Camera",
