@@ -18,7 +18,7 @@
 
 	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
 	[Property] public bool Visible { get; set; }
-	[Property] GameObject GameObject { get; set; }
+	[Property] GameObject Parent { get; set; }
 
 	
 	/// <summary>
@@ -32,12 +32,12 @@
 
 	void PressHost()
 	{
-		GameObject.Dispatch(new CreateLobbyEvent());
+		Parent.Dispatch(new CreateLobbyEvent());
 	}
 	
 	void PressJoin()
 	{
-		GameObject.Dispatch(new JoinLobbyEvent());
+		Parent.Dispatch(new JoinLobbyEvent());
 	}
 
 }

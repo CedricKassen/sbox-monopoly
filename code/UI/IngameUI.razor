@@ -17,7 +17,7 @@
 
 	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
 	[Property] public bool Visible { get; set; } = false;
-	[Property] GameObject GameObject { get; set; }
+	[Property] GameObject Parent { get; set; }
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
@@ -29,12 +29,12 @@
 	
 	void PressWin()
 	{
-		GameObject.Dispatch(new GameEndEvent());
+		Parent.Dispatch(new GameEndEvent());
 	}
 	
 	void PressEnd()
 	{
-		GameObject.Dispatch(new LeaveLobbyEvent());
+		Parent.Dispatch(new LeaveLobbyEvent());
 	}
 	
 }
