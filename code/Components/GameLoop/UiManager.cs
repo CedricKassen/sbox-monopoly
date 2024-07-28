@@ -14,7 +14,6 @@ public sealed class UiManager : Component
 	public GameState ChangeState(GameState newState)
 	{
 		
-		Debug.Write("Change state to: " + newState);
 		disableEverything();
 		
 		switch (newState)
