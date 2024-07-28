@@ -86,6 +86,7 @@
       "Name": "Camera",
       "Position": "0.667574,-1.854534,1017.005",
       "Rotation": "0.00000002652705,0.7071068,-0.00000002652705,0.7071068",
+      "Tags": "maincamera",
       "Enabled": true,
       "Components": [
         {
@@ -94,7 +95,7 @@
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
-          "IsMainCamera": true,
+          "IsMainCamera": false,
           "Orthographic": false,
           "OrthographicHeight": 1204,
           "Priority": 1,
@@ -150,6 +151,32 @@
           "__type": "Sandbox.Sharpen",
           "__guid": "0bffee5e-19f2-41c4-88f9-faefbcce6bf4",
           "Scale": 0.2
+        }
+      ]
+    },
+    {
+      "__guid": "dee468be-285b-4063-b660-c31ef8e11411",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "-319.2052,-12.50265,162.3727",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "e0b2ed75-701c-464e-ad2a-bfc589d48c7b",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 102.66,
+          "IsMainCamera": false,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
         }
       ]
     },
@@ -678,7 +705,8 @@
             {
               "__type": "LobbyCreationUI",
               "__guid": "91e5f689-0a03-4b70-a121-8cf1ac52b1ac",
-              "MyStringValue": "Host!"
+              "MyStringValue": "Host!",
+              "Visible": false
             }
           ]
         },
@@ -700,7 +728,8 @@
             {
               "__type": "LobbyHubUI",
               "__guid": "bfcac26e-abee-4eb3-852e-3a40c0958248",
-              "MyStringValue": "Join!"
+              "MyStringValue": "Join!",
+              "Visible": false
             }
           ]
         },
@@ -722,7 +751,8 @@
             {
               "__type": "IngameUI",
               "__guid": "8a21c3a9-28d5-40b1-afda-112e9978ee09",
-              "MyStringValue": "Play!"
+              "MyStringValue": "Play!",
+              "Visible": false
             }
           ]
         },
@@ -744,7 +774,8 @@
             {
               "__type": "GameEndUI",
               "__guid": "577d3b70-a612-44c1-bc73-dc334356865a",
-              "MyStringValue": "Cedruu win!"
+              "MyStringValue": "Cedruu win!",
+              "Visible": false
             }
           ]
         },
@@ -766,7 +797,8 @@
             {
               "__type": "MainMenuUI",
               "__guid": "246f6b76-e998-44f8-a4ed-2e17ad8bb3de",
-              "MyStringValue": "Menu!"
+              "MyStringValue": "Menu!",
+              "Visible": false
             }
           ]
         }
