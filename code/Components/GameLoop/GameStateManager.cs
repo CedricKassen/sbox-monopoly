@@ -1,5 +1,6 @@
 using Sandbox;
 using System.Diagnostics;
+using Microsoft.VisualBasic;
 using Sandbox.Events;
 using Sandbox.Events.GameStateEvents;
 
@@ -46,16 +47,9 @@ public sealed class GameStateManager : Component, IGameEventHandler<GameEndEvent
 
 	protected override void OnStart()
 	{
-		Log.Info("Start");
 		CurrentState = UiManager.ChangeState(GameState.MENU);
 	}
 
-	protected override void OnUpdate()
-	{
-		Transform.Position += Vector3.Forward;
-		Log.Info("Update");
-		base.OnUpdate();
-	}
 	
 	
 }
