@@ -45,9 +45,9 @@
 		return System.HashCode.Combine(Visible, lobbies);
 	}
 
-	protected override async void OnAwake()
+	protected override void OnStart()
 	{
-		base.OnAwake();
+		base.OnStart();
 		fetchLobbys();
 	}
 
