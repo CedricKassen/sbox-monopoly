@@ -9,6 +9,8 @@ public sealed class UiManager : Component
 	[Property] public LobbyCreationUI LobbyCreationUi { get; set; }
 	[Property] public LobbyHubUI HubUi { get; set; }
 	[Property] public MainMenuUI MainMenuUi { get; set; }
+	[Property] public LobbyUI LobbyUi { get; set; }
+
 
 
 	public GameState ChangeState(GameState newState)
@@ -27,12 +29,16 @@ public sealed class UiManager : Component
 			case GameState.END_GAME:
 				GameEndUi.Visible = true;
 				break;
-			case GameState.LOBBY_JOIN:
+			case GameState.LOBBY_SELECTION:
 				HubUi.Visible = true;
 				break;
-			case GameState.LOBBY_CREATE: 
+			case GameState.LOBBY_CREATION: 
 				LobbyCreationUi.Visible = true;
 				break;
+			case GameState.INLOBBY:
+				LobbyUi.Visible = true;
+				break;
+				
 		}
 
 		return newState;
@@ -45,5 +51,6 @@ public sealed class UiManager : Component
 		IngameUi.Visible = false;
 		LobbyCreationUi.Visible = false;
 		HubUi.Visible = false;
+		LobbyUi.Visible = false;
 	}
 }

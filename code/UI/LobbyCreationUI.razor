@@ -2,6 +2,7 @@
 @using Sandbox;
 @using Sandbox.Events
 @using Sandbox.Events.GameStateEvents
+@using Sandbox.Network
 @using Sandbox.UI;
 @inherits PanelComponent
 
@@ -11,6 +12,7 @@
 	<div class="title">@MyStringValue</div>
 	<button onclick=@PressCreate>Erstellen</button>
 	<button onclick=@PressBack>Zurück</button>
+	
 </root>
 
 @code
@@ -18,7 +20,7 @@
 
 	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
 	[Property] public bool Visible { get; set; } = false;
-	[Property] GameObject Parent { get; set; }
+	[Property] UiManager UiManager { get; set; }
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
@@ -30,12 +32,26 @@
 	
 	void PressCreate()
 	{
-		Parent.Dispatch(new JoinLobbyEvent());
+		Log.Info(Networking.IsHost);
+		Log.Info(GameNetworkSystem.IsConnecting);
+		Log.Info(GameNetworkSystem.IsActive);
+		
+		if (Networking.IsHost || GameNetworkSystem.IsActive && GameNetworkSystem.IsClient)
+		{
+			GameNetworkSystem.Disconnect();
+			
+		}
+			GameNetworkSystem.CreateLobby();
+			UiManager.ChangeState(GameState.INLOBBY);
 	}
 	
 	void PressBack()
 	{
-		Parent.Dispatch(new LeaveLobbyEvent());
+		if (GameNetworkSystem.IsActive)
+		{
+			GameNetworkSystem.Disconnect();
+		}
+		UiManager.ChangeState(GameState.MENU);
 	}
 	
 }

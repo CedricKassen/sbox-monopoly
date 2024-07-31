@@ -19,7 +19,7 @@
 
 	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
 	[Property] public bool Visible { get; set; } = false;
-	[Property] GameObject Parent { get; set; }
+	[Property] UiManager UiManager { get; set; }
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
@@ -43,12 +43,12 @@
 
 	void PressWin()
 	{
-		Parent.Dispatch(new GameEndEvent());
+		UiManager.ChangeState(GameState.END_GAME);
 	}
 	
 	void PressEnd()
 	{
-		Parent.Dispatch(new LeaveLobbyEvent());
+		UiManager.ChangeState(GameState.MENU);
 	}
 	
 }
