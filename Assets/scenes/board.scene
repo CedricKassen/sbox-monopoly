@@ -1,6 +1,576 @@
 {
-  "__guid": "defd1c17-b5ed-4782-a598-24cd34ee0cc6",
+  "__guid": "ac45d296-4247-41ad-a979-a07d457b0457",
   "GameObjects": [
+    {
+      "__guid": "bfc59c12-1ed2-4f91-8956-a95a315eac3c",
+      "Flags": 0,
+      "Name": "Sun",
+      "Rotation": "-0.0729315,0.4822396,0.1305433,0.8631827",
+      "Tags": "light_directional,light",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.DirectionalLight",
+          "__guid": "d3659344-a90d-48fa-927a-095f70fe041f",
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "0.94419,0.97767,1,1",
+          "Shadows": true,
+          "SkyColor": "0.2532,0.32006,0.35349,1"
+        }
+      ]
+    },
+    {
+      "__guid": "659efa50-4b32-4efc-a4f3-28917e4d503c",
+      "Flags": 0,
+      "Name": "CameraManager",
+      "Position": "-1586.981,21.80964,1559.919",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CameraManager",
+          "__guid": "275dd3c1-f95f-4bad-a7ac-bd0acca3ed33",
+          "Cameras": {
+            "topdown": {
+              "_type": "component",
+              "component_id": "cf3cbf96-22b6-4be4-a5d0-672a96c17f9f",
+              "go": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
+              "component_type": "CameraComponent"
+            },
+            "pTophat": {
+              "_type": "component",
+              "component_id": "32e5735a-3095-48ad-a806-000fdd326e78",
+              "go": "3d90eec4-745d-49bf-bde7-fe96a3772520",
+              "component_type": "CameraComponent"
+            },
+            "p\u0027Wheelbarrow": {
+              "_type": "component",
+              "component_id": "ba1272c2-60ac-41d4-8bb7-cf80e4c650cd",
+              "go": "dc463266-ba4b-4d8d-90ad-89b113d0c864",
+              "component_type": "CameraComponent"
+            },
+            "pThimble": {
+              "_type": "component",
+              "component_id": "4bc55f65-b166-44b5-8eae-12da8f48bf1e",
+              "go": "1c74defe-5315-4d2e-b711-61b0dfc510a7",
+              "component_type": "CameraComponent"
+            },
+            "pShip": {
+              "_type": "component",
+              "component_id": "5074275c-1171-4272-b39b-622e28790fd9",
+              "go": "046a832b-0f2d-428a-b61d-b5de440c5db9",
+              "component_type": "CameraComponent"
+            },
+            "pCar": {
+              "_type": "component",
+              "component_id": "ead6dec7-19d1-4433-b337-f2122d7cb25d",
+              "go": "5874bb2e-c209-4bc7-bafb-b8e6ed79e481",
+              "component_type": "CameraComponent"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "__guid": "00344a8c-fa5e-45ae-b12a-10bb781a1dc3",
+      "Flags": 0,
+      "Name": "2D Skybox",
+      "Tags": "skybox",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SkyBox2D",
+          "__guid": "de79e9e0-5c37-4c54-ac67-bfcdb1d5483b",
+          "SkyMaterial": "materials/skybox/skybox_day_01.vmat",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.EnvmapProbe",
+          "__guid": "f3e304db-baab-4c1a-a4ec-8442585c2d62",
+          "Texture": "textures/cubemaps/default2.vtex",
+          "Bounds": {
+            "Mins": "-512,-512,-512",
+            "Maxs": "512,512,512"
+          },
+          "DelayBetweenUpdates": 0.1,
+          "Feathering": 0.02,
+          "FrameInterval": 5,
+          "MaxDistance": 512,
+          "Projection": "Sphere",
+          "RenderDynamically": false,
+          "TintColor": "1,1,1,1",
+          "UpdateStrategy": "OnEnabled",
+          "ZFar": 4096,
+          "ZNear": 16
+        }
+      ]
+    },
+    {
+      "__guid": "6ad70641-3c6c-4402-9c85-9a4969af4764",
+      "Flags": 0,
+      "Name": "Plane",
+      "Scale": "5,5,5",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "0b6a18bf-fdb8-4661-970e-ef635bfa9baa",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/board.vmat",
+          "Model": "models/dev/plane.vmdl",
+          "RenderType": "On",
+          "Tint": "0.39546,0.51163,0.27128,1"
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "0715cb55-1733-4f5e-8560-c288b8695631",
+          "Center": "0,0,-5",
+          "IsTrigger": false,
+          "Scale": "100,100,10",
+          "Static": false
+        }
+      ]
+    },
+    {
+      "__guid": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "0.667574,-1.854534,1017.005",
+      "Rotation": "0.00000002652705,0.7071068,-0.00000002652705,0.7071068",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "cf3cbf96-22b6-4be4-a5d0-672a96c17f9f",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": false,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        },
+        {
+          "__type": "Sandbox.Bloom",
+          "__guid": "d73ef723-c888-41d4-802e-f797c79318be",
+          "BloomColor": {
+            "color": [
+              {
+                "c": "1,1,1,1"
+              },
+              {
+                "t": 1,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "BloomCurve": [
+            {
+              "y": 0.5
+            },
+            {
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "Mode": "Additive",
+          "Strength": 0.5,
+          "Threshold": 0.5,
+          "ThresholdWidth": 0.5
+        },
+        {
+          "__type": "Sandbox.Tonemapping",
+          "__guid": "9d76f362-7227-40eb-a189-69353c780c46",
+          "__version": 1,
+          "ExposureBias": 2,
+          "ExposureCompensation": 0,
+          "ExposureMethod": "RGB",
+          "MaximumExposure": 2,
+          "MinimumExposure": 1,
+          "Mode": "Legacy",
+          "Rate": 1
+        },
+        {
+          "__type": "Sandbox.Sharpen",
+          "__guid": "0bffee5e-19f2-41c4-88f9-faefbcce6bf4",
+          "Scale": 0.2
+        }
+      ]
+    },
+    {
+      "__guid": "72c8d5ec-b1e1-4a66-953a-eb259093d148",
+      "Flags": 0,
+      "Name": "Game Pieces",
+      "Position": "-30.24338,-230.3728,-144.9811",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "85038edd-4cde-44bb-82bf-e2c07f5b1bf7",
+          "Flags": 0,
+          "Name": "Wheelbarrow",
+          "Position": "-190.243,1.936279,144.9811",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "2830436a-3675-46a9-917f-b536ed927435",
+              "BodyGroups": 18446744073709551615,
+              "MaterialOverride": "materials/game_piece.vmat",
+              "Model": "models/wheelbarrow.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "dc463266-ba4b-4d8d-90ad-89b113d0c864",
+              "Flags": 0,
+              "Name": "Camera",
+              "Position": "-115.2446,5.413605,124.8364",
+              "Rotation": "-0.00000001031975,0.3826834,-0.000000004274582,0.9238797",
+              "Tags": "maincamera",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.CameraComponent",
+                  "__guid": "ba1272c2-60ac-41d4-8bb7-cf80e4c650cd",
+                  "__enabled": false,
+                  "BackgroundColor": "0.33333,0.46275,0.52157,1",
+                  "ClearFlags": "All",
+                  "FieldOfView": 60,
+                  "IsMainCamera": false,
+                  "Orthographic": false,
+                  "OrthographicHeight": 1204,
+                  "Priority": 1,
+                  "RenderExcludeTags": "",
+                  "RenderTags": "",
+                  "TargetEye": "None",
+                  "Viewport": "0,0,1,1",
+                  "ZFar": 10000,
+                  "ZNear": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "8403da3d-4511-4464-a296-5083fd865115",
+          "Flags": 0,
+          "Name": "Tophead",
+          "Position": "-196.2319,35.98134,144.9811",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "172edb99-1bef-456f-bb97-03ffd330681e",
+              "BodyGroups": 18446744073709551615,
+              "MaterialOverride": "materials/game_piece.vmat",
+              "Model": "models/tophat.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "3d90eec4-745d-49bf-bde7-fe96a3772520",
+              "Flags": 0,
+              "Name": "Camera",
+              "Position": "-108.9467,0.8657837,126.0826",
+              "Rotation": "-0.00000001031975,0.3826834,-0.000000004274582,0.9238797",
+              "Tags": "maincamera",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.CameraComponent",
+                  "__guid": "32e5735a-3095-48ad-a806-000fdd326e78",
+                  "__enabled": false,
+                  "BackgroundColor": "0.33333,0.46275,0.52157,1",
+                  "ClearFlags": "All",
+                  "FieldOfView": 60,
+                  "IsMainCamera": false,
+                  "Orthographic": false,
+                  "OrthographicHeight": 1204,
+                  "Priority": 1,
+                  "RenderExcludeTags": "",
+                  "RenderTags": "",
+                  "TargetEye": "None",
+                  "Viewport": "0,0,1,1",
+                  "ZFar": 10000,
+                  "ZNear": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "bcf4067d-926a-412f-a165-01fcd2c16013",
+          "Flags": 0,
+          "Name": "Thimble",
+          "Position": "-172.3011,4.110733,144.9811",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "61a11385-6e3d-4133-ada2-4a0c0702ea5b",
+              "BodyGroups": 18446744073709551615,
+              "MaterialOverride": "materials/game_piece.vmat",
+              "Model": "models/thimble.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "1c74defe-5315-4d2e-b711-61b0dfc510a7",
+              "Flags": 0,
+              "Name": "Camera",
+              "Position": "-118.0037,10.41444,123.4108",
+              "Rotation": "-0.00000001031975,0.3826834,-0.000000004274582,0.9238797",
+              "Tags": "maincamera",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.CameraComponent",
+                  "__guid": "4bc55f65-b166-44b5-8eae-12da8f48bf1e",
+                  "__enabled": false,
+                  "BackgroundColor": "0.33333,0.46275,0.52157,1",
+                  "ClearFlags": "All",
+                  "FieldOfView": 60,
+                  "IsMainCamera": false,
+                  "Orthographic": false,
+                  "OrthographicHeight": 1204,
+                  "Priority": 1,
+                  "RenderExcludeTags": "",
+                  "RenderTags": "",
+                  "TargetEye": "None",
+                  "Viewport": "0,0,1,1",
+                  "ZFar": 10000,
+                  "ZNear": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "fac064ac-ba99-4741-bd80-9e615fe6eae4",
+          "Flags": 0,
+          "Name": "Ship",
+          "Position": "-180.0841,38.37283,144.9811",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "30f6c90b-a6b2-407b-93d5-ed1d47b0c918",
+              "BodyGroups": 18446744073709551615,
+              "MaterialOverride": "materials/game_piece.vmat",
+              "Model": "models/ship.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "046a832b-0f2d-428a-b61d-b5de440c5db9",
+              "Flags": 0,
+              "Name": "Camera",
+              "Position": "-108.6916,-1.525726,123.9748",
+              "Rotation": "-0.00000001031975,0.3826834,-0.000000004274582,0.9238797",
+              "Tags": "maincamera",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.CameraComponent",
+                  "__guid": "5074275c-1171-4272-b39b-622e28790fd9",
+                  "__enabled": false,
+                  "BackgroundColor": "0.33333,0.46275,0.52157,1",
+                  "ClearFlags": "All",
+                  "FieldOfView": 60,
+                  "IsMainCamera": false,
+                  "Orthographic": false,
+                  "OrthographicHeight": 1204,
+                  "Priority": 1,
+                  "RenderExcludeTags": "",
+                  "RenderTags": "",
+                  "TargetEye": "None",
+                  "Viewport": "0,0,1,1",
+                  "ZFar": 10000,
+                  "ZNear": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "aead691d-0924-4b81-aa49-050395445eed",
+          "Flags": 0,
+          "Name": "Car",
+          "Position": "-161.7566,33.40874,144.9811",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "0188f4c0-ae78-4230-ba33-3c4dc8fe7438",
+              "BodyGroups": 18446744073709551615,
+              "MaterialOverride": "materials/game_piece.vmat",
+              "Model": "models/car.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "5874bb2e-c209-4bc7-bafb-b8e6ed79e481",
+              "Flags": 0,
+              "Name": "Camera",
+              "Position": "-104.7906,3.43837,124.2825",
+              "Rotation": "-0.00000001031975,0.3826834,-0.000000004274582,0.9238797",
+              "Tags": "maincamera",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.CameraComponent",
+                  "__guid": "ead6dec7-19d1-4433-b337-f2122d7cb25d",
+                  "__enabled": false,
+                  "BackgroundColor": "0.33333,0.46275,0.52157,1",
+                  "ClearFlags": "All",
+                  "FieldOfView": 60,
+                  "IsMainCamera": false,
+                  "Orthographic": false,
+                  "OrthographicHeight": 1204,
+                  "Priority": 1,
+                  "RenderExcludeTags": "",
+                  "RenderTags": "",
+                  "TargetEye": "None",
+                  "Viewport": "0,0,1,1",
+                  "ZFar": 10000,
+                  "ZNear": 10
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__guid": "16441097-c203-4127-b3a8-0a66be7ded32",
+      "Flags": 0,
+      "Name": "Houses",
+      "Position": "-30.24338,-230.3728,-144.9811",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "1efa8e61-60fc-435b-be8f-4ca5f1f81238",
+          "Flags": 0,
+          "Name": "Mediterranean Avenue",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "d2d3a58c-fd7c-43a4-98c9-db90721272b4",
+              "Flags": 0,
+              "Name": "House4",
+              "Position": "-153.8408,62.54433,144.9811",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.ModelRenderer",
+                  "__guid": "56240fbb-012d-4c51-a026-5b3c62ebafd9",
+                  "BodyGroups": 18446744073709551615,
+                  "Model": "models/house.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ]
+            },
+            {
+              "__guid": "39a8aea2-261a-4083-9d6f-53ecb082602a",
+              "Flags": 0,
+              "Name": "House3",
+              "Position": "-153.8408,71.4977,144.9811",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.ModelRenderer",
+                  "__guid": "5a3454b7-823b-4336-9580-17f3c290954a",
+                  "BodyGroups": 18446744073709551615,
+                  "Model": "models/house.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ]
+            },
+            {
+              "__guid": "6bfe06d5-2928-4fac-9a30-c656c646188e",
+              "Flags": 0,
+              "Name": "House2",
+              "Position": "-153.8408,80.27487,144.9811",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.ModelRenderer",
+                  "__guid": "f3978de7-08d5-4b79-86a6-66d8f93b52b2",
+                  "BodyGroups": 18446744073709551615,
+                  "Model": "models/house.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ]
+            },
+            {
+              "__guid": "437a1542-2030-4ce4-ada3-c3abb6c11142",
+              "Flags": 0,
+              "Name": "House1",
+              "Position": "-153.8408,89.14957,144.9811",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.ModelRenderer",
+                  "__guid": "eaad9d1b-28a0-429c-974d-2ea8bbd3ede7",
+                  "BodyGroups": 18446744073709551615,
+                  "Model": "models/house.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "4b81c358-b72d-4724-9ec7-3bf9b36dc763",
+          "Flags": 0,
+          "Name": "Baltic Avenue",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "666c3287-2e1e-41cc-8682-d3582b2af68a",
+              "Flags": 0,
+              "Name": "Hotel",
+              "Position": "-154.7681,152.7346,144.9811",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.ModelRenderer",
+                  "__guid": "4fe850cf-f84a-4da9-9305-2f9b02a87a96",
+                  "BodyGroups": 18446744073709551615,
+                  "Model": "models/hotel.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     {
       "__guid": "024eb414-bc10-4ad9-885d-eae5e42de48d",
       "Flags": 0,
