@@ -1,7 +1,3 @@
-using System.Threading;
-using Sandbox;
-using Sandbox.Utility;
-
 public sealed class CameraManager : Component
 {
 	[Property]
@@ -18,20 +14,10 @@ public sealed class CameraManager : Component
 		}
 
 		if (Cameras.TryGetValue(name, out var newCamera)) {
-			newCamera.IsMainCamera = false;
-			newCamera.Enabled = false;
+			newCamera.IsMainCamera = true;
+			newCamera.Enabled = true;
 		}
 
 		ActiveCamera = name;
-	}
-	
-	protected override void OnUpdate()
-	{
-		if (Input.Pressed("Forward")) {
-			SetActiveCamera("pTophat");
-		}
-		if (Input.Pressed("Left")) {
-			SetActiveCamera("topdown");
-		}
 	}
 }
