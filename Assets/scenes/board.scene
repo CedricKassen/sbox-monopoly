@@ -715,12 +715,6 @@
                 {
                   "__type": "LobbyHubUI",
                   "__guid": "cb89cb86-c252-4c74-acd1-c2de326e47a6",
-                  "LobbyManager": {
-                    "_type": "component",
-                    "component_id": "b646bd0d-76cc-4fbc-b41d-68f75a9bcdbe",
-                    "go": "7e6fdc0a-ed2b-4dce-a2f4-df9a5313a6d4",
-                    "component_type": "LobbyManager"
-                  },
                   "MyStringValue": "Join!",
                   "UiManager": {
                     "_type": "component",
@@ -940,13 +934,7 @@
               "Flags": 0,
               "Name": "LobbyManager",
               "Position": "0,0,0",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "LobbyManager",
-                  "__guid": "b646bd0d-76cc-4fbc-b41d-68f75a9bcdbe"
-                }
-              ]
+              "Enabled": true
             }
           ]
         }
