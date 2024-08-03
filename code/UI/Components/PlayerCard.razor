@@ -94,6 +94,29 @@
             </div>
         </div>
     </div>
+    <div>
+        <div style="display: flex; flex-direction: row; gap: 5px">
+            <div id="railway1" class="ownership-dot black">
+                <div id="railway1-disabled" class="@(Owned["railway1"] == SteamId ? "": "ownership-dot-disabled")"></div>
+            </div>
+            <div id="railway2" class="ownership-dot black">
+                <div id="railway2-disabled" class="@(Owned["railway2"] == SteamId ? "": "ownership-dot-disabled")"></div>
+            </div>
+            <div id="railway3" class="ownership-dot black">
+                <div id="railway3-disabled" class="@(Owned["railway3"] == SteamId ? "": "ownership-dot-disabled")"></div>
+            </div>
+            <div id="railway4" class="ownership-dot black">
+                <div id="railway4-disabled" class="@(Owned["railway4"] == SteamId ? "": "ownership-dot-disabled")"></div>
+            </div>
+            <div class="ownership-dot"></div>
+            <div id="electriccompany" class="ownership-dot gray">
+                <div id="electriccompany-disabled" class="@(Owned["electriccompany"] == SteamId ? "": "ownership-dot-disabled")"></div>
+            </div>
+            <div id="watercompany" class="ownership-dot gray">
+                <div id="watercompany-disabled" class="@(Owned["watercompany"] == SteamId ? "": "ownership-dot-disabled")"></div>
+            </div>
+        </div>
+    </div>
 </root>
 
 @code {

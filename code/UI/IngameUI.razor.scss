@@ -50,6 +50,7 @@ PlayerCard {
 	padding: 15px;
 	display: flex;
 	flex-direction: column;
+	gap: 15px;
 	
 	p {
 		margin-left: 15px; 
@@ -73,7 +74,6 @@ PlayerCard {
 		height: 25px;
 		width: 25px;
 		border-radius: 4px;
-		background-color: #ffffff;
 		overflow: hidden;
 	}
 	
@@ -114,6 +114,14 @@ PlayerCard {
 	
 	.blue {
 		background-color: #0c499a;
+	}
+	
+	.black {
+		background-color: #111111;
+	}
+	
+	.gray {
+		background-color: #9ca2b4;
 	}
 	
 	.ownership-dot-disabled {
