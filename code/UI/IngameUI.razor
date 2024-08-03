@@ -4,20 +4,23 @@
 @inherits PanelComponent;
 
 <root class="@(Visible ? "" : "hide")">
-	<PlayerCard/>
-	<PlayerCard/>
-	<PlayerCard/>
+	@foreach (var player in Lobby.players)
+	{
+			<PlayerCard PlayerId=@($"{player.steamId}") Name=@player.name />
+	}
+	
 </root>
 
 @code {
 	[Property] public bool Visible { get; set; } = false;
 	[Property] UiManager UiManager { get; set; }
+	[Property] Lobby Lobby { get; set; }
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return System.HashCode.Combine(Visible);
+		return System.HashCode.Combine(Visible, Lobby);
 	}
 }

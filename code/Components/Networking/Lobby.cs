@@ -35,7 +35,7 @@ public sealed class Lobby : Component, Component.INetworkListener
 public class Player
 {
 	public ulong steamId { get; }
-	private string name;
+	public string name;
 	private int money = 2000;
 	private List<string> cards = new List<string>();
 
