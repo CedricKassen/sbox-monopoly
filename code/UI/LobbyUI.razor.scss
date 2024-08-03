@@ -41,4 +41,13 @@ LobbyUI
 	&.hide {
 		opacity: 0;
 	}
+	
+	.player-container {
+		display: flex;
+		flex-direction: row;
+	}
+	
+	.player-container > * {
+		
+	}
 }

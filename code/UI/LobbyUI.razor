@@ -15,12 +15,14 @@
 	
 	<p class="text">@Lobby.playerNum/@Lobby.maxPlayers</p>
 	
-	@foreach (var player in Lobby.players)
-	{
-		<div>
-			<img src=@($"avatar:{player.steamId}") />
-		</div>
-	}
+	<div class="player-container">
+			@foreach (var player in Lobby.getCurrentPlayers())
+        	{
+		        <p>@player.Name</p>
+        		<img src=@($"avatar:{player.SteamId}")/>
+	        }
+	</div>
+
 </root>
 
 @code
@@ -46,7 +48,7 @@
 
 	void PressBack()
 	{
-		if (GameNetworkSystem.IsActive)
+		if (GameNetworkSystem.IsActive || Networking.IsHost)
 		{
 			GameNetworkSystem.Disconnect();
 		}
