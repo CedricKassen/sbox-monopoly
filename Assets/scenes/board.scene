@@ -1,5 +1,5 @@
 {
-  "__guid": "6fcee760-6e47-4af0-bedf-ec5d50e7b3a7",
+  "__guid": "b9547b44-8a7d-4cef-9115-227bb826fedb",
   "GameObjects": [
     {
       "__guid": "024eb414-bc10-4ad9-885d-eae5e42de48d",
@@ -505,8 +505,8 @@
       "__guid": "d597598b-15b2-49d0-bb58-54c52febb830",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "0.667572,-1.854534,1017.005",
-      "Rotation": "0.00000002652705,0.7071068,-0.00000002652705,0.7071068",
+      "Position": "-565.3768,-562.6835,922.0605",
+      "Rotation": "-0.1698553,0.410067,0.3429224,0.8278879",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [
@@ -646,11 +646,11 @@
         {
           "__type": "Sandbox.DirectionalLight",
           "__guid": "dc65472e-cec2-4f34-a242-b3b73054ebf3",
-          "FogMode": "Enabled",
+          "FogMode": "Disabled",
           "FogStrength": 1,
           "LightColor": "0.94419,0.97767,1,1",
           "Shadows": true,
-          "SkyColor": "0.2532,0.32006,0.35349,1"
+          "SkyColor": "0.36279,0.36279,0.36279,1"
         }
       ]
     },
@@ -960,6 +960,24 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "__guid": "2d60a3a9-944f-47ad-9b22-6f6b435853c4",
+      "Flags": 0,
+      "Name": "Cube",
+      "Position": "0,0,-25.1",
+      "Scale": "10,10,1",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "3d6eb0e6-5e47-44b9-b77e-599d37a68ee3",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
         }
       ]
     }

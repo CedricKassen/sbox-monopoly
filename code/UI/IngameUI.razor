@@ -4,11 +4,22 @@
 @inherits PanelComponent;
 
 <root class="@(Visible ? "" : "hide")">
-	@foreach (var player in Lobby.getCurrentPlayers())
-	{
-			<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@OwnedFields />
+	<div style="position: absolute; top: 0; left: 0">
+		<p class="timer">00:00.000</p>
+	</div>
+	<div id="mainPanel">
+		<div class="autogrow"></div>
+		<a> 🏦 </a>
+		<a> 💸 </a>
+		<a class="mainButton active"> GO </a>
+		<a> 🏠 </a>
+		<div class="autogrow"></div>
+		<a> ⚙️ </a>
+	</div>
+	@foreach (var player in Lobby.getCurrentPlayers()) {
+		<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@OwnedFields/>
 	}
-	
+
 </root>
 
 @code {
