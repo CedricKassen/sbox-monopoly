@@ -1,0 +1,23 @@
+{
+  "RootObject": {
+    "__guid": "295aa5ed-2fc0-4cc4-9cbb-fe45197779aa",
+    "Flags": 0,
+    "Name": "PlayerPrefab",
+    "Position": "0,0,0",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Player",
+        "__guid": "080abc4d-1900-4b01-8660-e59716d95e5b",
+        "money": 2000,
+        "SteamId": 0
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

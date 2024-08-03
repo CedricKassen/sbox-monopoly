@@ -1,106 +1,111 @@
-﻿@using Sandbox;
+﻿@using System.Collections
+@using Sandbox;
 @using Sandbox.UI;
 
 <root>
     <div>
-        <img src=@($"avatar:{PlayerId}")/>
+        <img src=@($"avatar:{SteamId}") alt="profile-picture"/>
         <div style="display: flex; flex-direction: column; gap: 4px">
             <p style="font-weight: bolder"> @Name </p>
-            <p style="font-weight: lighter"> 200$ </p>
+            <p style="font-weight: lighter"> @Money$ </p>
         </div>
     </div>
     <div style="display: flex; flex-direction: row; width: 100%; margin-top: 20px; gap: 5px">
         <div class="ownership-dot-column">
             <div id="brown1" class="ownership-dot brown">
-                <div id="brown1-disabled" class="ownership-dot-disabled"></div>
+                <div id="brown1-disabled" class="@(Owned["brown1"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="brown2" class="ownership-dot brown">
-                <div id="brown2-disabled" class="ownership-dot-disabled"></div>
+                <div id="brown2-disabled" class="@(Owned["brown2"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
         </div>
         <div class="ownership-dot-column">
             <div id="lightBlue1" class="ownership-dot lightBlue">
-                <div id="lightBlue1-disabled" class="ownership-dot-disabled"></div>
+                <div id="lightBlue1-disabled" class="@(Owned["lightBlue1"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="lightBlue2" class="ownership-dot lightBlue">
-                <div id="lightBlue2-disabled" class="ownership-dot-disabled"></div>
+                <div id="lightBlue2-disabled" class="@(Owned["lightBlue2"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="lightBlue3" class="ownership-dot lightBlue">
-                <div id="lightBlue3-disabled" class="ownership-dot-disabled"></div>
+                <div id="lightBlue3-disabled" class="@(Owned["lightBlue3"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
         </div>
         <div class="ownership-dot-column">
             <div id="pink1" class="ownership-dot pink">
-                <div id="pink1-disabled" class="ownership-dot-disabled"></div>
+                <div id="pink1-disabled" class="@(Owned["pink1"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="pink2" class="ownership-dot pink">
-                <div id="pink2-disabled" class="ownership-dot-disabled"></div> 
+                <div id="pink2-disabled" class="@(Owned["pink2"] == SteamId ? "": "ownership-dot-disabled")"></div> 
             </div>
             <div id="pink3" class="ownership-dot pink">
-                <div id="pink3-disabled" class="ownership-dot-disabled"></div> 
+                <div id="pink3-disabled" class="@(Owned["pink3"] == SteamId ? "": "ownership-dot-disabled")"></div> 
             </div>
         </div>
         <div class="ownership-dot-column">
             <div id="orange1" class="ownership-dot orange">
-                <div id="orange1-disabled" class="ownership-dot-disabled"></div> 
+                <div id="orange1-disabled" class="@(Owned["orange1"] == SteamId ? "": "ownership-dot-disabled")"></div> 
             </div>
             <div id="orange2" class="ownership-dot orange">
-                <div id="orange2-disabled" class="ownership-dot-disabled"></div>
+                <div id="orange2-disabled" class="@(Owned["orange2"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="orange3" class="ownership-dot orange">
-                <div id="orange3-disabled" class="ownership-dot-disabled"></div>
+                <div id="orange3-disabled" class="@(Owned["orange3"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
         </div>
         <div class="ownership-dot-column">
             <div id="red1" class="ownership-dot red">
-                <div id="red1-disabled" class="ownership-dot-disabled"></div>
+                <div id="red1-disabled" class="@(Owned["red1"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="red2" class="ownership-dot red">
-                <div id="red2-disabled" class="ownership-dot-disabled"></div>
+                <div id="red2-disabled" class="@(Owned["red2"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="red3" class="ownership-dot red">
-                <div id="red3-disabled" class="ownership-dot-disabled"></div>
+                <div id="red3-disabled" class="@(Owned["red3"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
         </div>
         <div class="ownership-dot-column">
             <div id="yellow1" class="ownership-dot yellow">
-                <div id="yellow1-disabled" class="ownership-dot-disabled"></div>
+                <div id="yellow1-disabled" class="@(Owned["yellow1"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="yellow2" class="ownership-dot yellow">
-                <div id="yellow2-disabled" class="ownership-dot-disabled"></div>
+                <div id="yellow2-disabled" class="@(Owned["yellow2"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="yellow3" class="ownership-dot yellow">
-                <div id="yellow3-disabled" class="ownership-dot-disabled"></div>
+                <div id="yellow3-disabled" class="@(Owned["yellow3"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
         </div>
         <div class="ownership-dot-column">
             <div id="green1" class="ownership-dot green">
-                <div id="green1-disabled" class="ownership-dot-disabled"></div>
+                <div id="green1-disabled" class="@(Owned["green1"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="green2" class="ownership-dot green">
-                <div id="green2-disabled" class="ownership-dot-disabled"></div>
+                <div id="green2-disabled" class="@(Owned["green2"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="green3" class="ownership-dot green">
-                <div id="green3-disabled" class="ownership-dot-disabled"></div>
+                <div id="green3-disabled" class="@(Owned["green3"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
         </div>
         <div class="ownership-dot-column">
             <div id="blue1" class="ownership-dot blue">
-                <div id="blue1-disabled" class="ownership-dot-disabled"></div>
+                <div id="blue1-disabled" class="@(Owned["blue1"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
             <div id="blue2" class="ownership-dot blue">
-                <div id="blue2-disabled" class="ownership-dot-disabled"></div>
+                <div id="blue2-disabled" class="@(Owned["blue2"] == SteamId ? "": "ownership-dot-disabled")"></div>
             </div>
         </div>
     </div>
 </root>
 
 @code {
-
     [Property]
-    public string PlayerId { get; set; }
+    public ulong SteamId { get; set; }
     
     [Property]
     public string Name { get; set; }
 
+    [Property]
+    public int Money { get; set; } = 0;
+
+    [Property]
+    public Dictionary<string, ulong> Owned { get; set; }
 }

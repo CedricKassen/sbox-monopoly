@@ -11,8 +11,7 @@ public enum GameState
 
 public sealed class GameStateManager : Component, IGameEventHandler<GameEndEvent>, IGameEventHandler<GameStartEvent>
 {
-	[Property] [Sync] private int StartState { get; set; } = 0;
-	[Property] GameState CurrentState { get; set; }
+	[Property] [Sync] GameState CurrentState { get; set; }
 	[Property] public UiManager UiManager { get; private set; }
 
 
@@ -31,7 +30,6 @@ public sealed class GameStateManager : Component, IGameEventHandler<GameEndEvent
 
 	protected override void OnStart()
 	{
-		Log.Info("Change to " + (GameState)StartState);
 		CurrentState = UiManager.ChangeState(CurrentState);
 	}
 
