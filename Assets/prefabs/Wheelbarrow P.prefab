@@ -1,0 +1,26 @@
+{
+  "RootObject": {
+    "__guid": "087a15bb-8dc7-40d9-af64-cfa13fff6a05",
+    "Flags": 0,
+    "Name": "Wheelbarrow P",
+    "Position": "-190.243,97.76868,144.9811",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "be47172b-0343-4461-ad9b-162c8e1576fe",
+        "BodyGroups": 18446744073709551615,
+        "MaterialOverride": "materials/game_piece.vmat",
+        "Model": "models/wheelbarrow.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

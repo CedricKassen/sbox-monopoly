@@ -18,7 +18,7 @@
 
 	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
 	[Property] public bool Visible { get; set; }
-	[Property] GameObject Parent { get; set; }
+	[Property] UiManager UiManager { get; set; }
 
 	
 	/// <summary>
@@ -32,12 +32,12 @@
 
 	void PressHost()
 	{
-		Parent.Dispatch(new CreateLobbyEvent());
+		UiManager.ChangeState(GameState.LOBBY_CREATION);
 	}
 	
 	void PressJoin()
 	{
-		Parent.Dispatch(new JoinLobbyEvent());
+		UiManager.ChangeState(GameState.LOBBY_SELECTION);
 	}
 
 }

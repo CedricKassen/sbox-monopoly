@@ -1,4 +1,4 @@
-LobbyHubUI
+LobbyUI
 {
 	top: 0;
 	bottom: 0;
@@ -20,6 +20,12 @@ LobbyHubUI
 		color: #fff;
 		margin-bottom: 15px;
 	}
+	
+	.text {
+		font-size: 40px;
+		font-family: Poppins;
+		color: #fff;
+	}
 
 	button {
 		color: #888888;
@@ -35,29 +41,13 @@ LobbyHubUI
 	&.hide {
 		opacity: 0;
 	}
-
-	.lobbies {
+	
+	.player-container {
 		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
-		width: 75%;
-		flex-wrap: wrap;
-		gap: 0 20px;
 	}
 	
-	.lobby {
-		&:hover {
-			background: #a1b7e1;
-			cursor: pointer;
-		}
-		display: flex;
-		flex-direction: column;
-		background: #cccccc;
-		opacity: 0.2;
-		color: #2b303c;
-		border-radius: 20px;
-		font-size: 20px;
-		padding: 15px;
-		width: 300px;
+	.player-container > * {
+		
 	}
 }

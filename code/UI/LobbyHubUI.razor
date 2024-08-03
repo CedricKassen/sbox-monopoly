@@ -1,7 +1,9 @@
 @using System.Diagnostics
+@using Microsoft.VisualBasic
 @using Sandbox;
 @using Sandbox.Events
 @using Sandbox.Events.GameStateEvents
+@using Sandbox.Network
 @using Sandbox.UI;
 @inherits PanelComponent
 
@@ -9,33 +11,65 @@
 
 <root class="@(Visible ? "" : "hide")">
 	<div class="title">@MyStringValue</div>
-	<button onclick=@PressStart>Start Game</button>
+	<button >Start Game</button>
 	<button onclick=@PressBack>Leave</button>
 </root>
+
+
+<button onclick=@ReloadLobbies>Refetch</button>
+<div class="lobbies">
+	@foreach (var lobby in lobbies)
+	{
+		<div class="lobby" onclick=@(() => JoinLobby(lobby.LobbyId))>
+			<p>Name: @lobby.Name </p><br/>
+			<p>Teilnehmer: @lobby.Members </p><br/>
+		</div>
+	}
+
+</div>
 
 @code
 {
 
 	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
 	[Property] public bool Visible { get; set; } = false;
-	[Property] GameObject Parent { get; set; }
+	[Property] UiManager UiManager { get; set; }
+	
+	private List<LobbyInformation> lobbies = new List<LobbyInformation>();
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return System.HashCode.Combine(Visible);
+		return System.HashCode.Combine(Visible, lobbies);
+	}
+
+	protected override void OnStart()
+	{
+		base.OnStart();
+		fetchLobbys();
+	}
+
+	void JoinLobby(ulong lobbyId)
+	{
+		GameNetworkSystem.Connect(lobbyId);
+		UiManager.ChangeState(GameState.INLOBBY);
 	}
 	
-	void PressStart()
+	void ReloadLobbies()
 	{
-		Parent.Dispatch(new GameStartEvent());
+		fetchLobbys();
 	}
 	
 	void PressBack()
 	{
-		Parent.Dispatch(new LeaveLobbyEvent());
+		UiManager.ChangeState(GameState.MENU);
+	}
+	
+	public async void fetchLobbys()
+	{
+		lobbies = await Networking.QueryLobbies();
 	}
 	
 }
