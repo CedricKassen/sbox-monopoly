@@ -1,0 +1,25 @@
+@using Sandbox;
+@using Sandbox.Network
+@using Sandbox.UI;
+
+
+
+<root>
+	<div class="lobby-card">
+		<img class="avatar" src=@($"avatar:{lobby.OwnerId}")/>
+		<div class="card-content">
+			<p>@lobby.Name</p>
+			<div>
+				<p>@lobby.Members/@lobby.MaxMembers PLAYERS</p>
+			</div>
+		</div>
+	</div>
+</root>
+
+
+
+@code {
+
+	[Property] public LobbyInformation lobby;
+
+}

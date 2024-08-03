@@ -5,8 +5,7 @@ LobbyHubUI
 	left: 0;
 	right: 0;
 	position: absolute;
-	background-color: #000000;
-	opacity: 0.85;
+	background-color: #071627;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
@@ -40,24 +39,48 @@ LobbyHubUI
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		width: 75%;
+		width: 75vw;
 		flex-wrap: wrap;
-		gap: 0 20px;
 	}
 	
-	.lobby {
+	.lobby-card {
+		display: flex;
+		flex-direction: row;
+		background-color: #050A14AA ;
+		color: #fff;
+		border-radius: 5px;
+		font-size: 20px;
+		padding: 15px;
+		
+		.card-content {
+			width: 300px;
+			background-color: #54be35;
+			margin-left: 15px;
+			justify-content: center;
+			align-items: center;
+			display: flex;
+			flex-direction: column;
+		}
+		
+		.avatar {
+			padding: 5px;
+			height: 106px;
+			width: 106px;
+		}
+		
 		&:hover {
 			background: #a1b7e1;
 			cursor: pointer;
 		}
+
+	}
+	
+	.hub-buttons {
 		display: flex;
-		flex-direction: column;
-		background: #cccccc;
-		opacity: 0.2;
-		color: #2b303c;
-		border-radius: 20px;
-		font-size: 20px;
-		padding: 15px;
-		width: 300px;
+		bottom: 0;
+		position: absolute;
+		padding: 0 40px;
+		justify-content: space-between;
+		width: 100vw;
 	}
 }

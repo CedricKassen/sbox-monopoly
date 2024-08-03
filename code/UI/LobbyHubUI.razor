@@ -10,23 +10,29 @@
 
 
 <root class="@(Visible ? "" : "hide")">
-	<div class="title">@MyStringValue</div>
-	<button >Start Game</button>
-	<button onclick=@PressBack>Leave</button>
+
+	<div class="title">MY_POOL_NO</div>
+	<div class="lobbies">
+		@foreach (var lobby in lobbies)
+		{
+			<LobbyCard @lobby=@lobby></LobbyCard>
+		}
+
+	</div>
+
+	
+		<div class="hub-buttons">
+    		<button onclick=@ReloadLobbies>Refetch</button>
+    		<button onclick=@PressBack>Back</button>
+    	</div>
 </root>
 
 
-<button onclick=@ReloadLobbies>Refetch</button>
-<div class="lobbies">
-	@foreach (var lobby in lobbies)
-	{
-		<div class="lobby" onclick=@(() => JoinLobby(lobby.LobbyId))>
-			<p>Name: @lobby.Name </p><br/>
-			<p>Teilnehmer: @lobby.Members </p><br/>
-		</div>
-	}
 
-</div>
+
+
+
+
 
 @code
 {
