@@ -6,12 +6,13 @@ using Sandbox.Events.GameStateEvents;
 
 public enum GameState
 {
-	INGAME, MENU, LOBBY_CREATE, LOBBY_JOIN, END_GAME
+	INGAME = 4, MENU = 0, LOBBY_CREATION = 1, LOBBY_SELECTION = 2, INLOBBY = 3, END_GAME = 5
 }
 
-public sealed class GameStateManager : Component, IGameEventHandler<GameEndEvent>, IGameEventHandler<GameStartEvent>, IGameEventHandler<CreateLobbyEvent>, IGameEventHandler<JoinLobbyEvent>, IGameEventHandler<LeaveLobbyEvent>
+public sealed class GameStateManager : Component, IGameEventHandler<GameEndEvent>, IGameEventHandler<GameStartEvent>
 {
-	[Property] public GameState CurrentState { get; private set; }
+	[Property] [Sync] private int StartState { get; set; } = 0;
+	[Property] GameState CurrentState { get; set; }
 	[Property] public UiManager UiManager { get; private set; }
 
 
@@ -27,27 +28,11 @@ public sealed class GameStateManager : Component, IGameEventHandler<GameEndEvent
 		CurrentState = UiManager.ChangeState(GameState.INGAME);
 	}
 	
-	public void OnGameEvent( CreateLobbyEvent eventArgs )
-	{
-		Log.Info("Event: " + "CreateLobbyEvent");
-		CurrentState = UiManager.ChangeState(GameState.LOBBY_CREATE);
-	}
-	
-	public void OnGameEvent( JoinLobbyEvent eventArgs )
-	{
-		Log.Info("Event: " + "JoinLobbyEvent");
-		CurrentState = UiManager.ChangeState(GameState.LOBBY_JOIN);
-	}
-	
-	public void OnGameEvent( LeaveLobbyEvent eventArgs )
-	{
-		Log.Info("Event: " + "LeaveLobbyEvent");
-		CurrentState = UiManager.ChangeState(GameState.MENU);
-	}
 
 	protected override void OnStart()
 	{
-		CurrentState = UiManager.ChangeState(GameState.MENU);
+		Log.Info("Change to " + (GameState)StartState);
+		CurrentState = UiManager.ChangeState(CurrentState);
 	}
 
 	
