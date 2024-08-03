@@ -4,8 +4,8 @@ using Sandbox.Network;
 public sealed class Lobby : Component, Component.INetworkListener
 {
 
-	[Property] public long maxPlayers = 5;
-	[Property] public long playerNum = 0;
+	public long maxPlayers = 5;
+	[Property] [HostSync] public long playerNum { get; set; } = 0;
 
 	[Property] public List<Player> players = new List<Player>();
 	
