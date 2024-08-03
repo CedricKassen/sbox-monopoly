@@ -35,7 +35,7 @@
 	[Property] public bool Visible { get; set; } = false;
 	[Property] UiManager UiManager { get; set; }
 	
-	private List<LobbyInformation> lobbies;
+	private List<LobbyInformation> lobbies = new List<LobbyInformation>();
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt

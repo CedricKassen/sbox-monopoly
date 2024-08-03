@@ -1,5 +1,5 @@
 {
-  "__guid": "5995b55e-16f0-455c-9f9d-ed5b13474d9f",
+  "__guid": "134edfeb-6f36-4b54-a7b0-36ce5f4f7a1e",
   "GameObjects": [
     {
       "__guid": "024eb414-bc10-4ad9-885d-eae5e42de48d",
@@ -831,6 +831,12 @@
                 {
                   "__type": "LobbyUI",
                   "__guid": "61aac792-4312-40a9-b98e-07165f1f1dc0",
+                  "Lobby": {
+                    "_type": "component",
+                    "component_id": "a8157055-fe38-49f3-bca5-55572fc4d83f",
+                    "go": "00e6060f-33c7-439f-87f4-209648b444c7",
+                    "component_type": "Lobby"
+                  },
                   "MyStringValue": "In der Lobby",
                   "UiManager": {
                     "_type": "component",
@@ -861,7 +867,8 @@
                 {
                   "__type": "GameStateManager",
                   "__guid": "a8b28d91-4539-41ba-8185-75379898e7f1",
-                  "CurrentState": "INGAME",
+                  "CurrentState": "MENU",
+                  "StartState": 0,
                   "UiManager": {
                     "_type": "component",
                     "component_id": "384d6879-5464-4d36-8e3a-6e07f190238d",
@@ -930,11 +937,20 @@
           "Enabled": true,
           "Children": [
             {
-              "__guid": "7e6fdc0a-ed2b-4dce-a2f4-df9a5313a6d4",
+              "__guid": "00e6060f-33c7-439f-87f4-209648b444c7",
               "Flags": 0,
-              "Name": "LobbyManager",
+              "Name": "Lobby",
               "Position": "0,0,0",
-              "Enabled": true
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Lobby",
+                  "__guid": "a8157055-fe38-49f3-bca5-55572fc4d83f",
+                  "maxPlayers": 0,
+                  "playerNum": 0,
+                  "players": []
+                }
+              ]
             }
           ]
         }

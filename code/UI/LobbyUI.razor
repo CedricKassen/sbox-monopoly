@@ -12,6 +12,15 @@
 	<div class="title">@MyStringValue</div>
 	<button onclick=@PressStart>Start</button>
 	<button onclick=@PressBack>Zurück</button>
+	
+	<p class="text">@Lobby.playerNum/@Lobby.maxPlayers</p>
+	
+	@foreach (var player in Lobby.players)
+	{
+		<div>
+			<img src=@($"avatar:{player.steamId}") />
+		</div>
+	}
 </root>
 
 @code
@@ -19,13 +28,14 @@
 	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
 	[Property] public bool Visible { get; set; } = false;
 	[Property] UiManager UiManager { get; set; }
+	[Property] Lobby Lobby { get; set; }
 
 	/// <summary>
 	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return System.HashCode.Combine(Visible);
+		return System.HashCode.Combine(Visible, Lobby);
 	}
 	
 	void PressStart()
@@ -36,6 +46,10 @@
 
 	void PressBack()
 	{
+		if (GameNetworkSystem.IsActive)
+		{
+			GameNetworkSystem.Disconnect();
+		}
 		UiManager.ChangeState(GameState.MENU);
 	}
 	

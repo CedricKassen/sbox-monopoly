@@ -6,12 +6,13 @@ using Sandbox.Events.GameStateEvents;
 
 public enum GameState
 {
-	INGAME, MENU, LOBBY_CREATION, LOBBY_SELECTION, INLOBBY, END_GAME
+	INGAME = 4, MENU = 0, LOBBY_CREATION = 1, LOBBY_SELECTION = 2, INLOBBY = 3, END_GAME = 5
 }
 
 public sealed class GameStateManager : Component, IGameEventHandler<GameEndEvent>, IGameEventHandler<GameStartEvent>
 {
-	[Property] public GameState CurrentState { get; private set; }
+	[Property] [Sync] private int StartState { get; set; } = 0;
+	[Property] GameState CurrentState { get; set; }
 	[Property] public UiManager UiManager { get; private set; }
 
 
@@ -30,7 +31,8 @@ public sealed class GameStateManager : Component, IGameEventHandler<GameEndEvent
 
 	protected override void OnStart()
 	{
-		CurrentState = UiManager.ChangeState(GameState.MENU);
+		Log.Info("Change to " + (GameState)StartState);
+		CurrentState = UiManager.ChangeState(CurrentState);
 	}
 
 	

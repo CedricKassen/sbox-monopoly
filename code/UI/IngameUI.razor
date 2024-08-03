@@ -10,8 +10,7 @@
 <root class="@(Visible ? "" : "hide")">
 	<div class="title">@MyStringValue</div>
 	<button onclick=@PressWin>Win</button>
-	<button  onclick=@PressEnd>End Game</button>
-	
+    	<button  onclick=@PressEnd>End Game</button>
 	<p>Press Esc to Win and Jump to Leave</p>
 </root>
 @code
@@ -40,7 +39,7 @@
 			PressEnd();
 		}
 	}
-
+	
 	void PressWin()
 	{
 		UiManager.ChangeState(GameState.END_GAME);
@@ -50,5 +49,6 @@
 	{
 		UiManager.ChangeState(GameState.MENU);
 	}
-	
+
+
 }
