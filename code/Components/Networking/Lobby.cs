@@ -7,22 +7,41 @@ public sealed class Lobby : Component, Component.INetworkListener
 	public long maxPlayers = 5;
 	[Property] [HostSync] public long playerNum { get; set; } = 0;
 
-	[Property] public List<Player> players = new List<Player>();
+	[Property] public GameObject PlayerPrefab { get; set; }
+	[Property] public List<Player> players;
+	
+	
 	
 
 	public void OnActive(Connection conn)
 	{
 		Log.Info( $"Player '{conn.DisplayName}' tritt bei" );
+
+		GameObject playerObj = PlayerPrefab.Clone();
+		playerObj.Name = conn.DisplayName + " - Network";
+		playerObj.Components.Get<Player>().Name = conn.DisplayName;
+		playerObj.Components.Get<Player>().SteamId = conn.SteamId;
+
+		
+		playerObj.NetworkSpawn();
+		playerObj.Network.AssignOwnership(conn);
+	
 		playerNum++;
-		players.Add(new Player(conn.SteamId, conn.DisplayName));
 
 	}
 
 	public void OnDisconnected(Connection conn)
 	{
-		players.Remove(players.Find(player => player.steamId == conn.SteamId));
-		Log.Info("On Disconneced");
+		IEnumerable<Player> currentPlayers = Scene.GetAllComponents<Player>();
+		Player player = currentPlayers.First(player => player.SteamId == conn.SteamId);
+		player.GameObject.Destroy();
+		playerNum--;
 		GameNetworkSystem.Disconnect();
+	}
+
+	public List<Player> getCurrentPlayers()
+	{
+		return new List<Player>(Scene.GetAllComponents<Player>());
 	}
 
 	public override int GetHashCode()
@@ -32,17 +51,4 @@ public sealed class Lobby : Component, Component.INetworkListener
 	
 }
 
-public class Player
-{
-	public ulong steamId { get; }
-	private string name;
-	private int money = 2000;
-	private List<string> cards = new List<string>();
-
-	public Player(ulong steamId, string name)
-	{
-		this.steamId = steamId;
-		this.name = name;
-	}
-}
 
