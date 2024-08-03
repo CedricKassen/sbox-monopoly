@@ -1,5 +1,5 @@
 {
-  "__guid": "fc77a4d3-707c-4586-aa55-73e34e73bfaf",
+  "__guid": "6fcee760-6e47-4af0-bedf-ec5d50e7b3a7",
   "GameObjects": [
     {
       "__guid": "024eb414-bc10-4ad9-885d-eae5e42de48d",
@@ -308,7 +308,7 @@
               "__guid": "d2d3a58c-fd7c-43a4-98c9-db90721272b4",
               "Flags": 0,
               "Name": "House4",
-              "Position": "-153.8408,62.54433,144.9811",
+              "Position": "-159.9552,56.67157,144.9811",
               "Enabled": true,
               "Components": [
                 {
@@ -325,7 +325,7 @@
               "__guid": "39a8aea2-261a-4083-9d6f-53ecb082602a",
               "Flags": 0,
               "Name": "House3",
-              "Position": "-153.8408,71.4977,144.9811",
+              "Position": "-159.9552,65.62495,144.9811",
               "Enabled": true,
               "Components": [
                 {
@@ -342,7 +342,7 @@
               "__guid": "6bfe06d5-2928-4fac-9a30-c656c646188e",
               "Flags": 0,
               "Name": "House2",
-              "Position": "-153.8408,80.27487,144.9811",
+              "Position": "-159.9552,74.40211,144.9811",
               "Enabled": true,
               "Components": [
                 {
@@ -359,7 +359,7 @@
               "__guid": "437a1542-2030-4ce4-ada3-c3abb6c11142",
               "Flags": 0,
               "Name": "House1",
-              "Position": "-153.8408,89.14957,144.9811",
+              "Position": "-159.9552,83.27681,144.9811",
               "Enabled": true,
               "Components": [
                 {
@@ -385,7 +385,7 @@
               "__guid": "666c3287-2e1e-41cc-8682-d3582b2af68a",
               "Flags": 0,
               "Name": "Hotel",
-              "Position": "-154.7681,152.7346,144.9811",
+              "Position": "-160.3419,149.8225,144.9811",
               "Enabled": true,
               "Components": [
                 {
@@ -413,7 +413,7 @@
           "__guid": "85038edd-4cde-44bb-82bf-e2c07f5b1bf7",
           "Flags": 0,
           "Name": "Wheelbarrow",
-          "Position": "-190.243,0.08163452,144.9811",
+          "Position": "-197.1274,-3.808578,144.9811",
           "Enabled": true,
           "Components": [
             {
@@ -431,7 +431,7 @@
           "__guid": "8403da3d-4511-4464-a296-5083fd865115",
           "Flags": 0,
           "Name": "Tophead",
-          "Position": "-196.2319,35.98134,144.9811",
+          "Position": "-203.1163,32.09113,144.9811",
           "Enabled": true,
           "Components": [
             {
@@ -449,7 +449,7 @@
           "__guid": "bcf4067d-926a-412f-a165-01fcd2c16013",
           "Flags": 0,
           "Name": "Thimble",
-          "Position": "-172.3011,4.110733,144.9811",
+          "Position": "-179.1855,0.22052,144.9811",
           "Enabled": true,
           "Components": [
             {
@@ -467,7 +467,7 @@
           "__guid": "fac064ac-ba99-4741-bd80-9e615fe6eae4",
           "Flags": 0,
           "Name": "Ship",
-          "Position": "-180.0841,38.37283,144.9811",
+          "Position": "-186.9685,34.48262,144.9811",
           "Enabled": true,
           "Components": [
             {
@@ -485,7 +485,7 @@
           "__guid": "aead691d-0924-4b81-aa49-050395445eed",
           "Flags": 0,
           "Name": "Car",
-          "Position": "-161.7566,33.40874,144.9811",
+          "Position": "-168.641,29.51852,144.9811",
           "Enabled": true,
           "Components": [
             {
@@ -579,7 +579,7 @@
       "__guid": "6ad70641-3c6c-4402-9c85-9a4969af4764",
       "Flags": 0,
       "Name": "Plane",
-      "Scale": "5,5,5",
+      "Scale": "-5,-5,5",
       "Enabled": true,
       "Components": [
         {
