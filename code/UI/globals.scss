@@ -1,15 +1,42 @@
-﻿* {
+﻿$white: #ffffff;
+$black: #111111;
+
+$blue100: #96b6e1;
+$blue200: #0081ea;
+$blue300: #0c499a;
+$blue400: #293849;
+$blue500: #1e2c39;
+$blue600: #0d151d;
+
+$primary-foreground-color: $white;
+$primary-background-color: $blue600;
+$button-background-color: $blue400;
+$button-hover-background-color: $blue500;
+$curtain-background-color: #0d151daa;
+
+* {
   font-family: "Segoe UI", sans-serif;
-  color: #ffffff;
+  color: $primary-foreground-color;
 }
 
-a {
+a, button {
   cursor: pointer;
+  
   &:hover {
     sound-in: 'ui.button.over';
   }
 
   &:active {
     sound-in: 'ui.button.press';
+  }
+}
+
+button {
+  background-color: $button-background-color;
+  transition: color 200ms;
+  font-size: 55px;
+  
+  &:hover {
+    background-color: $button-hover-background-color;
   }
 }
