@@ -13,7 +13,12 @@
 <root class="@(Visible ? "" : "hide") menu">
 	<h1 class="title"> MY_POOL_NO </h1>
 	<button onclick=@PressCreate>Erstellen</button>
-	<button onclick=@PressBack>Zurück</button>
+
+	<div class="hub-buttons">
+		<button class="back icon" onclick=@PressBack>
+			keyboard_return
+		</button>
+	</div>
 </root>
 
 @code

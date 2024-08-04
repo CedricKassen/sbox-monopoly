@@ -11,19 +11,27 @@
 
 <root class="@(Visible ? "" : "hide") menu">
 	<h1> MY_POOL_NO </h1>
-	<button onclick=@PressStart>Start</button>
-	<button onclick=@PressBack>Zurück</button>
 	
-	<p class="text">@Lobby.playerNum/@Lobby.maxPlayers</p>
-	
-	<div class="player-container">
+	<div class="overview">
+		<h3>@Lobby.playerNum/@Lobby.maxPlayers</h3>
+		<div class="player-container">
 			@foreach (var player in Lobby.getCurrentPlayers())
-        	{
-		        <p>@player.Name</p>
-        		<img src=@($"avatar:{player.SteamId}")/>
-	        }
+			{
+			<div class="player">
+				<img src=@($"avatar:{player.SteamId}")/>
+				<h3>@player.Name</h3>
+			</div>
+			}
+		</div>
 	</div>
 
+	<button onclick=@PressStart>Start</button>
+
+	<div class="hub-buttons">
+		<button class="back icon" onclick=@PressBack>
+			keyboard_return
+		</button>
+	</div>
 </root>
 
 @code

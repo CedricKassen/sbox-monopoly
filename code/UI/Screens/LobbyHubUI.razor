@@ -5,9 +5,11 @@
 @inherits PanelComponent
 
 <root class="@(Visible ? "" : "hide") menu">
-
-	<h1>MY_POOL_NO</h1>
-	<h2>LOBBY SELECTION</h2>
+	<div class="column">
+		<h1>MY_POOL_NO</h1>
+		<h2>LOBBY SELECTION</h2>
+	</div>
+	
 	<div class="lobbies">
 		@if (lobbies.Count <= 0) {
 			<LobbyCard class="empty"></LobbyCard>

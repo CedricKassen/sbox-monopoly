@@ -1,6 +1,12 @@
 @import "../globals.scss";
 
 LobbyHubUI {
+	.column {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
 	.lobbies {
 		margin-bottom: 10vh;
 		margin-top: 15vh;
