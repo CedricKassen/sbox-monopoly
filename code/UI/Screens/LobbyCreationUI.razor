@@ -10,16 +10,14 @@
 
 
 
-<root class="@(Visible ? "" : "hide")">
-	<div class="title">@MyStringValue</div>
+<root class="@(Visible ? "" : "hide") menu">
+	<h1 class="title"> MY_POOL_NO </h1>
 	<button onclick=@PressCreate>Erstellen</button>
 	<button onclick=@PressBack>Zurück</button>
 </root>
 
 @code
 {
-
-	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
 	[Property] public bool Visible { get; set; } = false;
 	[Property] UiManager UiManager { get; set; }
 
