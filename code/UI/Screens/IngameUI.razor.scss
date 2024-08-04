@@ -1,4 +1,5 @@
 @import "../globals.scss";
+@import "../colors.scss";
 
 @keyframes bluePulse {
 	0% { border: 8px solid #0081ea; }
@@ -6,8 +7,7 @@
 	100% { border: 8px solid #0081ea; }
 }
 
-IngameUI
-{
+IngameUI {
 	width: 100vw;
 	height: 100vh;
 	position: absolute;
@@ -17,39 +17,6 @@ IngameUI
 	flex-direction: row;
 	font-weight: bold;
 	pointer-events: all;
-
-	.title
-	{
-		font-size: 75px;
-		font-family: Poppins;
-		color: #fff;
-		margin-bottom: 15px;
-	}
-	
-	.curtain {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100vh;
-		width: 100vw;
-		background-color: #0d151daa;
-		z-index: 3;
-	}
-	
-	dialog {
-		position: absolute; 
-		top: 50%; 
-		left: 50%; 
-		transform: translate(-50%, -50%); 
-		height: 50%; 
-		width: 450px; 
-		background-color: #0d151d; 
-		border-radius: 12px; 
-		flex-direction: column; 
-		align-items: center; 
-		padding: 8px 16px;
-		z-index: 4;
-	}
 	
 	#mainPanel {
 		position: absolute; 
@@ -57,104 +24,64 @@ IngameUI
 		right: 0; 
 		height: 100vh; 
 		width: 120px;
-		background-color: #0d151d;
+		background-color: $primary-background-color;
 		display: flex; 
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		padding: 15px 0;
-		gap: 5px;
+		gap: 15px;
 		
-		a {
+		.secondaryButton {
 			margin: 10px 0;
-			color: white;
-			width: auto;
 			font-size: 64px;
 			transition: color 200ms;
-			background-color: #0d151d;
-			border-radius: 8px;
+			background-color: $primary-background-color;
 			
 			&:hover {
-				background-color: #1e2c39;
+				background-color: $button-background-color;
 			}
 		}
-		
-		.autogrow {
-			display: flex;
-			flex-grow: 1;
-			min-height: auto;
-		}
-		
+
 		.mainButton {
 			height: 150px;
 			width: 150px;
-			background-color: #1e2c39;
 			transform: rotate(45deg);
 			margin-right: 120px;
 			transition: color 200ms;
 			border-radius: 0 16px;
-			
-			&:hover {
-				background-color: #293849;
-			}
+			font-size: 55px;
 
 			* {
-				transform: rotate(-45deg) translate(-16%, 42%);
+				transform: rotate(-45deg) translate(-10px, 75px);
 			}
 		}
-		
+
 		.active {
 			animation: bluePulse 2s infinite;
 
 			* {
-				transform: rotate(-45deg) translate(-13%, 35%);
+				transform: rotate(-45deg) translate(-8px, 52px);
 			}
 		}
-	}
-
-	button {
-		color: #888888;
-		font-size: 55px;
-		font-weight: bolder;
-		cursor: pointer;
-	}
-
-	button:hover {
-		color: #2b303c;
-	}
-
-	&.hide {
-		opacity: 0;
-	}
-	
-	.timer {
-		color: #ffffff;
-		font-size: 32px;
-		font-weight: bold;
 	}
 }
 
 PlayerCard {
 	position: relative;
-	background-color: #0d151d;
-	color: #ffffff;
+	background-color: $primary-background-color;
 	height: 380px;
 	width: 280px;
 	border-radius: 12px;
 	overflow: hidden;
 	margin: 2px -35px;
-	border: 3px solid #ffffff;
+	border: 3px solid $primary-foreground-color;
 	transform: translate3d(0px, 250px, 0px);
 	transition: transform 300ms;
 	padding: 15px;
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
-	
-	p {
-		margin-left: 15px; 
-		font-size: 22px;
-	}
 	
 	&:hover {
 		z-index: 2;
@@ -166,7 +93,8 @@ PlayerCard {
 		height: 80px;
 		width: 80px;
 		border-radius: 8px;
-		border: 2px solid #ffffff;
+		margin-right: 10px;
+		border: 2px solid $primary-foreground-color;
 	} 
 	
 	.ownership-dot {
@@ -184,43 +112,43 @@ PlayerCard {
 	}
 	
 	.red {
-		background-color: #c11919;
+		background-color: $red300;
 	}
 	
 	.brown {
-		background-color: #5e2b15;
+		background-color: $brown300;
 	}
 	
 	.lightBlue {
-		background-color: #32b2bf;
+		background-color: $cyan300;
 	}
 	
 	.pink {
-		background-color: #ab2288;
+		background-color: $pink300;
 	}
 	
 	.orange {
-		background-color: #ca5409;
+		background-color: $orange300;
 	}
 	
 	.yellow {
-		background-color: #e3be00;
+		background-color: $yellow300;
 	}
 	
 	.green {
-		background-color: #208445;
+		background-color: $green300;
 	}
 	
 	.blue {
-		background-color: #0c499a;
+		background-color: $blue300;
 	}
 	
 	.black {
-		background-color: #111111;
+		background-color: $black;
 	}
 	
 	.gray {
-		background-color: #9ca2b4;
+		background-color: $gray300;
 	}
 	
 	.ownership-dot-disabled {

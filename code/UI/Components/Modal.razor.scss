@@ -1,0 +1,36 @@
+﻿@import "../constants.scss";
+
+.curtain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: $curtain-background-color;
+  z-index: 3;
+}
+
+dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 50%;
+  width: 450px;
+  background-color: $primary-background-color;
+  border-radius: 12px;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px;
+  z-index: 4;
+}
+
+.headline {
+  align-items: center; 
+  justify-content: space-between; 
+  width: 100%;
+  
+  h1, a {
+    font-size: 32px;
+  }
+}

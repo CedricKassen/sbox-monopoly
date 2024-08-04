@@ -1,0 +1,17 @@
+﻿@using System
+@using Sandbox.Razor;
+@namespace Sandbox.UI
+
+<root>
+    <div class="curtain"></div>
+    <dialog>
+        <ModalHeadline OnClose=@OnClose Name=@Name />
+        @Content
+    </dialog>
+</root>
+
+@code {
+    [Property] public RenderFragment Content { get; set; }
+    [Property] public Func<IngameUI.IngameUiStates> OnClose { get; set; }
+    [Property] public string Name { get; set; }
+}
