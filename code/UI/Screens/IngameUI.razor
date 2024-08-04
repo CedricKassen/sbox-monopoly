@@ -1,0 +1,119 @@
+@using Sandbox;
+@using Sandbox.UI;
+
+@inherits PanelComponent;
+
+<root class="@(Visible ? "" : "hide")">
+	<div style="position: absolute; top: 0; left: 0">
+		<p class="timer">00:00.000</p>
+	</div>
+	<div id="mainPanel">
+		<div class="autogrow"></div>
+		<a onclick=@(() => state = IngameUIStates.bank)> 🏦 </a>
+		<a onclick=@(() => state = IngameUIStates.trade)> 💸 </a>
+		<a class="mainButton active sound"> GO </a>
+		<a onclick=@(() => state = IngameUIStates.building)> 🏠 </a>
+		<div class="autogrow"></div>
+		<a onclick=@(() => state = IngameUIStates.options)> ⚙️ </a>
+	</div>
+	@foreach (var player in Lobby.getCurrentPlayers()) {
+		<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@OwnedFields/>
+	}
+	
+	@if (state == IngameUIStates.bank) {
+		<div class="curtain"></div>
+		<dialog>
+			<div style="align-items: center; justify-content: space-between; width: 100%">
+				<h1 style="color: #ffffff; font-family: Segoe UI; font-size: 32px"> Bank </h1>
+				<a style="color: #ffffff; font-size: 32px" onclick=@(() => state = IngameUIStates.none)> 🗙 </a>
+			</div>
+		</dialog>
+	}
+
+	@if (state == IngameUIStates.trade) {
+	<div class="curtain"></div>
+	<dialog>
+		<div style="align-items: center; justify-content: space-between; width: 100%">
+			<h1 style="color: #ffffff; font-family: Segoe UI; font-size: 32px"> Trading </h1>
+			<a style="color: #ffffff; font-size: 32px" onclick=@(() => state = IngameUIStates.none)> 🗙 </a>
+		</div>
+	</dialog>
+	}
+
+	@if (state == IngameUIStates.building) {
+	<div class="curtain"></div>
+	<dialog>
+		<div style="align-items: center; justify-content: space-between; width: 100%">
+			<h1 style="color: #ffffff; font-family: Segoe UI; font-size: 32px"> Building </h1>
+			<a style="color: #ffffff; font-size: 32px" onclick=@(() => state = IngameUIStates.none)> 🗙 </a>
+		</div>
+	</dialog>
+	}
+
+	@if (state == IngameUIStates.options) {
+	<div class="curtain"></div>
+	<dialog>
+		<div style="align-items: center; justify-content: space-between; width: 100%">
+			<h1 style="color: #ffffff; font-family: Segoe UI; font-size: 32px"> Options </h1>
+			<a style="color: #ffffff; font-size: 32px" onclick=@(() => state = IngameUIStates.none)> 🗙 </a>
+		</div>
+	</dialog>
+	}
+
+</root>
+
+@code {
+	enum IngameUIStates {
+		bank,
+		trade,
+		options,
+		building,
+		none
+	}
+	
+	[Property] public bool Visible { get; set; } = false;
+	[Property] UiManager UiManager { get; set; }
+	[Property] Lobby Lobby { get; set; }
+
+	private IngameUIStates state { get; set; } = IngameUIStates.none;
+	
+	private Dictionary<string, ulong> OwnedFields = new Dictionary<string, ulong> {
+		{"brown1", 0},
+		{"brown2", 0},
+		{"lightBlue1", 0},
+		{"lightBlue2", 0},
+		{"lightBlue3", 0},
+		{"pink1", 0},
+		{"pink2", 0},
+		{"pink3", 0},
+		{"orange1", 0},
+		{"orange2", 0},
+		{"orange3", 0},
+		{"red1", 0},
+		{"red2", 0},
+		{"red3", 0},
+		{"yellow1", 0},
+		{"yellow2", 0},
+		{"yellow3", 0},
+		{"green1", 0},
+		{"green2", 0},
+		{"green3", 0},
+		{"blue1", 0},
+		{"blue2", 0},
+		{"railway1", 0},
+		{"railway2", 0},
+		{"railway3", 0},
+		{"railway4", 0},
+		{"electriccompany", 0},
+		{"watercompany", 0}
+	};
+
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash()
+	{
+		return System.HashCode.Combine(Visible, Lobby);
+	}
+}
