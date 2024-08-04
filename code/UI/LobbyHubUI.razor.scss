@@ -5,18 +5,23 @@ LobbyHubUI
 	left: 0;
 	right: 0;
 	position: absolute;
-	background-color: #000000;
-	opacity: 0.85;
-	justify-content: center;
+	background: radial-gradient(rgba(10, 26, 40, 1) 0%,rgba(5, 20, 38, 1) 100%);
+	padding-top: 12vh;
 	align-items: center;
 	flex-direction: column;
 	font-weight: bold;
 	pointer-events: all;
+	font-family: "Segoe UI";
+	
 
 	.title
 	{
 		font-size: 75px;
-		font-family: Poppins;
+		color: #fff;
+	}
+
+	.sub-title {
+		font-size: 40px;
 		color: #fff;
 		margin-bottom: 15px;
 	}
@@ -35,29 +40,104 @@ LobbyHubUI
 	&.hide {
 		opacity: 0;
 	}
+	
+
 
 	.lobbies {
+		margin-bottom: 10vh;
+		margin-top: 15vh;
 		display: flex;
+		gap: 25px 15px;
 		flex-direction: row;
 		justify-content: space-between;
-		width: 75%;
+		width: 75vw;
 		flex-wrap: wrap;
-		gap: 0 20px;
+		overflow-y: scroll;
+
+		.lobby-card {
+			display: flex;
+			flex-direction: row;
+			background-color: #050A14AA ;
+			color: #fff;
+			border-radius: 12px;
+			border-radius: 5px;
+			font-size: 20px;
+			
+			&:hover {
+				background-color: hsla(220, 60%, 2%, 0.67);
+				cursor: pointer;
+				sound-in: 'ui.button.over';
+			}
+
+			&:active {
+				background-color: hsla(220, 60%, 0%, 0.67);
+				sound-in: 'ui.button.press';
+			}
+
+			.card-content {
+
+				padding: 15px;
+				width: 300px;
+				margin-left: 15px;
+				justify-content: center;
+				align-items: center;
+				display: flex;
+				flex-direction: column;
+
+				.name {
+					font-size: 30px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap; 
+				}
+
+				.count {
+					font-size: 20px;
+				}
+
+			}
+
+			.avatar {
+				border-top-left-radius: 12px;
+				border-bottom-left-radius: 12px;
+				padding: 5px;
+				height: 106px;
+				width: 106px;
+			}
+			
+
+		}
+
+		.empty {
+			font-size: 32px;
+			color: #fff;
+			p {
+				width: 100%;
+				justify-content: center;
+			}
+		}
 	}
 	
-	.lobby {
-		&:hover {
-			background: #a1b7e1;
-			cursor: pointer;
-		}
+	.icon {
+		font-size: 8em;
+		font-family: "Material Icons";
+	}
+	
+	.hub-buttons {
 		display: flex;
-		flex-direction: column;
-		background: #cccccc;
-		opacity: 0.2;
-		color: #2b303c;
-		border-radius: 20px;
-		font-size: 20px;
-		padding: 15px;
-		width: 300px;
+		bottom: 40px;
+		position: absolute;
+		padding: 0 40px;
+		justify-content: space-between;
+		width: 100vw;
+		
+		
+		.back:active {
+			sound-in: 'ui.navigate.back';
+		}
+		
+		.refetch:active {
+			sound-in: 'ui.upvote';
+		}
 	}
 }
