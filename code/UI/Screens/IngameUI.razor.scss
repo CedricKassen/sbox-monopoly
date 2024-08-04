@@ -53,7 +53,7 @@ IngameUI {
 			font-size: 55px;
 
 			* {
-				transform: rotate(-45deg) translate(-12%, 48%);
+				transform: rotate(-45deg) translate(-10px, 75px);
 			}
 		}
 
@@ -61,7 +61,7 @@ IngameUI {
 			animation: bluePulse 2s infinite;
 
 			* {
-				transform: rotate(-45deg) translate(-8%, 38%);
+				transform: rotate(-45deg) translate(-8px, 52px);
 			}
 		}
 	}
