@@ -1,4 +1,9 @@
-﻿a {
+﻿* {
+  font-family: "Segoe UI", sans-serif;
+  color: #ffffff;
+}
+
+a {
   cursor: pointer;
   &:hover {
     sound-in: 'ui.button.over';

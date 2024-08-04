@@ -10,9 +10,7 @@ public sealed class UiManager : Component
 	[Property] public LobbyHubUI HubUi { get; set; }
 	[Property] public MainMenuUI MainMenuUi { get; set; }
 	[Property] public LobbyUI LobbyUi { get; set; } 
-
-
-
+	
 	public GameState ChangeState(GameState newState) 
 	{
 		
