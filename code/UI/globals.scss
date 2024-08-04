@@ -2,9 +2,12 @@
 @import "constants.scss";
 @import "Components/Modal.razor.scss";
 
-* {
+a, p, h1, h2, h3, button {
   font-family: "Segoe UI", sans-serif;
   color: $primary-foreground-color;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 a, button {
@@ -20,11 +23,11 @@ a, button {
 }
 
 h1 {
-  font-size: 64px;
+  font-size: 72px;
 }
 
 h2 {
-  font-size: 48px;
+  font-size: 42px;
 }
 
 h3 {
@@ -32,7 +35,7 @@ h3 {
 }
 
 p, a {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 
@@ -56,4 +59,25 @@ button {
 
 .hide {
   display: none;
+}
+
+.menu {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background: radial-gradient(rgba(10, 26, 40, 1) 0%,rgba(5, 20, 38, 1) 100%);
+  padding-top: 12vh;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+  pointer-events: all;
+}
+
+.icon {
+  font-size: 8em;
+  font-family: "Material Icons";
+  background: #00000000;
+  transition: background-color 200ms;
 }

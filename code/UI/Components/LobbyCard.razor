@@ -6,7 +6,7 @@
 
 @if (lobby.Members <= 0)
 {
-	<p>NO LOBBY AVAILABLE!</p>
+	<h3>NO LOBBY AVAILABLE!</h3>
 	return;
 }
 
@@ -14,10 +14,8 @@
 	<button class="lobby-card">
 		<img class="avatar" src=@($"avatar:{lobby.OwnerId}") alt="Profile Picture"/>
 		<div class="card-content">
-			<p class="name">@lobby.Name</p>
-			<div>
-				<p class="count">@lobby.Members/@lobby.MaxMembers PLAYERS</p>
-			</div>
+			<h3>@lobby.Name</h3>
+			<p>@lobby.Members/@lobby.MaxMembers PLAYERS</p>
 		</div>
 	</button>
 </root>

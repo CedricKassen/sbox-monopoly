@@ -1,56 +1,34 @@
-@using System.Diagnostics
-@using Microsoft.VisualBasic
 @using Sandbox;
-@using Sandbox.Events
-@using Sandbox.Events.GameStateEvents
 @using Sandbox.Network
 @using Sandbox.UI;
 @namespace Sandbox.UI
 @inherits PanelComponent
 
+<root class="@(Visible ? "" : "hide") menu">
 
-
-<root class="@(Visible ? "" : "hide")">
-
-	<div class="title">MY_POOL_NO</div>
-	<div class="sub-title">LOBBY SELECTION</div>
+	<h1>MY_POOL_NO</h1>
+	<h2>LOBBY SELECTION</h2>
 	<div class="lobbies">
-		@if (lobbies.Count <= 0)
-		{
+		@if (lobbies.Count <= 0) {
 			<LobbyCard class="empty"></LobbyCard>
 		}
 		
-		@foreach (var lobby in lobbies)
-		{
-			<button onclick=@(() => JoinLobby(lobby.LobbyId))>
+		@foreach (var lobby in lobbies) {
+			<a onclick=@(() => JoinLobby(lobby.LobbyId))>
 				<LobbyCard @lobby=@lobby></LobbyCard> 
-			</button>
-
+			</a>
 		}
-
 	</div>
 
-
 	<div class="hub-buttons">
-		<button class="back" onclick=@PressBack>
-			<div class="icon">
-				keyboard_return
-			</div>
+		<button class="back icon" onclick=@PressBack>
+			keyboard_return
 		</button>
-		<button class="refetch" onclick=@ReloadLobbies>
-			<div class="icon">
-            	refresh
-            </div>
+		<button class="refetch icon" onclick=@ReloadLobbies>
+            refresh
 		</button>
 	</div>
 </root>
-
-
-
-
-
-
-
 
 @code
 {
