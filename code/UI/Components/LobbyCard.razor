@@ -1,0 +1,31 @@
+@using Sandbox;
+@using Sandbox.Network
+@using Sandbox.UI;
+@inherits Button
+
+@if (lobby.Members <= 0)
+{
+	<p>NO LOBBY AVAILABLE!</p>
+	return;
+}
+
+<root>
+	<button class="lobby-card">
+		<img class="avatar" src=@($"avatar:{lobby.OwnerId}") alt="Profile Picture"/>
+		<div class="card-content">
+			<p class="name">@lobby.Name</p>
+			<div>
+				<p class="count">@lobby.Members/@lobby.MaxMembers PLAYERS</p>
+			</div>
+		</div>
+	</button>
+</root>
+
+
+
+@code {
+
+	[Property] public LobbyInformation lobby;
+
+
+}
