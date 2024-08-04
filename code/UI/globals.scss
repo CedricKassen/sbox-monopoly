@@ -1,12 +1,4 @@
-﻿$white: #ffffff;
-$black: #111111;
-
-$blue100: #96b6e1;
-$blue200: #0081ea;
-$blue300: #0c499a;
-$blue400: #293849;
-$blue500: #1e2c39;
-$blue600: #0d151d;
+﻿@import "colors.scss";
 
 $primary-foreground-color: $white;
 $primary-background-color: $blue600;

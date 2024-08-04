@@ -1,4 +1,5 @@
 @import "../globals.scss";
+@import "../colors.scss";
 
 @keyframes bluePulse {
 	0% { border: 8px solid #0081ea; }
@@ -165,31 +166,31 @@ PlayerCard {
 	}
 	
 	.red {
-		background-color: #c11919;
+		background-color: $red300;
 	}
 	
 	.brown {
-		background-color: #5e2b15;
+		background-color: $brown300;
 	}
 	
 	.lightBlue {
-		background-color: #32b2bf;
+		background-color: $cyan300;
 	}
 	
 	.pink {
-		background-color: #ab2288;
+		background-color: $pink300;
 	}
 	
 	.orange {
-		background-color: #ca5409;
+		background-color: $orange300;
 	}
 	
 	.yellow {
-		background-color: #e3be00;
+		background-color: $yellow300;
 	}
 	
 	.green {
-		background-color: #208445;
+		background-color: $green300;
 	}
 	
 	.blue {
@@ -197,11 +198,11 @@ PlayerCard {
 	}
 	
 	.black {
-		background-color: #111111;
+		background-color: $black;
 	}
 	
 	.gray {
-		background-color: #9ca2b4;
+		background-color: $gray300;
 	}
 	
 	.ownership-dot-disabled {
