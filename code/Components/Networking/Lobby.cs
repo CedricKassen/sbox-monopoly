@@ -36,7 +36,6 @@ public sealed class Lobby : Component, Component.INetworkListener
 		Player player = currentPlayers.First(player => player.SteamId == conn.SteamId);
 		player.GameObject.Destroy();
 		playerNum--;
-		GameNetworkSystem.Disconnect();
 	}
 
 	public List<Player> getCurrentPlayers()
