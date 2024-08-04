@@ -9,11 +9,11 @@ public sealed class UiManager : Component
 	[Property] public LobbyCreationUI LobbyCreationUi { get; set; }
 	[Property] public LobbyHubUI HubUi { get; set; }
 	[Property] public MainMenuUI MainMenuUi { get; set; }
-	[Property] public LobbyUI LobbyUi { get; set; }
+	[Property] public LobbyUI LobbyUi { get; set; } 
 
 
 
-	public GameState ChangeState(GameState newState)
+	public GameState ChangeState(GameState newState) 
 	{
 		
 		disableEverything();
@@ -30,7 +30,7 @@ public sealed class UiManager : Component
 				GameEndUi.Visible = true;
 				break;
 			case GameState.LOBBY_SELECTION:
-				HubUi.Visible = true;
+				HubUi.Visible = true; 
 				break;
 			case GameState.LOBBY_CREATION: 
 				LobbyCreationUi.Visible = true;
