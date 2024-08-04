@@ -12,19 +12,36 @@
 <root class="@(Visible ? "" : "hide")">
 
 	<div class="title">MY_POOL_NO</div>
+	<div class="sub-title">LOBBY SELECTION</div>
 	<div class="lobbies">
+		@if (lobbies.Count <= 0)
+		{
+			<LobbyCard class="empty"></LobbyCard>
+		}
+		
 		@foreach (var lobby in lobbies)
 		{
-			<LobbyCard @lobby=@lobby></LobbyCard>
+			<button onclick=@(() => JoinLobby(lobby.LobbyId))>
+				<LobbyCard @lobby=@lobby></LobbyCard> 
+			</button>
+
 		}
 
 	</div>
 
-	
-		<div class="hub-buttons">
-    		<button onclick=@ReloadLobbies>Refetch</button>
-    		<button onclick=@PressBack>Back</button>
-    	</div>
+
+	<div class="hub-buttons">
+		<button class="back" onclick=@PressBack>
+			<div class="icon">
+				keyboard_return
+			</div>
+		</button>
+		<button class="refetch" onclick=@ReloadLobbies>
+			<div class="icon">
+            	refresh
+            </div>
+		</button>
+	</div>
 </root>
 
 
@@ -50,19 +67,21 @@
 	{
 		return System.HashCode.Combine(Visible, lobbies);
 	}
+	
 
 	protected override void OnStart()
 	{
 		base.OnStart();
 		fetchLobbys();
 	}
-
+	
 	void JoinLobby(ulong lobbyId)
 	{
+		Log.Info(lobbyId);
 		GameNetworkSystem.Connect(lobbyId);
 		UiManager.ChangeState(GameState.INLOBBY);
 	}
-	
+
 	void ReloadLobbies()
 	{
 		fetchLobbys();
@@ -73,7 +92,7 @@
 		UiManager.ChangeState(GameState.MENU);
 	}
 	
-	public async void fetchLobbys()
+	private async void fetchLobbys()
 	{
 		lobbies = await Networking.QueryLobbies();
 	}
