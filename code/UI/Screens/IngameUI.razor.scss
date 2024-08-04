@@ -7,8 +7,7 @@
 	100% { border: 8px solid #0081ea; }
 }
 
-IngameUI
-{
+IngameUI {
 	width: 100vw;
 	height: 100vh;
 	position: absolute;
@@ -18,37 +17,6 @@ IngameUI
 	flex-direction: row;
 	font-weight: bold;
 	pointer-events: all;
-
-	.title
-	{
-		font-size: 75px;
-		margin-bottom: 15px;
-	}
-	
-	.curtain {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100vh;
-		width: 100vw;
-		background-color: $curtain-background-color;
-		z-index: 3;
-	}
-	
-	dialog {
-		position: absolute; 
-		top: 50%; 
-		left: 50%; 
-		transform: translate(-50%, -50%); 
-		height: 50%; 
-		width: 450px; 
-		background-color: $primary-background-color; 
-		border-radius: 12px; 
-		flex-direction: column; 
-		align-items: center; 
-		padding: 8px 16px;
-		z-index: 4;
-	}
 	
 	#mainPanel {
 		position: absolute; 
@@ -62,27 +30,19 @@ IngameUI
 		align-items: center;
 		justify-content: center;
 		padding: 15px 0;
-		gap: 5px;
+		gap: 15px;
 		
-		a {
+		.secondaryButton {
 			margin: 10px 0;
-			width: auto;
 			font-size: 64px;
 			transition: color 200ms;
 			background-color: $primary-background-color;
-			border-radius: 8px;
 			
 			&:hover {
 				background-color: $button-background-color;
 			}
 		}
-		
-		.autogrow {
-			display: flex;
-			flex-grow: 1;
-			min-height: auto;
-		}
-		
+
 		.mainButton {
 			height: 150px;
 			width: 150px;
@@ -96,7 +56,7 @@ IngameUI
 				transform: rotate(-45deg) translate(-12%, 48%);
 			}
 		}
-		
+
 		.active {
 			animation: bluePulse 2s infinite;
 
@@ -104,16 +64,6 @@ IngameUI
 				transform: rotate(-45deg) translate(-8%, 38%);
 			}
 		}
-	}
-
-	&.hide {
-		opacity: 0;
-	}
-	
-	.timer {
-		color: #ffffff;
-		font-size: 32px;
-		font-weight: bold;
 	}
 }
 
@@ -133,11 +83,6 @@ PlayerCard {
 	flex-direction: column;
 	gap: 15px;
 	
-	p {
-		margin-left: 15px; 
-		font-size: 22px;
-	}
-	
 	&:hover {
 		z-index: 2;
 		transition: 300ms;
@@ -148,7 +93,8 @@ PlayerCard {
 		height: 80px;
 		width: 80px;
 		border-radius: 8px;
-		border: 2px solid $primary-background-color;
+		margin-right: 10px;
+		border: 2px solid $primary-foreground-color;
 	} 
 	
 	.ownership-dot {

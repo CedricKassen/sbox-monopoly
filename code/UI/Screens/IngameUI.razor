@@ -5,78 +5,68 @@
 
 
 <root class="@(Visible ? "" : "hide")">
-	<div style="position: absolute; top: 0; left: 0">
-		<p class="timer font-red">00:00.000</p>
-	</div>
 	<div id="mainPanel">
 		<div class="autogrow"></div>
-		<a onclick=@(() => state = IngameUIStates.bank)> 🏦 </a>
-		<a onclick=@(() => state = IngameUIStates.trade)> 💸 </a>
+		<button class="secondaryButton" onclick=@(() => state = IngameUiStates.Bank)> 🏦 </button>
+		<button class="secondaryButton"  onclick=@(() => state = IngameUiStates.Trade)> 💸 </button>
 		<button class="mainButton active"> GO </button>
-		<a onclick=@(() => state = IngameUIStates.building)> 🏠 </a>
+		<button class="secondaryButton"  onclick=@(() => state = IngameUiStates.Building)> 🏠 </button>
 		<div class="autogrow"></div>
-		<a onclick=@(() => state = IngameUIStates.options)> ⚙️ </a>
+		<button class="secondaryButton" onclick=@(() => state = IngameUiStates.Options)> ⚙️ </button>
 	</div>
+	
 	@foreach (var player in Lobby.getCurrentPlayers()) {
 		<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@OwnedFields/>
 	}
 	
-	@if (state == IngameUIStates.bank) {
-		<div class="curtain"></div>
-		<dialog>
-			<div style="align-items: center; justify-content: space-between; width: 100%">
-				<h1 style="color: #ffffff; font-family: Segoe UI; font-size: 32px"> Bank </h1>
-				<a style="color: #ffffff; font-size: 32px" onclick=@(() => state = IngameUIStates.none)> 🗙 </a>
-			</div>
-		</dialog>
+	@if (state == IngameUiStates.Bank) {
+		<Modal OnClose=@(() => state = IngameUiStates.None) Name="Bank">
+			<Content>
+				<p> Hello :3 </p>
+			</Content>
+		</Modal>
 	}
 
-	@if (state == IngameUIStates.trade) {
-	<div class="curtain"></div>
-	<dialog>
-		<div style="align-items: center; justify-content: space-between; width: 100%">
-			<h1 style="color: #ffffff; font-family: Segoe UI; font-size: 32px"> Trading </h1>
-			<a style="color: #ffffff; font-size: 32px" onclick=@(() => state = IngameUIStates.none)> 🗙 </a>
-		</div>
-	</dialog>
+	@if (state == IngameUiStates.Trade) {
+		<Modal OnClose=@(() => state = IngameUiStates.None) Name="Trading">
+			<Content>
+				<p> Hello :3 </p>
+			</Content>
+		</Modal>
 	}
 
-	@if (state == IngameUIStates.building) {
-	<div class="curtain"></div>
-	<dialog>
-		<div style="align-items: center; justify-content: space-between; width: 100%">
-			<h1 style="color: #ffffff; font-family: Segoe UI; font-size: 32px"> Building </h1>
-			<a style="color: #ffffff; font-size: 32px" onclick=@(() => state = IngameUIStates.none)> 🗙 </a>
-		</div>
-	</dialog>
+	@if (state == IngameUiStates.Building) {
+		<Modal OnClose=@(() => state = IngameUiStates.None) Name="Building">
+			<Content>
+				<p> Hello :3 </p>
+			</Content>
+		</Modal>
 	}
 
-	@if (state == IngameUIStates.options) {
-	<div class="curtain"></div>
-	<dialog>
-		<div style="align-items: center; justify-content: space-between; width: 100%">
-			<h1 style="color: #ffffff; font-family: Segoe UI; font-size: 32px"> Options </h1>
-			<a style="color: #ffffff; font-size: 32px" onclick=@(() => state = IngameUIStates.none)> 🗙 </a>
-		</div>
-	</dialog>
+	@if (state == IngameUiStates.Options) {
+		<Modal OnClose=@(() => state = IngameUiStates.None) Name="Options">
+			<Content>
+				<p> Hello :3 </p>
+			</Content>
+		</Modal>
 	}
 
 </root>
 
 @code {
-	enum IngameUIStates {
-		bank,
-		trade,
-		options,
-		building,
-		none
+	public enum IngameUiStates {
+		Bank,
+		Trade,
+		Options,
+		Building,
+		None
 	}
 	
 	[Property] public bool Visible { get; set; } = false;
 	[Property] UiManager UiManager { get; set; }
 	[Property] Lobby Lobby { get; set; }
 
-	private IngameUIStates state { get; set; } = IngameUIStates.none;
+	private IngameUiStates state { get; set; } = IngameUiStates.None;
 	
 	private Dictionary<string, ulong> OwnedFields = new Dictionary<string, ulong> {
 		{"brown1", 0},

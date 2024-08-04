@@ -1,0 +1,16 @@
+﻿@using System
+@using Sandbox.Razor;
+@namespace Sandbox.UI
+
+<root>
+    <div class="headline">
+        <h1> @Name </h1>
+        <a onclick=@(() => OnClose())> 🗙 </a>
+    </div>
+</root>
+
+@code {
+    [Property] public RenderFragment Content { get; set; }
+    [Property] public Func<IngameUI.IngameUiStates> OnClose { get; set; } 
+    [Property] public string Name { get; set; } 
+}
