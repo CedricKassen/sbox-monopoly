@@ -1,0 +1,10 @@
+﻿a {
+  cursor: pointer;
+  &:hover {
+    sound-in: 'ui.button.over';
+  }
+
+  &:active {
+    sound-in: 'ui.button.press';
+  }
+}
