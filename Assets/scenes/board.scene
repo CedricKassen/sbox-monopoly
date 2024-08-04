@@ -684,9 +684,9 @@
                   "ZIndex": 100
                 },
                 {
-                  "__type": "LobbyCreationUI",
-                  "__guid": "bee7ed10-e35c-443f-936e-01ee2431a6e4",
-                  "MyStringValue": "Host!",
+                  "__type": "Sandbox.UI.LobbyCreationUI",
+                  "__guid": "86c57909-8b6c-4505-b1c4-293d29e48539",
+                  "MyStringValue": "Hello World!",
                   "UiManager": {
                     "_type": "component",
                     "component_id": "384d6879-5464-4d36-8e3a-6e07f190238d",
@@ -713,9 +713,9 @@
                   "ZIndex": 100
                 },
                 {
-                  "__type": "LobbyHubUI",
-                  "__guid": "cb89cb86-c252-4c74-acd1-c2de326e47a6",
-                  "MyStringValue": "Join!",
+                  "__type": "Sandbox.UI.LobbyHubUI",
+                  "__guid": "114f23ac-cdd8-4f29-aefe-5ec31b9ae133",
+                  "MyStringValue": "Hello World!",
                   "UiManager": {
                     "_type": "component",
                     "component_id": "384d6879-5464-4d36-8e3a-6e07f190238d",
@@ -742,8 +742,8 @@
                   "ZIndex": 100
                 },
                 {
-                  "__type": "IngameUI",
-                  "__guid": "4e6dc2d4-b488-4b42-a917-ddb2cc749a3c",
+                  "__type": "Sandbox.UI.IngameUI",
+                  "__guid": "ed4bf1a6-7000-4942-b49c-618655f52a49",
                   "Lobby": {
                     "_type": "component",
                     "component_id": "a8157055-fe38-49f3-bca5-55572fc4d83f",
@@ -776,9 +776,9 @@
                   "ZIndex": 100
                 },
                 {
-                  "__type": "GameEndUI",
-                  "__guid": "5cb5509b-aedc-4e26-a2cb-f1a6b3d64468",
-                  "MyStringValue": "Cedruu win!",
+                  "__type": "Sandbox.UI.GameEndUI",
+                  "__guid": "da7059e5-8106-4d13-b045-82aef965903d",
+                  "MyStringValue": "Hello World!",
                   "UiManager": {
                     "_type": "component",
                     "component_id": "384d6879-5464-4d36-8e3a-6e07f190238d",
@@ -805,9 +805,9 @@
                   "ZIndex": 100
                 },
                 {
-                  "__type": "MainMenuUI",
-                  "__guid": "ff5689f5-b429-4d49-95c8-f066f7bc4c89",
-                  "MyStringValue": "Menu!",
+                  "__type": "Sandbox.UI.MainMenuUI",
+                  "__guid": "298c57d1-2bdc-48be-bbfb-2f7cba70bc9e",
+                  "MyStringValue": "Hello World!",
                   "UiManager": {
                     "_type": "component",
                     "component_id": "384d6879-5464-4d36-8e3a-6e07f190238d",
@@ -834,15 +834,15 @@
                   "ZIndex": 100
                 },
                 {
-                  "__type": "LobbyUI",
-                  "__guid": "9a4c19d1-b6ce-4002-a407-758b544dd4b7",
+                  "__type": "Sandbox.UI.LobbyUI",
+                  "__guid": "6e08678d-2d28-4d99-91a1-838b2bc49d37",
                   "Lobby": {
                     "_type": "component",
                     "component_id": "a8157055-fe38-49f3-bca5-55572fc4d83f",
                     "go": "00e6060f-33c7-439f-87f4-209648b444c7",
                     "component_type": "Lobby"
                   },
-                  "MyStringValue": "In der Lobby",
+                  "MyStringValue": "Hello World!",
                   "UiManager": {
                     "_type": "component",
                     "component_id": "384d6879-5464-4d36-8e3a-6e07f190238d",
@@ -894,37 +894,37 @@
                   "__guid": "384d6879-5464-4d36-8e3a-6e07f190238d",
                   "GameEndUi": {
                     "_type": "component",
-                    "component_id": "5cb5509b-aedc-4e26-a2cb-f1a6b3d64468",
+                    "component_id": "da7059e5-8106-4d13-b045-82aef965903d",
                     "go": "d0dbf866-9ea1-44b3-896c-70ad700cfbc3",
                     "component_type": "GameEndUI"
                   },
                   "HubUi": {
                     "_type": "component",
-                    "component_id": "cb89cb86-c252-4c74-acd1-c2de326e47a6",
+                    "component_id": "114f23ac-cdd8-4f29-aefe-5ec31b9ae133",
                     "go": "6cc29126-657e-444c-a958-21f76baabf55",
                     "component_type": "LobbyHubUI"
                   },
                   "IngameUi": {
                     "_type": "component",
-                    "component_id": "4e6dc2d4-b488-4b42-a917-ddb2cc749a3c",
+                    "component_id": "ed4bf1a6-7000-4942-b49c-618655f52a49",
                     "go": "02791e92-fb19-4ca1-a5a2-78f2c99cfc8a",
                     "component_type": "IngameUI"
                   },
                   "LobbyCreationUi": {
                     "_type": "component",
-                    "component_id": "bee7ed10-e35c-443f-936e-01ee2431a6e4",
+                    "component_id": "86c57909-8b6c-4505-b1c4-293d29e48539",
                     "go": "6980e3d6-6586-4183-b5a5-330b92e9c25b",
                     "component_type": "LobbyCreationUI"
                   },
                   "LobbyUi": {
                     "_type": "component",
-                    "component_id": "9a4c19d1-b6ce-4002-a407-758b544dd4b7",
+                    "component_id": "6e08678d-2d28-4d99-91a1-838b2bc49d37",
                     "go": "52485f1d-3bf8-4363-8151-33484152c4a3",
                     "component_type": "LobbyUI"
                   },
                   "MainMenuUi": {
                     "_type": "component",
-                    "component_id": "ff5689f5-b429-4d49-95c8-f066f7bc4c89",
+                    "component_id": "298c57d1-2bdc-48be-bbfb-2f7cba70bc9e",
                     "go": "67facf4e-d079-4980-9ba5-78588aed10f0",
                     "component_type": "MainMenuUI"
                   }

@@ -21,7 +21,7 @@ public sealed class GameStateManager : Component, IGameEventHandler<GameEndEvent
 		CurrentState = UiManager.ChangeState(GameState.END_GAME);
 	}
 
-	public void OnGameEvent( GameStartEvent eventArgs )
+	public void OnGameEvent( GameStartEvent eventArgs ) 
 	{
 		Log.Info("Event: " + "GameStartEvent");
 		CurrentState = UiManager.ChangeState(GameState.INGAME);
