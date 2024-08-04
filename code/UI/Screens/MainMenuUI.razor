@@ -7,8 +7,8 @@
 @inherits PanelComponent  
 
 
-<root class="@(Visible ? "" : "hide")">
-	<div class="title">@MyStringValue</div>
+<root class="@(Visible ? "" : "hide") menu">
+	<h1> MY_POOL_NO </h1>
 	
 	<button onclick="@PressHost">Host</button>
 	<button onclick="@PressJoin">Join</button>
@@ -16,8 +16,6 @@
 
 @code
 {
-
-	[Property, TextArea] public string MyStringValue { get; set; } = "Hello World!";
 	[Property] public bool Visible { get; set; }
 	[Property] UiManager UiManager { get; set; }
 
