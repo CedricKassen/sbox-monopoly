@@ -8,9 +8,7 @@
 <root class="@(Visible ? "" : "hide")">
 	<div style="position: absolute; top: 50%; left: 50%">
 		@if (ShowRoll) {
-			@foreach (var dice in Dice) {
-				<h1> @dice.GetRollValue() </h1>
-			}
+			<h1> @Dice.Aggregate(0, (accumulator, dice ) => dice.GetRollValue() + accumulator) </h1>
 		}
 	</div>
 	
@@ -130,15 +128,13 @@
 		foreach (var dice in Dice) {
 			dice.Roll();
 		}
-
-		while (Dice[0].IsRolling) {
+		
+		while (Dice.Any(dice => dice.IsRolling)) {
 			await Task.DelayRealtimeSeconds( 0.5f );
 		}
 
 		ShowRoll = true;
-		
 		await Task.DelayRealtimeSeconds( 2f );
-
 		ShowRoll = false;
 	} 
 }

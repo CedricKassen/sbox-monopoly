@@ -749,6 +749,12 @@
                       "component_id": "3f886b06-46f1-49e2-862e-f0c352b8a570",
                       "go": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0",
                       "component_type": "Dice"
+                    },
+                    {
+                      "_type": "component",
+                      "component_id": "e2135290-ed6b-4fa6-a4bd-6c16c93acf33",
+                      "go": "9c38fde3-e34c-4f89-ab94-c714c48d150b",
+                      "component_type": "Dice"
                     }
                   ],
                   "Lobby": {
@@ -992,6 +998,53 @@
       "Name": "DiceRoll",
       "Enabled": true,
       "Children": [
+        {
+          "__guid": "9c38fde3-e34c-4f89-ab94-c714c48d150b",
+          "Flags": 0,
+          "Name": "Dice1",
+          "Position": "-48.64488,-1.786922,312.2573",
+          "Scale": "2,2,2",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "b8cc6233-d5e7-495c-adcb-4e6ee137b0a2",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dice/dice.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Dice",
+              "__guid": "e2135290-ed6b-4fa6-a4bd-6c16c93acf33",
+              "Rigidbody": {
+                "_type": "component",
+                "component_id": "c1e0f016-07b5-43f8-a169-8ab39bcf557f",
+                "go": "9c38fde3-e34c-4f89-ab94-c714c48d150b",
+                "component_type": "Rigidbody"
+              }
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "87f056d5-d61a-418f-aa8d-fbfecf305ca3",
+              "IsTrigger": false,
+              "Model": "models/dice/dice.vmdl",
+              "Static": false
+            },
+            {
+              "__type": "Sandbox.Rigidbody",
+              "__guid": "c1e0f016-07b5-43f8-a169-8ab39bcf557f",
+              "AngularDamping": 0,
+              "Gravity": true,
+              "LinearDamping": 0,
+              "Locking": {},
+              "MassOverride": 0,
+              "MotionEnabled": true,
+              "RigidbodyFlags": 0,
+              "StartAsleep": false
+            }
+          ]
+        },
         {
           "__guid": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0",
           "Flags": 0,
