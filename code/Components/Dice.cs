@@ -34,34 +34,34 @@ public sealed class Dice : Component {
 	public int GetRollValue() {
 		Vector3 rotation = GetRotation();
 		
-		if (Math.Abs(rotation.z - 0f) <= 1) {
-			if (Math.Abs(rotation.x - 0) <= 1) {
+		if (Math.Abs(rotation.z - 0f) <= 30) {
+			if (Math.Abs(rotation.x - 0) <= 30) {
 				return 6;
 			}
 			
-			if (Math.Abs(rotation.x - 90) <= 1) {
+			if (Math.Abs(rotation.x - 90) <= 30) {
 				return 4;
 			}
 			
-			if (Math.Abs(rotation.x + 90) <= 1) {
+			if (Math.Abs(rotation.x + 90) <= 30) {
 				return 3;
 			}
 		}
 
-		if (Math.Abs(rotation.z - 90f) <= 1) {
+		if (Math.Abs(rotation.z - 90f) <= 30) {
 			if (Math.Abs(rotation.x - 0) <= 1) {
 				return 2;
 			}
 		}
 		
-		if (Math.Abs(rotation.z + 90f) <= 1) {
+		if (Math.Abs(rotation.z + 90f) <= 30) {
 			if (Math.Abs(rotation.x - 0) <= 1) {
 				return 5;
 			}
 		}
 		
-		if ((Math.Abs(rotation.z - 180f) <= 1) | (Math.Abs(rotation.z + 180f) <= 1)) {
-			if (Math.Abs(rotation.x - 0) <= 1) {
+		if ((Math.Abs(rotation.z - 180f) <= 30) | (Math.Abs(rotation.z + 180f) <= 30)) {
+			if (Math.Abs(rotation.x - 0) <= 30) {
 				return 1;
 			}
 		}

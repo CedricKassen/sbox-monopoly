@@ -1091,6 +1091,82 @@
               "StartAsleep": false
             }
           ]
+        },
+        {
+          "__guid": "9dba19fd-6c2c-4169-b907-9c9c108e1381",
+          "Flags": 0,
+          "Name": "Wall (3)",
+          "Position": "0,-175,0",
+          "Rotation": "0.258819,0,0,0.9659259",
+          "Scale": "7,0.1,1",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "4c50319f-de1c-4355-b693-980ff5892b53",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false
+            }
+          ]
+        },
+        {
+          "__guid": "83cd8dbd-2287-47c2-9857-6f5bde4b2b57",
+          "Flags": 0,
+          "Name": "Wall (2)",
+          "Position": "0,175,0",
+          "Rotation": "-0.2588191,0,0,0.9659259",
+          "Scale": "7,0.1,1",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "6158c65d-940e-4c06-a295-df390659aebc",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false
+            }
+          ]
+        },
+        {
+          "__guid": "7c48c85c-40e5-4bf4-b346-b493b8b801fe",
+          "Flags": 0,
+          "Name": "Wall (1)",
+          "Position": "175,0,0",
+          "Rotation": "0,0.258819,0,0.9659259",
+          "Scale": "0.1,7,1",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "9ecdf768-38a6-49e2-ab92-a4fd6585e932",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false
+            }
+          ]
+        },
+        {
+          "__guid": "1c22704f-861e-43ea-b12b-e8f6741c367b",
+          "Flags": 0,
+          "Name": "Wall",
+          "Position": "-175,0,0",
+          "Rotation": "0,-0.3826833,0,0.9238797",
+          "Scale": "0.1,7,1",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "44d62a83-1072-469b-8c40-bdd564dbb546",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false
+            }
+          ]
         }
       ]
     }
