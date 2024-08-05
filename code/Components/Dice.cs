@@ -4,10 +4,10 @@ using Sandbox;
 using Sandbox.Utility;
 
 public sealed class Dice : Component {
-	private bool _isrolling;
+	private bool _isRolling;
 
 	public bool IsRolling {
-		get { return _isrolling; }
+		get { return _isRolling; }
 	}
 	
 	[Property]
@@ -15,14 +15,14 @@ public sealed class Dice : Component {
 
 	protected override void OnUpdate() {
 		if (Rigidbody.Velocity == 0) {
-			_isrolling = false;
+			_isRolling = false;
 		}
 	}
 
 	public void Roll() {
-		if (_isrolling) return;
+		if (_isRolling) return;
 		
-		_isrolling = true;
+		_isRolling = true;
 		Rigidbody.Velocity += Vector3.Up * 1000;
 		Rigidbody.AngularVelocity += Vector3.Random * 10;
 	}
@@ -34,34 +34,34 @@ public sealed class Dice : Component {
 	public int GetRollValue() {
 		Vector3 rotation = GetRotation();
 		
-		if (Math.Abs(rotation.z - 0f) <= 30) {
-			if (Math.Abs(rotation.x - 0) <= 30) {
+		if (Math.Abs(rotation.z - 0f) <= 44) {
+			if (Math.Abs(rotation.x - 0) <= 44) {
 				return 6;
 			}
 			
-			if (Math.Abs(rotation.x - 90) <= 30) {
+			if (Math.Abs(rotation.x - 90) <= 44) {
 				return 4;
 			}
 			
-			if (Math.Abs(rotation.x + 90) <= 30) {
+			if (Math.Abs(rotation.x + 90) <= 44) {
 				return 3;
 			}
 		}
 
-		if (Math.Abs(rotation.z - 90f) <= 30) {
-			if (Math.Abs(rotation.x - 0) <= 1) {
+		if (Math.Abs(rotation.z - 90f) <= 44) {
+			if (Math.Abs(rotation.x - 0) <= 44) {
 				return 2;
 			}
 		}
 		
-		if (Math.Abs(rotation.z + 90f) <= 30) {
-			if (Math.Abs(rotation.x - 0) <= 1) {
+		if (Math.Abs(rotation.z + 90f) <= 44) {
+			if (Math.Abs(rotation.x - 0) <= 44) {
 				return 5;
 			}
 		}
 		
-		if ((Math.Abs(rotation.z - 180f) <= 30) | (Math.Abs(rotation.z + 180f) <= 30)) {
-			if (Math.Abs(rotation.x - 0) <= 30) {
+		if ((Math.Abs(rotation.z - 180f) <= 44) || (Math.Abs(rotation.z + 180f) <= 30)) {
+			if (Math.Abs(rotation.x - 0) <= 44) {
 				return 1;
 			}
 		}
