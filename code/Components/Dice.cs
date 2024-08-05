@@ -20,6 +20,8 @@ public sealed class Dice : Component {
 	}
 
 	public void Roll() {
+		if (_isrolling) return;
+		
 		_isrolling = true;
 		Rigidbody.Velocity += Vector3.Up * 1000;
 		Rigidbody.AngularVelocity += Vector3.Random * 10;
