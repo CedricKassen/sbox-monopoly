@@ -1,40 +1,70 @@
+using System;
 using System.Threading.Tasks;
 using Sandbox;
 using Sandbox.Utility;
 
 public sealed class Dice : Component {
-	private bool _rolling = false;
-	private float _timer = 0;
-	
-	[Property]
-	public float Time { get; set; } = 0;
-	
-	[Property]
-	public MotionPath MotionPath { get; set; }
-	
-	[Property]
-	public bool Rolling {
-		get {
-			return _rolling;
-		}
-		set {
-			_rolling = value;
-			_timer = 0;
-			Time = 0;
-			MotionPath.Time = 0;
-		}
-	}
+	private bool _isrolling;
 
-	protected override void OnStart() {
-		MotionPath.Time = 0;
+	public bool IsRolling {
+		get { return _isrolling; }
 	}
+	
+	[Property]
+	public Rigidbody Rigidbody { get; set; }
 
 	protected override void OnUpdate() {
-		_timer += 1 * RealTime.Delta;
-		Time = Easing.QuadraticIn(_timer % 1 / 1);
-		
-		if (Time > MotionPath.Time && Rolling) {
-			MotionPath.Time = Time;
+		if (Rigidbody.Velocity == 0) {
+			_isrolling = false;
 		}
+	}
+
+	public void Roll() {
+		_isrolling = true;
+		Rigidbody.Velocity += Vector3.Up * 1000;
+		Rigidbody.AngularVelocity += Vector3.Random * 10;
+	}
+
+	public Vector3 GetRotation() {
+		return GameObject.Transform.Rotation.Angles().AsVector3();
+	}
+
+	public int GetRollValue() {
+		Vector3 rotation = GetRotation();
+		
+		if (Math.Abs(rotation.z - 0f) <= 1) {
+			if (Math.Abs(rotation.x - 0) <= 1) {
+				return 6;
+			}
+			
+			if (Math.Abs(rotation.x - 90) <= 1) {
+				return 4;
+			}
+			
+			if (Math.Abs(rotation.x + 90) <= 1) {
+				return 3;
+			}
+		}
+
+		if (Math.Abs(rotation.z - 90f) <= 1) {
+			if (Math.Abs(rotation.x - 0) <= 1) {
+				return 2;
+			}
+		}
+		
+		if (Math.Abs(rotation.z + 90f) <= 1) {
+			if (Math.Abs(rotation.x - 0) <= 1) {
+				return 5;
+			}
+		}
+		
+		if ((Math.Abs(rotation.z - 180f) <= 1) | (Math.Abs(rotation.z + 180f) <= 1)) {
+			if (Math.Abs(rotation.x - 0) <= 1) {
+				return 1;
+			}
+		}
+		
+
+		return 0;
 	}
 }

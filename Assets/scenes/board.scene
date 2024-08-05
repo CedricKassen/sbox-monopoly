@@ -749,12 +749,6 @@
                       "component_id": "3f886b06-46f1-49e2-862e-f0c352b8a570",
                       "go": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0",
                       "component_type": "Dice"
-                    },
-                    {
-                      "_type": "component",
-                      "component_id": "9b570c9e-7734-4212-9c46-601dac551998",
-                      "go": "eee83db0-4512-43ca-9297-43bb68026994",
-                      "component_type": "Dice"
                     }
                   ],
                   "Lobby": {
@@ -961,7 +955,8 @@
                 {
                   "__type": "Lobby",
                   "__guid": "a8157055-fe38-49f3-bca5-55572fc4d83f",
-                  "Players": [],
+                  "players": [],
+                  "playerNum": 0,
                   "PlayerPrefab": {
                     "_type": "gameobject",
                     "prefab": "prefabs/playerprefab.prefab"
@@ -998,42 +993,10 @@
       "Enabled": true,
       "Children": [
         {
-          "__guid": "eee83db0-4512-43ca-9297-43bb68026994",
-          "Flags": 0,
-          "Name": "Dice (1)",
-          "Position": "-763.7173,1119.336,118.1726",
-          "Rotation": "0.09904575,-0.3696438,0.2391176,0.8923992",
-          "Scale": "2,2,2",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "36d61ab7-bbe4-43ce-89b7-715ddcaf2e2c",
-              "BodyGroups": 18446744073709551615,
-              "Model": "models/dice/dice.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Dice",
-              "__guid": "9b570c9e-7734-4212-9c46-601dac551998",
-              "MotionPath": {
-                "_type": "component",
-                "component_id": "3a95c656-d795-4d8d-9ff2-e0f9de3ce37b",
-                "go": "e4e8be2a-e636-4dd6-90df-d606ffb76660",
-                "component_type": "MotionPath"
-              },
-              "Rolling": false,
-              "Time": 0
-            }
-          ]
-        },
-        {
           "__guid": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0",
           "Flags": 0,
           "Name": "Dice",
-          "Position": "10.99515,1237.836,102.9554",
-          "Rotation": "0,-0.258819,0,0.9659258",
+          "Position": "-48.64488,-41.59496,312.2573",
           "Scale": "2,2,2",
           "Enabled": true,
           "Components": [
@@ -1048,314 +1011,31 @@
             {
               "__type": "Dice",
               "__guid": "3f886b06-46f1-49e2-862e-f0c352b8a570",
-              "MotionPath": {
+              "Rigidbody": {
                 "_type": "component",
-                "component_id": "630e0dd3-031c-43ab-a69b-9d5399ae163c",
-                "go": "8070981d-8bc6-4b58-8610-b4abc31a9615",
-                "component_type": "MotionPath"
-              },
-              "Rolling": false,
-              "Time": 0
-            }
-          ]
-        },
-        {
-          "__guid": "e4e8be2a-e636-4dd6-90df-d606ffb76660",
-          "Flags": 0,
-          "Name": "MotionPath (1)",
-          "Position": "-61.29393,-35.38808,13.98085",
-          "Rotation": "0.09904575,-0.3696438,0.2391176,0.8923992",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "MotionPath",
-              "__guid": "3a95c656-d795-4d8d-9ff2-e0f9de3ce37b",
-              "Duration": 1,
-              "Manual": true,
-              "SplineBias": -0.42,
-              "SplineContinuity": 0.19,
-              "SplineMode": "Tcb",
-              "SplineTension": -0.06,
-              "Target": {
-                "_type": "gameobject",
-                "go": "eee83db0-4512-43ca-9297-43bb68026994"
-              },
-              "Time": 0,
-              "UsePointRotation": true
-            }
-          ],
-          "Children": [
-            {
-              "__guid": "97e846f0-5a56-48c3-ace7-cb79020b89a1",
-              "Flags": 0,
-              "Name": "Point",
-              "Position": "51.78649,1351.232,95.56278",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "35b65647-6064-491d-9acb-cb40d9ce367b"
-                }
-              ]
+                "component_id": "358c8ea7-27e9-4243-891c-aded97e6e6f9",
+                "go": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0",
+                "component_type": "Rigidbody"
+              }
             },
             {
-              "__guid": "4c869862-53ed-4a42-b244-eb1d6c0593f5",
-              "Flags": 0,
-              "Name": "Point (1)",
-              "Position": "36.20391,351.6705,47.37455",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "4a44ea2d-0e6c-477c-8d78-0639e8254cb3"
-                }
-              ]
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "9728ee4b-9e05-4546-8100-0b4ce2020d0f",
+              "IsTrigger": false,
+              "Model": "models/dice/dice.vmdl",
+              "Static": false
             },
             {
-              "__guid": "eefd08d1-41a6-4520-99c1-b0850a99d8f6",
-              "Flags": 0,
-              "Name": "Point (2)",
-              "Position": "1.636078,96,3.482183",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "58b1ff6c-7d18-4ce7-be03-26db8fa7e35e"
-                }
-              ]
-            },
-            {
-              "__guid": "f4ccff69-e069-4867-8f92-da96b2ccec4b",
-              "Flags": 0,
-              "Name": "Point (3)",
-              "Position": "30.85081,44.30854,32.30725",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "4b089a05-0b73-4b9c-8d2e-195299654def",
-                  "LookAt": {
-                    "_type": "gameobject",
-                    "go": "61a8c4e3-62f5-49f0-b990-1f0c2c5bd3d3"
-                  }
-                }
-              ]
-            },
-            {
-              "__guid": "b7e7e45d-c4cb-4b1b-94ef-d46559a4b719",
-              "Flags": 0,
-              "Name": "Point (4)",
-              "Position": "0,17.31727,0",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "e9f97719-31c6-4e8a-b587-87362d4f6b2a"
-                }
-              ]
-            },
-            {
-              "__guid": "3085a4c1-418c-43a1-b4e9-823cfe733fdf",
-              "Flags": 0,
-              "Name": "Point (5)",
-              "Position": "0,-12.6189,9.017223",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "3abbdf6c-1b8f-4196-9936-ade3eb4dac2d"
-                }
-              ]
-            },
-            {
-              "__guid": "75bbc378-c5d3-4f13-90da-2fcace5135cb",
-              "Flags": 0,
-              "Name": "Point (6)",
-              "Position": "0,-33.68812,0.2568769",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "f5fe6e41-b2e8-4567-ae93-3af1a98486a2"
-                }
-              ]
-            },
-            {
-              "__guid": "4fa6a1af-43a2-4346-8f3e-6b6c6cd6c6a3",
-              "Flags": 0,
-              "Name": "Point (7)",
-              "Position": "3.886714,-54.91578,4.349354",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "db3bd6be-ff74-4fcb-a4ae-2b5f47d08d49"
-                }
-              ]
-            },
-            {
-              "__guid": "61a8c4e3-62f5-49f0-b990-1f0c2c5bd3d3",
-              "Flags": 0,
-              "Name": "Point",
-              "Position": "0,-82.51617,-0.6247406",
-              "Rotation": "0,0.3826835,-0.00000005390135,0.9238796",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "1e379435-b4b7-4141-a8c6-84f26f2808fa"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "__guid": "8070981d-8bc6-4b58-8610-b4abc31a9615",
-          "Flags": 0,
-          "Name": "MotionPath",
-          "Position": "9.089273,0,18.43139",
-          "Rotation": "0,-0.258819,0,0.9659258",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "MotionPath",
-              "__guid": "630e0dd3-031c-43ab-a69b-9d5399ae163c",
-              "Duration": 1,
-              "Manual": true,
-              "SplineBias": -0.42,
-              "SplineContinuity": 0.19,
-              "SplineMode": "Tcb",
-              "SplineTension": -0.06,
-              "Target": {
-                "_type": "gameobject",
-                "go": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0"
-              },
-              "Time": 0,
-              "UsePointRotation": true
-            }
-          ],
-          "Children": [
-            {
-              "__guid": "cafd3add-cec0-487c-a641-cfe056ddafb3",
-              "Flags": 0,
-              "Name": "Point",
-              "Position": "43.91253,1237.836,72.24699",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "c9caab5d-19fc-44cc-9e18-167947336bba"
-                }
-              ]
-            },
-            {
-              "__guid": "44c1d4d8-02df-4122-ab85-29cb2dd316ae",
-              "Flags": 0,
-              "Name": "Point (1)",
-              "Position": "21.03662,328.6319,36.70788",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "7ddd2c3c-cd22-4d1d-b51b-d894b58d2257"
-                }
-              ]
-            },
-            {
-              "__guid": "6fa99c4e-2f9f-4344-b2b5-34a6bdd41709",
-              "Flags": 0,
-              "Name": "Point (2)",
-              "Position": "1.636078,96,3.482183",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "e3ff42cc-3abe-45b2-a2bc-b8aff253b1d9"
-                }
-              ]
-            },
-            {
-              "__guid": "437acead-a564-4b14-a1bb-44f2af78c82e",
-              "Flags": 0,
-              "Name": "Point (3)",
-              "Position": "26.33426,44.30852,36.77242",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "bde5841c-f95b-4a1d-9ef3-f82c6e4cbf47",
-                  "LookAt": {
-                    "_type": "gameobject",
-                    "go": "c08f67b7-1ded-42cd-a4a9-ade89d2d616f"
-                  }
-                }
-              ]
-            },
-            {
-              "__guid": "c3e4b8cf-847c-47b1-8401-05461946ac73",
-              "Flags": 0,
-              "Name": "Point (4)",
-              "Position": "0,17.31727,0",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "ab04cb5e-c44c-4b93-95ea-cea249131761"
-                }
-              ]
-            },
-            {
-              "__guid": "c4000587-46c1-46a4-a431-f426ef6f31f2",
-              "Flags": 0,
-              "Name": "Point (5)",
-              "Position": "3.217229,-12.6189,6.598709",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "dde9c4b3-e1f6-45af-a0ad-8764e57c1c4f"
-                }
-              ]
-            },
-            {
-              "__guid": "f912b648-b8a1-4e35-936e-99b1397584e5",
-              "Flags": 0,
-              "Name": "Point (6)",
-              "Position": "0,-33.68812,0.2568769",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "97fd5a9a-61b1-477a-aee6-ed5cc6e28713"
-                }
-              ]
-            },
-            {
-              "__guid": "47dd46aa-8edf-47eb-bb36-4031b0bae1cd",
-              "Flags": 0,
-              "Name": "Point (7)",
-              "Position": "0,-54.91577,4.349356",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "680fd098-2ff5-4033-a7bf-d779589e4063"
-                }
-              ]
-            },
-            {
-              "__guid": "c08f67b7-1ded-42cd-a4a9-ade89d2d616f",
-              "Flags": 0,
-              "Name": "Point",
-              "Position": "0,-82.51617,-0.6247406",
-              "Rotation": "0,0.258819,0,0.9659259",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "MotionPathPoint",
-                  "__guid": "2de1814f-7ba7-4299-8251-ec2fddc09b71"
-                }
-              ]
+              "__type": "Sandbox.Rigidbody",
+              "__guid": "358c8ea7-27e9-4243-891c-aded97e6e6f9",
+              "AngularDamping": 0,
+              "Gravity": true,
+              "LinearDamping": 0,
+              "Locking": {},
+              "MassOverride": 0,
+              "MotionEnabled": true,
+              "RigidbodyFlags": 0,
+              "StartAsleep": false
             }
           ]
         }

@@ -6,20 +6,28 @@
 
 
 <root class="@(Visible ? "" : "hide")">
+	<div style="position: absolute; top: 50%; left: 50%">
+		@if (ShowRoll) {
+			@foreach (var dice in Dice) {
+				<h1> @dice.GetRollValue() </h1>
+			}
+		}
+	</div>
+	
 	<div id="mainPanel">
 		<div class="autogrow"></div>
 		<button class="secondaryButton" onclick=@(() => state = IngameUiStates.Bank)> 🏦 </button>
-		<button class="secondaryButton"  onclick=@(() => state = IngameUiStates.Trade)> 💸 </button>
+		<button class="secondaryButton" onclick=@(() => state = IngameUiStates.Trade)> 💸 </button>
 		<button class="mainButton" onclick=@Roll> GO </button>
-		<button class="secondaryButton"  onclick=@(() => state = IngameUiStates.Building)> 🏠 </button>
+		<button class="secondaryButton" onclick=@(() => state = IngameUiStates.Building)> 🏠 </button>
 		<div class="autogrow"></div>
 		<button class="secondaryButton" onclick=@(() => state = IngameUiStates.Options)> ⚙️ </button>
 	</div>
-	
+
 	@foreach (var player in Lobby.getCurrentPlayers()) {
 		<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@OwnedFields/>
 	}
-	
+
 	@if (state == IngameUiStates.Bank) {
 		<Modal OnClose=@(() => state = IngameUiStates.None) Name="Bank">
 			<Content>
@@ -69,6 +77,8 @@
 	[Property] List<Dice> Dice { get; set; }
 
 	private IngameUiStates state { get; set; } = IngameUiStates.None;
+
+	private bool ShowRoll;
 	
 	private Dictionary<string, ulong> OwnedFields = new Dictionary<string, ulong> {
 		{"brown1", 0},
@@ -107,7 +117,7 @@
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return System.HashCode.Combine(Visible, Lobby);
+		return System.HashCode.Combine(Visible, Lobby, ShowRoll);
 	}
 
 	private void LeaveLobby() {
@@ -116,9 +126,19 @@
 		GameNetworkSystem.Disconnect();
 	}
 
-	private void Roll() {
+	private async void Roll() {
 		foreach (var dice in Dice) {
-			dice.Rolling = true;
+			dice.Roll();
 		}
+
+		while (Dice[0].IsRolling) {
+			await Task.DelayRealtimeSeconds( 0.5f );
+		}
+
+		ShowRoll = true;
+		
+		await Task.DelayRealtimeSeconds( 2f );
+
+		ShowRoll = false;
 	} 
 }
