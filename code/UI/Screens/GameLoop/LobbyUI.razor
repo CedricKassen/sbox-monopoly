@@ -1,0 +1,64 @@
+@namespace Sandbox.UI
+@using System
+@using Sandbox.Network
+@inherits PanelComponent
+
+
+<root class="@(Visible ? "" : "hide") menu">
+	<h1> MY_POOL_NO </h1>
+
+	<div class="overview">
+		<h3>@Lobby.GetCurrentPlayers().Count()/@Lobby.MaxPlayers</h3>
+		<div class="player-container">
+			@foreach (var player in Lobby.GetCurrentPlayers())
+			{
+				<div class="player">
+					<img src=@($"avatar:{player.SteamId}")/>
+					<h3>@player.Name</h3>
+				</div>
+			}
+		</div>
+	</div>
+
+	<button onclick="@PressStart">Start</button>
+
+	<div class="hub-buttons">
+		<button class="back icon" onclick="@PressBack">
+			keyboard_return
+		</button>
+	</div>
+
+	<div></div>
+</root>
+
+@code
+{
+	[Property]
+	public bool Visible { get; set; } = false;
+
+	[Property]
+	public Lobby Lobby { get; set; }
+
+	/// <summary>
+	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(Visible, Lobby);
+	}
+
+	void PressStart()
+	{
+	//UiManager.ChangeState(GameState.INGAME);
+	}
+
+
+	void PressBack()
+	{
+	//UiManager.ChangeState(GameState.MENU);
+			GameNetworkSystem.Disconnect();
+	}
+
+
+
+}

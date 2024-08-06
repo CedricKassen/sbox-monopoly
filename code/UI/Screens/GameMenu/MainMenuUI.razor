@@ -1,0 +1,45 @@
+@namespace Monopoly.UI.Screens.GameMenu
+
+@inherits PanelComponent
+@using System
+@implements Sandbox.UI.INavigatorPage
+
+
+<root class="menu">
+	<h1> MY_POOL_NO </h1>
+	<div class="overview">
+		<a href="/create">
+			<button onclick="@PressHost">Host</button>
+		</a>
+		<a href="/hub">
+			<button onclick="@PressJoin">Join</button>
+		</a>
+
+	</div>
+	<div></div>
+</root>
+
+@code
+{
+
+
+	/// <summary>
+	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(2);
+	}
+
+
+	void PressHost()
+	{
+	//UiManager.ChangeState(GameState.LOBBY_CREATION);
+	}
+
+	void PressJoin()
+	{
+	//UiManager.ChangeState(GameState.LOBBY_SELECTION);
+	}
+
+}
