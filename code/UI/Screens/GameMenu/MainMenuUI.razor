@@ -22,6 +22,22 @@
 @code
 {
 
+	protected override void OnStart()
+	{
+		base.OnStart();
+		Log.Info("Start Menu");
+	}
+
+	public void OnNavigationOpen()
+	{
+		Log.Info("Nav Open");
+	}
+
+	public void OnNavigationClose()
+	{
+		Log.Info("Nav Close");
+	}
+
 
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt

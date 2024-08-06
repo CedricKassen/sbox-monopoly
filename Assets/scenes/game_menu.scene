@@ -9,15 +9,23 @@
       "Enabled": true,
       "Children": [
         {
-          "__guid": "043ce409-38fb-40c5-98dc-1fcd378ec264",
+          "__guid": "ab4505db-8b9d-4685-a705-f87ed358c447",
           "Flags": 0,
           "Name": "GameMenuPanel",
-          "Position": "-228.8045,-91.43645,72.8403",
+          "Position": "0,0,0",
           "Enabled": true,
           "Components": [
             {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "2a4c383b-ca2f-42e2-9786-a765c23679d1",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
               "__type": "Monopoly.UI.Screens.GameMenu.GameMenuPanel",
-              "__guid": "f540b57e-e1ea-40c5-b553-7538c40e588e"
+              "__guid": "62ae540d-0cc7-4f0f-bf31-7698bd898524"
             }
           ]
         },

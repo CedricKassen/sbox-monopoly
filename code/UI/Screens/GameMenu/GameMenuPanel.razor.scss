@@ -1,5 +1,9 @@
 @import "../../globals.scss";
 
+h1 {
+  color: $white;
+  font-size: 100px;
+}
 
 GameMenuRouter {
   opacity: 1;
