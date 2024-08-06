@@ -13,16 +13,18 @@ public sealed class UiManager : Component
 	
 	public GameState ChangeState(GameState newState) 
 	{
-		
 		disableEverything();
 		
 		switch (newState)
 		{
 			case GameState.MENU:
 				MainMenuUi.Visible = true;
+				Sound.StopAll(1f);
 				break;
 			case GameState.INGAME:
 				IngameUi.Visible = true;
+				var sound = Sound.Play("bgm");
+				sound.Volume = 0.2f;
 				break;
 			case GameState.END_GAME:
 				GameEndUi.Visible = true;

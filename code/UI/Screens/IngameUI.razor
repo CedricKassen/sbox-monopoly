@@ -73,7 +73,7 @@
 	[Property] UiManager UiManager { get; set; }
 	[Property] Lobby Lobby { get; set; }
 	[Property] List<Dice> Dice { get; set; }
-
+	
 	private IngameUiStates state { get; set; } = IngameUiStates.None;
 
 	private bool ShowRoll;
@@ -136,5 +136,5 @@
 		ShowRoll = true;
 		await Task.DelayRealtimeSeconds( 2f );
 		ShowRoll = false;
-	} 
+	}
 }

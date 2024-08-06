@@ -10,9 +10,6 @@ public sealed class Lobby : Component, Component.INetworkListener
 	[Property] public GameObject PlayerPrefab { get; set; }
 	[Property] public List<Player> players;
 	
-	
-	
-
 	public void OnActive(Connection conn)
 	{
 		Log.Info( $"Player '{conn.DisplayName}' tritt bei" );
@@ -27,7 +24,6 @@ public sealed class Lobby : Component, Component.INetworkListener
 		playerObj.Network.AssignOwnership(conn);
 	
 		playerNum++;
-
 	}
 
 	public void OnDisconnected(Connection conn)
