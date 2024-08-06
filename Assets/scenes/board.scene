@@ -1000,6 +1000,10 @@
                     "component_id": "a8157055-fe38-49f3-bca5-55572fc4d83f",
                     "go": "00e6060f-33c7-439f-87f4-209648b444c7",
                     "component_type": "Lobby"
+                  },
+                  "LocationContainer": {
+                    "_type": "gameobject",
+                    "go": "024eb414-bc10-4ad9-885d-eae5e42de48d"
                   }
                 }
               ]
