@@ -1,0 +1,90 @@
+{
+  "__guid": "5baf46ca-0abd-480b-b5da-c02249250691",
+  "GameObjects": [
+    {
+      "__guid": "2d9f7fa2-9c69-46c9-b025-35bd4bdf49df",
+      "Flags": 0,
+      "Name": "Game",
+      "Position": "-319.2052,-12.50265,162.3727",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "043ce409-38fb-40c5-98dc-1fcd378ec264",
+          "Flags": 0,
+          "Name": "GameMenuPanel",
+          "Position": "-228.8045,-91.43645,72.8403",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Monopoly.UI.Screens.GameMenu.GameMenuPanel",
+              "__guid": "f540b57e-e1ea-40c5-b553-7538c40e588e"
+            }
+          ]
+        },
+        {
+          "__guid": "c889eb32-1468-466e-a8a9-5ac1050c4d0f",
+          "Flags": 0,
+          "Name": "GameLoop",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "c5b10a97-8955-42f8-89b5-4950a97505ba",
+              "Flags": 0,
+              "Name": "GameStateManager",
+              "Position": "169.6161,0,-3.366089",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "GameStateManager",
+                  "__guid": "d0a1e062-344b-4f1b-b85b-23017f23e0c0",
+                  "CurrentState": "MENU"
+                }
+              ]
+            },
+            {
+              "__guid": "ce6f8ca6-9d27-408e-a199-ad68a014fde8",
+              "Flags": 0,
+              "Name": "UiManager",
+              "Position": "0,0,0",
+              "Enabled": true
+            }
+          ]
+        },
+        {
+          "__guid": "6c2a822e-7915-4bdd-af4a-4c61be9291b2",
+          "Flags": 0,
+          "Name": "Networking",
+          "Position": "0,0,0",
+          "Enabled": true
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": null,
+  "Description": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
