@@ -32,7 +32,14 @@ public sealed class Player : Component
 		}
 	}
 
-	[Property] int money { get; set; } = 2000;
+	[Property]
+	public int Money { get; set; } = 2000;
+
+	[Property]
+	public int CurrentField { get; set; } = 0;
+	
+	[Property]
+	public Connection Connection { get; set; }
 
 	
 	protected override void OnUpdate()

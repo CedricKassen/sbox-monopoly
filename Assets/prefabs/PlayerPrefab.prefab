@@ -2,8 +2,7 @@
   "RootObject": {
     "__guid": "295aa5ed-2fc0-4cc4-9cbb-fe45197779aa",
     "Flags": 0,
-    "Name": "PlayerPrefab",
-    "Position": "0,0,0",
+    "Name": "playerprefab",
     "Enabled": true,
     "Components": [
       {
@@ -11,8 +10,39 @@
         "__guid": "080abc4d-1900-4b01-8660-e59716d95e5b",
         "money": 2000,
         "SteamId": 0
+      },
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "d1d544b0-e705-42e3-9401-687bd920b078",
+        "BodyGroups": 18446744073709551615,
+        "MaterialOverride": "materials/game_piece.vmat",
+        "Model": "models/car.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "df7dce07-3a03-487b-8225-f9a535f36a8b",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "361c33b2-bbb8-4774-8f85-168548138d64",
+        "Center": "0,3,6",
+        "IsTrigger": false,
+        "Scale": "10,29,12",
+        "Static": false
       }
-    ]
+    ],
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

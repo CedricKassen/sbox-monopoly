@@ -8,22 +8,26 @@ public sealed class Lobby : Component, Component.INetworkListener
 	[Property] [HostSync] public long playerNum { get; set; } = 0;
 
 	[Property] public GameObject PlayerPrefab { get; set; }
-	[Property] public List<Player> players;
+
+	[Property]
+	public List<Player> players {
+		get {
+			return new List<Player>(Scene.GetAllComponents<Player>());
+		}
+	}
+
+	[Property] public GameObject SpawnLocation { get; set; }
 	
 	public void OnActive(Connection conn)
 	{
 		Log.Info( $"Player '{conn.DisplayName}' tritt bei" );
 
-		GameObject playerObj = PlayerPrefab.Clone();
-		playerObj.Name = conn.DisplayName + " - Network";
+		GameObject playerObj = PlayerPrefab.Clone(SpawnLocation.Transform.World, name: conn.DisplayName + " - Network");
 		playerObj.Components.Get<Player>().Name = conn.DisplayName;
 		playerObj.Components.Get<Player>().SteamId = conn.SteamId;
-
+		playerObj.Components.Get<Player>().Connection = conn;
 		
-		playerObj.NetworkSpawn();
-		playerObj.Network.AssignOwnership(conn);
-	
-		playerNum++;
+		playerObj.NetworkSpawn(conn);
 	}
 
 	public void OnDisconnected(Connection conn)
@@ -31,7 +35,6 @@ public sealed class Lobby : Component, Component.INetworkListener
 		IEnumerable<Player> currentPlayers = Scene.GetAllComponents<Player>();
 		Player player = currentPlayers.First(player => player.SteamId == conn.SteamId);
 		player.GameObject.Destroy();
-		playerNum--;
 	}
 
 	public List<Player> getCurrentPlayers()

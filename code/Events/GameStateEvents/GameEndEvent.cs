@@ -1,3 +1,3 @@
 namespace Sandbox.Events.GameStateEvents;
 
-public record GameEndEvent(  ) : IGameEvent;
+public record GameEndEvent( ) : IGameEvent;
