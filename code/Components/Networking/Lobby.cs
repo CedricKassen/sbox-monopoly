@@ -11,6 +11,8 @@ public sealed class Lobby : Component, Component.INetworkListener
 	[Property] public List<Player> Players => new(Game.ActiveScene.GetAllComponents<Player>());
 
 	[Property] public GameObject SpawnLocation { get; set; }
+	
+	[Property] public Panel LobbyPanel { get; set; }
 
 	public void OnActive(Connection conn)
 	{
@@ -46,9 +48,8 @@ public sealed class Lobby : Component, Component.INetworkListener
 		}
 	}
 
-	[Broadcast]
-	public void ChangeGameScene(Panel panel, string url)
-	{
-		panel.Navigate(url);
+	[Broadcast(NetPermission.HostOnly)]
+	public void StartGame() {
+		LobbyPanel.Navigate("/ingame");
 	}
 }

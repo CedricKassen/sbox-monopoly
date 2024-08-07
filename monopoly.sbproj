@@ -22,6 +22,7 @@
     "LeaderboardType": "None",
     "CsProjName": "",
     "StartupScene": "scenes/game_menu.scene",
-    "LaunchMode": "Normal"
+    "LaunchMode": "Normal",
+    "MapStartupScene": "scenes/game_menu.scene"
   }
 }

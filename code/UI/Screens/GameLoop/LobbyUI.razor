@@ -37,8 +37,15 @@
 
 @code
 {
-	[Property]
-	public Lobby Lobby { get; set; } = new();
+	public Lobby Lobby { get; set; }
+	
+	public void OnNavigationOpen() {
+		if (Lobby == null) {
+			Lobby = Game.ActiveScene.GetAllComponents<Lobby>().First();
+		}
+
+		Lobby.LobbyPanel = this;
+	}
 
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
@@ -54,8 +61,7 @@
 		Game.ActiveScene.LoadFromFile("scenes/game_menu.scene");
 	}
 
-	public void Start()
-	{
-		Lobby.ChangeGameScene(this, "/ingame");
+	public void Start() {
+		Lobby.StartGame();
 	}
 }
