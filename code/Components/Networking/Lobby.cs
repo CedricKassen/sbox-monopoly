@@ -3,16 +3,16 @@ using Sandbox.Network;
 
 public sealed class Lobby : Component, Component.INetworkListener
 {
-
-	public long maxPlayers = 5;
-	[Property] [HostSync] public long playerNum { get; set; } = 0;
-
-	[Property] public GameObject PlayerPrefab { get; set; }
+	[Property]
+	public long MaxPlayers { get; set; } = 5;
+	
+	[Property]
+	public GameObject PlayerPrefab { get; set; }
 
 	[Property]
-	public List<Player> players {
+	public List<Player> Players {
 		get {
-			return new List<Player>(Scene.GetAllComponents<Player>());
+			return new List<Player>(Game.ActiveScene.GetAllComponents<Player>());
 		}
 	}
 
@@ -36,16 +36,5 @@ public sealed class Lobby : Component, Component.INetworkListener
 		Player player = currentPlayers.First(player => player.SteamId == conn.SteamId);
 		player.GameObject.Destroy();
 	}
-
-	public List<Player> getCurrentPlayers()
-	{
-		return new List<Player>(Scene.GetAllComponents<Player>());
-	}
-
-	public override int GetHashCode()
-	{
-		return System.HashCode.Combine(playerNum);
-	}
-	
 }
 

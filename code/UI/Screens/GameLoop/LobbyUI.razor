@@ -1,0 +1,59 @@
+@using System
+@using Sandbox.Network
+@using Sandbox.UI
+
+@namespace Monopoly.UI.Screens.GameLoop
+@inherits Panel
+@implements INavigatorPage
+
+
+<root class="menu">
+	<h1> MY_POOL_NO </h1>
+
+	<div class="overview">
+		<h3>@Lobby.Players.Count()/@Lobby.MaxPlayers</h3>
+		<div class="player-container">
+			@foreach (var player in Lobby.Players)
+			{
+				<div class="player">
+					<img src=@($"avatar:{player.SteamId}")/>
+					<h3>@player.Name</h3>
+				</div>
+			}
+		</div>
+	</div>
+
+    <button onclick=@Start>Start</button>
+
+	<div class="hub-buttons">
+		<button class="back icon" onclick="@PressBack">
+			keyboard_return
+		</button>
+	</div>
+
+	<div></div>
+</root>
+
+@code
+{
+	[Property]
+	public Lobby Lobby { get; set; } = new Lobby();
+
+	/// <summary>
+	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(Lobby);
+	}
+
+	void PressBack()
+	{
+		GameNetworkSystem.Disconnect();
+		Game.ActiveScene.LoadFromFile("scenes/game_menu.scene");
+	}
+
+	private void Start() {
+		 NavigationExtensions.Navigate(this, "/ingame");
+	}
+}

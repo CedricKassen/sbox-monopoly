@@ -1,0 +1,18 @@
+﻿@inherits Sandbox.UI.NavHostPanel
+@namespace Monopoly.UI.Screens.GameLoop
+
+<root>
+    <div class="navigator-canvas" slot="navigator-canvas"/>
+</root>
+
+@code
+{
+
+    public GameLoopRouter()
+    {
+        DefaultUrl = "/lobby";
+        AddDestination("/lobby", typeof(LobbyUI));
+        AddDestination("/ingame", typeof(IngameUI));
+        AddDestination("/end", typeof(GameEndUI));
+    }
+}

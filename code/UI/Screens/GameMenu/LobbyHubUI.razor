@@ -1,0 +1,77 @@
+@using System
+@using Sandbox.Network
+@using Sandbox.UI
+
+@namespace Monopoly.UI.Screens.GameMenu
+@inherits Panel
+@implements INavigatorPage
+
+<root class="menu">
+	<div class="column">
+		<h1>MY_POOL_NO</h1>
+		<h2>LOBBY SELECTION</h2>
+	</div>
+
+	<div class="lobbies">
+		@if (lobbies.Count <= 0)
+		{
+			<LobbyCard class="empty"></LobbyCard>
+		}
+
+		@foreach (var lobby in lobbies)
+		{
+			<a onclick=@(() => JoinLobby(lobby.LobbyId))>
+				<LobbyCard @lobby=@lobby></LobbyCard>
+			</a>
+		}
+	</div>
+
+	<div class="hub-buttons">
+		<a href="/">
+			<button class="back icon">
+				keyboard_return
+			</button>
+		</a>
+
+		<button class="refetch icon" onclick="@ReloadLobbies">
+			refresh
+		</button>
+	</div>
+	<div></div>
+</root>
+
+@code
+{
+
+	private List<LobbyInformation> lobbies = new();
+
+	/// <summary>
+	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(lobbies);
+	}
+
+	public void OnNavigationOpen()
+	{
+		fetchLobbys();
+	}
+
+	void JoinLobby(ulong lobbyId)
+	{
+		Log.Info(lobbyId);
+		GameNetworkSystem.Connect(lobbyId);
+	}
+
+	void ReloadLobbies()
+	{
+		fetchLobbys();
+	}
+
+	private async void fetchLobbys()
+	{
+		lobbies = await Networking.QueryLobbies();
+	}
+
+}

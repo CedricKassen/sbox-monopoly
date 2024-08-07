@@ -1,0 +1,30 @@
+@using System
+@using Sandbox.UI
+
+@namespace Monopoly.UI.Screens.GameMenu
+@inherits Panel
+@implements INavigatorPage
+
+
+<root class="menu">
+	<h1> MY_POOL_NO </h1>
+	<div class="column">
+		<a href="/create">
+			<button>Host</button>
+		</a>
+		<a href="/hub">
+			<button>Join</button>
+		</a>
+	</div>
+	<div></div>
+</root>
+
+@code {
+	/// <summary>
+	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(2);
+	}
+}

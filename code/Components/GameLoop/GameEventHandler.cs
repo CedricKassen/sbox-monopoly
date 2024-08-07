@@ -20,6 +20,6 @@ public class GameEventHandler: Component, IGameEventHandler<RolledEvent> {
     }
 
     private Player GetPlayerFromEvent(BaseEvent eventArgs) {
-        return Lobby.players.Find(player => player.SteamId == eventArgs.playerId);
+        return Lobby.Players.Find(player => player.SteamId == eventArgs.playerId);
     }
 }

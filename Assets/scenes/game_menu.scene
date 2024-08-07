@@ -1,0 +1,98 @@
+{
+  "__guid": "5baf46ca-0abd-480b-b5da-c02249250691",
+  "GameObjects": [
+    {
+      "__guid": "2d9f7fa2-9c69-46c9-b025-35bd4bdf49df",
+      "Flags": 0,
+      "Name": "Game",
+      "Position": "-319.2052,-12.50265,162.3727",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "ab4505db-8b9d-4685-a705-f87ed358c447",
+          "Flags": 0,
+          "Name": "GameMenuPanel",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "2a4c383b-ca2f-42e2-9786-a765c23679d1",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
+              "__type": "Monopoly.UI.Screens.GameMenu.GameMenuPanel",
+              "__guid": "62ae540d-0cc7-4f0f-bf31-7698bd898524"
+            }
+          ]
+        },
+        {
+          "__guid": "c889eb32-1468-466e-a8a9-5ac1050c4d0f",
+          "Flags": 0,
+          "Name": "GameLoop",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "c5b10a97-8955-42f8-89b5-4950a97505ba",
+              "Flags": 0,
+              "Name": "GameStateManager",
+              "Position": "169.6161,0,-3.366089",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "GameStateManager",
+                  "__guid": "d0a1e062-344b-4f1b-b85b-23017f23e0c0",
+                  "CurrentState": "MENU"
+                }
+              ]
+            },
+            {
+              "__guid": "ce6f8ca6-9d27-408e-a199-ad68a014fde8",
+              "Flags": 0,
+              "Name": "UiManager",
+              "Position": "-0.03210449,0,0",
+              "Enabled": true
+            }
+          ]
+        },
+        {
+          "__guid": "6c2a822e-7915-4bdd-af4a-4c61be9291b2",
+          "Flags": 0,
+          "Name": "Networking",
+          "Position": "0,0,0",
+          "Enabled": true
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "game_menu",
+  "Description": "",
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

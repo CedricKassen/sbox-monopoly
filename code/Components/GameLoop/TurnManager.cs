@@ -29,7 +29,7 @@ public class TurnManager : Component {
     public Lobby CurrentLobby { get; set; }
 
     public void EmitRolledEvent(int value) {
-        GameParentObject.Dispatch(new RolledEvent{ playerId = CurrentLobby.players[0].SteamId, Number = value });
+        GameParentObject.Dispatch(new RolledEvent{ playerId = CurrentLobby.Players[0].SteamId, Number = value });
         CurrentPhase = Phase.RoundAction;
     }
 

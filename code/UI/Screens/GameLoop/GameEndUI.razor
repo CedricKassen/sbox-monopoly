@@ -1,0 +1,43 @@
+@using System
+@using Sandbox.UI
+
+@namespace Monopoly.UI.Screens.GameLoop
+@inherits Panel
+
+
+<root>
+	<div class="title">@MyStringValue</div>
+	<button onclick="@PressEnd">Quit</button>
+	<button onclick="@PressNew">New Round</button>
+</root>
+
+@code
+{
+
+	[Property]
+	[TextArea]
+	public string MyStringValue { get; set; } = "Hello World!";
+
+	[Property]
+	public bool Visible { get; set; } = false;
+
+	/// <summary>
+	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(Visible);
+	}
+
+	void PressNew()
+	{
+	//UiManager.ChangeState(GameState.INLOBBY);
+	}
+
+	void PressEnd()
+	{
+	//UiManager.ChangeState(GameState.MENU);
+	}
+
+
+}

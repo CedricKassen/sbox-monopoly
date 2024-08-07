@@ -1,6 +1,3 @@
-using Sandbox;
-using System.Diagnostics;
-using Microsoft.VisualBasic;
 using Sandbox.Events;
 using Sandbox.Events.GameStateEvents;
 
@@ -11,28 +8,18 @@ public enum GameState
 
 public sealed class GameStateManager : Component, IGameEventHandler<GameEndEvent>, IGameEventHandler<GameStartEvent>
 {
-	[Property] [Sync] GameState CurrentState { get; set; }
-	[Property] public UiManager UiManager { get; private set; }
+	[Property] [HostSync] private GameState CurrentState { get; set; }
 
 
-	public void OnGameEvent( GameEndEvent eventArgs )
+	public void OnGameEvent(GameEndEvent eventArgs)
 	{
 		Log.Info("Event: " + "GameEndEvent");
-		CurrentState = UiManager.ChangeState(GameState.END_GAME);
+		//CurrentState = UiManager.ChangeState(GameState.END_GAME);
 	}
 
-	public void OnGameEvent( GameStartEvent eventArgs ) 
+	public void OnGameEvent(GameStartEvent eventArgs)
 	{
 		Log.Info("Event: " + "GameStartEvent");
-		CurrentState = UiManager.ChangeState(GameState.INGAME);
+		//CurrentState = UiManager.ChangeState(GameState.INGAME);
 	}
-	
-
-	protected override void OnStart()
-	{
-		CurrentState = UiManager.ChangeState(CurrentState);
-	}
-
-	
-	
 }
