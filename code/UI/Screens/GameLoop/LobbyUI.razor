@@ -4,6 +4,7 @@
 
 @namespace Monopoly.UI.Screens.GameLoop
 @inherits Panel
+@implements INavigatorPage
 
 
 <root class="menu">
@@ -22,9 +23,7 @@
 		</div>
 	</div>
 
-	<a href="/ingame">
-		<button>Start</button>
-	</a>
+    <button onclick=@Start>Start</button>
 
 	<div class="hub-buttons">
 		<button class="back icon" onclick="@PressBack">
@@ -52,5 +51,17 @@
 	{
 		GameNetworkSystem.Disconnect();
 		Game.ActiveScene.LoadFromFile("scenes/game_menu.scene");
+	}
+
+	private void Start() {
+		 NavigationExtensions.Navigate(this, "/ingame");
+	}
+	
+	public void OnNavigationOpen() {
+		Log.Info("Looby Opened");
+	}
+
+	public void OnNavigationClose() {
+		Log.Info("Looby Closed");
 	}
 }

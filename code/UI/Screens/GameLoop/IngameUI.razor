@@ -4,6 +4,7 @@
 
 @namespace Monopoly.UI.Screens.GameLoop
 @inherits Panel;
+@implements INavigatorPage
 
 
 <root>
@@ -129,6 +130,14 @@
 	{
 		_state = IngameUiStates.None;
 		GameNetworkSystem.Disconnect();
+	}
+
+	public void OnNavigationOpen() {
+		Log.Info("IngameUi Opened");
+	}
+
+	public void OnNavigationClose() {
+		Log.Info("IngameUi Closed");
 	}
 
 	private async void Roll()
