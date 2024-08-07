@@ -8,57 +8,57 @@
 
 <root>
 	<div style="position: absolute; top: 50%; left: 50%">
-		@if (ShowRoll)
+		@if (_showRoll)
 		{
-			<h1> @Dice.Aggregate(0, (accumulator, dice) => dice.GetRollValue() + accumulator) </h1>
+			<h1> @_dice.Aggregate(0, (accumulator, dice) => dice.GetRollValue() + accumulator) </h1>
 		}
 	</div>
 
 	<div id="mainPanel">
 		<div class="autogrow"></div>
-		<button class="secondaryButton" onclick="@(() => state = IngameUiStates.Bank)"> 🏦 </button>
-		<button class="secondaryButton" onclick="@(() => state = IngameUiStates.Trade)"> 💸 </button>
+		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Bank)"> 🏦 </button>
+		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Trade)"> 💸 </button>
 		<button class="mainButton" onclick="@Roll"> GO </button>
-		<button class="secondaryButton" onclick="@(() => state = IngameUiStates.Building)"> 🏠 </button>
+		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Building)"> 🏠 </button>
 		<div class="autogrow"></div>
-		<button class="secondaryButton" onclick="@(() => state = IngameUiStates.Options)"> ⚙️ </button>
+		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Options)"> ⚙️ </button>
 	</div>
 
 	@foreach (var player in Lobby.Players)
 	{
-		<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@OwnedFields/>
+		<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@_ownedFields/>
 	}
 
-	@if (state == IngameUiStates.Bank)
+	@if (_state == IngameUiStates.Bank)
 	{
-		<Modal OnClose=@(() => state = IngameUiStates.None) Name="Bank">
+		<Modal OnClose=@(() => _state = IngameUiStates.None) Name="Bank">
 			<Content>
 				<p> Hello :3 </p>
 			</Content>
 		</Modal>
 	}
 
-	@if (state == IngameUiStates.Trade)
+	@if (_state == IngameUiStates.Trade)
 	{
-		<Modal OnClose=@(() => state = IngameUiStates.None) Name="Trading">
+		<Modal OnClose=@(() => _state = IngameUiStates.None) Name="Trading">
 			<Content>
 				<p> Hello :3 </p>
 			</Content>
 		</Modal>
 	}
 
-	@if (state == IngameUiStates.Building)
+	@if (_state == IngameUiStates.Building)
 	{
-		<Modal OnClose=@(() => state = IngameUiStates.None) Name="Building">
+		<Modal OnClose=@(() => _state = IngameUiStates.None) Name="Building">
 			<Content>
 				<p> Hello :3 </p>
 			</Content>
 		</Modal>
 	}
 
-	@if (state == IngameUiStates.Options)
+	@if (_state == IngameUiStates.Options)
 	{
-		<Modal OnClose=@(() => state = IngameUiStates.None) Name="Options">
+		<Modal OnClose=@(() => _state = IngameUiStates.None) Name="Options">
 			<Content>
 				<button onclick=@LeaveLobby> Leave Game </button>
 			</Content>
@@ -79,19 +79,12 @@
 	}
 
 	[Property]
-	public bool Visible { get; set; } = false;
+	public Lobby Lobby { get; set; } = Game.ActiveScene.GetAllComponents<Lobby>().First();
 
-	[Property]
-	public Lobby Lobby { get; set; }
-
-	[Property]
-	List<Dice> Dice { get; set; }
-
-	private IngameUiStates state { get; set; } = IngameUiStates.None;
-
-	private bool ShowRoll;
-
-	private readonly Dictionary<string, ulong> OwnedFields = new()
+	private List<Dice> _dice = new (Game.ActiveScene.GetAllComponents<Dice>());
+	private IngameUiStates _state = IngameUiStates.None;
+	private bool _showRoll;
+	private readonly Dictionary<string, ulong> _ownedFields = new()
 	{
 		{ "brown1", 0 },
 		{ "brown2", 0 },
@@ -129,31 +122,30 @@
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(Visible, Lobby, ShowRoll);
+		return HashCode.Combine(Lobby, _showRoll);
 	}
 
 	private void LeaveLobby()
 	{
-		state = IngameUiStates.None;
-	//UiManager.ChangeState(GameState.MENU);
+		_state = IngameUiStates.None;
 		GameNetworkSystem.Disconnect();
 	}
 
 	private async void Roll()
 	{
-		foreach (var dice in Dice)
+		foreach (var dice in _dice)
 		{
 			dice.Roll();
 		}
 
-		while (Dice.Any(dice => dice.IsRolling))
+		while (_dice.Any(dice => dice.IsRolling))
 		{
 			await Task.DelayRealtimeSeconds(0.5f);
 		}
 
-		ShowRoll = true;
+		_showRoll = true;
 		await Task.DelayRealtimeSeconds(2f);
-		ShowRoll = false;
+		_showRoll = false;
 	}
 
 }
