@@ -568,6 +568,8 @@
           "Position": "-48.64488,-1.786922,312.2573",
           "Scale": "2,2,2",
           "Enabled": true,
+          "NetworkMode": 1,
+          "NetworkOrphaned": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -617,6 +619,8 @@
           "Position": "-48.64488,-41.59496,312.2573",
           "Scale": "2,2,2",
           "Enabled": true,
+          "NetworkMode": 1,
+          "NetworkOrphaned": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
