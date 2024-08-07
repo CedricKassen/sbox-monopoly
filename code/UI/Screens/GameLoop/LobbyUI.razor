@@ -1,16 +1,18 @@
-@namespace Sandbox.UI
 @using System
 @using Sandbox.Network
-@inherits PanelComponent
+@using Sandbox.UI
+
+@namespace Monopoly.UI.Screens.GameLoop
+@inherits Panel
 
 
-<root class="@(Visible ? "" : "hide") menu">
+<root class="menu">
 	<h1> MY_POOL_NO </h1>
 
 	<div class="overview">
-		<h3>@Lobby.GetCurrentPlayers().Count()/@Lobby.MaxPlayers</h3>
+		<h3>@Lobby.Players.Count()/@Lobby.MaxPlayers</h3>
 		<div class="player-container">
-			@foreach (var player in Lobby.GetCurrentPlayers())
+			@foreach (var player in Lobby.Players)
 			{
 				<div class="player">
 					<img src=@($"avatar:{player.SteamId}")/>
@@ -20,7 +22,7 @@
 		</div>
 	</div>
 
-	<button onclick="@PressStart">Start</button>
+	<button>Start</button>
 
 	<div class="hub-buttons">
 		<button class="back icon" onclick="@PressBack">
@@ -34,31 +36,19 @@
 @code
 {
 	[Property]
-	public bool Visible { get; set; } = false;
-
-	[Property]
-	public Lobby Lobby { get; set; }
+	public Lobby Lobby { get; set; } = new Lobby();
 
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(Visible, Lobby);
+		return HashCode.Combine(Lobby);
 	}
-
-	void PressStart()
-	{
-	//UiManager.ChangeState(GameState.INGAME);
-	}
-
 
 	void PressBack()
 	{
-	//UiManager.ChangeState(GameState.MENU);
-			GameNetworkSystem.Disconnect();
+		GameNetworkSystem.Disconnect();
+		Game.ActiveScene.LoadFromFile("scenes/game_menu.scene");
 	}
-
-
-
 }

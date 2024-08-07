@@ -1,11 +1,11 @@
-﻿@import "../../globals.scss";
+@import "../../globals.scss";
 
 h1 {
   color: $white;
   font-size: 100px;
 }
 
-GameMenuPanel {
+GameLoopPanel {
   opacity: 1;
   flex-direction: column;
   font-size: 25px;

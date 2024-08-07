@@ -54,7 +54,7 @@
               "__guid": "ce6f8ca6-9d27-408e-a199-ad68a014fde8",
               "Flags": 0,
               "Name": "UiManager",
-              "Position": "0,0,0",
+              "Position": "-0.03210449,0,0",
               "Enabled": true
             }
           ]
@@ -90,8 +90,8 @@
       "IncludedBodies": ""
     }
   },
-  "Title": null,
-  "Description": null,
+  "Title": "game_menu",
+  "Description": "",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

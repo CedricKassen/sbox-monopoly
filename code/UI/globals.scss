@@ -1,6 +1,5 @@
 ﻿@import "colors.scss";
 @import "constants.scss";
-@import "Components/Modal.razor.scss";
 
 a, p, h1, h2, h3, button {
   font-family: "Segoe UI", sans-serif;
@@ -55,10 +54,6 @@ button {
   flex-grow: 1;
   min-height: auto;
   min-width: auto;
-}
-
-.hide {
-  display: none;
 }
 
 .menu {

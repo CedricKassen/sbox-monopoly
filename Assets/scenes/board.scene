@@ -741,104 +741,23 @@
       "Enabled": true,
       "Children": [
         {
-          "__guid": "6ec7a419-1af6-4ba3-9324-f17037999c7a",
+          "__guid": "52485f1d-3bf8-4363-8151-33484152c4a3",
           "Flags": 0,
           "Name": "UI",
           "Position": "-228.8045,-91.43645,72.8403",
           "Enabled": true,
-          "Children": [
+          "Components": [
             {
-              "__guid": "02791e92-fb19-4ca1-a5a2-78f2c99cfc8a",
-              "Flags": 0,
-              "Name": "Ingame",
-              "Position": "0,0,0",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "Sandbox.ScreenPanel",
-                  "__guid": "8ecf6c86-49e0-49e0-b36d-b6e3ba2f8db6",
-                  "AutoScreenScale": true,
-                  "Opacity": 1,
-                  "Scale": 1,
-                  "ZIndex": 100
-                },
-                {
-                  "__type": "Sandbox.UI.IngameUI",
-                  "__guid": "ed4bf1a6-7000-4942-b49c-618655f52a49",
-                  "Dice": [
-                    {
-                      "_type": "component",
-                      "component_id": "3f886b06-46f1-49e2-862e-f0c352b8a570",
-                      "go": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0",
-                      "component_type": "Dice"
-                    },
-                    {
-                      "_type": "component",
-                      "component_id": "e2135290-ed6b-4fa6-a4bd-6c16c93acf33",
-                      "go": "9c38fde3-e34c-4f89-ab94-c714c48d150b",
-                      "component_type": "Dice"
-                    }
-                  ],
-                  "Lobby": {
-                    "_type": "component",
-                    "component_id": "a8157055-fe38-49f3-bca5-55572fc4d83f",
-                    "go": "00e6060f-33c7-439f-87f4-209648b444c7",
-                    "component_type": "Lobby"
-                  },
-                  "Visible": false
-                }
-              ]
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "30301d59-5fcf-454c-b9ac-1a3d05230e29",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
             },
             {
-              "__guid": "d0dbf866-9ea1-44b3-896c-70ad700cfbc3",
-              "Flags": 0,
-              "Name": "GameEndScreen",
-              "Position": "0,0,0",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "Sandbox.ScreenPanel",
-                  "__guid": "2b9f6516-cc79-45b7-8fb9-a6918eb4ba50",
-                  "AutoScreenScale": true,
-                  "Opacity": 1,
-                  "Scale": 1,
-                  "ZIndex": 100
-                },
-                {
-                  "__type": "Sandbox.UI.GameEndUI",
-                  "__guid": "da7059e5-8106-4d13-b045-82aef965903d",
-                  "MyStringValue": "Hello World!",
-                  "Visible": false
-                }
-              ]
-            },
-            {
-              "__guid": "52485f1d-3bf8-4363-8151-33484152c4a3",
-              "Flags": 0,
-              "Name": "Lobby",
-              "Position": "0,0,0",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "Sandbox.ScreenPanel",
-                  "__guid": "30301d59-5fcf-454c-b9ac-1a3d05230e29",
-                  "AutoScreenScale": true,
-                  "Opacity": 1,
-                  "Scale": 1,
-                  "ZIndex": 100
-                },
-                {
-                  "__type": "Sandbox.UI.LobbyUI",
-                  "__guid": "6e08678d-2d28-4d99-91a1-838b2bc49d37",
-                  "Lobby": {
-                    "_type": "component",
-                    "component_id": "a8157055-fe38-49f3-bca5-55572fc4d83f",
-                    "go": "00e6060f-33c7-439f-87f4-209648b444c7",
-                    "component_type": "Lobby"
-                  },
-                  "Visible": false
-                }
-              ]
+              "__type": "Monopoly.UI.Screens.GameLoop.GameLoopPanel",
+              "__guid": "1cd93fff-31dc-49d2-9c05-d9027f5ee4aa"
             }
           ]
         },

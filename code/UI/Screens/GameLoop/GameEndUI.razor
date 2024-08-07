@@ -1,9 +1,11 @@
-@namespace Sandbox.UI
 @using System
-@inherits PanelComponent
+@using Sandbox.UI
+
+@namespace Monopoly.UI.Screens.GameLoop
+@inherits Panel
 
 
-<root class="@(Visible ? "" : "hide")">
+<root>
 	<div class="title">@MyStringValue</div>
 	<button onclick="@PressEnd">Quit</button>
 	<button onclick="@PressNew">New Round</button>

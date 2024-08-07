@@ -1,10 +1,12 @@
-@namespace Sandbox.UI
 @using System
 @using Sandbox.Network
-@inherits PanelComponent;
+@using Sandbox.UI
+
+@namespace Monopoly.UI.Screens.GameLoop
+@inherits Panel;
 
 
-<root class="@(Visible ? "" : "hide")">
+<root>
 	<div style="position: absolute; top: 50%; left: 50%">
 		@if (ShowRoll)
 		{
@@ -22,7 +24,7 @@
 		<button class="secondaryButton" onclick="@(() => state = IngameUiStates.Options)"> ⚙️ </button>
 	</div>
 
-	@foreach (var player in Lobby.GetCurrentPlayers())
+	@foreach (var player in Lobby.Players)
 	{
 		<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@OwnedFields/>
 	}

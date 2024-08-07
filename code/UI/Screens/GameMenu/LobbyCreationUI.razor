@@ -30,5 +30,7 @@
 		return HashCode.Combine(1);
 	}
 
-	void PressCreate() {}
+	void PressCreate() {
+		Game.ActiveScene.LoadFromFile("scenes/board.scene");
+	}
 }
