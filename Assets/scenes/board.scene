@@ -601,8 +601,10 @@
               "Gravity": true,
               "LinearDamping": 0,
               "Locking": {},
+              "MassCenterOverride": "0,0,0",
               "MassOverride": 0,
               "MotionEnabled": true,
+              "OverrideMassCenter": false,
               "RigidbodyFlags": 0,
               "StartAsleep": false
             }
@@ -648,8 +650,10 @@
               "Gravity": true,
               "LinearDamping": 0,
               "Locking": {},
+              "MassCenterOverride": "0,0,0",
               "MassOverride": 0,
               "MotionEnabled": true,
+              "OverrideMassCenter": false,
               "RigidbodyFlags": 0,
               "StartAsleep": false
             }
@@ -810,13 +814,6 @@
                   }
                 }
               ]
-            },
-            {
-              "__guid": "6ab68362-7c7a-4dc1-b7b1-1b1d597d8677",
-              "Flags": 0,
-              "Name": "UiManager",
-              "Position": "0,0,0",
-              "Enabled": true
             }
           ]
         },
@@ -837,7 +834,7 @@
                 {
                   "__type": "Lobby",
                   "__guid": "a8157055-fe38-49f3-bca5-55572fc4d83f",
-                  "PlayerNum": 0,
+                  "MaxPlayers": 5,
                   "PlayerPrefab": {
                     "_type": "gameobject",
                     "prefab": "prefabs/playerprefab.prefab"
