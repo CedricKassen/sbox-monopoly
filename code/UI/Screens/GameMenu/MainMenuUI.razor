@@ -1,8 +1,9 @@
-@namespace Monopoly.UI.Screens.GameMenu
-
-@inherits PanelComponent
 @using System
-@implements Sandbox.UI.INavigatorPage
+@using Sandbox.UI
+
+@namespace Monopoly.UI.Screens.GameMenu
+@inherits Panel
+@implements INavigatorPage
 
 
 <root class="menu">
@@ -19,15 +20,7 @@
 	<div></div>
 </root>
 
-@code
-{
-
-	protected override void OnStart()
-	{
-		base.OnStart();
-		Log.Info("Start Menu");
-	}
-
+@code {
 	public void OnNavigationOpen()
 	{
 		Log.Info("Nav Open");

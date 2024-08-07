@@ -1,7 +1,10 @@
-@namespace Monopoly.UI.Screens.GameMenu
 @using System
 @using Sandbox.Network
-@inherits PanelComponent
+@using Sandbox.UI
+
+@namespace Monopoly.UI.Screens.GameMenu
+@inherits Panel
+@implements INavigatorPage
 
 <root class="menu">
 	<div class="column">
@@ -49,10 +52,8 @@
 		return HashCode.Combine(lobbies);
 	}
 
-
-	protected override void OnStart()
+	public void OnNavigationOpen()
 	{
-		base.OnStart();
 		fetchLobbys();
 	}
 
