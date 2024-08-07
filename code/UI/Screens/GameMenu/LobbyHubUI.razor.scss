@@ -49,22 +49,4 @@ LobbyHubUI {
 			}
 		}
 	}
-	
-	.hub-buttons {
-		display: flex;
-		bottom: 0;
-		left: 0;
-		position: absolute;
-		padding: 40px;
-		justify-content: space-between;
-		width: 100vw;
-		
-		.back:active {
-			sound-in: 'ui.navigate.back';
-		}
-		
-		.refetch:active {
-			sound-in: 'ui.upvote';
-		}
-	}
 }

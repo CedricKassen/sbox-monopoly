@@ -28,7 +28,7 @@
 
 	<div class="hub-buttons">
 		<a href="/">
-			<button class="back icon" onclick="@PressBack">
+			<button class="back icon">
 				keyboard_return
 			</button>
 		</a>
@@ -37,6 +37,7 @@
 			refresh
 		</button>
 	</div>
+	<div></div>
 </root>
 
 @code
@@ -66,11 +67,6 @@
 	void ReloadLobbies()
 	{
 		fetchLobbys();
-	}
-
-	void PressBack()
-	{
-	//UiManager.ChangeState(GameState.MENU);
 	}
 
 	private async void fetchLobbys()
