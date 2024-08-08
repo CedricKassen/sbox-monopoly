@@ -1,10 +1,8 @@
+@namespace Monopoly.UI.Screens.GameLoop
+@inherits Sandbox.UI.Panel
 @using System
 @using Sandbox.Network
-@using Sandbox.UI
-
-@namespace Monopoly.UI.Screens.GameLoop
-@inherits Panel
-@implements INavigatorPage
+@implements Sandbox.UI.INavigatorPage
 
 
 <root>
@@ -17,68 +15,79 @@
 
 	<div id="mainPanel">
 		<div class="autogrow"></div>
-		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Bank)"> 🏦 </button>
-		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Trade)"> 💸 </button>
+		<button class="secondaryButton" onclick="@(() => _stateManager.State = IngameUiStates.Bank)"> 🏦 </button>
+		<button class="secondaryButton" onclick="@(() => _stateManager.State = IngameUiStates.Trade)"> 💸 </button>
 		<button class="mainButton @(Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId ? "active" : "")" onclick="@Roll"> GO </button>
-		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Building)"> 🏠 </button>
+		<button class="secondaryButton" onclick="@(() => _stateManager.State = IngameUiStates.Building)"> 🏠 </button>
 		<div class="autogrow"></div>
-		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Options)"> ⚙️ </button>
+		<button class="secondaryButton" onclick="@(() => _stateManager.State = IngameUiStates.Options)"> ⚙️ </button>
 	</div>
 
 	<div style="position: absolute; bottom: 0; left: 0; width: 100%; flex-direction: row; justify-content: center">
-		@foreach (var player in Lobby.Players) {
+		@foreach (var player in Lobby.Players)
+		{
 			<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@_ownedFields/>
 		}
 	</div>
 
-	@if (_state == IngameUiStates.Bank)
+	@switch (_stateManager.State)
 	{
-		<Modal OnClose=@(() => _state = IngameUiStates.None) Name="Bank">
-			<Content>
-				<p> Hello :3 </p>
-			</Content>
-		</Modal>
+		case IngameUiStates.Bank:
+			<Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Bank">
+				<Content>
+					<p> Hello :3 </p>
+				</Content>
+			</Modal>
+			break;
+		case IngameUiStates.Trade:
+			<Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Trading">
+				<Content>
+					<p> Hello :3 </p>
+				</Content>
+			</Modal>
+			break;
+		case IngameUiStates.Building:
+			<Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Building">
+				<Content>
+					<p> Hello :3 </p>
+				</Content>
+			</Modal>
+			break;
+		case IngameUiStates.Buying:
+			<Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Buying">
+				<Content>
+					<p> Hello :3 </p>
+				</Content>
+			</Modal>
+			break;
+		case IngameUiStates.Options:
+			<Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Options">
+				<Content>
+					<button onclick=@LeaveLobby> Leave Game </button>
+				</Content>
+			</Modal>
+			break;
+		case IngameUiStates.Chance:
+			<Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Options">
+				<Content>
+					<p> Chance </p>
+				</Content>
+			</Modal>
+			break;
+		case IngameUiStates.Community_Chest:
+			<Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Options">
+				<Content>
+					<p> Community Chest </p>
+				</Content>
+			</Modal>
+			break;
 	}
 
-	@if (_state == IngameUiStates.Trade)
-	{
-		<Modal OnClose=@(() => _state = IngameUiStates.None) Name="Trading">
-			<Content>
-				<p> Hello :3 </p>
-			</Content>
-		</Modal>
-	}
-
-	@if (_state == IngameUiStates.Building)
-	{
-		<Modal OnClose=@(() => _state = IngameUiStates.None) Name="Building">
-			<Content>
-				<p> Hello :3 </p>
-			</Content>
-		</Modal>
-	}
-
-	@if (_state == IngameUiStates.Buying)
-	{
-	<Modal OnClose=@(() => _state = IngameUiStates.None) Name="Buying">
-		<Content>
-			<p> Hello :3 </p>
-		</Content>
-	</Modal>
-	}
-
-	@if (_state == IngameUiStates.Options)
-	{
-		<Modal OnClose=@(() => _state = IngameUiStates.None) Name="Options">
-			<Content>
-				<button onclick=@LeaveLobby> Leave Game </button>
-			</Content>
-		</Modal>
-	}
 
 </root>
 
 @code {
+
 	public enum IngameUiStates
 	{
 		Bank,
@@ -86,6 +95,8 @@
 		Options,
 		Building,
 		Buying,
+		Chance,
+		Community_Chest,
 		None
 	}
 
@@ -93,12 +104,13 @@
 	public Lobby Lobby { get; set; } = Game.ActiveScene.GetAllComponents<Lobby>().First();
 
 	[Property]
-	private TurnManager _turnManager { get; set; } = Game.ActiveScene.GetAllComponents<TurnManager>().First();
+	private TurnManager _turnManager { get; } = Game.ActiveScene.GetAllComponents<TurnManager>().First();
 
-	private List<Dice> _dice = new (Game.ActiveScene.GetAllComponents<Dice>());
-	private IngameUiStates _state = IngameUiStates.None;
-	
+	private readonly List<Dice> _dice = new(Game.ActiveScene.GetAllComponents<Dice>());
+	private readonly IngameStateManager _stateManager = Game.ActiveScene.GetAllComponents<IngameStateManager>().First();
+
 	private bool _showRoll;
+
 	private readonly Dictionary<string, ulong> _ownedFields = new()
 	{
 		{ "brown1", 0 },
@@ -137,12 +149,12 @@
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(Lobby, _showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex);
+		return HashCode.Combine(Lobby, _showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State);
 	}
 
 	private void LeaveLobby()
 	{
-		_state = IngameUiStates.None;
+		_stateManager.State = IngameUiStates.None;
 		GameNetworkSystem.Disconnect();
 	}
 
@@ -152,7 +164,7 @@
 		{
 			return;
 		}
-		
+
 		foreach (var dice in _dice)
 		{
 			dice.Roll();
@@ -162,11 +174,12 @@
 		{
 			await Task.DelayRealtimeSeconds(0.5f);
 		}
-		
+
 		_turnManager.EmitRolledEvent(_dice.Aggregate(0, (accumulator, dice) => dice.GetRollValue() + accumulator));
 
 		_showRoll = true;
 		await Task.DelayRealtimeSeconds(2f);
 		_showRoll = false;
 	}
+
 }
