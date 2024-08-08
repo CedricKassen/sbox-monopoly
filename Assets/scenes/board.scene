@@ -1992,11 +1992,11 @@
                 {
                   "__type": "Sandbox.Components.GameLoop.GameEventHandler",
                   "__guid": "d9fa2f5b-e5e2-40dd-82c3-6372c8ba7aaf",
-                  "CardDisplayManager": {
+                  "CardActionManager": {
                     "_type": "component",
-                    "component_id": "0bb3005a-5004-4bdb-b843-f04de26e471a",
+                    "component_id": "844bf9c0-8802-4506-9e32-b9262d5f6987",
                     "go": "75ead9c5-003f-4f8a-a72d-2fc294d01131",
-                    "component_type": "CardDisplayManager"
+                    "component_type": "CardActionManager"
                   },
                   "Lobby": {
                     "_type": "component",
@@ -2046,8 +2046,10 @@
               "Enabled": true,
               "Components": [
                 {
-                  "__type": "CardDisplayManager",
-                  "__guid": "0bb3005a-5004-4bdb-b843-f04de26e471a",
+                  "__type": "CardActionManager",
+                  "__guid": "844bf9c0-8802-4506-9e32-b9262d5f6987",
+                  "ChanceCards": [],
+                  "CommunityCards": [],
                   "MovementManager": {
                     "_type": "component",
                     "component_id": "069b4e7c-3cce-45d4-9a2b-a244aa336851",
