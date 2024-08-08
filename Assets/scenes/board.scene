@@ -1937,6 +1937,21 @@
               "__type": "Monopoly.UI.Screens.GameLoop.GameLoopPanel",
               "__guid": "1cd93fff-31dc-49d2-9c05-d9027f5ee4aa"
             }
+          ],
+          "Children": [
+            {
+              "__guid": "50a0f343-7e9b-4da6-a7f9-7e39e5f50128",
+              "Flags": 0,
+              "Name": "State",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "IngameStateManager",
+                  "__guid": "8112c606-1144-4881-86b8-2eb35e8030ad"
+                }
+              ]
+            }
           ]
         },
         {
@@ -1977,6 +1992,12 @@
                 {
                   "__type": "Sandbox.Components.GameLoop.GameEventHandler",
                   "__guid": "d9fa2f5b-e5e2-40dd-82c3-6372c8ba7aaf",
+                  "CardDisplayManager": {
+                    "_type": "component",
+                    "component_id": "0bb3005a-5004-4bdb-b843-f04de26e471a",
+                    "go": "75ead9c5-003f-4f8a-a72d-2fc294d01131",
+                    "component_type": "CardDisplayManager"
+                  },
                   "Lobby": {
                     "_type": "component",
                     "component_id": "a8157055-fe38-49f3-bca5-55572fc4d83f",
@@ -2014,6 +2035,25 @@
                     "go": "024eb414-bc10-4ad9-885d-eae5e42de48d"
                   },
                   "SpeedMultiplier": 3
+                }
+              ]
+            },
+            {
+              "__guid": "75ead9c5-003f-4f8a-a72d-2fc294d01131",
+              "Flags": 0,
+              "Name": "CardDisplayManager",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "CardDisplayManager",
+                  "__guid": "0bb3005a-5004-4bdb-b843-f04de26e471a",
+                  "MovementManager": {
+                    "_type": "component",
+                    "component_id": "069b4e7c-3cce-45d4-9a2b-a244aa336851",
+                    "go": "dd179206-68ac-4c6b-9019-f033562ff797",
+                    "component_type": "MovementManager"
+                  }
                 }
               ]
             }
