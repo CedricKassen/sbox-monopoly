@@ -139,6 +139,11 @@
 
 	private async void Roll()
 	{
+		if (Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId != (ulong)Game.SteamId)
+		{
+			return;
+		}
+		
 		Log.Info(Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId);
 		Log.Info(Game.SteamId);
 		foreach (var dice in _dice)
