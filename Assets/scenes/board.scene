@@ -373,6 +373,7 @@
           "Flags": 0,
           "Name": "Jail",
           "Position": "15.69002,250.7109,-61.09317",
+          "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -408,7 +409,8 @@
           "__guid": "54142386-c8fb-40a0-9084-eb80dce87ad3",
           "Flags": 0,
           "Name": "Pink1",
-          "Position": "68.20039,259.7269,-61.09317",
+          "Position": "63,268.1399,-61.09317",
+          "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -444,7 +446,8 @@
           "__guid": "4429305f-adf4-4c31-bd84-ea50af9986be",
           "Flags": 0,
           "Name": "ElectricCompany",
-          "Position": "104.2864,259.7269,-61.09317",
+          "Position": "102,259.7269,-61.09317",
+          "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -480,7 +483,8 @@
           "__guid": "de87ea96-4c4c-4653-9145-8aef35598c42",
           "Flags": 0,
           "Name": "Pink2",
-          "Position": "145.2036,259.7269,-61.09317",
+          "Position": "141,259.7269,-61.09317",
+          "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -517,6 +521,7 @@
           "Flags": 0,
           "Name": "Pink3",
           "Position": "182.7813,259.7269,-61.09317",
+          "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -553,6 +558,7 @@
           "Flags": 0,
           "Name": "Railroad2",
           "Position": "224.817,259.7269,-61.09317",
+          "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -589,6 +595,7 @@
           "Flags": 0,
           "Name": "Orange1",
           "Position": "261.5884,259.7269,-61.09317",
+          "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -625,6 +632,7 @@
           "Flags": 0,
           "Name": "CommunityChest2",
           "Position": "299.9954,259.7269,-61.09317",
+          "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -661,6 +669,7 @@
           "Flags": 0,
           "Name": "Orange2",
           "Position": "339.0019,259.7269,-61.09317",
+          "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -697,6 +706,7 @@
           "Flags": 0,
           "Name": "Orange3",
           "Position": "377.5777,259.7269,-61.09317",
+          "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1973,6 +1983,32 @@
                     "go": "00e6060f-33c7-439f-87f4-209648b444c7",
                     "component_type": "Lobby"
                   },
+                  "LocationContainer": {
+                    "_type": "gameobject",
+                    "go": "024eb414-bc10-4ad9-885d-eae5e42de48d"
+                  },
+                  "MovementManager": {
+                    "_type": "component",
+                    "component_id": "069b4e7c-3cce-45d4-9a2b-a244aa336851",
+                    "go": "dd179206-68ac-4c6b-9019-f033562ff797",
+                    "component_type": "MovementManager"
+                  }
+                }
+              ]
+            },
+            {
+              "__guid": "dd179206-68ac-4c6b-9019-f033562ff797",
+              "Flags": 0,
+              "Name": "MovementManager",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "MovementManager",
+                  "__guid": "069b4e7c-3cce-45d4-9a2b-a244aa336851",
+                  "CurrentField": 0,
+                  "ToTravel": 0,
+                  "Travelled": 0,
                   "LocationContainer": {
                     "_type": "gameobject",
                     "go": "024eb414-bc10-4ad9-885d-eae5e42de48d"
