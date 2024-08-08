@@ -25,10 +25,11 @@
 		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Options)"> ⚙️ </button>
 	</div>
 
-	@foreach (var player in Lobby.Players)
-	{
-		<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@_ownedFields/>
-	}
+	<div style="position: absolute; bottom: 0; left: 0; width: 100%; flex-direction: row; justify-content: center">
+		@foreach (var player in Lobby.Players) {
+			<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@_ownedFields/>
+		}
+	</div>
 
 	@if (_state == IngameUiStates.Bank)
 	{
