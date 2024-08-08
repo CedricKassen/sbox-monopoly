@@ -32,9 +32,9 @@ public sealed class MovementManager : Component
 			return;
 		}
 	
-		if (_timer < 1) {
+		if (_timer < 0.5) {
 			GameObject location = LocationContainer.Children[CurrentField];
-			Player.Transform.LerpTo(location.Transform.World, _timer);
+			Player.Transform.LerpTo(location.Transform.World, _timer * 2);
 			_timer += Time.Delta;
 			
 			return;
