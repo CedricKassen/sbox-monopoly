@@ -12,6 +12,7 @@ public sealed class MovementManager : Component
 	[Property] private int ToTravel;
 	[Property] private int Travelled;
 	[Property] public GameObject LocationContainer { get; set; }
+	[Property] public float SpeedMultiplier { get; set; }
 
 	public void StartMovement(Player player, int fieldsToTravel)
 	{
@@ -32,9 +33,9 @@ public sealed class MovementManager : Component
 			return;
 		}
 	
-		if (_timer < 0.5) {
+		if (_timer < 1 / SpeedMultiplier) {
 			GameObject location = LocationContainer.Children[CurrentField];
-			Player.Transform.LerpTo(location.Transform.World, _timer * 2);
+			Player.Transform.LerpTo(location.Transform.World, _timer * SpeedMultiplier);
 			_timer += Time.Delta;
 			
 			return;

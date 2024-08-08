@@ -1,5 +1,5 @@
 {
-  "__guid": "854281b2-5f77-42e6-8674-39a8d4ac4833",
+  "__guid": "fe5802d9-1abc-4dcb-9fe4-b29782550068",
   "GameObjects": [
     {
       "__guid": "024eb414-bc10-4ad9-885d-eae5e42de48d",
@@ -2012,7 +2012,8 @@
                   "LocationContainer": {
                     "_type": "gameobject",
                     "go": "024eb414-bc10-4ad9-885d-eae5e42de48d"
-                  }
+                  },
+                  "SpeedMultiplier": 3
                 }
               ]
             }
