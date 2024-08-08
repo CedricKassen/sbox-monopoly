@@ -1,6 +1,4 @@
-﻿using Sandbox;
-using Sandbox.Events;
-using Sandbox.Events.GameStateEvents;
+﻿using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 
 public class TurnManager : Component {
@@ -28,21 +26,28 @@ public class TurnManager : Component {
     [Property]
     public Lobby CurrentLobby { get; set; }
 
+    [Property]
+    public int CurrentPlayerIndex { get; set; } = 0;
+
+    [Broadcast]
     public void EmitRolledEvent(int value) {
         GameParentObject.Dispatch(new RolledEvent{ playerId = CurrentLobby.Players[0].SteamId, Number = value });
         CurrentPhase = Phase.RoundAction;
     }
 
+    [Broadcast]
     public void EmitPropertyAquiredEvent(string property) {
         GameParentObject.Dispatch(new PropertyAquiredEvent());
         CurrentPhase = Phase.PlayerAction;
     }
     
+    [Broadcast]
     public void EmitPlayerPaymentEvent(ulong playerId, int amount) {
         GameParentObject.Dispatch(new PlayerPaymentEvent());
         CurrentPhase = Phase.PlayerAction;
     }
     
+    [Broadcast]
     public void EmitSpecialPropertyActionEvent(SpecialPropertyActionType type) {
         GameParentObject.Dispatch(new SpecialPropertyActionEvent());
 
@@ -54,12 +59,15 @@ public class TurnManager : Component {
         CurrentPhase = Phase.PlayerAction;
     }
 
+    [Broadcast]
     public void EmitPlayerActionEvent(PlayerActionType type) {
         GameParentObject.Dispatch(new PlayerActionEvent());
     }
 
+    [Broadcast]
     public void EmitTurnFinishedEvent() {
         GameParentObject.Dispatch(new TurnFinishedEvent());
+        CurrentPlayerIndex = (CurrentPlayerIndex + 1) % CurrentLobby.Players.Count;
         CurrentPhase = Phase.Rolling;
     }
 }

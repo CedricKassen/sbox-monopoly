@@ -798,6 +798,7 @@
                     "component_type": "Lobby"
                   },
                   "CurrentPhase": "Rolling",
+                  "CurrentPlayerIndex": 0,
                   "GameParentObject": {
                     "_type": "gameobject",
                     "go": "69ccf2e0-38d6-4861-a58e-ce8466d3a064"

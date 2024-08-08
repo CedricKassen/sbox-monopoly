@@ -19,7 +19,7 @@
 		<div class="autogrow"></div>
 		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Bank)"> 🏦 </button>
 		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Trade)"> 💸 </button>
-		<button class="mainButton" onclick="@Roll"> GO </button>
+		<button class="mainButton @(Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId ? "active" : "")" onclick="@Roll"> GO </button>
 		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Building)"> 🏠 </button>
 		<div class="autogrow"></div>
 		<button class="secondaryButton" onclick="@(() => _state = IngameUiStates.Options)"> ⚙️ </button>
@@ -83,8 +83,12 @@
 	[Property]
 	public Lobby Lobby { get; set; } = Game.ActiveScene.GetAllComponents<Lobby>().First();
 
+	[Property]
+	private TurnManager _turnManager { get; set; } = Game.ActiveScene.GetAllComponents<TurnManager>().First();
+
 	private List<Dice> _dice = new (Game.ActiveScene.GetAllComponents<Dice>());
 	private IngameUiStates _state = IngameUiStates.None;
+	
 	private bool _showRoll;
 	private readonly Dictionary<string, ulong> _ownedFields = new()
 	{
@@ -124,7 +128,7 @@
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(Lobby, _showRoll);
+		return HashCode.Combine(Lobby, _showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex);
 	}
 
 	private void LeaveLobby()
@@ -135,6 +139,8 @@
 
 	private async void Roll()
 	{
+		Log.Info(Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId);
+		Log.Info(Game.SteamId);
 		foreach (var dice in _dice)
 		{
 			dice.Roll();
@@ -144,6 +150,8 @@
 		{
 			await Task.DelayRealtimeSeconds(0.5f);
 		}
+		
+		_turnManager.EmitRolledEvent(_dice.Aggregate(0, (accumulator, dice) => dice.GetRollValue() + accumulator));
 
 		_showRoll = true;
 		await Task.DelayRealtimeSeconds(2f);
