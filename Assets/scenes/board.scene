@@ -13,280 +13,1371 @@
           "Flags": 0,
           "Name": "Start",
           "Position": "12.91069,-165.1257,-33.72451",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "142d1981-c34d-4f1e-b57a-3205b9da1018",
+              "EventId": "start",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "be16af03-40a6-4655-9699-6e7e24e64f29",
           "Flags": 0,
           "Name": "Brown1",
           "Position": "1.111725,-112.6371,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "3cd895b6-f3f2-4895-9a69-5becd9b64e76",
+              "House_Cost": 50,
+              "Normal_Rent": [
+                2,
+                10,
+                30,
+                90,
+                160,
+                250
+              ],
+              "Price": 60,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "a589e0f1-4009-4887-970e-2e59222206f1",
           "Flags": 0,
           "Name": "CommunityChest1",
           "Position": "1.111725,-73.50697,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "f874d392-91d1-4da4-820f-d33c42ee13d6",
+              "EventId": "community",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "05fe5d72-2678-441f-8ab7-c770e75ec2e6",
           "Flags": 0,
           "Name": "Brown2",
           "Position": "1.111725,-35.30772,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "0aed9d60-8b32-4e6a-ad6c-aab133d202c0",
+              "House_Cost": 50,
+              "Normal_Rent": [
+                4,
+                20,
+                60,
+                180,
+                320,
+                450
+              ],
+              "Price": 60,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "3c6ca99d-999a-4d4c-a3c4-2ba9938b77ff",
           "Flags": 0,
           "Name": "IncomeTax",
           "Position": "1.111725,2.866219,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "562345eb-3a46-4169-879c-f8fdf6ca082a",
+              "EventId": "income_tax",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "e473eab9-fefd-4dde-b39f-415a54208ffb",
           "Flags": 0,
           "Name": "Railroad1",
           "Position": "1.111725,42.4017,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "deba65df-a723-45b3-a373-40fa38b7cd4a",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 200,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Railroad",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "43793b8f-b8fa-4b5b-8ac7-7c80864c289d",
           "Flags": 0,
           "Name": "LightBlue1",
           "Position": "1.111725,81.49652,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "efe95e37-ee22-4665-a68d-146102b7203b",
+              "House_Cost": 50,
+              "Normal_Rent": [
+                6,
+                30,
+                90,
+                270,
+                400,
+                550
+              ],
+              "Price": 100,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "5b93ea35-ffba-4961-81a9-170f218a2027",
           "Flags": 0,
           "Name": "Chance1",
           "Position": "1.111725,121.4953,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "20764901-42e6-4784-950f-6a42bc5b0544",
+              "EventId": "chance",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "bfbee061-ca1c-4955-a357-03e19b47870b",
           "Flags": 0,
           "Name": "LightBlue2",
           "Position": "1.111725,158.7676,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "b0da137c-8668-4eb4-9439-2ea229e89e13",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                6,
+                30,
+                90,
+                270,
+                400,
+                550
+              ],
+              "Price": 100,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "0ab3c9cb-e719-488e-be15-a86e50c64abc",
           "Flags": 0,
           "Name": "LightBlue3",
           "Position": "1.111725,198.2553,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "279a95a5-4ad4-409d-99b6-df9f32f08d8f",
+              "House_Cost": 50,
+              "Normal_Rent": [
+                8,
+                40,
+                100,
+                300,
+                450,
+                600
+              ],
+              "Price": 120,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "a81f03ef-8d98-48db-9704-14b414a4d530",
           "Flags": 0,
           "Name": "Jail",
           "Position": "15.69002,250.7109,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "715f68a6-4d4b-4e8c-9ecb-65c8cfe57dbc",
+              "EventId": "",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "54142386-c8fb-40a0-9084-eb80dce87ad3",
           "Flags": 0,
           "Name": "Pink1",
           "Position": "68.20039,259.7269,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "8f440de9-73e6-42c8-b523-7d0f4997e5d6",
+              "House_Cost": 100,
+              "Normal_Rent": [
+                10,
+                50,
+                150,
+                450,
+                625,
+                750
+              ],
+              "Price": 140,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "4429305f-adf4-4c31-bd84-ea50af9986be",
           "Flags": 0,
           "Name": "ElectricCompany",
           "Position": "104.2864,259.7269,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "c9d81f0b-22ad-49a3-8de9-b75153470f5c",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 150,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Utility",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "de87ea96-4c4c-4653-9145-8aef35598c42",
           "Flags": 0,
           "Name": "Pink2",
           "Position": "145.2036,259.7269,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "3dcb2e5a-5ca8-4096-a8ec-e0c365e4be1b",
+              "House_Cost": 100,
+              "Normal_Rent": [
+                10,
+                50,
+                150,
+                450,
+                625,
+                750
+              ],
+              "Price": 140,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "e09a06e9-27ca-4515-b0d9-8ade5e8efa3b",
           "Flags": 0,
           "Name": "Pink3",
           "Position": "182.7813,259.7269,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "26b3c015-0c67-450c-b72e-381bde9e2f8e",
+              "House_Cost": 100,
+              "Normal_Rent": [
+                12,
+                60,
+                180,
+                500,
+                700,
+                900
+              ],
+              "Price": 160,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "2b28f563-7d20-44cf-9ebc-88a40246f605",
           "Flags": 0,
           "Name": "Railroad2",
           "Position": "224.817,259.7269,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "e85cc271-9180-46ed-843b-f3f6f102b6d2",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 200,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Railroad",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "1d20c0b1-e63c-4724-9638-50c83fb3f4da",
           "Flags": 0,
           "Name": "Orange1",
           "Position": "261.5884,259.7269,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "ea9311d3-734e-4a13-9df1-80d5bc1b7380",
+              "House_Cost": 100,
+              "Normal_Rent": [
+                14,
+                70,
+                200,
+                550,
+                750,
+                950
+              ],
+              "Price": 180,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "9315be49-dfba-45e4-a87d-b3a7c0cbdbf3",
           "Flags": 0,
           "Name": "CommunityChest2",
           "Position": "299.9954,259.7269,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "abd6e1a1-81f7-4407-919c-683f62f524be",
+              "EventId": "community",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "d96d4e0c-3df5-4c01-a115-40a6e48e5212",
           "Flags": 0,
           "Name": "Orange2",
           "Position": "339.0019,259.7269,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "84230ddf-f95c-4f9e-9e08-9c96686d27b7",
+              "House_Cost": 100,
+              "Normal_Rent": [
+                14,
+                70,
+                200,
+                550,
+                750,
+                950
+              ],
+              "Price": 180,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "ebe562f4-1d55-43cb-bf69-77ab7f16b169",
           "Flags": 0,
           "Name": "Orange3",
           "Position": "377.5777,259.7269,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "cd607765-ab2c-42f8-943c-9b4070126ab7",
+              "House_Cost": 100,
+              "Normal_Rent": [
+                16,
+                80,
+                220,
+                600,
+                800,
+                1000
+              ],
+              "Price": 200,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "fade20d1-25c5-419e-bd9f-3823152352b1",
           "Flags": 0,
           "Name": "FreeParking",
           "Position": "430.2625,250.8535,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "2130dfb3-63c9-4047-9660-2a19623b6eb5",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "4ce5a2a2-03ee-43a4-8cb3-85c0ddf5931e",
           "Flags": 0,
           "Name": "Red1",
           "Position": "443.824,196.5553,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "e26a0864-213b-4ad7-872a-f5496250f4b3",
+              "House_Cost": 150,
+              "Normal_Rent": [
+                18,
+                90,
+                250,
+                700,
+                875,
+                1050
+              ],
+              "Price": 220,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "242701a4-7b73-4052-8d30-f58c4bb54401",
           "Flags": 0,
           "Name": "Chance2",
           "Position": "443.824,157.5074,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "0b207820-6f3a-41a3-b8f0-18012b055c4f",
+              "EventId": "chance",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "4cdc3b45-b2e8-403c-87b5-33a1a7020fbf",
           "Flags": 0,
           "Name": "Red2",
           "Position": "443.824,118.9885,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "c93e34d4-e7c4-4b0c-a1b7-61b9fa71479a",
+              "House_Cost": 150,
+              "Normal_Rent": [
+                18,
+                90,
+                250,
+                700,
+                875,
+                1050
+              ],
+              "Price": 220,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "302c03f1-265c-482d-ae59-508de6e5c573",
           "Flags": 0,
           "Name": "Red3",
           "Position": "443.824,81.07051,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "ecd2e475-734c-4b60-8d13-2b27265c022f",
+              "House_Cost": 150,
+              "Normal_Rent": [
+                20,
+                100,
+                300,
+                750,
+                925,
+                110
+              ],
+              "Price": 240,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "861703b1-00de-4959-884b-4e0ee84fec1e",
           "Flags": 0,
           "Name": "Railroad3",
           "Position": "443.824,42.89046,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "8c3e5462-59d9-49b4-b326-13fc2d53ee81",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 200,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Railroad",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "0b0c4a73-2dca-44e3-b10c-011a3925dfcb",
           "Flags": 0,
           "Name": "Yellow1",
           "Position": "443.824,3.786041,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "38111f50-9eb2-44e4-af02-5f014c629253",
+              "House_Cost": 150,
+              "Normal_Rent": [
+                22,
+                110,
+                330,
+                800,
+                975,
+                1150
+              ],
+              "Price": 260,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "650a5286-64ec-40e6-a8a7-af3262ce3f19",
           "Flags": 0,
           "Name": "Yellow2",
           "Position": "443.824,-36.18573,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "a0b36246-cda9-438b-9604-e4c556280dbd",
+              "House_Cost": 150,
+              "Normal_Rent": [
+                22,
+                110,
+                330,
+                800,
+                975,
+                1150
+              ],
+              "Price": 260,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "b0d14978-84e5-44c6-a3b7-91375b3bbb9e",
           "Flags": 0,
           "Name": "WaterCompany",
           "Position": "443.824,-73.9437,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "9956795b-d6dd-409d-a12b-910afdacd8be",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 150,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Utility",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "af269b1c-649b-4106-9e53-b0af38f0801f",
           "Flags": 0,
           "Name": "Yellow3",
           "Position": "443.824,-112.5264,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "a36d9341-bbb6-4f7b-a543-61ee28137aa1",
+              "House_Cost": 150,
+              "Normal_Rent": [
+                22,
+                120,
+                360,
+                850,
+                1025,
+                1200
+              ],
+              "Price": 280,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "8eebf108-ade5-470a-be42-1d5a09256bcd",
           "Flags": 0,
           "Name": "GoToJail",
           "Position": "429.9303,-165.7601,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "f8b4511e-0b5e-433e-8866-61d2d653a2a9",
+              "EventId": "jail",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "c323c06f-74b8-482a-b7f9-1bd8b47d8ff6",
           "Flags": 0,
           "Name": "Green1",
           "Position": "377.6019,-176.6429,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "7d8883ab-ef7b-456b-8a87-9ae28a4f1436",
+              "House_Cost": 200,
+              "Normal_Rent": [
+                26,
+                130,
+                390,
+                900,
+                1100,
+                1275
+              ],
+              "Price": 300,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "38444516-43e4-476d-8d2e-84a74223fea9",
           "Flags": 0,
           "Name": "Green2",
           "Position": "338.8383,-176.6429,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "f4705905-cb4e-4b86-b0ff-ed45896c0a2b",
+              "House_Cost": 200,
+              "Normal_Rent": [
+                130,
+                1,
+                390,
+                900,
+                1100,
+                1275
+              ],
+              "Price": 300,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "4f689089-08fd-467f-b30e-e13e5e91914c",
           "Flags": 0,
           "Name": "CommunityChest3",
           "Position": "300.7648,-176.6429,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "19a8784e-a1dd-4c86-b9c1-725727c54382",
+              "EventId": "community",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "d3460535-765f-42bb-b631-689e1f10737d",
           "Flags": 0,
           "Name": "Green3",
           "Position": "261.61,-176.6429,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "102d6511-465c-46b1-bdb3-3fd143ef3f42",
+              "House_Cost": 200,
+              "Normal_Rent": [
+                28,
+                150,
+                450,
+                1000,
+                1200,
+                1400
+              ],
+              "Price": 320,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "03acd3d3-6e22-492d-854c-d53091b68754",
           "Flags": 0,
           "Name": "Railroad4",
           "Position": "222.3676,-176.6429,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "991ed332-55ca-4167-a5e8-936353dd525a",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 200,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Railroad",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "90b94eba-a375-4db0-a7c6-19c71a24cc02",
           "Flags": 0,
           "Name": "Chance3",
           "Position": "183.6045,-176.6429,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "e20da0c0-0542-4878-9134-bd2f61819bf0",
+              "EventId": "chance",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "729f9184-3260-453d-8cc8-213ad66cd5bf",
           "Flags": 0,
           "Name": "Blue1",
           "Position": "144.8873,-176.6429,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "7996d06b-dd66-4567-b051-8ffd0c60e4ec",
+              "House_Cost": 200,
+              "Normal_Rent": [
+                35,
+                175,
+                500,
+                1100,
+                1300,
+                1500
+              ],
+              "Price": 350,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "0424be78-b4be-4925-bf04-3f8cbdaade11",
           "Flags": 0,
           "Name": "LuxuryTax",
           "Position": "107.085,-176.6429,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "59775a2a-fd06-424e-8023-0414a93dcd70",
+              "EventId": "luxury_tax",
+              "House_Cost": 0,
+              "Normal_Rent": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "Price": 0,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Event",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         },
         {
           "__guid": "321cbec3-533a-4980-a2c7-7a517153d12a",
           "Flags": 0,
           "Name": "Blue2",
           "Position": "68.12912,-176.6429,-61.09317",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GameLocation",
+              "__guid": "d31a755f-3fc6-4337-b37c-78e1bbb3dc76",
+              "House_Cost": 200,
+              "Normal_Rent": [
+                50,
+                200,
+                600,
+                1400,
+                1700,
+                2000
+              ],
+              "Price": 400,
+              "Railroad_Rent": [
+                25,
+                50,
+                100,
+                200
+              ],
+              "Type": "Normal",
+              "Utility_Rent_Multiplier": [
+                4,
+                10
+              ]
+            }
+          ]
         }
       ]
     },
@@ -570,6 +1661,7 @@
           "Enabled": true,
           "NetworkMode": 1,
           "NetworkOrphaned": 1,
+          "OwnerTransfer": 0,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
