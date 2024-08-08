@@ -9,8 +9,26 @@ public sealed class GameLocation : Component
 		 Utility,
 		 Railroad
 	}
+	
+	public enum Colors {
+		Brown,
+		LightBlue,
+		Pink,
+		Orange,
+		Red,
+		Yellow,
+		Green,
+		Blue
+	}
+	
 	[Property]
 	public PropertyType Type  { get; set; } = PropertyType.Normal;
+	
+	[Property, HideIf("Type", PropertyType.Event)]
+	public string Name { get; set; }
+	
+	[Property, ShowIf("Type", PropertyType.Normal)]
+	public Colors Color { get; set; }
 	
 	[Property, HideIf("Type", PropertyType.Event)]
 	public int Price { get; set; } = 0;

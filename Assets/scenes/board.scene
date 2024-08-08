@@ -18,6 +18,7 @@
             {
               "__type": "GameLocation",
               "__guid": "142d1981-c34d-4f1e-b57a-3205b9da1018",
+              "Color": "Brown",
               "EventId": "start",
               "House_Cost": 0,
               "Normal_Rent": [
@@ -53,7 +54,9 @@
             {
               "__type": "GameLocation",
               "__guid": "3cd895b6-f3f2-4895-9a69-5becd9b64e76",
+              "Color": "Brown",
               "House_Cost": 50,
+              "Name": "Mediterranean Avenue",
               "Normal_Rent": [
                 2,
                 10,
@@ -87,6 +90,7 @@
             {
               "__type": "GameLocation",
               "__guid": "f874d392-91d1-4da4-820f-d33c42ee13d6",
+              "Color": "Brown",
               "EventId": "community",
               "House_Cost": 0,
               "Normal_Rent": [
@@ -122,7 +126,9 @@
             {
               "__type": "GameLocation",
               "__guid": "0aed9d60-8b32-4e6a-ad6c-aab133d202c0",
+              "Color": "Brown",
               "House_Cost": 50,
+              "Name": "Baltic Avenue",
               "Normal_Rent": [
                 4,
                 20,
@@ -156,6 +162,7 @@
             {
               "__type": "GameLocation",
               "__guid": "562345eb-3a46-4169-879c-f8fdf6ca082a",
+              "Color": "Brown",
               "EventId": "income_tax",
               "House_Cost": 0,
               "Normal_Rent": [
@@ -191,7 +198,9 @@
             {
               "__type": "GameLocation",
               "__guid": "deba65df-a723-45b3-a373-40fa38b7cd4a",
+              "Color": "Brown",
               "House_Cost": 0,
+              "Name": "Reading Railroad",
               "Normal_Rent": [
                 0,
                 1,
@@ -225,7 +234,9 @@
             {
               "__type": "GameLocation",
               "__guid": "efe95e37-ee22-4665-a68d-146102b7203b",
+              "Color": "LightBlue",
               "House_Cost": 50,
+              "Name": "Oriental Avenue",
               "Normal_Rent": [
                 6,
                 30,
@@ -259,6 +270,7 @@
             {
               "__type": "GameLocation",
               "__guid": "20764901-42e6-4784-950f-6a42bc5b0544",
+              "Color": "Brown",
               "EventId": "chance",
               "House_Cost": 0,
               "Normal_Rent": [
@@ -294,7 +306,9 @@
             {
               "__type": "GameLocation",
               "__guid": "b0da137c-8668-4eb4-9439-2ea229e89e13",
+              "Color": "LightBlue",
               "House_Cost": 0,
+              "Name": "Vermont Avenue",
               "Normal_Rent": [
                 6,
                 30,
@@ -328,7 +342,9 @@
             {
               "__type": "GameLocation",
               "__guid": "279a95a5-4ad4-409d-99b6-df9f32f08d8f",
+              "Color": "LightBlue",
               "House_Cost": 50,
+              "Name": "Connecticut Avenue",
               "Normal_Rent": [
                 8,
                 40,
@@ -362,6 +378,7 @@
             {
               "__type": "GameLocation",
               "__guid": "715f68a6-4d4b-4e8c-9ecb-65c8cfe57dbc",
+              "Color": "Brown",
               "EventId": "",
               "House_Cost": 0,
               "Normal_Rent": [
@@ -397,7 +414,9 @@
             {
               "__type": "GameLocation",
               "__guid": "8f440de9-73e6-42c8-b523-7d0f4997e5d6",
+              "Color": "Pink",
               "House_Cost": 100,
+              "Name": "St. Charles Place",
               "Normal_Rent": [
                 10,
                 50,
@@ -431,7 +450,9 @@
             {
               "__type": "GameLocation",
               "__guid": "c9d81f0b-22ad-49a3-8de9-b75153470f5c",
+              "Color": "Brown",
               "House_Cost": 0,
+              "Name": "Electric Company",
               "Normal_Rent": [
                 0,
                 1,
@@ -465,7 +486,9 @@
             {
               "__type": "GameLocation",
               "__guid": "3dcb2e5a-5ca8-4096-a8ec-e0c365e4be1b",
+              "Color": "LightBlue",
               "House_Cost": 100,
+              "Name": "States Avenue",
               "Normal_Rent": [
                 10,
                 50,
@@ -499,7 +522,9 @@
             {
               "__type": "GameLocation",
               "__guid": "26b3c015-0c67-450c-b72e-381bde9e2f8e",
+              "Color": "Pink",
               "House_Cost": 100,
+              "Name": "Virginia Avenue",
               "Normal_Rent": [
                 12,
                 60,
@@ -533,7 +558,9 @@
             {
               "__type": "GameLocation",
               "__guid": "e85cc271-9180-46ed-843b-f3f6f102b6d2",
+              "Color": "Brown",
               "House_Cost": 0,
+              "Name": "Pennsylvania Railroad",
               "Normal_Rent": [
                 0,
                 1,
@@ -567,7 +594,9 @@
             {
               "__type": "GameLocation",
               "__guid": "ea9311d3-734e-4a13-9df1-80d5bc1b7380",
+              "Color": "Orange",
               "House_Cost": 100,
+              "Name": "St. James Place",
               "Normal_Rent": [
                 14,
                 70,
@@ -601,6 +630,7 @@
             {
               "__type": "GameLocation",
               "__guid": "abd6e1a1-81f7-4407-919c-683f62f524be",
+              "Color": "Brown",
               "EventId": "community",
               "House_Cost": 0,
               "Normal_Rent": [
@@ -636,7 +666,9 @@
             {
               "__type": "GameLocation",
               "__guid": "84230ddf-f95c-4f9e-9e08-9c96686d27b7",
+              "Color": "Orange",
               "House_Cost": 100,
+              "Name": "Tennessee Avenue",
               "Normal_Rent": [
                 14,
                 70,
@@ -670,7 +702,9 @@
             {
               "__type": "GameLocation",
               "__guid": "cd607765-ab2c-42f8-943c-9b4070126ab7",
+              "Color": "Orange",
               "House_Cost": 100,
+              "Name": "New York Avenue",
               "Normal_Rent": [
                 16,
                 80,
@@ -704,6 +738,7 @@
             {
               "__type": "GameLocation",
               "__guid": "2130dfb3-63c9-4047-9660-2a19623b6eb5",
+              "Color": "Brown",
               "House_Cost": 0,
               "Normal_Rent": [
                 0,
@@ -738,7 +773,9 @@
             {
               "__type": "GameLocation",
               "__guid": "e26a0864-213b-4ad7-872a-f5496250f4b3",
+              "Color": "Red",
               "House_Cost": 150,
+              "Name": "Kentucky Avenue",
               "Normal_Rent": [
                 18,
                 90,
@@ -772,6 +809,7 @@
             {
               "__type": "GameLocation",
               "__guid": "0b207820-6f3a-41a3-b8f0-18012b055c4f",
+              "Color": "Brown",
               "EventId": "chance",
               "House_Cost": 0,
               "Normal_Rent": [
@@ -807,7 +845,9 @@
             {
               "__type": "GameLocation",
               "__guid": "c93e34d4-e7c4-4b0c-a1b7-61b9fa71479a",
+              "Color": "Red",
               "House_Cost": 150,
+              "Name": "Indiana Avenue",
               "Normal_Rent": [
                 18,
                 90,
@@ -841,7 +881,9 @@
             {
               "__type": "GameLocation",
               "__guid": "ecd2e475-734c-4b60-8d13-2b27265c022f",
+              "Color": "Red",
               "House_Cost": 150,
+              "Name": "Illinois Avenue",
               "Normal_Rent": [
                 20,
                 100,
@@ -875,7 +917,9 @@
             {
               "__type": "GameLocation",
               "__guid": "8c3e5462-59d9-49b4-b326-13fc2d53ee81",
+              "Color": "Brown",
               "House_Cost": 0,
+              "Name": "B. \u0026 O. Railroad",
               "Normal_Rent": [
                 0,
                 1,
@@ -909,7 +953,9 @@
             {
               "__type": "GameLocation",
               "__guid": "38111f50-9eb2-44e4-af02-5f014c629253",
+              "Color": "Yellow",
               "House_Cost": 150,
+              "Name": "Atlantic Avenue",
               "Normal_Rent": [
                 22,
                 110,
@@ -943,7 +989,9 @@
             {
               "__type": "GameLocation",
               "__guid": "a0b36246-cda9-438b-9604-e4c556280dbd",
+              "Color": "Yellow",
               "House_Cost": 150,
+              "Name": "Ventnor Avenue",
               "Normal_Rent": [
                 22,
                 110,
@@ -977,7 +1025,9 @@
             {
               "__type": "GameLocation",
               "__guid": "9956795b-d6dd-409d-a12b-910afdacd8be",
+              "Color": "Brown",
               "House_Cost": 0,
+              "Name": "Water Company",
               "Normal_Rent": [
                 0,
                 1,
@@ -1011,7 +1061,9 @@
             {
               "__type": "GameLocation",
               "__guid": "a36d9341-bbb6-4f7b-a543-61ee28137aa1",
+              "Color": "Green",
               "House_Cost": 150,
+              "Name": "Marvin Gardens",
               "Normal_Rent": [
                 22,
                 120,
@@ -1045,6 +1097,7 @@
             {
               "__type": "GameLocation",
               "__guid": "f8b4511e-0b5e-433e-8866-61d2d653a2a9",
+              "Color": "Brown",
               "EventId": "jail",
               "House_Cost": 0,
               "Normal_Rent": [
@@ -1080,7 +1133,9 @@
             {
               "__type": "GameLocation",
               "__guid": "7d8883ab-ef7b-456b-8a87-9ae28a4f1436",
+              "Color": "Green",
               "House_Cost": 200,
+              "Name": "Pacific Avenue",
               "Normal_Rent": [
                 26,
                 130,
@@ -1114,7 +1169,9 @@
             {
               "__type": "GameLocation",
               "__guid": "f4705905-cb4e-4b86-b0ff-ed45896c0a2b",
+              "Color": "Green",
               "House_Cost": 200,
+              "Name": "North Carolina Avenue",
               "Normal_Rent": [
                 130,
                 1,
@@ -1148,6 +1205,7 @@
             {
               "__type": "GameLocation",
               "__guid": "19a8784e-a1dd-4c86-b9c1-725727c54382",
+              "Color": "Brown",
               "EventId": "community",
               "House_Cost": 0,
               "Normal_Rent": [
@@ -1183,7 +1241,9 @@
             {
               "__type": "GameLocation",
               "__guid": "102d6511-465c-46b1-bdb3-3fd143ef3f42",
+              "Color": "Green",
               "House_Cost": 200,
+              "Name": "Pennsylvania Avenue",
               "Normal_Rent": [
                 28,
                 150,
@@ -1217,7 +1277,9 @@
             {
               "__type": "GameLocation",
               "__guid": "991ed332-55ca-4167-a5e8-936353dd525a",
+              "Color": "Brown",
               "House_Cost": 0,
+              "Name": "Short Line",
               "Normal_Rent": [
                 0,
                 1,
@@ -1251,6 +1313,7 @@
             {
               "__type": "GameLocation",
               "__guid": "e20da0c0-0542-4878-9134-bd2f61819bf0",
+              "Color": "Brown",
               "EventId": "chance",
               "House_Cost": 0,
               "Normal_Rent": [
@@ -1286,7 +1349,9 @@
             {
               "__type": "GameLocation",
               "__guid": "7996d06b-dd66-4567-b051-8ffd0c60e4ec",
+              "Color": "Blue",
               "House_Cost": 200,
+              "Name": "Park Place",
               "Normal_Rent": [
                 35,
                 175,
@@ -1320,6 +1385,7 @@
             {
               "__type": "GameLocation",
               "__guid": "59775a2a-fd06-424e-8023-0414a93dcd70",
+              "Color": "Brown",
               "EventId": "luxury_tax",
               "House_Cost": 0,
               "Normal_Rent": [
@@ -1355,7 +1421,9 @@
             {
               "__type": "GameLocation",
               "__guid": "d31a755f-3fc6-4337-b37c-78e1bbb3dc76",
+              "Color": "Blue",
               "House_Cost": 200,
+              "Name": "Boardwalk",
               "Normal_Rent": [
                 50,
                 200,
