@@ -3,7 +3,7 @@
 @using Sandbox.UI
 
 @namespace Monopoly.UI.Screens.GameLoop
-@inherits Panel;
+@inherits Panel
 @implements INavigatorPage
 
 
@@ -58,6 +58,15 @@
 		</Modal>
 	}
 
+	@if (_state == IngameUiStates.Buying)
+	{
+	<Modal OnClose=@(() => _state = IngameUiStates.None) Name="Buying">
+		<Content>
+			<p> Hello :3 </p>
+		</Content>
+	</Modal>
+	}
+
 	@if (_state == IngameUiStates.Options)
 	{
 		<Modal OnClose=@(() => _state = IngameUiStates.None) Name="Options">
@@ -70,13 +79,13 @@
 </root>
 
 @code {
-
 	public enum IngameUiStates
 	{
 		Bank,
 		Trade,
 		Options,
 		Building,
+		Buying,
 		None
 	}
 
@@ -144,8 +153,6 @@
 			return;
 		}
 		
-		Log.Info(Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId);
-		Log.Info(Game.SteamId);
 		foreach (var dice in _dice)
 		{
 			dice.Roll();
@@ -162,5 +169,4 @@
 		await Task.DelayRealtimeSeconds(2f);
 		_showRoll = false;
 	}
-
 }
