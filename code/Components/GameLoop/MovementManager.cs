@@ -1,8 +1,12 @@
+using System;
+using System.Threading.Tasks;
+using Microsoft.VisualBasic;
+
 public sealed class MovementManager : Component
 {
 	[Property] private int CurrentField;
-
-	private float nextUpdate;
+	
+	private float _timer;
 	[Property] private Player Player;
 	[Property] private Rigidbody PlayerBody;
 	[Property] private int ToTravel;
@@ -14,41 +18,34 @@ public sealed class MovementManager : Component
 		ToTravel = fieldsToTravel;
 		Player = player;
 		PlayerBody = player.GameObject.Components.Get<Rigidbody>();
-		CurrentField = player.CurrentField;
+		CurrentField = (player.CurrentField + 1) % 40;;
 	}
 
 	protected override void OnUpdate()
 	{
-		if (Time.Now > nextUpdate)
-		{
-			UpdateMove();
-			nextUpdate++;
-		}
+		UpdateMove();
 	}
 
 	private void UpdateMove()
 	{
-		if (Player == null)
-		{
+		if (Player == null) {
 			return;
 		}
-
-		CurrentField = (CurrentField + 1) % 40;
-		Log.Info(CurrentField);
-		var location = LocationContainer.Children[CurrentField];
-		Player.Transform.LerpTo(location.Transform.World, 1f);
-		Travelled++;
-
-		if (CurrentField % 10 == 0)
-		{
-			var ro = PlayerBody.Transform.LocalRotation;
-			PlayerBody.AngularVelocity += Vector3.Up * 10;
-			Log.Info("On Corner");
+	
+		if (_timer < 1) {
+			GameObject location = LocationContainer.Children[CurrentField];
+			Player.Transform.LerpTo(location.Transform.World, _timer);
+			_timer += Time.Delta;
+			
+			return;
 		}
+		
+		CurrentField = (CurrentField + 1) % 40;
+		Travelled++;
+		_timer = 0;
 
-		if (ToTravel == Travelled)
-		{
-			Player.CurrentField = CurrentField;
+		if (ToTravel == Travelled) {
+			Player.CurrentField = CurrentField - 1;
 			ToTravel = 0;
 			Travelled = 0;
 			Player = null;
