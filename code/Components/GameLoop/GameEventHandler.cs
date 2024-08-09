@@ -1,4 +1,5 @@
-﻿using Sandbox.Events;
+﻿using Microsoft.VisualBasic;
+using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 
 namespace Sandbox.Components.GameLoop;
@@ -14,7 +15,15 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	[Property] public IngameStateManager IngameStateManager { get; set; }
 
 	public void OnGameEvent(MovementDoneEvent eventArgs) {
-		CardActionManager.DisplayCardFor(GetPlayerFromEvent(eventArgs), eventArgs.Location);
+		IngameStateManager.OwnedFields.TryGetValue(eventArgs.Location.GameObject.Name, out var ownedField);
+		if (ownedField == 0 || eventArgs.Location.Type == GameLocation.PropertyType.Event ) {
+			CardActionManager.DisplayCardFor(GetPlayerFromEvent(eventArgs), eventArgs.Location);
+			return;
+		}
+
+		if (ownedField != (ulong)Game.SteamId) {
+			Log.Info("Pay " + eventArgs.Location.Normal_Rent[0]);
+		}
 	}
 
 	public void OnGameEvent(RolledEvent eventArgs)
