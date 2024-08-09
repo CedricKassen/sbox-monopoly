@@ -26,7 +26,7 @@
 	<div style="position: absolute; bottom: 0; left: 0; width: 100%; flex-direction: row; justify-content: center">
 		@foreach (var player in Lobby.Players)
 		{
-			<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@_ownedFields/>
+			<PlayerCard SteamId=@player.SteamId Name=@player.Name Owned=@_stateManager.OwnedFields/>
 		}
 	</div>
 
@@ -55,7 +55,15 @@
 			break;
 		case IngameUiStates.Buying:
 			GameLocation location = _stateManager.Data as GameLocation;
-			<PropertyCard Name=@location.Name Rent=@location.Normal_Rent HousePrice=@location.House_Cost Color=@location.Color.ToString()></PropertyCard>
+			<Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Buying">
+				<Content>
+					<PropertyCard Name=@location.Name Rent=@location.Normal_Rent HousePrice=@location.House_Cost Color=@location.Color.ToString()></PropertyCard>
+					<div style="gap: 12px">
+						<button onclick=@Buy> Buy </button>
+						<button> Auction </button>
+					</div>
+				</Content>
+			</Modal>
 			break;
 		case IngameUiStates.Options:
 			<Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Options">
@@ -108,45 +116,13 @@
 
 	private bool _showRoll;
 
-	private readonly Dictionary<string, ulong> _ownedFields = new()
-	{
-		{ "brown1", 0 },
-		{ "brown2", 0 },
-		{ "lightBlue1", 0 },
-		{ "lightBlue2", 0 },
-		{ "lightBlue3", 0 },
-		{ "pink1", 0 },
-		{ "pink2", 0 },
-		{ "pink3", 0 },
-		{ "orange1", 0 },
-		{ "orange2", 0 },
-		{ "orange3", 0 },
-		{ "red1", 0 },
-		{ "red2", 0 },
-		{ "red3", 0 },
-		{ "yellow1", 0 },
-		{ "yellow2", 0 },
-		{ "yellow3", 0 },
-		{ "green1", 0 },
-		{ "green2", 0 },
-		{ "green3", 0 },
-		{ "blue1", 0 },
-		{ "blue2", 0 },
-		{ "railway1", 0 },
-		{ "railway2", 0 },
-		{ "railway3", 0 },
-		{ "railway4", 0 },
-		{ "electriccompany", 0 },
-		{ "watercompany", 0 }
-	};
-
 
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(Lobby, _showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data);
+		return HashCode.Combine(Lobby, _showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data, _stateManager.OwnedFields);
 	}
 
 	private void LeaveLobby()
@@ -177,6 +153,11 @@
 		_showRoll = true;
 		await Task.DelayRealtimeSeconds(2f);
 		_showRoll = false;
+	}
+
+	private void Buy() {
+		_turnManager.EmitPropertyAquiredEvent(Lobby.Players[_turnManager.CurrentPlayerIndex].CurrentField);
+		_stateManager.State = IngameUiStates.None;
 	}
 
 }

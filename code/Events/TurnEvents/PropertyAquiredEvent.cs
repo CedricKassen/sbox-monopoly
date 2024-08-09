@@ -1,3 +1,5 @@
 ﻿namespace Sandbox.Events.TurnEvents;
 
-public record PropertyAquiredEvent(): IGameEvent;
+public record PropertyAquiredEvent : BaseEvent {
+    public int PropertyIndex { get; init; }
+};

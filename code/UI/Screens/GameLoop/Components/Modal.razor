@@ -4,11 +4,12 @@
 @namespace Monopoly.UI.Screens.GameLoop
 
 <root>
-    <div class="curtain"></div>
-    <dialog>
-        <ModalHeadline OnClose=@OnClose Name=@Name />
-        @Content
-    </dialog>
+    <div class="curtain">
+        <div class="modal">
+            <ModalHeadline OnClose=@OnClose Name=@Name />
+            @Content
+        </div>
+    </div>
 </root>
 
 @code {

@@ -36,8 +36,8 @@ public class TurnManager : Component {
     }
 
     [Broadcast]
-    public void EmitPropertyAquiredEvent(string property) {
-        GameParentObject.Dispatch(new PropertyAquiredEvent());
+    public void EmitPropertyAquiredEvent(int propertyIndex) {
+        GameParentObject.Dispatch(new PropertyAquiredEvent{ playerId = CurrentLobby.Players[0].SteamId, PropertyIndex = propertyIndex });
         CurrentPhase = Phase.PlayerAction;
     }
     
