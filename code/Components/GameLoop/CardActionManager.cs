@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
 
 public sealed class CardActionManager : Component
@@ -8,6 +9,7 @@ public sealed class CardActionManager : Component
 	[Property] private List<Card> CommunityCards;
 
 	[Property] public MovementManager MovementManager { get; set; }
+	[Property] public IngameStateManager IngameStateManager { get; set; }
 
 	protected override Task OnLoad()
 	{
@@ -43,23 +45,22 @@ public sealed class CardActionManager : Component
 
 	public void DisplayCardFor(Player player, GameLocation location)
 	{
-		if (location.Type != GameLocation.PropertyType.Event)
-		{
-			Log.Warning("Tried to display card that is no event!");
-			Log.Warning(location);
-			return;
-		}
-
-
 		Log.Info("Show " + location.EventId);
 
-		if (location.EventId == "chance")
-		{
-			DisplayChance(player, location);
-		}
-		else if (location.EventId == "community")
-		{
-			DisplayCommunity(player, location);
+		switch (location.Type) {
+			case GameLocation.PropertyType.Event:
+				if (location.EventId == "chance") {
+					DisplayChance(player, location);
+				}
+				if (location.EventId == "community")
+				{
+					DisplayCommunity(player, location);
+				}
+
+				break;
+			default:
+				DisplayPropertyCard(player, location);
+				break;
 		}
 	}
 
@@ -96,5 +97,10 @@ public sealed class CardActionManager : Component
 		{
 			FillCommunityCards();
 		}
+	}
+
+	private void DisplayPropertyCard(Player player, GameLocation location) {
+		IngameStateManager.State = IngameUI.IngameUiStates.Buying;
+		IngameStateManager.Data = location;
 	}
 }

@@ -1,5 +1,5 @@
 {
-  "__guid": "fe5802d9-1abc-4dcb-9fe4-b29782550068",
+  "__guid": "21dde547-c302-4f00-b399-9bfadfc2567b",
   "GameObjects": [
     {
       "__guid": "024eb414-bc10-4ad9-885d-eae5e42de48d",
@@ -56,7 +56,7 @@
               "__guid": "3cd895b6-f3f2-4895-9a69-5becd9b64e76",
               "Color": "Brown",
               "House_Cost": 50,
-              "Name": "Mediterranean Avenue",
+              "Name": "Mediterranean Ave.",
               "Normal_Rent": [
                 2,
                 10,
@@ -128,7 +128,7 @@
               "__guid": "0aed9d60-8b32-4e6a-ad6c-aab133d202c0",
               "Color": "Brown",
               "House_Cost": 50,
-              "Name": "Baltic Avenue",
+              "Name": "Baltic Ave.",
               "Normal_Rent": [
                 4,
                 20,
@@ -236,7 +236,7 @@
               "__guid": "efe95e37-ee22-4665-a68d-146102b7203b",
               "Color": "LightBlue",
               "House_Cost": 50,
-              "Name": "Oriental Avenue",
+              "Name": "Oriental Ave.",
               "Normal_Rent": [
                 6,
                 30,
@@ -308,7 +308,7 @@
               "__guid": "b0da137c-8668-4eb4-9439-2ea229e89e13",
               "Color": "LightBlue",
               "House_Cost": 0,
-              "Name": "Vermont Avenue",
+              "Name": "Vermont Ave.",
               "Normal_Rent": [
                 6,
                 30,
@@ -344,7 +344,7 @@
               "__guid": "279a95a5-4ad4-409d-99b6-df9f32f08d8f",
               "Color": "LightBlue",
               "House_Cost": 50,
-              "Name": "Connecticut Avenue",
+              "Name": "Connecticut Ave.",
               "Normal_Rent": [
                 8,
                 40,
@@ -492,7 +492,7 @@
               "__guid": "3dcb2e5a-5ca8-4096-a8ec-e0c365e4be1b",
               "Color": "LightBlue",
               "House_Cost": 100,
-              "Name": "States Avenue",
+              "Name": "States Ave.",
               "Normal_Rent": [
                 10,
                 50,
@@ -529,7 +529,7 @@
               "__guid": "26b3c015-0c67-450c-b72e-381bde9e2f8e",
               "Color": "Pink",
               "House_Cost": 100,
-              "Name": "Virginia Avenue",
+              "Name": "Virginia Ave.",
               "Normal_Rent": [
                 12,
                 60,
@@ -677,7 +677,7 @@
               "__guid": "84230ddf-f95c-4f9e-9e08-9c96686d27b7",
               "Color": "Orange",
               "House_Cost": 100,
-              "Name": "Tennessee Avenue",
+              "Name": "Tennessee Ave.",
               "Normal_Rent": [
                 14,
                 70,
@@ -714,7 +714,7 @@
               "__guid": "cd607765-ab2c-42f8-943c-9b4070126ab7",
               "Color": "Orange",
               "House_Cost": 100,
-              "Name": "New York Avenue",
+              "Name": "New York Ave.",
               "Normal_Rent": [
                 16,
                 80,
@@ -2048,8 +2048,144 @@
                 {
                   "__type": "CardActionManager",
                   "__guid": "844bf9c0-8802-4506-9e32-b9262d5f6987",
-                  "ChanceCards": [],
-                  "CommunityCards": [],
+                  "ChanceCards": [
+                    {
+                      "ActionId": 9,
+                      "Text": "Get Out of Jail Free"
+                    },
+                    {
+                      "ActionId": 12,
+                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100"
+                    },
+                    {
+                      "ActionId": 5,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled"
+                    },
+                    {
+                      "ActionId": 4,
+                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200"
+                    },
+                    {
+                      "ActionId": 8,
+                      "Text": "Bank pays you dividend of $50"
+                    },
+                    {
+                      "ActionId": 16,
+                      "Text": "Your building loan matures. Collect $150"
+                    },
+                    {
+                      "ActionId": 1,
+                      "Text": "Advance to Boardwalk"
+                    },
+                    {
+                      "ActionId": 6,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled"
+                    },
+                    {
+                      "ActionId": 14,
+                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200"
+                    },
+                    {
+                      "ActionId": 2,
+                      "Text": "Advance to Go (Collect $200)"
+                    },
+                    {
+                      "ActionId": 10,
+                      "Text": "Go Back 3 Spaces"
+                    },
+                    {
+                      "ActionId": 3,
+                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200"
+                    },
+                    {
+                      "ActionId": 11,
+                      "Text": "Go to Jail. Go directly to Jail, do not pass Go, do not collect $200"
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Speeding fine $15"
+                    },
+                    {
+                      "ActionId": 7,
+                      "Text": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown."
+                    },
+                    {
+                      "ActionId": 15,
+                      "Text": "You have been elected Chairman of the Board. Pay each player $50"
+                    }
+                  ],
+                  "CommunityCards": [
+                    {
+                      "ActionId": 1,
+                      "Text": "Advance to Go (Collect $200)"
+                    },
+                    {
+                      "ActionId": 2,
+                      "Text": "Bank error in your favor. Collect $200"
+                    },
+                    {
+                      "ActionId": 3,
+                      "Text": "Doctor\u2019s fee. Pay $50"
+                    },
+                    {
+                      "ActionId": 4,
+                      "Text": "From sale of stock you get $50"
+                    },
+                    {
+                      "ActionId": 5,
+                      "Text": "Get Out of Jail Free"
+                    },
+                    {
+                      "ActionId": 6,
+                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200"
+                    },
+                    {
+                      "ActionId": 7,
+                      "Text": "Holiday fund matures. Receive $100"
+                    },
+                    {
+                      "ActionId": 8,
+                      "Text": "Income tax refund. Collect $20"
+                    },
+                    {
+                      "ActionId": 9,
+                      "Text": "It is your birthday. Collect $10 from every player"
+                    },
+                    {
+                      "ActionId": 10,
+                      "Text": "Life insurance matures. Collect $100"
+                    },
+                    {
+                      "ActionId": 11,
+                      "Text": "Pay hospital fees of $100"
+                    },
+                    {
+                      "ActionId": 12,
+                      "Text": "Pay school fees of $50"
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Receive $25 consultancy fee"
+                    },
+                    {
+                      "ActionId": 14,
+                      "Text": "You are assessed for street repair. $40 per house. $115 per hotel"
+                    },
+                    {
+                      "ActionId": 15,
+                      "Text": "You have won second prize in a beauty contest. Collect $10"
+                    },
+                    {
+                      "ActionId": 16,
+                      "Text": "You inherit $100"
+                    }
+                  ],
+                  "IngameStateManager": {
+                    "_type": "component",
+                    "component_id": "8112c606-1144-4881-86b8-2eb35e8030ad",
+                    "go": "50a0f343-7e9b-4da6-a7f9-7e39e5f50128",
+                    "component_type": "IngameStateManager"
+                  },
                   "MovementManager": {
                     "_type": "component",
                     "component_id": "069b4e7c-3cce-45d4-9a2b-a244aa336851",

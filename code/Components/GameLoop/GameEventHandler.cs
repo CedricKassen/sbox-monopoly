@@ -12,8 +12,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	[Property] public MovementManager MovementManager { get; set; }
 	[Property] public CardActionManager CardActionManager { get; set; }
 
-	public void OnGameEvent(MovementDoneEvent eventArgs)
-	{
+	public void OnGameEvent(MovementDoneEvent eventArgs) {
 		CardActionManager.DisplayCardFor(GetPlayerFromEvent(eventArgs), eventArgs.Location);
 	}
 
