@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Monopoly;
+using Sandbox.Constants;
 using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 
@@ -17,6 +18,16 @@ public sealed class MovementManager : Component
 	[Property] public GameObject LocationContainer { get; set; }
 	[Property] public float SpeedMultiplier { get; set; }
 
+
+	[Button("Go to next chance field")]
+	public void GoToNextChance()
+	{
+		var player = Game.ActiveScene.GetAllComponents<Player>().First();
+
+		var lines = new List<int> { 7, 22, 36 };
+		var next = lines.Find(field => player.CurrentField < field || (player.CurrentField > 36 && field == 7));
+		CardActionHelper.MoveTo(next, player, this);
+	}
 
 	public void StartMovement(Player player, int fieldsToTravel)
 	{
