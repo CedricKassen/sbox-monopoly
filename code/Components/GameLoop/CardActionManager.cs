@@ -200,17 +200,31 @@ public sealed class CardActionManager : Component
 		var lines = new List<int> { 5, 15, 25, 35 };
 		return lines.Find(field => playerCurrentField < field || (playerCurrentField > 35 && field == 5));
 	}
-
-
-	private void DisplayCommunity(Player getPlayerFromEvent, GameLocation location)
+	
+	private void GoToJail(Player player)
 	{
-		var card = CommunityCards[0];
-		CommunityCards.Remove(card);
-
-		if (CommunityCards.Count == 0)
+		int currentPos = player.CurrentField;
+		
+		var fieldsToTravel = 0;
+		if (currentPos < 10)
 		{
-			FillCommunityCards();
+			MovementManager.StartMovement(player, CalculateFieldsToTravel(currentPos, 10));
 		}
+		else
+		{
+			MovementManager.StartMovement(player, -(currentPos - 10));
+		}
+	}
+
+
+
+	private void CollectFromAll(Player player, int amount)
+	{
+		List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>());
+		// TODO Check Bankruptcy
+		player.Money -= amount * allPlayers.Count;
+
+		allPlayers.ForEach(otherPlayer => otherPlayer.Money += amount);
 	}
 
 	private void DisplayPropertyCard(Player player, GameLocation location)
