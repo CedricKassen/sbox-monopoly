@@ -2,10 +2,8 @@ using Monopoly.UI.Screens.GameLoop;
 
 public sealed class IngameStateManager : Component
 {
-	[Property]
-	public IngameUI.IngameUiStates State = IngameUI.IngameUiStates.None;
 	public object Data = null;
-	
+
 	public Dictionary<string, ulong> OwnedFields = new()
 	{
 		{ "brown1", 0 },
@@ -35,6 +33,10 @@ public sealed class IngameStateManager : Component
 		{ "railroad3", 0 },
 		{ "railroad4", 0 },
 		{ "electricCompany", 0 },
-		{ "waterCompany", 0 }
+		{ "waterCompany", 0 },
+		{ "chanceJailFree", 0 },
+		{ "communityJailFree", 0 }
 	};
+
+	[Property] public IngameUI.IngameUiStates State = IngameUI.IngameUiStates.None;
 }
