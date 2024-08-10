@@ -240,6 +240,8 @@ PlayerCard {
       text-overflow: ellipsis;
       white-space: pre-line;
       text-align: center;
+      align-items: center;
+      justify-content: center;
     }
 
     & > div {
