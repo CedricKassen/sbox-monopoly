@@ -51,7 +51,13 @@ public sealed class MovementManager : Component
 		if (_timer < 1 / SpeedMultiplier)
 		{
 			var location = LocationContainer.Children[CurrentField];
-			Player.Transform.LerpTo(location.Transform.World, _timer * SpeedMultiplier);
+			var position = location.Transform.World;
+			if (Backwards)
+			{
+				position.Rotation.RotateAroundAxis(location.Transform.Position, 180f);
+			}
+
+			Player.Transform.LerpTo(position, _timer * SpeedMultiplier);
 			_timer += Time.Delta;
 
 			return;
