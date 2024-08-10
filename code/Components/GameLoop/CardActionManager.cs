@@ -71,73 +71,7 @@ public sealed class CardActionManager : Component
 		IngameStateManager.Data = card;
 		IngameStateManager.State = IngameUI.IngameUiStates.Chance;
 
-		int targetLocation;
-		switch (card.ActionId)
-		{
-			case 1:
-				// Go to Broadwalk
-				MovementManager.StartMovement(player, CalculateFieldsToTravel(player.CurrentField, 39));
-				break;
-			case 2:
-				// Go to Go
-				MovementManager.StartMovement(player, CalculateFieldsToTravel(player.CurrentField, 40));
-				break;
-			case 3:
-				// Go to Illinois Avenue
-				MovementManager.StartMovement(player, CalculateFieldsToTravel(player.CurrentField, 24));
-				break;
-			case 4:
-				// Go to St. Charles Place
-				MovementManager.StartMovement(player, CalculateFieldsToTravel(player.CurrentField, 11));
-				break;
-			case 5:
-			case 6:
-				// Go to next line
-				targetLocation = FindNearestLine(player.CurrentField);
-				MovementManager.StartMovement(player, CalculateFieldsToTravel(player.CurrentField, targetLocation));
-				player.Tags.Add(PlayerTags.RAILROAD_EVENT.ToString());
-				break;
-			case 7:
-				// Go to next Utility Field 12 & 28
-				targetLocation = player.CurrentField is < 12 or > 28 ? 12 : 28;
-				MovementManager.StartMovement(player, CalculateFieldsToTravel(player.CurrentField, targetLocation));
-				player.Tags.Add(PlayerTags.UTILITY_EVENT.ToString());
-				break;
-			case 8:
-				// Bank divident
-				player.Money += 50;
-				break;
-			case 9:
-				// Get out of Jail Card
-				IsChanceJailCardPresent = false;
-				IngameStateManager.OwnedFields["chanceJailFree"] = player.SteamId;
-				break;
-			case 10:
-				// Move back 3
-				MovementManager.StartMovement(player, -3);
-				break;
-			case 11:
-				GoToJail(player);
-				break;
-			case 12:
-				// Repair houses (house: 25, hotel 100)
-				break;
-			case 13:
-				// Speeding fine
-				player.Money -= 15;
-				break;
-			case 14:
-				// Go to Reading Railroad
-				MovementManager.StartMovement(player, CalculateFieldsToTravel(player.CurrentField, 5));
-				break;
-			case 15:
-				CollectFromAll(player, 50);
-				break;
-			case 16:
-				// loan matures 
-				player.Money += 150;
-				break;
-		}
+		card.Action(player, MovementManager, BlockedCards, IngameStateManager, card);
 
 		if (ChanceCards.Count == 0)
 		{
