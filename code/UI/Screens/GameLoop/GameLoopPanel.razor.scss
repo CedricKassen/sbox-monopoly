@@ -212,6 +212,44 @@ PlayerCard {
   }
 }
 
+.chanceCard {
+  width: 480px;
+  height: 285px;
+  background-color: $white;
+  border-radius: 8px;
+  padding: 5px;
+
+  & > div {
+    height: 100%;
+    width: 100%;
+    border: 2px solid #000000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    gap: 16px;
+
+    p {
+      color: #000000;
+      font-size: 22px;
+      overflow: visible;
+      text-overflow: ellipsis;
+      white-space: pre-line;
+      text-align: center;
+    }
+    
+    & > div {
+      gap: 16px;
+      align-items: center;
+
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+}
+
 @keyframes bluePulse {
   0% { border: 8px solid #0081ea; }
   50% { border: 8px solid #96b6e1; }

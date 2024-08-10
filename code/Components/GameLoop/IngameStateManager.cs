@@ -2,6 +2,7 @@ using Monopoly.UI.Screens.GameLoop;
 
 public sealed class IngameStateManager : Component
 {
+	[Property]
 	public IngameUI.IngameUiStates State = IngameUI.IngameUiStates.None;
 	public object Data = null;
 	
