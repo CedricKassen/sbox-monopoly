@@ -1,17 +1,13 @@
-using System;
 using System.Threading.Tasks;
 using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
 
 public sealed class CardActionManager : Component
 {
+	[Property] private readonly Dictionary<Card, bool> BlockedCards = new();
 	[Property] private List<Card> ChanceCards;
 
 	[Property] private List<Card> CommunityCards;
-
-	[Property] private bool IsChanceJailCardPresent = true;
-
-	[Property] private bool IsCommunityJailCardPresent = true;
 
 	[Property] public MovementManager MovementManager { get; set; }
 
@@ -28,10 +24,7 @@ public sealed class CardActionManager : Component
 	{
 		ChanceCards = new List<Card>(Cards.Chance_Standard);
 
-		if (!IsChanceJailCardPresent)
-		{
-			ChanceCards.Remove(ChanceCards.Find(card => card.ActionId == 9));
-		}
+		ChanceCards.RemoveAll(card => BlockedCards.ContainsKey(card));
 
 		CardActionHelper.Shuffle(ChanceCards);
 	}
@@ -40,10 +33,7 @@ public sealed class CardActionManager : Component
 	{
 		CommunityCards = new List<Card>(Cards.CommunityChest_Standard);
 
-		if (!IsCommunityJailCardPresent)
-		{
-			CommunityCards.Remove(CommunityCards.Find(card => card.ActionId == 5));
-		}
+		ChanceCards.RemoveAll(card => BlockedCards.ContainsKey(card));
 
 		CardActionHelper.Shuffle(ChanceCards);
 	}
@@ -181,7 +171,7 @@ public sealed class CardActionManager : Component
 				break;
 			case 5:
 				// Get out of Jail Card
-				IsCommunityJailCardPresent = false;
+				BlockedCards.Add(card, true);
 				IngameStateManager.OwnedFields["communityJailFree"] = player.SteamId;
 				break;
 			case 6:
