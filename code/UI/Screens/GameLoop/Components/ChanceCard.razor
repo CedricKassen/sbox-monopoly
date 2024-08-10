@@ -1,17 +1,25 @@
-﻿@using System
-@using Sandbox.Razor;
-@namespace Monopoly.UI.Screens.GameLoop
+﻿@namespace Monopoly.UI.Screens.GameLoop
 
 <root>
     <div class="chanceCard">
         <div>
             <p style="font-weight: bolder"> Chance </p>
             <div>
-                <img src="ui/jail.png" alt="jail"/>
-                <p style="max-width: 65%"> Unpaid congestion charges catch up with you. Go to jail, move directly to jail, do not pass "go", do not collect $2M</p>
+                @if (ImageUrl != null) {
+                    <img src="@ImageUrl" alt="jail"/>
+                }
+                <p style="max-width: 65%"> @Text </p>
             </div>
         </div>
     </div>
 </root>
 
-@code {}
+@code {
+
+    [Property]
+    public string Text { get; set; } = "Wer das liest ist doof";
+
+    [Property]
+    public string ImageUrl { get; set; }
+
+}
