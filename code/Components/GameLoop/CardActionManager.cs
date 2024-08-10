@@ -5,13 +5,13 @@ using Sandbox.Constants;
 
 public sealed class CardActionManager : Component
 {
-	[Property] private readonly bool IsCommunityJailCardPresent = true;
-
 	[Property] private List<Card> ChanceCards;
 
 	[Property] private List<Card> CommunityCards;
 
 	[Property] private bool IsChanceJailCardPresent = true;
+
+	[Property] private bool IsCommunityJailCardPresent = true;
 
 	[Property] public MovementManager MovementManager { get; set; }
 
@@ -141,18 +141,7 @@ public sealed class CardActionManager : Component
 				MovementManager.StartMovement(player, -3);
 				break;
 			case 11:
-				// Go to Jail
-				var fieldsToTravel = 0;
-				if (player.CurrentField < 10)
-				{
-					MovementManager.StartMovement(player, CalculateFieldsToTravel(player.CurrentField, 10));
-				}
-				else
-				{
-					MovementManager.StartMovement(player, -(player.CurrentField - 10));
-				}
-
-				// Go to Jail
+				GoToJail(player);
 				break;
 			case 12:
 				// Repair houses (house: 25, hotel 100)
@@ -166,12 +155,7 @@ public sealed class CardActionManager : Component
 				MovementManager.StartMovement(player, CalculateFieldsToTravel(player.CurrentField, 5));
 				break;
 			case 15:
-				// Pay each player
-				List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>());
-				// TODO Check Bankruptcy
-				player.Money -= 50 * allPlayers.Count;
-
-				allPlayers.ForEach(otherPlayer => otherPlayer.Money += 50);
+				CollectFromAll(player, 50);
 				break;
 			case 16:
 				// loan matures 
