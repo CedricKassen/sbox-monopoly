@@ -26,38 +26,26 @@ public sealed class CardActionManager : Component
 
 	private void FillChangeCards()
 	{
-		ChanceCards = new List<Card>(Cards.Chance);
+		ChanceCards = new List<Card>(Cards.Chance_Standard);
 
 		if (!IsChanceJailCardPresent)
 		{
 			ChanceCards.Remove(ChanceCards.Find(card => card.ActionId == 9));
 		}
 
-		Shuffle(ChanceCards);
+		CardActionHelper.Shuffle(ChanceCards);
 	}
 
 	private void FillCommunityCards()
 	{
-		CommunityCards = new List<Card>(Cards.CommunityChest);
+		CommunityCards = new List<Card>(Cards.CommunityChest_Standard);
 
 		if (!IsCommunityJailCardPresent)
 		{
 			CommunityCards.Remove(CommunityCards.Find(card => card.ActionId == 5));
 		}
 
-		Shuffle(ChanceCards);
-	}
-
-	private static void Shuffle<T>(IList<T> list)
-	{
-		var rng = new Random();
-		var n = list.Count;
-		while (n > 1)
-		{
-			n--;
-			var k = rng.Next(n + 1);
-			(list[k], list[n]) = (list[n], list[k]);
-		}
+		CardActionHelper.Shuffle(ChanceCards);
 	}
 
 
@@ -70,12 +58,12 @@ public sealed class CardActionManager : Component
 			case GameLocation.PropertyType.Event:
 				if (location.EventId == "chance")
 				{
-					DisplayChance(player, location);
+					DisplayChance(player);
 				}
 
 				if (location.EventId == "community")
 				{
-					DisplayCommunity(player, location);
+					DisplayCommunity(player);
 				}
 
 				break;
@@ -85,12 +73,10 @@ public sealed class CardActionManager : Component
 		}
 	}
 
-	private void DisplayChance(Player player, GameLocation location)
+	private void DisplayChance(Player player)
 	{
 		var card = ChanceCards[0];
 		ChanceCards.Remove(card);
-
-		Log.Info("Draw Chance: " + card.Text);
 
 		IngameStateManager.Data = card;
 		IngameStateManager.State = IngameUI.IngameUiStates.Chance;
@@ -169,17 +155,17 @@ public sealed class CardActionManager : Component
 		}
 	}
 
-	private void DisplayCommunity(Player player, GameLocation location)
+	private void DisplayCommunity(Player player)
 	{
 		var card = CommunityCards[0];
 		CommunityCards.Remove(card);
 
-		int targetLocation;
 		switch (card.ActionId)
 		{
 			case 1:
 				// Go to Go
-				MovementManager.StartMovement(player, CalculateFieldsToTravel(player.CurrentField, 40));
+				MovementManager.StartMovement(player,
+					CardActionHelper.CalculateFieldsToTravel(player, 40));
 				break;
 			case 2:
 				// Bank error 
@@ -199,7 +185,7 @@ public sealed class CardActionManager : Component
 				IngameStateManager.OwnedFields["communityJailFree"] = player.SteamId;
 				break;
 			case 6:
-				GoToJail(player);
+				CardActionHelper.GoToJail(player, MovementManager);
 				break;
 			case 7:
 				// Holiday fund
@@ -210,7 +196,7 @@ public sealed class CardActionManager : Component
 				player.Money += 20;
 				break;
 			case 9:
-				CollectFromAll(player, 10);
+				CardActionHelper.CollectFromAll(player, 10);
 				break;
 			case 10:
 				// Life insurance
@@ -252,47 +238,6 @@ public sealed class CardActionManager : Component
 		}
 	}
 
-
-	private int CalculateFieldsToTravel(int currentField, int targetField)
-	{
-		if (currentField < targetField)
-		{
-			return targetField - currentField;
-		}
-
-		return 40 - currentField + targetField;
-	}
-
-	private int FindNearestLine(int playerCurrentField)
-	{
-		var lines = new List<int> { 5, 15, 25, 35 };
-		return lines.Find(field => playerCurrentField < field || (playerCurrentField > 35 && field == 5));
-	}
-
-	private void GoToJail(Player player)
-	{
-		var currentPos = player.CurrentField;
-
-		var fieldsToTravel = 0;
-		if (currentPos < 10)
-		{
-			MovementManager.StartMovement(player, CalculateFieldsToTravel(currentPos, 10));
-		}
-		else
-		{
-			MovementManager.StartMovement(player, -(currentPos - 10));
-		}
-	}
-
-
-	private void CollectFromAll(Player player, int amount)
-	{
-		List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>());
-		// TODO Check Bankruptcy
-		player.Money -= amount * allPlayers.Count;
-
-		allPlayers.ForEach(otherPlayer => otherPlayer.Money += amount);
-	}
 
 	private void DisplayPropertyCard(Player player, GameLocation location)
 	{
