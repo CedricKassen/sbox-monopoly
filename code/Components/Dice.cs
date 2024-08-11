@@ -16,9 +16,14 @@ public sealed class Dice : Component {
 			return;
 		}
 
+		var rng = new Random();
 		IsRolling = true;
-		Rigidbody.Velocity += Vector3.Up * 1000;
-		Rigidbody.AngularVelocity += Vector3.Random * 10;
+		Rigidbody.Velocity += Vector3.Up * rng.Next(400, 700);
+		Rigidbody.AngularVelocity +=
+			Vector3.Random * (Vector3.Random + Vector3.Random * rng.Next(1, 2)) * rng.Next(10, 15);
+		var sound = Sound.Play("dice", Transform.World.Position);
+		sound.Volume = 1f;
+		Log.Info(sound.Name);
 	}
 
 	public Vector3 GetRotation() {
