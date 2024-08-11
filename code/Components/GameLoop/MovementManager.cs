@@ -29,6 +29,16 @@ public sealed class MovementManager : Component
 		CardActionHelper.MoveTo(next, player, this);
 	}
 
+	[Button("Go to next community field")]
+	public void GoToNextCommunity()
+	{
+		var player = Game.ActiveScene.GetAllComponents<Player>().First();
+
+		var lines = new List<int> { 2, 17, 33 };
+		var next = lines.Find(field => player.CurrentField < field || (player.CurrentField > 33 && field == 2));
+		CardActionHelper.MoveTo(next, player, this);
+	}
+
 	public void StartMovement(Player player, int fieldsToTravel)
 	{
 		Backwards = fieldsToTravel < 0;
