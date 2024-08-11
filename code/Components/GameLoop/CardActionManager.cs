@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
@@ -45,6 +46,16 @@ public sealed class CardActionManager : Component {
 				}
 				else if (location.EventId == "community") {
 					DisplayCommunity(player);
+				}
+				else if (location.EventId == "income_tax") {
+					var percentageTax = (int)Math.Ceiling(player.Money * 0.1);
+					player.Money -= percentageTax < 200 ? percentageTax : 200;
+				}
+				else if (location.EventId == "luxury_tax") {
+					player.Money -= 100;
+				}
+				else if (location.EventId == "jail") {
+					CardActionHelper.GoToJail(player, MovementManager);
 				}
 
 				break;
