@@ -1,0 +1,25 @@
+{
+  "RootObject": {
+    "__guid": "478c9fe2-2418-4863-a0f1-a8ef0cce4f14",
+    "Flags": 0,
+    "Name": "base_player",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Player",
+        "__guid": "320bb37f-1eae-4cdd-b08b-d865230c02a1",
+        "CurrentField": 0,
+        "Money": 0,
+        "SteamId": 0
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

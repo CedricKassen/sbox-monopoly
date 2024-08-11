@@ -1,19 +1,13 @@
 {
   "RootObject": {
-    "__guid": "295aa5ed-2fc0-4cc4-9cbb-fe45197779aa",
+    "__guid": "3bc7a68f-e0bb-48e1-b010-a10c36d76d2f",
     "Flags": 0,
-    "Name": "playerprefab",
+    "Name": "car",
     "Enabled": true,
     "Components": [
       {
-        "__type": "Player",
-        "__guid": "080abc4d-1900-4b01-8660-e59716d95e5b",
-        "money": 2000,
-        "SteamId": 0
-      },
-      {
         "__type": "Sandbox.ModelRenderer",
-        "__guid": "d1d544b0-e705-42e3-9401-687bd920b078",
+        "__guid": "db256add-2260-4494-b166-fdb49ddd98a8",
         "BodyGroups": 18446744073709551615,
         "MaterialOverride": "materials/game_piece.vmat",
         "Model": "models/car.vmdl",
@@ -21,27 +15,38 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "Sandbox.Rigidbody",
-        "__guid": "df7dce07-3a03-487b-8225-f9a535f36a8b",
-        "AngularDamping": 0,
-        "Gravity": true,
-        "LinearDamping": 0,
-        "Locking": {},
-        "MassOverride": 0,
-        "MotionEnabled": true,
-        "RigidbodyFlags": 0,
-        "StartAsleep": false
-      },
-      {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "361c33b2-bbb8-4774-8f85-168548138d64",
+        "__guid": "f3ebaa7e-63ec-4286-8423-060d6b27ea21",
         "Center": "0,3,6",
         "IsTrigger": false,
         "Scale": "10,29,12",
         "Static": false
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "70d2e6a5-4623-477d-903a-9de69ef2c104",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassCenterOverride": "0,0,0",
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "OverrideMassCenter": false,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
       }
     ],
-    "Children": [],
+    "Children": [
+      {
+        "__guid": "a8462d64-27b4-4372-856f-55436bccaf84",
+        "Flags": 0,
+        "Name": "base",
+        "Enabled": true,
+        "__Prefab": "prefabs/base_player.prefab",
+        "__PrefabVariables": {}
+      }
+    ],
     "__variables": []
   },
   "ShowInMenu": false,

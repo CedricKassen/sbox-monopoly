@@ -69,7 +69,7 @@ public sealed class MovementManager : Component {
 				position.Rotation.RotateAroundAxis(location.Transform.Position, 180f);
 			}
 
-			Player.Transform.LerpTo(position, _timer * SpeedMultiplier);
+			Player.Transform.Parent.Transform.LerpTo(position, _timer * SpeedMultiplier);
 			_timer += Time.Delta;
 
 			return;
