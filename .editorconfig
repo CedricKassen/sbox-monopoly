@@ -101,7 +101,7 @@ csharp_preserve_single_line_statements = false
 
 # ReSharper properties
 resharper_align_linq_query = true
-resharper_align_multiline_array_and_object_initializer = true
+resharper_align_multiline_array_and_object_initializer = false
 resharper_align_multiline_calls_chain = true
 resharper_align_multiline_extends_list = true
 resharper_align_multiline_parameter = true

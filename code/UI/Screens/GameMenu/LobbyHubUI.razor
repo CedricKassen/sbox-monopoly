@@ -1,10 +1,8 @@
+@namespace Monopoly.UI.Screens.GameMenu
+@inherits Sandbox.UI.Panel
 @using System
 @using Sandbox.Network
-@using Sandbox.UI
-
-@namespace Monopoly.UI.Screens.GameMenu
-@inherits Panel
-@implements INavigatorPage
+@implements Sandbox.UI.INavigatorPage
 
 <root class="menu">
 	<div class="column">
@@ -13,13 +11,11 @@
 	</div>
 
 	<div class="lobbies">
-		@if (lobbies.Count <= 0)
-		{
+		@if (lobbies.Count <= 0) {
 			<LobbyCard class="empty"></LobbyCard>
 		}
 
-		@foreach (var lobby in lobbies)
-		{
+		@foreach (var lobby in lobbies) {
 			<a onclick=@(() => JoinLobby(lobby.LobbyId))>
 				<LobbyCard @lobby=@lobby></LobbyCard>
 			</a>
@@ -48,29 +44,24 @@
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
-	protected override int BuildHash()
-	{
+	protected override int BuildHash() {
 		return HashCode.Combine(lobbies);
 	}
 
-	public void OnNavigationOpen()
-	{
+	public void OnNavigationOpen() {
 		fetchLobbys();
 	}
 
-	void JoinLobby(ulong lobbyId)
-	{
+	void JoinLobby(ulong lobbyId) {
 		Log.Info(lobbyId);
 		GameNetworkSystem.Connect(lobbyId);
 	}
 
-	void ReloadLobbies()
-	{
+	void ReloadLobbies() {
 		fetchLobbys();
 	}
 
-	private async void fetchLobbys()
-	{
+	private async void fetchLobbys() {
 		lobbies = await Networking.QueryLobbies();
 	}
 

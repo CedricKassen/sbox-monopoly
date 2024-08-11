@@ -1,19 +1,25 @@
 ﻿@using System
-@using Sandbox.Razor;
-
+@using Sandbox.Razor
 @namespace Monopoly.UI.Screens.GameLoop
 
 <root>
-    <div class="curtain">
-        <div class="modal">
-            <ModalHeadline OnClose=@OnClose Name=@Name />
-            @Content
-        </div>
-    </div>
+	<div class="curtain">
+		<div class="modal">
+			<ModalHeadline OnClose="@OnClose" Name="@Name"/>
+			@Content
+		</div>
+	</div>
 </root>
 
 @code {
-    [Property] public RenderFragment Content { get; set; }
-    [Property] public Func<IngameUI.IngameUiStates> OnClose { get; set; }
-    [Property] public string Name { get; set; }
+
+	[Property]
+	public RenderFragment Content { get; set; }
+
+	[Property]
+	public Func<IngameUI.IngameUiStates> OnClose { get; set; }
+
+	[Property]
+	public string Name { get; set; }
+
 }

@@ -1,3 +1,3 @@
 ﻿namespace Sandbox.Events.TurnEvents;
 
-public record SpecialPropertyActionEvent(): IGameEvent;
+public record SpecialPropertyActionEvent : IGameEvent;

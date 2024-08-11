@@ -1,25 +1,25 @@
 ﻿@namespace Monopoly.UI.Screens.GameLoop
 
 <root>
-    <div class="chanceCard">
-        <div>
-            <p style="font-weight: bolder"> Chance </p>
-            <div>
-                @if (ImageUrl != null) {
-                    <img src="@ImageUrl" alt="jail"/>
-                }
-                <p style="max-width: 65%"> @Text </p>
-            </div>
-        </div>
-    </div>
+	<div class="chanceCard">
+		<div>
+			<p style="font-weight: bolder"> Chance </p>
+			<div>
+				@if (ImageUrl != null) {
+					<img src="@ImageUrl" alt="jail"/>
+				}
+				<p style="max-width: 65%"> @Text </p>
+			</div>
+		</div>
+	</div>
 </root>
 
 @code {
 
-    [Property]
-    public string Text { get; set; } = "Wer das liest ist doof";
+	[Property]
+	public string Text { get; set; } = "Wer das liest ist doof";
 
-    [Property]
-    public string ImageUrl { get; set; }
+	[Property]
+	public string ImageUrl { get; set; }
 
 }

@@ -22,18 +22,15 @@
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
-	protected override int BuildHash()
-	{
+	protected override int BuildHash() {
 		return HashCode.Combine(Visible);
 	}
 
-	void PressNew()
-	{
+	void PressNew() {
 	//UiManager.ChangeState(GameState.INLOBBY);
 	}
 
-	void PressEnd()
-	{
+	void PressEnd() {
 	//UiManager.ChangeState(GameState.MENU);
 	}
 

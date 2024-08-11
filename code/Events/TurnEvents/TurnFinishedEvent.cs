@@ -1,3 +1,3 @@
 ﻿namespace Sandbox.Events.TurnEvents;
 
-public record TurnFinishedEvent(): IGameEvent;
+public record TurnFinishedEvent : IGameEvent;

@@ -1,3 +1,3 @@
 ﻿namespace Sandbox.Events.TurnEvents;
 
-public record PlayerPaymentEvent(): IGameEvent;
+public record PlayerPaymentEvent : IGameEvent;

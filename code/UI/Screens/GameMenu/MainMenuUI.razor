@@ -1,9 +1,7 @@
-@using System
-@using Sandbox.UI
-
 @namespace Monopoly.UI.Screens.GameMenu
-@inherits Panel
-@implements INavigatorPage
+@inherits Sandbox.UI.Panel
+@using System
+@implements Sandbox.UI.INavigatorPage
 
 
 <root class="menu">
@@ -20,11 +18,12 @@
 </root>
 
 @code {
+
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
-	protected override int BuildHash()
-	{
+	protected override int BuildHash() {
 		return HashCode.Combine(2);
 	}
+
 }

@@ -1,11 +1,9 @@
 using Monopoly.UI.Screens.GameLoop;
 
-public sealed class IngameStateManager : Component
-{
+public sealed class IngameStateManager : Component {
 	public object Data = null;
 
-	public Dictionary<string, ulong> OwnedFields = new()
-	{
+	public Dictionary<string, ulong> OwnedFields = new() {
 		{ "brown1", 0 },
 		{ "brown2", 0 },
 		{ "lightBlue1", 0 },

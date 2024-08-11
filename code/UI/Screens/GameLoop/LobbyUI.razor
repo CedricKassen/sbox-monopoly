@@ -11,8 +11,7 @@
 	<div class="overview">
 		<h3>@Lobby.Players.Count()/@Lobby.MaxPlayers</h3>
 		<div class="player-container">
-			@foreach (var player in Lobby.Players)
-			{
+			@foreach (var player in Lobby.Players) {
 				<div class="player">
 					<img src=@($"avatar:{player.SteamId}")/>
 					<h3>@player.Name</h3>
@@ -21,8 +20,7 @@
 		</div>
 	</div>
 
-	@if (Networking.IsHost)
-	{
+	@if (Networking.IsHost) {
 		<button onclick=@Start>Start</button>
 	}
 
@@ -38,7 +36,7 @@
 @code
 {
 	public Lobby Lobby { get; set; }
-	
+
 	public void OnNavigationOpen() {
 		if (Lobby == null) {
 			Lobby = Game.ActiveScene.GetAllComponents<Lobby>().First();
@@ -50,13 +48,11 @@
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
-	protected override int BuildHash()
-	{
+	protected override int BuildHash() {
 		return HashCode.Combine(Lobby);
 	}
 
-	void PressBack()
-	{
+	void PressBack() {
 		GameNetworkSystem.Disconnect();
 		Game.ActiveScene.LoadFromFile("scenes/game_menu.scene");
 	}

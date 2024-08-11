@@ -2,8 +2,7 @@ using System.Threading.Tasks;
 using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
 
-public sealed class CardActionManager : Component
-{
+public sealed class CardActionManager : Component {
 	[Property] private readonly Dictionary<Card, bool> BlockedCards = new();
 	[Property] private List<Card> ChanceCards;
 
@@ -13,15 +12,13 @@ public sealed class CardActionManager : Component
 
 	[Property] public IngameStateManager IngameStateManager { get; set; }
 
-	protected override Task OnLoad()
-	{
+	protected override Task OnLoad() {
 		FillChangeCards();
 		FillCommunityCards();
 		return base.OnLoad();
 	}
 
-	private void FillChangeCards()
-	{
+	private void FillChangeCards() {
 		ChanceCards = new List<Card>(Cards.Chance_Standard);
 
 		ChanceCards.RemoveAll(card => BlockedCards.ContainsKey(card));
@@ -29,8 +26,7 @@ public sealed class CardActionManager : Component
 		CardActionHelper.Shuffle(ChanceCards);
 	}
 
-	private void FillCommunityCards()
-	{
+	private void FillCommunityCards() {
 		CommunityCards = new List<Card>(Cards.CommunityChest_Standard);
 
 		CommunityCards.RemoveAll(card => BlockedCards.ContainsKey(card));
@@ -39,20 +35,15 @@ public sealed class CardActionManager : Component
 	}
 
 
-	public void DisplayCardFor(Player player, GameLocation location)
-	{
+	public void DisplayCardFor(Player player, GameLocation location) {
 		Log.Info("Show " + location.EventId);
 
-		switch (location.Type)
-		{
+		switch (location.Type) {
 			case GameLocation.PropertyType.Event:
-				if (location.EventId == "chance")
-				{
+				if (location.EventId == "chance") {
 					DisplayChance(player);
 				}
-
-				if (location.EventId == "community")
-				{
+				else if (location.EventId == "community") {
 					DisplayCommunity(player);
 				}
 
@@ -63,8 +54,7 @@ public sealed class CardActionManager : Component
 		}
 	}
 
-	private void DisplayChance(Player player)
-	{
+	private void DisplayChance(Player player) {
 		var card = ChanceCards[0];
 		ChanceCards.Remove(card);
 
@@ -75,14 +65,12 @@ public sealed class CardActionManager : Component
 
 		card.Action(player, MovementManager, BlockedCards, IngameStateManager, card);
 
-		if (ChanceCards.Count == 0)
-		{
+		if (ChanceCards.Count == 0) {
 			FillChangeCards();
 		}
 	}
 
-	private void DisplayCommunity(Player player)
-	{
+	private void DisplayCommunity(Player player) {
 		var card = CommunityCards[0];
 		CommunityCards.Remove(card);
 
@@ -93,15 +81,13 @@ public sealed class CardActionManager : Component
 
 		card.Action(player, MovementManager, BlockedCards, IngameStateManager, card);
 
-		if (CommunityCards.Count == 0)
-		{
+		if (CommunityCards.Count == 0) {
 			FillCommunityCards();
 		}
 	}
 
 
-	private void DisplayPropertyCard(Player player, GameLocation location)
-	{
+	private void DisplayPropertyCard(Player player, GameLocation location) {
 		IngameStateManager.State = IngameUI.IngameUiStates.Buying;
 		IngameStateManager.Data = location;
 	}

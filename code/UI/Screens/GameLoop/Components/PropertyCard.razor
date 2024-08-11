@@ -1,76 +1,78 @@
-﻿@using System
-@using Sandbox.Razor;
-@namespace Monopoly.UI.Screens.GameLoop
+﻿@namespace Monopoly.UI.Screens.GameLoop
 
 <root>
-    <div class="propertyCard">
-        <div>
-            <div class="title" style="background-color: @Color ">
-                <p style="font-size: 16px; font-weight: bolder; letter-spacing: 4px;"> TITLE DEED </p>
-                <p style="font-size: 22px; font-weight: bold; text-transform: uppercase"> @Name </p>
-            </div>
-            <p style="margin-top: 8px"> RENT $@Rent[0].</p>
-            <div>
-                <p>With 1 House</p>
-                <p>$@Rent[1].</p>
-            </div>
-            <div>
-                <p>With 2 Houses</p>
-                <p>$@Rent[2].</p>
-            </div>
-            <div>
-                <p>With 3 Houses</p>
-                <p>$@Rent[3].</p>
-            </div>
-            <div>
-                <p>With 4 Houses</p>
-                <p>$@Rent[4].</p>
-            </div>
-            <p> With HOTEL $@Rent[5].</p>
-            <p style="margin-top: 8px"> Mortgage Value $@(Rent[5] / 2).</p>
-            <p> Houses cost $@HousePrice. each</p>
-            <p> Hotels, $@HousePrice. plus 4 houses</p>
-            <p style="font-size: 14px; margin-top: 8px; padding: 0 5px">
-                If a players owns All the lots of any Color Group, the rent is Doubled on Unimproved lots in that group
-            </p>
-        </div>
-    </div>
+	<div class="propertyCard">
+		<div>
+			<div class="title" style="background-color: @Color ">
+				<p style="font-size: 16px; font-weight: bolder; letter-spacing: 4px;"> TITLE DEED </p>
+				<p style="font-size: 22px; font-weight: bold; text-transform: uppercase"> @Name </p>
+			</div>
+			<p style="margin-top: 8px"> RENT $@Rent[0].</p>
+			<div>
+				<p>With 1 House</p>
+				<p>$@Rent[1].</p>
+			</div>
+			<div>
+				<p>With 2 Houses</p>
+				<p>$@Rent[2].</p>
+			</div>
+			<div>
+				<p>With 3 Houses</p>
+				<p>$@Rent[3].</p>
+			</div>
+			<div>
+				<p>With 4 Houses</p>
+				<p>$@Rent[4].</p>
+			</div>
+			<p> With HOTEL $@Rent[5].</p>
+			<p style="margin-top: 8px"> Mortgage Value $@(Rent[5] / 2).</p>
+			<p> Houses cost $@HousePrice. each</p>
+			<p> Hotels, $@HousePrice. plus 4 houses</p>
+			<p style="font-size: 14px; margin-top: 8px; padding: 0 5px">
+				If a players owns All the lots of any Color Group, the rent is Doubled on Unimproved lots in that group
+			</p>
+		</div>
+	</div>
 </root>
 
 @code {
-    private string _color;
-    [Property] public string Name { get; set; }
-    [Property] public int[] Rent { get; set; }
-    [Property] public int HousePrice { get; set; }
+	private string _color;
 
-    [Property]
-    public string Color {
-        get {
-            switch (_color) {
-                case "Brown":
-                    return "#5e2b15";
-                case "LightBlue":
-                    return "#32b2bf";
-                case "Pink":
-                    return "#ab2288";
-                case "Orange":
-                    return "#ca5409";
-                case "Red":
-                    return "#c11919";
-                case "Yellow":
-                    return "#e3be00";
-                case "Green":
-                    return "#0dc64f";
-                case "Blue":
-                    return "#0c499a";
-            }
+	[Property]
+	public string Name { get; set; }
 
-            return "#ffffff";
-        }
-        
-        set {
-            _color = value;
-        }
-        
-    }
+	[Property]
+	public int[] Rent { get; set; }
+
+	[Property]
+	public int HousePrice { get; set; }
+
+	[Property]
+	public string Color {
+		get {
+			switch (_color) {
+				case "Brown":
+					return "#5e2b15";
+				case "LightBlue":
+					return "#32b2bf";
+				case "Pink":
+					return "#ab2288";
+				case "Orange":
+					return "#ca5409";
+				case "Red":
+					return "#c11919";
+				case "Yellow":
+					return "#e3be00";
+				case "Green":
+					return "#0dc64f";
+				case "Blue":
+					return "#0c499a";
+			}
+
+			return "#ffffff";
+		}
+
+		set => _color = value;
+	}
+
 }

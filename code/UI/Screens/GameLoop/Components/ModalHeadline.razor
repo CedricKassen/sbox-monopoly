@@ -1,16 +1,23 @@
 ﻿@using System
-@using Sandbox.Razor;
+@using Sandbox.Razor
 @namespace Monopoly.UI.Screens.GameLoop
 
 <root>
-    <div class="headline">
-        <h1> @Name </h1>
-        <button style="background-color: #00000000; font-size: 28px" onclick=@(() => OnClose())> 🗙 </button>
-    </div>
+	<div class="headline">
+		<h1> @Name </h1>
+		<button style="background-color: #00000000; font-size: 28px" onclick="@(() => OnClose())"> 🗙 </button>
+	</div>
 </root>
 
 @code {
-    [Property] public RenderFragment Content { get; set; }
-    [Property] public Func<IngameUI.IngameUiStates> OnClose { get; set; } 
-    [Property] public string Name { get; set; } 
+
+	[Property]
+	public RenderFragment Content { get; set; }
+
+	[Property]
+	public Func<IngameUI.IngameUiStates> OnClose { get; set; }
+
+	[Property]
+	public string Name { get; set; }
+
 }

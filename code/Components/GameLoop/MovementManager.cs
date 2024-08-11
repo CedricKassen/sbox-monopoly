@@ -4,8 +4,7 @@ using Sandbox.Constants;
 using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 
-public sealed class MovementManager : Component
-{
+public sealed class MovementManager : Component {
 	private readonly TaskCompletionSource<bool> tcs = new();
 
 	private float _timer;
@@ -20,8 +19,7 @@ public sealed class MovementManager : Component
 
 
 	[Button("Go to next chance field")]
-	public void GoToNextChance()
-	{
+	public void GoToNextChance() {
 		var player = Game.ActiveScene.GetAllComponents<Player>().First();
 
 		var lines = new List<int> { 7, 22, 36 };
@@ -30,8 +28,7 @@ public sealed class MovementManager : Component
 	}
 
 	[Button("Go to next community field")]
-	public void GoToNextCommunity()
-	{
+	public void GoToNextCommunity() {
 		var player = Game.ActiveScene.GetAllComponents<Player>().First();
 
 		var lines = new List<int> { 2, 17, 33 };
@@ -39,8 +36,7 @@ public sealed class MovementManager : Component
 		CardActionHelper.MoveTo(next, player, this);
 	}
 
-	public void StartMovement(Player player, int fieldsToTravel)
-	{
+	public void StartMovement(Player player, int fieldsToTravel) {
 		Backwards = fieldsToTravel < 0;
 
 		// If movement is backwards, first iteration is used to rotate player
@@ -57,24 +53,19 @@ public sealed class MovementManager : Component
 	}
 
 
-	protected override void OnUpdate()
-	{
+	protected override void OnUpdate() {
 		UpdateMove();
 	}
 
-	private void UpdateMove()
-	{
-		if (Player == null)
-		{
+	private void UpdateMove() {
+		if (Player == null) {
 			return;
 		}
 
-		if (_timer < 1 / SpeedMultiplier)
-		{
+		if (_timer < 1 / SpeedMultiplier) {
 			var location = LocationContainer.Children[CurrentField];
 			var position = location.Transform.World;
-			if (Backwards)
-			{
+			if (Backwards) {
 				position.Rotation.RotateAroundAxis(location.Transform.Position, 180f);
 			}
 
@@ -89,8 +80,7 @@ public sealed class MovementManager : Component
 		Travelled++;
 		_timer = 0;
 
-		if (ToTravel == Travelled || ToTravel == -Travelled)
-		{
+		if (ToTravel == Travelled || ToTravel == -Travelled) {
 			CurrentField += Backwards ? 1 : -1;
 
 			Player.CurrentField = CurrentField;

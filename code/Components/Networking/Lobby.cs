@@ -2,8 +2,7 @@ using System.Threading.Tasks;
 using Sandbox.Network;
 using Sandbox.UI;
 
-public sealed class Lobby : Component, Component.INetworkListener
-{
+public sealed class Lobby : Component, Component.INetworkListener {
 	[Property] public long MaxPlayers { get; set; } = 5;
 
 	[Property] public GameObject PlayerPrefab { get; set; }
@@ -11,11 +10,10 @@ public sealed class Lobby : Component, Component.INetworkListener
 	[Property] public List<Player> Players => new(Game.ActiveScene.GetAllComponents<Player>());
 
 	[Property] public GameObject SpawnLocation { get; set; }
-	
+
 	[Property] public Panel LobbyPanel { get; set; }
 
-	public void OnActive(Connection conn)
-	{
+	public void OnActive(Connection conn) {
 		Log.Info($"Player '{conn.DisplayName}' tritt bei");
 
 		var playerObj = PlayerPrefab.Clone(SpawnLocation.Transform.World, name: conn.DisplayName + " - Network");
@@ -26,22 +24,18 @@ public sealed class Lobby : Component, Component.INetworkListener
 		playerObj.NetworkSpawn(conn);
 	}
 
-	public void OnDisconnected(Connection conn)
-	{
+	public void OnDisconnected(Connection conn) {
 		var currentPlayers = Scene.GetAllComponents<Player>();
 		var player = currentPlayers.First(player => player.SteamId == conn.SteamId);
 		player.GameObject.Destroy();
 	}
 
-	protected override async Task OnLoad()
-	{
-		if (Scene.IsEditor)
-		{
+	protected override async Task OnLoad() {
+		if (Scene.IsEditor) {
 			return;
 		}
 
-		if (!GameNetworkSystem.IsActive)
-		{
+		if (!GameNetworkSystem.IsActive) {
 			LoadingScreen.Title = "Creating Lobby";
 			await Task.DelayRealtimeSeconds(0.1f);
 			GameNetworkSystem.CreateLobby();
