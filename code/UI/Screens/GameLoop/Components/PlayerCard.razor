@@ -4,8 +4,8 @@
 	<div>
 		<img src=@($"avatar:{SteamId}") alt="profile-picture"/>
 		<div style="display: flex; flex-direction: column; gap: 4px">
-			<p style="font-weight: bolder"> @Name </p>
-			<p style="font-weight: lighter"> @Money$ </p>
+			<p style="font-weight: bolder"> @Player.Name </p>
+			<p style="font-weight: lighter"> @Player.Money$ </p>
 		</div>
 	</div>
 	<div style="display: flex; flex-direction: row; width: 100%; margin-top: 20px; gap: 5px">
@@ -126,13 +126,9 @@
 @code {
 
 	[Property]
-	public ulong SteamId { get; set; }
+	public Player Player { get; set; }
 
-	[Property]
-	public string Name { get; set; }
-
-	[Property]
-	public int Money { get; set; } = 0;
+	public ulong SteamId => Player.SteamId;
 
 	[Property]
 	public Dictionary<string, ulong> Owned { get; set; }
