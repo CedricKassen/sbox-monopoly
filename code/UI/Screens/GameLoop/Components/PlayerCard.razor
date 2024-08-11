@@ -1,4 +1,7 @@
-﻿@namespace Monopoly.UI.Screens.GameLoop
+﻿@using System
+@inherits Sandbox.UI.Panel
+@namespace Monopoly.UI.Screens.GameLoop
+
 
 <root>
 	<div>
@@ -132,5 +135,15 @@
 
 	[Property]
 	public Dictionary<string, ulong> Owned { get; set; }
+
+	/// <summary>
+	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() {
+		return HashCode.Combine(Player.Money);
+	}
+
+
+
 
 }
