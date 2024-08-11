@@ -16,14 +16,20 @@ public sealed class Dice : Component {
 			return;
 		}
 
-		var rng = new Random();
+
 		IsRolling = true;
-		Rigidbody.Velocity += Vector3.Up * rng.Next(400, 700);
+		Rigidbody.Velocity += Vector3.Up * new Random().Next(400, 700);
+		// Rigidbody.AngularVelocity +=
+		// 	Vector3.Random * (Vector3.Random + Vector3.Random * rng.Next(1, 2)) * rng.Next(10, 15);
 		Rigidbody.AngularVelocity +=
-			Vector3.Random * (Vector3.Random + Vector3.Random * rng.Next(1, 2)) * rng.Next(10, 15);
+			new Vector3(GetRandomFloat() * 1.2f, GetRandomFloat() * 1.2f, GetRandomFloat() * 0.5f);
 		var sound = Sound.Play("dice", Transform.World.Position);
 		sound.Volume = 1f;
-		Log.Info(sound.Name);
+	}
+
+	private float GetRandomFloat() {
+		var rng = new Random();
+		return rng.Next(4, 7) * (1 + rng.NextSingle());
 	}
 
 	public Vector3 GetRotation() {
