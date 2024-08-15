@@ -16,7 +16,9 @@ public class TurnManager : Component {
 	public enum SpecialPropertyActionType {
 		CommunityChest,
 		Chance,
-		Jail
+		Jail,
+		Tax,
+		None
 	}
 
 	[Property] public GameObject GameParentObject { get; set; }

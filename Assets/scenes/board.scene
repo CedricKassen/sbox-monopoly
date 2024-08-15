@@ -1757,6 +1757,12 @@
                 "component_id": "c1e0f016-07b5-43f8-a169-8ab39bcf557f",
                 "go": "9c38fde3-e34c-4f89-ab94-c714c48d150b",
                 "component_type": "Rigidbody"
+              },
+              "TurnManager": {
+                "_type": "component",
+                "component_id": "3a3de850-0708-4654-ac37-0751891b2abc",
+                "go": "4d880113-7b4d-4756-ad95-7eed4744d084",
+                "component_type": "TurnManager"
               }
             },
             {
@@ -1808,6 +1814,12 @@
                 "component_id": "358c8ea7-27e9-4243-891c-aded97e6e6f9",
                 "go": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0",
                 "component_type": "Rigidbody"
+              },
+              "TurnManager": {
+                "_type": "component",
+                "component_id": "3a3de850-0708-4654-ac37-0751891b2abc",
+                "go": "4d880113-7b4d-4756-ad95-7eed4744d084",
+                "component_type": "TurnManager"
               }
             },
             {
@@ -1919,69 +1931,69 @@
       "Enabled": true,
       "Children": [
         {
-          "__guid": "52485f1d-3bf8-4363-8151-33484152c4a3",
+          "__guid": "50a0f343-7e9b-4da6-a7f9-7e39e5f50128",
           "Flags": 0,
-          "Name": "UI",
+          "Name": "State",
           "Position": "-228.8045,-91.43645,72.8403",
           "Enabled": true,
           "Components": [
             {
-              "__type": "Sandbox.ScreenPanel",
-              "__guid": "30301d59-5fcf-454c-b9ac-1a3d05230e29",
-              "AutoScreenScale": true,
-              "Opacity": 1,
-              "Scale": 1,
-              "ZIndex": 100
-            },
-            {
-              "__type": "Monopoly.UI.Screens.GameLoop.GameLoopPanel",
-              "__guid": "1cd93fff-31dc-49d2-9c05-d9027f5ee4aa"
+              "__type": "IngameStateManager",
+              "__guid": "8112c606-1144-4881-86b8-2eb35e8030ad",
+              "OwnedFields": {
+                "brown1": 0,
+                "brown2": 0,
+                "lightBlue1": 0,
+                "lightBlue2": 0,
+                "lightBlue3": 0,
+                "pink1": 0,
+                "pink2": 0,
+                "pink3": 0,
+                "orange1": 0,
+                "orange2": 0,
+                "orange3": 0,
+                "red1": 0,
+                "red2": 0,
+                "red3": 0,
+                "yellow1": 0,
+                "yellow2": 0,
+                "yellow3": 0,
+                "green1": 0,
+                "green2": 0,
+                "green3": 0,
+                "blue1": 0,
+                "blue2": 0,
+                "railroad1": 0,
+                "railroad2": 0,
+                "railroad3": 0,
+                "railroad4": 0,
+                "electricCompany": 0,
+                "waterCompany": 0,
+                "chanceJailFree": 0,
+                "communityJailFree": 0
+              },
+              "State": "None"
             }
           ],
           "Children": [
             {
-              "__guid": "50a0f343-7e9b-4da6-a7f9-7e39e5f50128",
+              "__guid": "52485f1d-3bf8-4363-8151-33484152c4a3",
               "Flags": 0,
-              "Name": "State",
+              "Name": "UI",
               "Position": "0,0,0",
               "Enabled": true,
               "Components": [
                 {
-                  "__type": "IngameStateManager",
-                  "__guid": "8112c606-1144-4881-86b8-2eb35e8030ad",
-                  "OwnedFields": {
-                    "brown1": 0,
-                    "brown2": 0,
-                    "lightBlue1": 0,
-                    "lightBlue2": 0,
-                    "lightBlue3": 0,
-                    "pink1": 0,
-                    "pink2": 0,
-                    "pink3": 0,
-                    "orange1": 0,
-                    "orange2": 0,
-                    "orange3": 0,
-                    "red1": 0,
-                    "red2": 0,
-                    "red3": 0,
-                    "yellow1": 0,
-                    "yellow2": 0,
-                    "yellow3": 0,
-                    "green1": 0,
-                    "green2": 0,
-                    "green3": 0,
-                    "blue1": 0,
-                    "blue2": 0,
-                    "railroad1": 0,
-                    "railroad2": 0,
-                    "railroad3": 0,
-                    "railroad4": 0,
-                    "electricCompany": 0,
-                    "waterCompany": 0,
-                    "chanceJailFree": 0,
-                    "communityJailFree": 0
-                  },
-                  "State": "None"
+                  "__type": "Sandbox.ScreenPanel",
+                  "__guid": "30301d59-5fcf-454c-b9ac-1a3d05230e29",
+                  "AutoScreenScale": true,
+                  "Opacity": 1,
+                  "Scale": 1,
+                  "ZIndex": 100
+                },
+                {
+                  "__type": "Monopoly.UI.Screens.GameLoop.GameLoopPanel",
+                  "__guid": "1cd93fff-31dc-49d2-9c05-d9027f5ee4aa"
                 }
               ]
             }
@@ -2091,23 +2103,13 @@
                   "BlockedCards": {},
                   "ChanceCards": [
                     {
-                      "ActionId": 13,
-                      "Text": "Speeding fine $15",
+                      "ActionId": 5,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
                       "Action": null
                     },
                     {
-                      "ActionId": 4,
-                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 2,
-                      "Text": "Advance to Go (Collect $200)",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 1,
-                      "Text": "Advance to Boardwalk",
+                      "ActionId": 3,
+                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
                       "Action": null
                     },
                     {
@@ -2116,23 +2118,28 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 5,
-                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
+                      "ActionId": 12,
+                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
                       "Action": null
                     },
                     {
-                      "ActionId": 9,
-                      "Text": "Get Out of Jail Free",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 8,
-                      "Text": "Bank pays you dividend of $50",
+                      "ActionId": 16,
+                      "Text": "Your building loan matures. Collect $150",
                       "Action": null
                     },
                     {
                       "ActionId": 6,
                       "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Speeding fine $15",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 2,
+                      "Text": "Advance to Go (Collect $200)",
                       "Action": null
                     },
                     {
@@ -2147,18 +2154,23 @@
                       "Action": null
                     },
                     {
+                      "ActionId": 8,
+                      "Text": "Bank pays you dividend of $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 1,
+                      "Text": "Advance to Boardwalk",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 9,
+                      "Text": "Get Out of Jail Free",
+                      "Action": null
+                    },
+                    {
                       "ActionId": 15,
                       "Text": "You have been elected Chairman of the Board. Pay each player $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 3,
-                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 12,
-                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
                       "Action": null
                     },
                     {
@@ -2167,65 +2179,20 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 16,
-                      "Text": "Your building loan matures. Collect $150",
+                      "ActionId": 4,
+                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
                       "Action": null
                     }
                   ],
                   "CommunityCards": [
                     {
-                      "ActionId": 7,
-                      "Text": "Holiday fund matures. Receive $100",
+                      "ActionId": 4,
+                      "Text": "From sale of stock you get $50",
                       "Action": null
                     },
                     {
-                      "ActionId": 3,
-                      "Text": "Doctor\u2019s fee. Pay $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 8,
-                      "Text": "Income tax refund. Collect $20",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 6,
-                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 10,
-                      "Text": "Life insurance matures. Collect $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 1,
-                      "Text": "Advance to Go (Collect $200)",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 5,
-                      "Text": "Get Out of Jail Free",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 15,
-                      "Text": "You have won second prize in a beauty contest. Collect $10",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 11,
-                      "Text": "Pay hospital fees of $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 13,
-                      "Text": "Receive $25 consultancy fee",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 16,
-                      "Text": "You inherit $100",
+                      "ActionId": 12,
+                      "Text": "Pay school fees of $50",
                       "Action": null
                     },
                     {
@@ -2239,18 +2206,63 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 12,
-                      "Text": "Pay school fees of $50",
+                      "ActionId": 15,
+                      "Text": "You have won second prize in a beauty contest. Collect $10",
                       "Action": null
                     },
                     {
-                      "ActionId": 4,
-                      "Text": "From sale of stock you get $50",
+                      "ActionId": 5,
+                      "Text": "Get Out of Jail Free",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 16,
+                      "Text": "You inherit $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 6,
+                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 7,
+                      "Text": "Holiday fund matures. Receive $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 8,
+                      "Text": "Income tax refund. Collect $20",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 11,
+                      "Text": "Pay hospital fees of $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 1,
+                      "Text": "Advance to Go (Collect $200)",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Receive $25 consultancy fee",
                       "Action": null
                     },
                     {
                       "ActionId": 2,
                       "Text": "Bank error in your favor. Collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 10,
+                      "Text": "Life insurance matures. Collect $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 3,
+                      "Text": "Doctor\u2019s fee. Pay $50",
                       "Action": null
                     }
                   ],
@@ -2265,6 +2277,12 @@
                     "component_id": "069b4e7c-3cce-45d4-9a2b-a244aa336851",
                     "go": "dd179206-68ac-4c6b-9019-f033562ff797",
                     "component_type": "MovementManager"
+                  },
+                  "TurnManager": {
+                    "_type": "component",
+                    "component_id": "3a3de850-0708-4654-ac37-0751891b2abc",
+                    "go": "4d880113-7b4d-4756-ad95-7eed4744d084",
+                    "component_type": "TurnManager"
                   }
                 }
               ]
@@ -2311,20 +2329,7 @@
                       "prefab": "prefabs/wheelbarrow.prefab"
                     }
                   ],
-                  "Players": [
-                    {
-                      "_type": "component",
-                      "component_id": "f3fe994c-e5f0-4efa-bd6d-b2483feceff8",
-                      "go": "7f5a7213-8b33-480a-9ff1-26d6eaef167f",
-                      "component_type": "Player"
-                    },
-                    {
-                      "_type": "component",
-                      "component_id": "d8b40d35-841f-4330-ad1d-16ae48688ae0",
-                      "go": "fc460f2b-42ba-4531-8e79-5cd118a8ecaf",
-                      "component_type": "Player"
-                    }
-                  ],
+                  "Players": [],
                   "SpawnLocation": {
                     "_type": "gameobject",
                     "go": "69d2bf3c-4940-40d9-a192-d28075f7ebb6"
