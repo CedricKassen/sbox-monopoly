@@ -2,10 +2,22 @@ using System.Threading.Tasks;
 using Sandbox.Network;
 using Sandbox.UI;
 
+public class PawnWrapper {
+	public GameObject Prefab { get; set; }
+	public string ImgPath { get; set; }
+
+	public int Width { get; set; }
+	public int Height { get; set; }
+
+	public override string ToString() {
+		return Prefab.Name;
+	}
+}
+
 public sealed class Lobby : Component, Component.INetworkListener {
 	[Property] public long MaxPlayers { get; set; } = 5;
 
-	[Property] public List<GameObject> PlayerPrefabs { get; set; }
+	[Property] public List<PawnWrapper> PlayerPrefabs { get; set; }
 
 	[Property] public List<Player> Players => new(Game.ActiveScene.GetAllComponents<Player>());
 
@@ -16,7 +28,8 @@ public sealed class Lobby : Component, Component.INetworkListener {
 	public void OnActive(Connection conn) {
 		Log.Info($"Player '{conn.DisplayName}' tritt bei");
 
-		var playerObj = PlayerPrefabs[0].Clone(SpawnLocation.Transform.World, name: conn.DisplayName + " - Network");
+		var playerObj = PlayerPrefabs[0].Prefab
+		                                .Clone(SpawnLocation.Transform.World, name: conn.DisplayName + " - Network");
 		playerObj.BreakFromPrefab();
 		playerObj.Children[0].BreakFromPrefab();
 		var player = playerObj.Children[0].Components.Get<Player>();
