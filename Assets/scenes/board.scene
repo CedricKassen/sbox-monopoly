@@ -1564,6 +1564,14 @@
                   "Model": "models/hotel.vmdl",
                   "RenderType": "On",
                   "Tint": "1,1,1,1"
+                },
+                {
+                  "__type": "Sandbox.BoxCollider",
+                  "__guid": "eab75c54-2f18-448c-87fa-0323dc19bcba",
+                  "Center": "0,0,0",
+                  "IsTrigger": false,
+                  "Scale": "50,50,50",
+                  "Static": false
                 }
               ]
             }
@@ -1575,8 +1583,8 @@
       "__guid": "d597598b-15b2-49d0-bb58-54c52febb830",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "-565.3768,-562.6835,922.0605",
-      "Rotation": "-0.1698553,0.410067,0.3429224,0.8278879",
+      "Position": "-602.4583,-599.7644,681.6284",
+      "Rotation": "-0.1321401,0.3190144,0.3591457,0.8670543",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [
@@ -1594,7 +1602,7 @@
           "RenderTags": "",
           "TargetEye": "None",
           "Viewport": "0,0,1,1",
-          "ZFar": 10000,
+          "ZFar": 1800,
           "ZNear": 10
         },
         {
@@ -1646,27 +1654,11 @@
       ]
     },
     {
-      "__guid": "a5fbd6c6-b4ed-4e73-80fe-6ef8261bca6f",
-      "Flags": 0,
-      "Name": "Base",
-      "Scale": "-5,-5,5",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "8aeb2b01-f964-43c5-b5a3-32cde4e15732",
-          "Center": "0,0,-5",
-          "IsTrigger": false,
-          "Scale": "1000,1000,10",
-          "Static": false
-        }
-      ]
-    },
-    {
       "__guid": "e0d57410-7e20-419a-a366-bcd8424f58f5",
       "Flags": 0,
       "Name": "Plane",
       "Scale": "-5,-5,5",
+      "Tags": "ignore_trace",
       "Enabled": true,
       "Components": [
         {
@@ -1675,7 +1667,7 @@
           "BodyGroups": 18446744073709551615,
           "MaterialOverride": "materials/board.vmat",
           "Model": "models/dev/plane.vmdl",
-          "RenderType": "On",
+          "RenderType": "Off",
           "Tint": "0.39546,0.51163,0.27128,1"
         },
         {
@@ -2120,13 +2112,23 @@
                   "BlockedCards": {},
                   "ChanceCards": [
                     {
-                      "ActionId": 2,
-                      "Text": "Advance to Go (Collect $200)",
+                      "ActionId": 7,
+                      "Text": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.",
                       "Action": null
                     },
                     {
-                      "ActionId": 15,
-                      "Text": "You have been elected Chairman of the Board. Pay each player $50",
+                      "ActionId": 13,
+                      "Text": "Speeding fine $15",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 8,
+                      "Text": "Bank pays you dividend of $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 2,
+                      "Text": "Advance to Go (Collect $200)",
                       "Action": null
                     },
                     {
@@ -2136,13 +2138,43 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 8,
-                      "Text": "Bank pays you dividend of $50",
+                      "ActionId": 6,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
                       "Action": null
                     },
                     {
-                      "ActionId": 13,
-                      "Text": "Speeding fine $15",
+                      "ActionId": 1,
+                      "Text": "Advance to Boardwalk",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 12,
+                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 4,
+                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 9,
+                      "Text": "Get Out of Jail Free",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 5,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 14,
+                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 3,
+                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
                       "Action": null
                     },
                     {
@@ -2156,60 +2188,20 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 6,
-                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 14,
-                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 1,
-                      "Text": "Advance to Boardwalk",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 5,
-                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 7,
-                      "Text": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 9,
-                      "Text": "Get Out of Jail Free",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 4,
-                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 3,
-                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 12,
-                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
+                      "ActionId": 15,
+                      "Text": "You have been elected Chairman of the Board. Pay each player $50",
                       "Action": null
                     }
                   ],
                   "CommunityCards": [
                     {
-                      "ActionId": 14,
-                      "Text": "You are assessed for street repair. $40 per house. $115 per hotel",
+                      "ActionId": 9,
+                      "Text": "It is your birthday. Collect $10 from every player",
                       "Action": null
                     },
                     {
-                      "ActionId": 7,
-                      "Text": "Holiday fund matures. Receive $100",
+                      "ActionId": 10,
+                      "Text": "Life insurance matures. Collect $100",
                       "Action": null
                     },
                     {
@@ -2218,23 +2210,8 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 16,
-                      "Text": "You inherit $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 8,
-                      "Text": "Income tax refund. Collect $20",
-                      "Action": null
-                    },
-                    {
                       "ActionId": 4,
                       "Text": "From sale of stock you get $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 6,
-                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
                       "Action": null
                     },
                     {
@@ -2243,23 +2220,23 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 9,
-                      "Text": "It is your birthday. Collect $10 from every player",
+                      "ActionId": 14,
+                      "Text": "You are assessed for street repair. $40 per house. $115 per hotel",
                       "Action": null
                     },
                     {
-                      "ActionId": 15,
-                      "Text": "You have won second prize in a beauty contest. Collect $10",
+                      "ActionId": 3,
+                      "Text": "Doctor\u2019s fee. Pay $50",
                       "Action": null
                     },
                     {
-                      "ActionId": 11,
-                      "Text": "Pay hospital fees of $100",
+                      "ActionId": 16,
+                      "Text": "You inherit $100",
                       "Action": null
                     },
                     {
-                      "ActionId": 10,
-                      "Text": "Life insurance matures. Collect $100",
+                      "ActionId": 6,
+                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
                       "Action": null
                     },
                     {
@@ -2273,13 +2250,28 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 3,
-                      "Text": "Doctor\u2019s fee. Pay $50",
+                      "ActionId": 5,
+                      "Text": "Get Out of Jail Free",
                       "Action": null
                     },
                     {
-                      "ActionId": 5,
-                      "Text": "Get Out of Jail Free",
+                      "ActionId": 11,
+                      "Text": "Pay hospital fees of $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 8,
+                      "Text": "Income tax refund. Collect $20",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 7,
+                      "Text": "Holiday fund matures. Receive $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 15,
+                      "Text": "You have won second prize in a beauty contest. Collect $10",
                       "Action": null
                     }
                   ],
@@ -2370,6 +2362,18 @@
           ]
         }
       ]
+    },
+    {
+      "__guid": "6c534455-d142-4cdb-8c54-39433a9ed8a9",
+      "Flags": 0,
+      "Name": "GameObject",
+      "Enabled": true
+    },
+    {
+      "__guid": "153aea24-a023-495b-b460-7e316e2a1ade",
+      "Flags": 0,
+      "Name": "GameObject",
+      "Enabled": true
     },
     {
       "__guid": "000b94cd-1c4a-410f-b55e-0b76c9c2bda6",

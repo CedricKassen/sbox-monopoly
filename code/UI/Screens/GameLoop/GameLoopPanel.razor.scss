@@ -3,7 +3,6 @@
 
 .navigator-body {
   pointer-events: all;
-  cursor: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -16,12 +15,10 @@
   flex-direction: column;
   align-items: center;
   gap: 32px;
-  cursor: default;
 }
 
 .player-container {
   gap: 15px;
-  cursor: default;
 }
 
 .player {
@@ -30,12 +27,10 @@
   height: auto;
   gap: 5px;
   align-items: center;
-  cursor: default;
 
   img {
     height: 128px;
     width: 128px;
-    cursor: default;
   }
 }
 
@@ -53,7 +48,6 @@
   padding: 15px 0;
   gap: 15px;
   z-index: 10;
-  cursor: default;
 
   .secondaryButton {
     margin: 10px 0;
@@ -90,7 +84,6 @@
 }
 
 PlayerCard {
-  cursor: default;
   position: relative;
   background-color: $primary-background-color;
   height: 380px;
@@ -269,7 +262,6 @@ PlayerCard {
 }
 
 .endTurn {
-  cursor: default;
   position: absolute;
   top: 16px;
   width: 100vw;
