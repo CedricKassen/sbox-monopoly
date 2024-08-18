@@ -17,6 +17,7 @@ public class PawnWrapper {
 public sealed class Lobby : Component, Component.INetworkListener {
 	[Property] public long MaxPlayers { get; set; } = 5;
 
+	[Property] private GameObject LobbyPlayer { get; set; }
 	[Property] public List<PawnWrapper> PlayerPrefabs { get; set; }
 
 	[Property] public List<Player> Players => new(Game.ActiveScene.GetAllComponents<Player>());
@@ -25,15 +26,20 @@ public sealed class Lobby : Component, Component.INetworkListener {
 
 	[Property] public Panel LobbyPanel { get; set; }
 
-	public void OnActive(Connection conn) {
-		Log.Info($"Player '{conn.DisplayName}' tritt bei");
 
-		var playerObj = PlayerPrefabs[0].Prefab
-		                                .Clone(SpawnLocation.Transform.World, name: conn.DisplayName + " - Network");
+	public void OnActive(Connection conn) {
+		if (Networking.IsHost) {
+			Log.Info($"Lobby created!");
+		}
+		else {
+			Log.Info($"Player '{conn.DisplayName}' joined!");
+		}
+
+
+		var playerObj = LobbyPlayer
+			.Clone(SpawnLocation.Transform.World, name: conn.DisplayName + " - Lobby");
 		playerObj.BreakFromPrefab();
-		playerObj.Children[0].BreakFromPrefab();
-		var player = playerObj.Children[0].Components.Get<Player>();
-		Log.Info(player);
+		var player = playerObj.Components.Get<Player>();
 		player.Name = conn.DisplayName;
 		player.SteamId = conn.SteamId;
 		player.Connection = conn;
