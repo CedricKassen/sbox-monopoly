@@ -90,7 +90,6 @@ public sealed class Lobby : Component, Component.INetworkListener {
 				playerObj.BreakFromPrefab();
 				playerObj.Children[0].BreakFromPrefab();
 				var player = playerObj.Children[0].Components.Get<Player>();
-				Log.Info(player);
 				player.Name = conn.DisplayName;
 				player.SteamId = conn.SteamId;
 				player.Connection = conn;
