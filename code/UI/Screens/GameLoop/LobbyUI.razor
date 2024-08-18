@@ -22,7 +22,7 @@
 				<div class="lobbyIconCol">
 					@* Mark pawn as selected *@
 					@if (Lobby.SelectedPawns[pawn] != 0L) {
-						<img class="selection" src=@($"avatar:{Lobby.SelectedPawns[pawn]}")/>
+						<img class="selection" src=@($"avatar:{Lobby.SelectedPawns[pawn]}") alt="@Lobby.SelectedPawns[pawn]"/>
 					}
 					else {
 						<div class="selection"></div>
