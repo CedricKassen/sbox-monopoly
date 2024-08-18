@@ -15,6 +15,7 @@ public class PawnWrapper {
 }
 
 public sealed class Lobby : Component, Component.INetworkListener {
+	[Property] public Dictionary<PawnWrapper, ulong> SelectedPawns = new();
 	[Property] public long MaxPlayers { get; set; } = 5;
 
 	[Property] private GameObject LobbyPlayer { get; set; }
@@ -54,6 +55,9 @@ public sealed class Lobby : Component, Component.INetworkListener {
 	}
 
 	protected override async Task OnLoad() {
+		// Prefill SelectedPawns with claimed if of 0 for every possible pawn
+		PlayerPrefabs.ForEach(pawn => { SelectedPawns.Add(pawn, 0L); });
+
 		if (Scene.IsEditor) {
 			return;
 		}
