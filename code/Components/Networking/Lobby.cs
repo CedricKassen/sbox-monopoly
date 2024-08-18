@@ -73,4 +73,30 @@ public sealed class Lobby : Component, Component.INetworkListener {
 	public void StartGame() {
 		LobbyPanel.Navigate("/ingame");
 	}
+
+	public void InitializePlayers() {
+		if (Networking.IsHost) {
+			Players.ForEach(ply => ply.GameObject.Destroy());
+
+			foreach (var pair in SelectedPawns) {
+				if (pair.Value == 0) {
+					continue;
+				}
+
+				var conn = Connection.All.First(con => con.SteamId == pair.Value);
+				var playerObj =
+					pair.Key.Prefab.Clone(SpawnLocation.Transform.World, name: conn.DisplayName + " - Pawn");
+
+				playerObj.BreakFromPrefab();
+				playerObj.Children[0].BreakFromPrefab();
+				var player = playerObj.Children[0].Components.Get<Player>();
+				Log.Info(player);
+				player.Name = conn.DisplayName;
+				player.SteamId = conn.SteamId;
+				player.Connection = conn;
+
+				playerObj.NetworkSpawn(conn);
+			}
+		}
+	}
 }
