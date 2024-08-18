@@ -37,6 +37,11 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 	[Property] public Panel LobbyPanel { get; set; }
 
 	public void OnGameEvent(ChangePawnSelectionEvent eventArgs) {
+		// Only host should change this stuff
+		if (!Networking.IsHost) {
+			return;
+		}
+
 		// First we have to search for the target pawn
 		var pawn = PlayerPrefabs.First(pawnWrapper => pawnWrapper.Id == eventArgs.pawnId);
 		var callerSteamId = eventArgs.callerSteamId;
