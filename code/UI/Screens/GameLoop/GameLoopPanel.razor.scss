@@ -221,23 +221,42 @@ PlayerCard {
 
   height: 150px;
   gap: 7px;
-  justify-content: center;
-  align-content: center;
+
+  .lobbyIconCol {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    & > .selection {
+      width: 40px;
+      height: 40px;
+      align-self: center;
+      margin-bottom: -10px;
+      border-radius: 20px;
+      z-index: 100;
+    }
+  }
 
   .lobbyIcon {
-
-    align-self: center;
+    height: 120px;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
     padding: 5px;
     border-radius: 4px;
+
+    &:hover {
+      & > img {
+        filter: drop-shadow(0 0 2px rgba(#fff, 100));
+      }
+
+      cursor: pointer;
+    }
 
     img {
       opacity: 1;
 
-      &:hover {
-        transform: scale(1.25);
-        cursor: pointer;
-        filter: drop-shadow(0 0 10px rgba(#fff, 0.6));
-      }
 
       &:not(:hover) {
         filter: drop-shadow(0 0 0 rgba(#fff, 0.5));

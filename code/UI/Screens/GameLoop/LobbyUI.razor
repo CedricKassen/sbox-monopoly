@@ -19,16 +19,20 @@
 				var height = scale * pawn.Height;
 
 				var ownSteamId = Connection.Local.SteamId;
+				<div class="lobbyIconCol">
+					@* Mark pawn as selected *@
+					@if (Lobby.SelectedPawns[pawn] != 0L) {
+						<img class="selection" src=@($"avatar:{Lobby.SelectedPawns[pawn]}")/>
+					}
+					else {
+						<div class="selection"></div>
+					}
 
-				// Mark pawn as selected
-				@if (Lobby.SelectedPawns[pawn] != 0L) {
-					<div style="background-color: #0dc64f; width: 30px; height: 30px"></div>
-				}
-
-				// Disable every pawn client has not claimed itself
-				<button disabled="(@Lobby.SelectedPawns[pawn] != @ownSteamId)" class="lobbyIcon" onclick=@(() => PawnSelectionChanged(pawn, ownSteamId))>
-					<img style="width: @width px; height: @height px" src="@pawn.ImgPath" alt="@pawn.Prefab.Name"/>
-				</button>
+					@* Disable every pawn client has not claimed itself *@
+					<button disabled="(@Lobby.SelectedPawns[pawn] != @ownSteamId)" class="lobbyIcon" onclick=@(() => PawnSelectionChanged(pawn, ownSteamId))>
+						<img style="width: @width px; height: @height px" src="@pawn.ImgPath" alt="@pawn.Prefab.Name"/>
+					</button>
+				</div>
 			}
 		</div>
 
@@ -60,7 +64,7 @@
 @code
 {
 	public Lobby Lobby { get; set; }
-	
+
 	public bool EveryPlayerHasSelected() {
 		var selectedPawnCount = Lobby.SelectedPawns.Count(pair => pair.Value != 0);
 		var totalPlayerCount = Lobby.Players.Count;
