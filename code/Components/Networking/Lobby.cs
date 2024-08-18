@@ -19,12 +19,17 @@ public class PawnWrapper {
 	public int Height { get; set; }
 
 	public override string ToString() {
+		if (null == Prefab) {
+			return "Kaputt";
+		}
+
 		return Prefab.Name;
 	}
 }
 
 public sealed class Lobby : Component, Component.INetworkListener, IGameEventHandler<ChangePawnSelectionEvent> {
-	[Property] public Dictionary<PawnWrapper, ulong> SelectedPawns = new();
+	[HostSync] public NetDictionary<int, ulong> SelectedPawns { get; set; } = new();
+
 	[Property] public long MaxPlayers { get; set; } = 5;
 
 	[Property] private GameObject LobbyPlayer { get; set; }
@@ -47,7 +52,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 		var callerSteamId = eventArgs.callerSteamId;
 
 		var lobbySelectedPawns = SelectedPawns;
-		var pawnOwnership = lobbySelectedPawns.First(pair => pair.Key.Equals(pawn)).Value;
+		var pawnOwnership = lobbySelectedPawns.First(pair => pair.Key.Equals(pawn.Id)).Value;
 
 		// owned by 0 means unowned! 
 
@@ -58,18 +63,19 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 
 		// If pawn is ours just deselect it
 		if (pawnOwnership == callerSteamId) {
-			lobbySelectedPawns[pawn] = 0;
+			lobbySelectedPawns[pawn.Id] = 0;
 			return;
 		}
 
 		// Pawn must be unowned
 
 		// If we own another pawn deselect the other pawn
-		if (lobbySelectedPawns.ContainsValue(callerSteamId)) {
-			lobbySelectedPawns[lobbySelectedPawns.First(pair => pair.Value == callerSteamId).Key] = 0;
+		var firstOrDefault = lobbySelectedPawns.FirstOrDefault(pair => pair.Value == callerSteamId);
+		if (!firstOrDefault.Equals(new KeyValuePair<PawnWrapper, ulong>())) {
+			lobbySelectedPawns[firstOrDefault.Key] = 0;
 		}
 
-		lobbySelectedPawns[pawn] = callerSteamId;
+		lobbySelectedPawns[pawn.Id] = callerSteamId;
 	}
 
 
@@ -105,12 +111,13 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 	}
 
 	protected override async Task OnLoad() {
-		// Prefill SelectedPawns with claimed if of 0 for every possible pawn
-		PlayerPrefabs.ForEach(pawn => { SelectedPawns.Add(pawn, 0L); });
-
-		if (Scene.IsEditor) {
+		if (Scene.IsEditor || !Networking.IsHost) {
 			return;
 		}
+
+		// Prefill SelectedPawns with claimed if of 0 for every possible pawn
+		PlayerPrefabs.ForEach(pawn => { SelectedPawns.Add(pawn.Id, 0L); });
+
 
 		if (!GameNetworkSystem.IsActive) {
 			LoadingScreen.Title = "Creating Lobby";
@@ -135,8 +142,10 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 				}
 
 				var conn = Connection.All.First(con => con.SteamId == pair.Value);
-				var playerObj =
-					pair.Key.Prefab.Clone(SpawnLocation.Transform.World, name: conn.DisplayName + " - Pawn");
+
+				var playerObj = PlayerPrefabs.First(prep => prep.Id == pair.Key)
+				                             .Prefab.Clone(SpawnLocation.Transform.World,
+					                             name: conn.DisplayName + " - Pawn");
 
 				playerObj.BreakFromPrefab();
 				playerObj.Children[0].BreakFromPrefab();

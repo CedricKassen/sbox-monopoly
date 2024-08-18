@@ -23,15 +23,15 @@
 				var ownSteamId = Connection.Local.SteamId;
 				<div class="lobbyIconCol">
 					@* Mark pawn as selected *@
-					@if (Lobby.SelectedPawns[pawn] != 0L) {
-						<img class="selection" src=@($"avatar:{Lobby.SelectedPawns[pawn]}") alt="@Lobby.SelectedPawns[pawn]"/>
+					@if (Lobby.SelectedPawns[pawn.Id] != 0L) {
+						<img class="selection" src=@($"avatar:{Lobby.SelectedPawns[pawn.Id]}") alt="@Lobby.SelectedPawns[pawn.Id]"/>
 					}
 					else {
 						<div class="selection"></div>
 					}
 
 					@* Disable every pawn client has not claimed itself *@
-					<button disabled="(@Lobby.SelectedPawns[pawn] != @ownSteamId)" class="lobbyIcon" onclick=@(() => PawnSelectionChanged(pawn.Id, ownSteamId))>
+					<button disabled="(@Lobby.SelectedPawns[pawn.Id] != @ownSteamId)" class="lobbyIcon" onclick=@(() => PawnSelectionChanged(pawn.Id, ownSteamId))>
 						<img style="width: @width px; height: @height px" src="@pawn.ImgPath" alt="@pawn.Prefab.Name"/>
 					</button>
 				</div>
@@ -75,6 +75,9 @@
 	}
 
 	public void PawnSelectionChanged(int pawnId, ulong callerSteamId) {
+		foreach (var selectedPawnsValue in Lobby.SelectedPawns.Values) {
+			Log.Info(selectedPawnsValue);
+		}
 		Lobby.PawnSelectionChanged(pawnId, callerSteamId);
 	}
 
