@@ -1,0 +1,19 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "shoe",
+      "Type": "asset",
+      "Org": "local",
+      "Ident": "shoe",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": null,
+      "EditorReferences": null,
+      "Metadata": {
+        "SingleAssetSource": "ui/game_pieces/shoe.png"
+      }
+    }
+  }
+}
