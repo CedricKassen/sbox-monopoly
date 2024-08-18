@@ -1,8 +1,17 @@
 using System.Threading.Tasks;
+using Sandbox.Events;
+using Sandbox.Events.LobbyEvents;
 using Sandbox.Network;
 using Sandbox.UI;
 
 public class PawnWrapper {
+	private static int IdCounter;
+
+	public PawnWrapper() {
+		Id = ++IdCounter;
+	}
+
+	public int Id { get; }
 	public GameObject Prefab { get; set; }
 	public string ImgPath { get; set; }
 
@@ -14,7 +23,7 @@ public class PawnWrapper {
 	}
 }
 
-public sealed class Lobby : Component, Component.INetworkListener {
+public sealed class Lobby : Component, Component.INetworkListener, IGameEventHandler<ChangePawnSelectionEvent> {
 	[Property] public Dictionary<PawnWrapper, ulong> SelectedPawns = new();
 	[Property] public long MaxPlayers { get; set; } = 5;
 
@@ -26,6 +35,37 @@ public sealed class Lobby : Component, Component.INetworkListener {
 	[Property] public GameObject SpawnLocation { get; set; }
 
 	[Property] public Panel LobbyPanel { get; set; }
+
+	public void OnGameEvent(ChangePawnSelectionEvent eventArgs) {
+		// First we have to search for the target pawn
+		var pawn = PlayerPrefabs.First(pawnWrapper => pawnWrapper.Id == eventArgs.pawnId);
+		var callerSteamId = eventArgs.callerSteamId;
+
+		var lobbySelectedPawns = SelectedPawns;
+		var pawnOwnership = lobbySelectedPawns.First(pair => pair.Key.Equals(pawn)).Value;
+
+		// owned by 0 means unowned! 
+
+		// Do nothing if client somehow pressed pawn that is claimed by another player
+		if (pawnOwnership != 0 && pawnOwnership != callerSteamId) {
+			return;
+		}
+
+		// If pawn is ours just deselect it
+		if (pawnOwnership == callerSteamId) {
+			lobbySelectedPawns[pawn] = 0;
+			return;
+		}
+
+		// Pawn must be unowned
+
+		// If we own another pawn deselect the other pawn
+		if (lobbySelectedPawns.ContainsValue(callerSteamId)) {
+			lobbySelectedPawns[lobbySelectedPawns.First(pair => pair.Value == callerSteamId).Key] = 0;
+		}
+
+		lobbySelectedPawns[pawn] = callerSteamId;
+	}
 
 
 	public void OnActive(Connection conn) {
@@ -54,6 +94,11 @@ public sealed class Lobby : Component, Component.INetworkListener {
 		player.GameObject.Destroy();
 	}
 
+	[Broadcast]
+	public void PawnSelectionChanged(int pawnId, ulong callerSteamId) {
+		Game.ActiveScene.Dispatch(new ChangePawnSelectionEvent(pawnId, callerSteamId));
+	}
+
 	protected override async Task OnLoad() {
 		// Prefill SelectedPawns with claimed if of 0 for every possible pawn
 		PlayerPrefabs.ForEach(pawn => { SelectedPawns.Add(pawn, 0L); });
@@ -68,6 +113,7 @@ public sealed class Lobby : Component, Component.INetworkListener {
 			GameNetworkSystem.CreateLobby();
 		}
 	}
+
 
 	[Broadcast(NetPermission.HostOnly)]
 	public void StartGame() {

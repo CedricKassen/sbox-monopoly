@@ -1,6 +1,8 @@
 @namespace Monopoly.UI.Screens.GameLoop
 @inherits Sandbox.UI.Panel
 @using System
+@using Sandbox.Events
+@using Sandbox.Events.LobbyEvents
 @using Sandbox.Network
 @implements Sandbox.UI.INavigatorPage
 
@@ -29,7 +31,7 @@
 					}
 
 					@* Disable every pawn client has not claimed itself *@
-					<button disabled="(@Lobby.SelectedPawns[pawn] != @ownSteamId)" class="lobbyIcon" onclick=@(() => PawnSelectionChanged(pawn, ownSteamId))>
+					<button disabled="(@Lobby.SelectedPawns[pawn] != @ownSteamId)" class="lobbyIcon" onclick=@(() => PawnSelectionChanged(pawn.Id, ownSteamId))>
 						<img style="width: @width px; height: @height px" src="@pawn.ImgPath" alt="@pawn.Prefab.Name"/>
 					</button>
 				</div>
@@ -72,32 +74,8 @@
 		return selectedPawnCount == totalPlayerCount;
 	}
 
-
-	public void PawnSelectionChanged(PawnWrapper pawn, ulong ownSteamId) {
-		var lobbySelectedPawns = Lobby.SelectedPawns;
-		var pawnOwnership = lobbySelectedPawns.First(pair => pair.Key.Equals(pawn)).Value;
-
-	// owned by 0 means unowned!
-
-	// Do nothing if client somehow pressed pawn that is claimed by another player
-		if (pawnOwnership != 0 && pawnOwnership != ownSteamId) {
-			return;
-		}
-
-	// If pawn is ours just deselect it
-		if (pawnOwnership == ownSteamId) {
-			lobbySelectedPawns[pawn] = 0;
-			return;
-		}
-
-	// Pawn must be unowned
-
-	// If we own another pawn deselect the other pawn
-		if (lobbySelectedPawns.ContainsValue(ownSteamId)) {
-			lobbySelectedPawns[lobbySelectedPawns.First(pair => pair.Value == ownSteamId).Key] = 0;
-		}
-
-		lobbySelectedPawns[pawn] = ownSteamId;
+	public void PawnSelectionChanged(int pawnId, ulong callerSteamId) {
+		Lobby.PawnSelectionChanged(pawnId, callerSteamId);
 	}
 
 	public void OnNavigationOpen() {

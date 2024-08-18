@@ -2103,8 +2103,33 @@
                   "BlockedCards": {},
                   "ChanceCards": [
                     {
-                      "ActionId": 6,
+                      "ActionId": 3,
+                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 4,
+                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 5,
                       "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 8,
+                      "Text": "Bank pays you dividend of $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 16,
+                      "Text": "Your building loan matures. Collect $150",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 1,
+                      "Text": "Advance to Boardwalk",
                       "Action": null
                     },
                     {
@@ -2123,53 +2148,9 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 8,
-                      "Text": "Bank pays you dividend of $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 5,
-                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 10,
-                      "Text": "Go Back 3 Spaces",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 9,
-                      "Text": "Get Out of Jail Free",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 4,
-                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 12,
-                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 1,
-                      "Text": "Advance to Boardwalk",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 3,
-                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 16,
-                      "Text": "Your building loan matures. Collect $150",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 14,
-                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
+                      "ActionId": 11,
+                      "Text": "Go to Jail. Go directly to Jail, do not pass Go, do not collect $200",
+                      "ImageUrl": "ui/jail.png",
                       "Action": null
                     },
                     {
@@ -2178,31 +2159,35 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 11,
-                      "Text": "Go to Jail. Go directly to Jail, do not pass Go, do not collect $200",
-                      "ImageUrl": "ui/jail.png",
+                      "ActionId": 12,
+                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
                       "Action": null
-                    }
-                  ],
-                  "CommunityCards": [
+                    },
                     {
-                      "ActionId": 5,
+                      "ActionId": 14,
+                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 9,
                       "Text": "Get Out of Jail Free",
                       "Action": null
                     },
                     {
                       "ActionId": 10,
+                      "Text": "Go Back 3 Spaces",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 6,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
+                      "Action": null
+                    }
+                  ],
+                  "CommunityCards": [
+                    {
+                      "ActionId": 10,
                       "Text": "Life insurance matures. Collect $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 11,
-                      "Text": "Pay hospital fees of $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 3,
-                      "Text": "Doctor\u2019s fee. Pay $50",
                       "Action": null
                     },
                     {
@@ -2221,13 +2206,18 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 16,
-                      "Text": "You inherit $100",
+                      "ActionId": 7,
+                      "Text": "Holiday fund matures. Receive $100",
                       "Action": null
                     },
                     {
-                      "ActionId": 9,
-                      "Text": "It is your birthday. Collect $10 from every player",
+                      "ActionId": 3,
+                      "Text": "Doctor\u2019s fee. Pay $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 4,
+                      "Text": "From sale of stock you get $50",
                       "Action": null
                     },
                     {
@@ -2241,18 +2231,8 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 15,
-                      "Text": "You have won second prize in a beauty contest. Collect $10",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 7,
-                      "Text": "Holiday fund matures. Receive $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 4,
-                      "Text": "From sale of stock you get $50",
+                      "ActionId": 5,
+                      "Text": "Get Out of Jail Free",
                       "Action": null
                     },
                     {
@@ -2261,8 +2241,28 @@
                       "Action": null
                     },
                     {
+                      "ActionId": 9,
+                      "Text": "It is your birthday. Collect $10 from every player",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 11,
+                      "Text": "Pay hospital fees of $100",
+                      "Action": null
+                    },
+                    {
                       "ActionId": 8,
                       "Text": "Income tax refund. Collect $20",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 16,
+                      "Text": "You inherit $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 15,
+                      "Text": "You have won second prize in a beauty contest. Collect $10",
                       "Action": null
                     }
                   ],
