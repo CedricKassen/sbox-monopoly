@@ -5,6 +5,7 @@
   pointer-events: all;
 }
 
+
 .overview {
   display: flex;
   flex-direction: column;
@@ -234,7 +235,12 @@ PlayerCard {
 
       &:hover {
         transform: scale(1.25);
-        filter: drop-shadow(1px 2px 3px rgba(#fff, 0.5));
+        cursor: pointer;
+        filter: drop-shadow(0 0 10px rgba(#fff, 0.6));
+      }
+
+      &:not(:hover) {
+        filter: drop-shadow(0 0 0 rgba(#fff, 0.5));
       }
     }
 
