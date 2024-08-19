@@ -1,6 +1,8 @@
 @namespace Monopoly.UI.Screens.GameLoop
 @inherits Sandbox.UI.Panel
 @using System
+@using Sandbox.Events
+@using Sandbox.Events.LobbyEvents
 @using Sandbox.Network
 @implements Sandbox.UI.INavigatorPage
 
@@ -9,6 +11,34 @@
 	<h1> MY_POOL_NO </h1>
 
 	<div class="overview">
+		<div class="lobbyIconContainer">
+			@foreach (var pawn in Lobby.PlayerPrefabs) {
+				// Scale to render the icons in correct proportion 
+				var scale = 0.2F;
+
+				// Scale da thing down/up
+				var width = scale * pawn.Width;
+				var height = scale * pawn.Height;
+
+				var ownSteamId = Connection.Local.SteamId;
+				<div class="lobbyIconCol">
+					@* Mark pawn as selected *@
+					@if (Lobby.SelectedPawns[pawn.Id] != 0L) {
+						<img class="selection" src=@($"avatar:{Lobby.SelectedPawns[pawn.Id]}") alt="@Lobby.SelectedPawns[pawn.Id]"/>
+					}
+					else {
+						<div class="selection"></div>
+					}
+
+					@* Disable every pawn client has not claimed itself *@
+					<button disabled="(@Lobby.SelectedPawns[pawn.Id] != @ownSteamId)" class="lobbyIcon" onclick=@(() => PawnSelectionChanged(pawn.Id, ownSteamId))>
+						<img style="width: @width px; height: @height px" src="@pawn.ImgPath" alt="@pawn.Prefab.Name"/>
+					</button>
+				</div>
+			}
+		</div>
+
+
 		<h3>@Lobby.Players.Count()/@Lobby.MaxPlayers</h3>
 		<div class="player-container">
 			@foreach (var player in Lobby.Players) {
@@ -37,6 +67,20 @@
 {
 	public Lobby Lobby { get; set; }
 
+	public bool EveryPlayerHasSelected() {
+		var selectedPawnCount = Lobby.SelectedPawns.Count(pair => pair.Value != 0);
+		var totalPlayerCount = Lobby.Players.Count;
+
+		return selectedPawnCount == totalPlayerCount;
+	}
+
+	public void PawnSelectionChanged(int pawnId, ulong callerSteamId) {
+		foreach (var selectedPawnsValue in Lobby.SelectedPawns.Values) {
+			Log.Info(selectedPawnsValue);
+		}
+		Lobby.PawnSelectionChanged(pawnId, callerSteamId);
+	}
+
 	public void OnNavigationOpen() {
 		if (Lobby == null) {
 			Lobby = Game.ActiveScene.GetAllComponents<Lobby>().First();
@@ -58,6 +102,13 @@
 	}
 
 	public void Start() {
+		if (!EveryPlayerHasSelected()) {
+	// TODO remove default click sound from button sound-in: unset/none won't work!
+	// somehow call the check in the ui to disable the button would be the best for now its here
+			PlaySound("ui.button.deny");
+			return;
+		}
+		Lobby.InitializePlayers();
 		Lobby.StartGame();
 	}
 }

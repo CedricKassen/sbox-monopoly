@@ -1,0 +1,19 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "cannon",
+      "Type": "asset",
+      "Org": "freshgaming",
+      "Ident": "cannon",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": null,
+      "EditorReferences": null,
+      "Metadata": {
+        "SingleAssetSource": "ui/game_pieces/cannon.png"
+      }
+    }
+  }
+}

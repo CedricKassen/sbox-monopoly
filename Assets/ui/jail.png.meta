@@ -1,0 +1,19 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "jail",
+      "Type": "asset",
+      "Org": "local",
+      "Ident": "jail",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": null,
+      "EditorReferences": null,
+      "Metadata": {
+        "SingleAssetSource": "ui/jail.png"
+      }
+    }
+  }
+}

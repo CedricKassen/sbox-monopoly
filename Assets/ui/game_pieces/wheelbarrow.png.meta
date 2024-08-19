@@ -1,0 +1,19 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "wheelbarrow",
+      "Type": "asset",
+      "Org": "local",
+      "Ident": "wheelbarrow",
+      "Schema": 0,
+      "IncludeSourceFiles": true,
+      "Resources": null,
+      "PackageReferences": null,
+      "EditorReferences": null,
+      "Metadata": {
+        "SingleAssetSource": "ui/game_pieces/wheelbarrow.png"
+      }
+    }
+  }
+}
