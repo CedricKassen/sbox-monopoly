@@ -53,7 +53,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var component = location.Components.Get<GameLocation>();
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 		
-		if (component.Price <= player.Money) {
+		if (component.Price <= player.Money && Networking.IsHost) {
 			player.Money -= component.Price;
 			IngameStateManager.OwnedFields[location.Name] = eventArgs.playerId;
 		}
@@ -76,7 +76,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
 		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex);
-		GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+
+		if (Networking.IsHost) {
+			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+		}
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
 	}
 	
@@ -85,8 +88,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
-		GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
-		GetPlayerFromEvent(eventArgs.Recipient).Money += eventArgs.Amount;
+		if (Networking.IsHost) {
+			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+			GetPlayerFromEvent(eventArgs.Recipient).Money += eventArgs.Amount;
+		}
 	}
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
