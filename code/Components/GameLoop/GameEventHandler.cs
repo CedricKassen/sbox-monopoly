@@ -4,7 +4,7 @@ using Sandbox.Events.TurnEvents;
 namespace Sandbox.Components.GameLoop;
 
 public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGameEventHandler<MovementDoneEvent>,
-                                IGameEventHandler<PropertyAquiredEvent> {
+                                IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
 
 	[Property] public Lobby Lobby { get; set; }
@@ -36,5 +36,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	private Player GetPlayerFromEvent(BaseEvent eventArgs) {
 		return Lobby.Players.Find(player => player.SteamId == eventArgs.playerId);
+	}
+
+	public void OnGameEvent(PropertyAuctionEvent eventArgs) {
+		IngameStateManager.AuctionBiddings = new NetDictionary<ulong, int>();
+
+		foreach (var player in Lobby.Players) {
+			IngameStateManager.AuctionBiddings[player.SteamId] = 0;
+		}
 	}
 }

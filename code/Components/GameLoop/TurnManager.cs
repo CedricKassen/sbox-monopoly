@@ -5,6 +5,7 @@ public class TurnManager : Component {
 	public enum Phase {
 		Rolling,
 		RoundAction,
+		Auction,
 		PlayerAction
 	}
 
@@ -23,11 +24,11 @@ public class TurnManager : Component {
 
 	[Property] public GameObject GameParentObject { get; set; }
 
-	[Property] public Phase CurrentPhase { get; set; }
+	[Property, HostSync] public Phase CurrentPhase { get; set; }
 
 	[Property] public Lobby CurrentLobby { get; set; }
 
-	[Property] public int CurrentPlayerIndex { get; set; }
+	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
 
 	[Broadcast]
 	public void EmitRolledEvent(int value) {
@@ -40,6 +41,13 @@ public class TurnManager : Component {
 		GameParentObject.Dispatch(
 			new PropertyAquiredEvent { playerId = CurrentLobby.Players[0].SteamId, PropertyIndex = propertyIndex });
 		CurrentPhase = Phase.PlayerAction;
+	}
+	
+	[Broadcast]
+	public void EmitPropertyAuctionEvent(int propertyIndex) {
+		GameParentObject.Dispatch(
+			new PropertyAuctionEvent() { PropertyIndex = propertyIndex });
+		CurrentPhase = Phase.Auction;
 	}
 
 	[Broadcast]
@@ -75,5 +83,10 @@ public class TurnManager : Component {
 
 		CurrentPhase = Phase.Rolling;
 		GameParentObject.Dispatch(new TurnFinishedEvent());
+	}
+
+	[Broadcast]
+	public void EmitAuctionBidEvent(ulong PlayerId, int Amount) {
+		GameParentObject.Dispatch(new AuctionBidEvent {playerId = PlayerId, Amount = Amount});
 	}
 }

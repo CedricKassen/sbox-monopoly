@@ -1,9 +1,11 @@
 using Monopoly.UI.Screens.GameLoop;
+using Sandbox.Events;
+using Sandbox.Events.TurnEvents;
 
-public sealed class IngameStateManager : Component {
+public sealed class IngameStateManager : Component, IGameEventHandler<AuctionBidEvent> {
 	public object Data = null;
 
-	[Property] public Dictionary<string, ulong> OwnedFields = new() {
+	[Property, HostSync] public NetDictionary<string, ulong> OwnedFields { get; set; } = new() {
 		{ "brown1", 0 },
 		{ "brown2", 0 },
 		{ "lightBlue1", 0 },
@@ -36,5 +38,30 @@ public sealed class IngameStateManager : Component {
 		{ "communityJailFree", 0 }
 	};
 
-	[Property] public IngameUI.IngameUiStates State = IngameUI.IngameUiStates.None;
+	[Property, HostSync] public IngameUI.IngameUiStates State { get; set; } = IngameUI.IngameUiStates.None;
+	[Property, HostSync] public NetDictionary<ulong, int> AuctionBiddings { get; set; } = new();
+	[Property] public readonly int AuctionTime = 8;
+	[Property, HostSync] public float AuctionTimer { get; set; }
+
+	public void OnGameEvent(AuctionBidEvent eventArgs) {
+		var result = AuctionBiddings.TryGetValue(eventArgs.playerId, out var bid);
+		
+		if (result) {
+			AuctionBiddings[eventArgs.playerId] += eventArgs.Amount;
+		} else {
+			AuctionBiddings[eventArgs.playerId] = eventArgs.Amount;	
+		}
+
+		AuctionTimer = AuctionTime;
+	}
+
+	protected override void OnUpdate() {
+		if (AuctionTimer > 0) {
+			AuctionTimer -= Time.Delta;
+		}
+
+		if (AuctionTimer < 0) {
+			AuctionTimer = 0;
+		}
+	}
 }
