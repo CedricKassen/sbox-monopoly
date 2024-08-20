@@ -5,7 +5,7 @@ using Sandbox.Events.TurnEvents;
 namespace Sandbox.Components.GameLoop;
 
 public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGameEventHandler<MovementDoneEvent>,
-                                IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>, IGameEventHandler<AuctionFinishedEvent> {
+                                IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>, IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<PlayerPaymentEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
 	[Property] public Lobby Lobby { get; set; }
 	[Property] public MovementManager MovementManager { get; set; }
@@ -15,7 +15,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(MovementDoneEvent eventArgs) {
 		IngameStateManager.OwnedFields.TryGetValue(eventArgs.Location.GameObject.Name, out var fieldOwner);
-		var currentPlayer = GetPlayerFromEvent(eventArgs);
+		var currentPlayer = GetPlayerFromEvent(eventArgs.playerId);
 		
 		if (fieldOwner == 0 || eventArgs.Location.Type == GameLocation.PropertyType.Event) {
 			CardActionManager.DisplayCardFor(currentPlayer, eventArgs.Location);
@@ -51,8 +51,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	public void OnGameEvent(RolledEvent eventArgs) {
-		MovementManager.StartMovement(GetPlayerFromEvent(eventArgs), eventArgs.Number);
-		GetPlayerFromEvent(eventArgs).LastDiceCount = eventArgs.Number;
+		var player = GetPlayerFromEvent(eventArgs.playerId);
+		MovementManager.StartMovement(player, eventArgs.Number);
+		player.LastDiceCount = eventArgs.Number;
 	}
 
 	public void OnGameEvent(PropertyAuctionEvent eventArgs) {
@@ -65,11 +66,16 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
 		TurnManager.EmitPropertyAquiredEvent(eventArgs.PropertyIndex, eventArgs.playerId);
-		GetPlayerFromEvent(eventArgs).Money -= eventArgs.Amount;
+		GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
 	}
 	
-	private Player GetPlayerFromEvent(BaseEvent eventArgs) {
-		return Lobby.Players.Find(player => player.SteamId == eventArgs.playerId);
+	private Player GetPlayerFromEvent(ulong playerId) {
+		return Lobby.Players.Find(player => player.SteamId == playerId);
+	}
+
+	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
+		GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+		GetPlayerFromEvent(eventArgs.Recipient).Money += eventArgs.Amount;
 	}
 }
