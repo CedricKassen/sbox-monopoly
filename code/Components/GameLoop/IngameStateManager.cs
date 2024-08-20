@@ -71,7 +71,7 @@ public sealed class IngameStateManager : Component, IGameEventHandler<AuctionBid
 
 	public List<KeyValuePair<ulong, int>> GetSortedBiddings() {
 		var list = AuctionBiddings.ToList();
-		list.Sort((left, right) => left.Value > right.Value ? 1 : -1);
+		list.Sort((left, right) => left.Value > right.Value ? -1 : 1);
 		
 		return list;
 	}
