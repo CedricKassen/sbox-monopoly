@@ -70,11 +70,6 @@ public sealed class IngameStateManager : Component, IGameEventHandler<AuctionBid
 					c.Components.Get<GameLocation>().Id == location.Id);
 			var biddingList = GetSortedBiddings();
 			
-			
-			Log.Info(biddingList.Count);
-			
-			Log.Info(TurnManager);
-			
 			TurnManager.EmitAuctionFinishedEvent(locationIndex, biddingList[0].Key, biddingList[0].Value);
 		}
 	}

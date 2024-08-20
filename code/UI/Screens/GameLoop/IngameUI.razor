@@ -246,6 +246,8 @@
     }
 
     private void BidAmount(int amount) {
+        
+        if (_player.Money >= _stateManager.AuctionBiddings[_player.SteamId] + amount)
         _turnManager.EmitAuctionBidEvent(_player.SteamId, amount);
     }
 }
