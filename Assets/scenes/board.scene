@@ -1,5 +1,5 @@
 {
-  "__guid": "814d73a2-7346-45d7-833e-c71f007fe054",
+  "__guid": "72fcde04-81b5-4cf4-bd8c-b9eea8f6a4aa",
   "GameObjects": [
     {
       "__guid": "024eb414-bc10-4ad9-885d-eae5e42de48d",
@@ -21,6 +21,7 @@
               "Color": "Brown",
               "EventId": "start",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -56,6 +57,7 @@
               "__guid": "3cd895b6-f3f2-4895-9a69-5becd9b64e76",
               "Color": "Brown",
               "House_Cost": 50,
+              "Houses": 0,
               "Name": "Mediterranean Ave.",
               "Normal_Rent": [
                 2,
@@ -93,6 +95,7 @@
               "Color": "Brown",
               "EventId": "community",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -128,6 +131,7 @@
               "__guid": "0aed9d60-8b32-4e6a-ad6c-aab133d202c0",
               "Color": "Brown",
               "House_Cost": 50,
+              "Houses": 0,
               "Name": "Baltic Ave.",
               "Normal_Rent": [
                 4,
@@ -165,6 +169,7 @@
               "Color": "Brown",
               "EventId": "income_tax",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -200,6 +205,7 @@
               "__guid": "deba65df-a723-45b3-a373-40fa38b7cd4a",
               "Color": "Brown",
               "House_Cost": 0,
+              "Houses": 0,
               "Name": "Reading Railroad",
               "Normal_Rent": [
                 0,
@@ -236,6 +242,7 @@
               "__guid": "efe95e37-ee22-4665-a68d-146102b7203b",
               "Color": "LightBlue",
               "House_Cost": 50,
+              "Houses": 0,
               "Name": "Oriental Ave.",
               "Normal_Rent": [
                 6,
@@ -273,6 +280,7 @@
               "Color": "Brown",
               "EventId": "chance",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -308,6 +316,7 @@
               "__guid": "b0da137c-8668-4eb4-9439-2ea229e89e13",
               "Color": "LightBlue",
               "House_Cost": 0,
+              "Houses": 0,
               "Name": "Vermont Ave.",
               "Normal_Rent": [
                 6,
@@ -344,6 +353,7 @@
               "__guid": "279a95a5-4ad4-409d-99b6-df9f32f08d8f",
               "Color": "LightBlue",
               "House_Cost": 50,
+              "Houses": 0,
               "Name": "Connecticut Ave.",
               "Normal_Rent": [
                 8,
@@ -382,6 +392,7 @@
               "Color": "Brown",
               "EventId": "",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -418,6 +429,7 @@
               "__guid": "8f440de9-73e6-42c8-b523-7d0f4997e5d6",
               "Color": "Pink",
               "House_Cost": 100,
+              "Houses": 0,
               "Name": "St. Charles Place",
               "Normal_Rent": [
                 10,
@@ -455,6 +467,7 @@
               "__guid": "c9d81f0b-22ad-49a3-8de9-b75153470f5c",
               "Color": "Brown",
               "House_Cost": 0,
+              "Houses": 0,
               "Name": "Electric Company",
               "Normal_Rent": [
                 0,
@@ -492,6 +505,7 @@
               "__guid": "3dcb2e5a-5ca8-4096-a8ec-e0c365e4be1b",
               "Color": "Pink",
               "House_Cost": 100,
+              "Houses": 0,
               "Name": "States Ave.",
               "Normal_Rent": [
                 10,
@@ -529,6 +543,7 @@
               "__guid": "26b3c015-0c67-450c-b72e-381bde9e2f8e",
               "Color": "Pink",
               "House_Cost": 100,
+              "Houses": 0,
               "Name": "Virginia Ave.",
               "Normal_Rent": [
                 12,
@@ -566,6 +581,7 @@
               "__guid": "e85cc271-9180-46ed-843b-f3f6f102b6d2",
               "Color": "Brown",
               "House_Cost": 0,
+              "Houses": 0,
               "Name": "Pennsylvania R.R.",
               "Normal_Rent": [
                 0,
@@ -603,6 +619,7 @@
               "__guid": "ea9311d3-734e-4a13-9df1-80d5bc1b7380",
               "Color": "Orange",
               "House_Cost": 100,
+              "Houses": 0,
               "Name": "St. James Place",
               "Normal_Rent": [
                 14,
@@ -641,6 +658,7 @@
               "Color": "Brown",
               "EventId": "community",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -677,6 +695,7 @@
               "__guid": "84230ddf-f95c-4f9e-9e08-9c96686d27b7",
               "Color": "Orange",
               "House_Cost": 100,
+              "Houses": 0,
               "Name": "Tennessee Ave.",
               "Normal_Rent": [
                 14,
@@ -714,6 +733,7 @@
               "__guid": "cd607765-ab2c-42f8-943c-9b4070126ab7",
               "Color": "Orange",
               "House_Cost": 100,
+              "Houses": 0,
               "Name": "New York Ave.",
               "Normal_Rent": [
                 16,
@@ -750,6 +770,7 @@
               "__guid": "2130dfb3-63c9-4047-9660-2a19623b6eb5",
               "Color": "Brown",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -785,6 +806,7 @@
               "__guid": "e26a0864-213b-4ad7-872a-f5496250f4b3",
               "Color": "Red",
               "House_Cost": 150,
+              "Houses": 0,
               "Name": "Kentucky Ave.",
               "Normal_Rent": [
                 18,
@@ -822,6 +844,7 @@
               "Color": "Brown",
               "EventId": "chance",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -857,6 +880,7 @@
               "__guid": "c93e34d4-e7c4-4b0c-a1b7-61b9fa71479a",
               "Color": "Red",
               "House_Cost": 150,
+              "Houses": 0,
               "Name": "Indiana Ave.",
               "Normal_Rent": [
                 18,
@@ -893,6 +917,7 @@
               "__guid": "ecd2e475-734c-4b60-8d13-2b27265c022f",
               "Color": "Red",
               "House_Cost": 150,
+              "Houses": 0,
               "Name": "Illinois Ave.",
               "Normal_Rent": [
                 20,
@@ -929,6 +954,7 @@
               "__guid": "8c3e5462-59d9-49b4-b326-13fc2d53ee81",
               "Color": "Brown",
               "House_Cost": 0,
+              "Houses": 0,
               "Name": "B. \u0026 O. Railroad",
               "Normal_Rent": [
                 0,
@@ -965,6 +991,7 @@
               "__guid": "38111f50-9eb2-44e4-af02-5f014c629253",
               "Color": "Yellow",
               "House_Cost": 150,
+              "Houses": 0,
               "Name": "Atlantic Ave.",
               "Normal_Rent": [
                 22,
@@ -1001,6 +1028,7 @@
               "__guid": "a0b36246-cda9-438b-9604-e4c556280dbd",
               "Color": "Yellow",
               "House_Cost": 150,
+              "Houses": 0,
               "Name": "Ventnor Ave.",
               "Normal_Rent": [
                 22,
@@ -1037,6 +1065,7 @@
               "__guid": "9956795b-d6dd-409d-a12b-910afdacd8be",
               "Color": "Brown",
               "House_Cost": 0,
+              "Houses": 0,
               "Name": "Water Works",
               "Normal_Rent": [
                 0,
@@ -1073,6 +1102,7 @@
               "__guid": "a36d9341-bbb6-4f7b-a543-61ee28137aa1",
               "Color": "Yellow",
               "House_Cost": 150,
+              "Houses": 0,
               "Name": "Marvin Gardens",
               "Normal_Rent": [
                 22,
@@ -1110,6 +1140,7 @@
               "Color": "Brown",
               "EventId": "jail",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -1145,6 +1176,7 @@
               "__guid": "7d8883ab-ef7b-456b-8a87-9ae28a4f1436",
               "Color": "Green",
               "House_Cost": 200,
+              "Houses": 0,
               "Name": "Pacific Ave.",
               "Normal_Rent": [
                 26,
@@ -1181,6 +1213,7 @@
               "__guid": "f4705905-cb4e-4b86-b0ff-ed45896c0a2b",
               "Color": "Green",
               "House_Cost": 200,
+              "Houses": 0,
               "Name": "No. Carolina Ave.",
               "Normal_Rent": [
                 130,
@@ -1218,6 +1251,7 @@
               "Color": "Brown",
               "EventId": "community",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -1253,6 +1287,7 @@
               "__guid": "102d6511-465c-46b1-bdb3-3fd143ef3f42",
               "Color": "Green",
               "House_Cost": 200,
+              "Houses": 0,
               "Name": "Pennsylvania Ave.",
               "Normal_Rent": [
                 28,
@@ -1289,6 +1324,7 @@
               "__guid": "991ed332-55ca-4167-a5e8-936353dd525a",
               "Color": "Brown",
               "House_Cost": 0,
+              "Houses": 0,
               "Name": "Short Line R.R.",
               "Normal_Rent": [
                 0,
@@ -1326,6 +1362,7 @@
               "Color": "Brown",
               "EventId": "chance",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -1361,6 +1398,7 @@
               "__guid": "7996d06b-dd66-4567-b051-8ffd0c60e4ec",
               "Color": "Blue",
               "House_Cost": 200,
+              "Houses": 0,
               "Name": "Park Place",
               "Normal_Rent": [
                 35,
@@ -1398,6 +1436,7 @@
               "Color": "Brown",
               "EventId": "luxury_tax",
               "House_Cost": 0,
+              "Houses": 0,
               "Normal_Rent": [
                 0,
                 1,
@@ -1433,6 +1472,7 @@
               "__guid": "d31a755f-3fc6-4337-b37c-78e1bbb3dc76",
               "Color": "Blue",
               "House_Cost": 200,
+              "Houses": 0,
               "Name": "Boardwalk",
               "Normal_Rent": [
                 50,
@@ -2131,69 +2171,14 @@
                   "BlockedCards": {},
                   "ChanceCards": [
                     {
-                      "ActionId": 12,
-                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 4,
-                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 1,
-                      "Text": "Advance to Boardwalk",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 16,
-                      "Text": "Your building loan matures. Collect $150",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 14,
-                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 5,
-                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
-                      "Action": null
-                    },
-                    {
                       "ActionId": 11,
                       "Text": "Go to Jail. Go directly to Jail, do not pass Go, do not collect $200",
                       "ImageUrl": "ui/jail.png",
                       "Action": null
                     },
                     {
-                      "ActionId": 6,
-                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 7,
-                      "Text": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 13,
-                      "Text": "Speeding fine $15",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 15,
-                      "Text": "You have been elected Chairman of the Board. Pay each player $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 3,
-                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 2,
-                      "Text": "Advance to Go (Collect $200)",
+                      "ActionId": 10,
+                      "Text": "Go Back 3 Spaces",
                       "Action": null
                     },
                     {
@@ -2202,57 +2187,72 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 9,
-                      "Text": "Get Out of Jail Free",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 10,
-                      "Text": "Go Back 3 Spaces",
-                      "Action": null
-                    }
-                  ],
-                  "CommunityCards": [
-                    {
-                      "ActionId": 13,
-                      "Text": "Receive $25 consultancy fee",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 10,
-                      "Text": "Life insurance matures. Collect $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 16,
-                      "Text": "You inherit $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 7,
-                      "Text": "Holiday fund matures. Receive $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 1,
-                      "Text": "Advance to Go (Collect $200)",
+                      "ActionId": 6,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
                       "Action": null
                     },
                     {
                       "ActionId": 5,
-                      "Text": "Get Out of Jail Free",
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
                       "Action": null
                     },
                     {
-                      "ActionId": 11,
-                      "Text": "Pay hospital fees of $100",
+                      "ActionId": 3,
+                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 14,
+                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 16,
+                      "Text": "Your building loan matures. Collect $150",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 7,
+                      "Text": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 2,
+                      "Text": "Advance to Go (Collect $200)",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 12,
+                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
                       "Action": null
                     },
                     {
                       "ActionId": 15,
-                      "Text": "You have won second prize in a beauty contest. Collect $10",
+                      "Text": "You have been elected Chairman of the Board. Pay each player $50",
                       "Action": null
                     },
+                    {
+                      "ActionId": 13,
+                      "Text": "Speeding fine $15",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 1,
+                      "Text": "Advance to Boardwalk",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 4,
+                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 9,
+                      "Text": "Get Out of Jail Free",
+                      "Action": null
+                    }
+                  ],
+                  "CommunityCards": [
                     {
                       "ActionId": 8,
                       "Text": "Income tax refund. Collect $20",
@@ -2264,13 +2264,8 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 6,
-                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 2,
-                      "Text": "Bank error in your favor. Collect $200",
+                      "ActionId": 11,
+                      "Text": "Pay hospital fees of $100",
                       "Action": null
                     },
                     {
@@ -2279,13 +2274,58 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 4,
-                      "Text": "From sale of stock you get $50",
+                      "ActionId": 16,
+                      "Text": "You inherit $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 15,
+                      "Text": "You have won second prize in a beauty contest. Collect $10",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 5,
+                      "Text": "Get Out of Jail Free",
                       "Action": null
                     },
                     {
                       "ActionId": 3,
                       "Text": "Doctor\u2019s fee. Pay $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 7,
+                      "Text": "Holiday fund matures. Receive $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 6,
+                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 1,
+                      "Text": "Advance to Go (Collect $200)",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Receive $25 consultancy fee",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 10,
+                      "Text": "Life insurance matures. Collect $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 2,
+                      "Text": "Bank error in your favor. Collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 4,
+                      "Text": "From sale of stock you get $50",
                       "Action": null
                     },
                     {
@@ -2413,12 +2453,15 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.SoundBoxComponent",
-          "__guid": "88fbc163-a297-4598-abbf-b13cdde43c9a",
+          "__type": "MusicManager",
+          "__guid": "a3838272-7da9-48ba-866f-b147d8679c49",
+          "MusicStart": {
+            "Relative": 337.52576
+          },
           "DistanceAttenuation": false,
           "DistanceAttenuationOverride": false,
           "Force2d": true,
-          "MaxRepeatTime": 0,
+          "MaxRepeatTime": 1,
           "MinRepeatTime": 1,
           "Occlusion": false,
           "OcclusionOverride": false,
@@ -2427,16 +2470,16 @@
           "PlayOnStart": true,
           "ReflectionOverride": false,
           "Reflections": false,
-          "Repeat": true,
-          "Scale": "50,50,50",
-          "SoundEvent": "sounds/bgm.sound",
+          "Repeat": false,
+          "RepeatOffset": 7.85,
+          "SoundEvent": "sounds/ingame_music.sound",
           "SoundOverride": true,
           "StopOnNew": false,
           "TargetMixer": {
-            "Name": "music",
-            "Id": "ea6ae6bf-ecf4-489f-9d86-8c51b1f44a14"
+            "Name": "unknown",
+            "Id": "00000000-0000-0000-0000-000000000000"
           },
-          "Volume": 0.03
+          "Volume": 0.33
         }
       ]
     }
