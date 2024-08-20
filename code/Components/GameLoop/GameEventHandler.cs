@@ -1,11 +1,14 @@
 ﻿using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
+using Sandbox.Network;
 
 namespace Sandbox.Components.GameLoop;
 
 public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGameEventHandler<MovementDoneEvent>,
-                                IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>, IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<PlayerPaymentEvent> {
+                                IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>, 
+                                IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<PlayerPaymentEvent>,
+								IGameEventHandler<TurnFinishedEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
 	[Property] public Lobby Lobby { get; set; }
 	[Property] public MovementManager MovementManager { get; set; }
@@ -64,6 +67,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PropertyAuctionEvent eventArgs) {
 		IngameStateManager.AuctionBiddings = new NetDictionary<ulong, int>();
+		IngameStateManager.State = IngameUI.IngameUiStates.Auction;
 
 		foreach (var player in Lobby.Players) {
 			IngameStateManager.AuctionBiddings[player.SteamId] = 0;
@@ -83,5 +87,15 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
 		GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
 		GetPlayerFromEvent(eventArgs.Recipient).Money += eventArgs.Amount;
+	}
+
+	public void OnGameEvent(TurnFinishedEvent eventArgs) {
+		TurnManager.CurrentPlayerIndex = (TurnManager.CurrentPlayerIndex + 1) % TurnManager.CurrentLobby.Players.Count;
+
+		if (Networking.IsHost) {
+			foreach (var dice in Game.ActiveScene.GetAllComponents<Dice>()) {
+				dice.Network.AssignOwnership(TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
+			}
+		}
 	}
 }

@@ -228,8 +228,8 @@
     private void Auction() {
         var player = Lobby.Players[_turnManager.CurrentPlayerIndex];
         _turnManager.EmitPropertyAuctionEvent(player.CurrentField);
+        
         player.localUiState = LocalUIStates.None;
-        _stateManager.State = IngameUiStates.Auction;
     }
 
     private void EndTurn() {

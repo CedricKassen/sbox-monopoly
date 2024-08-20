@@ -75,12 +75,6 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void EmitTurnFinishedEvent() {
-		CurrentPlayerIndex = (CurrentPlayerIndex + 1) % CurrentLobby.Players.Count;
-
-		foreach (var dice in Game.ActiveScene.GetAllComponents<Dice>()) {
-			dice.Network.AssignOwnership(CurrentLobby.Players[CurrentPlayerIndex].Connection);
-		}
-
 		CurrentPhase = Phase.Rolling;
 		GameParentObject.Dispatch(new TurnFinishedEvent());
 	}
