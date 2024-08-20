@@ -46,13 +46,8 @@ public sealed class IngameStateManager : Component, IGameEventHandler<AuctionBid
 	[Property, HostSync] public float AuctionTimer { get; set; }
 
 	public void OnGameEvent(AuctionBidEvent eventArgs) {
-		var result = AuctionBiddings.TryGetValue(eventArgs.playerId, out var bid);
-		
-		if (result) {
-			AuctionBiddings[eventArgs.playerId] += eventArgs.Amount;
-		} else {
-			AuctionBiddings[eventArgs.playerId] = eventArgs.Amount;	
-		}
+		var currentMax = GetSortedBiddings()[0].Value;
+		AuctionBiddings[eventArgs.playerId] = currentMax + eventArgs.Amount;
 
 		AuctionTimer = AuctionTime;
 	}
