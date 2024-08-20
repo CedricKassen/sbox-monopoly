@@ -134,7 +134,7 @@
 	public ulong SteamId => Player.SteamId;
 
 	[Property]
-	public Dictionary<string, ulong> Owned { get; set; }
+	public NetDictionary<string, ulong> Owned { get; set; }
 
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt

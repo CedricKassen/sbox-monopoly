@@ -112,7 +112,10 @@ public sealed class CardActionManager : Component {
 
 
     private void DisplayPropertyCard(Player player, GameLocation location) {
-        IngameStateManager.State = IngameUI.IngameUiStates.Buying;
+        // IngameStateManager.State = IngameUI.IngameUiStates.Buying;
+        Log.Info("UIState : " + player.localUiState);
+        player.localUiState = IngameUI.LocalUIStates.Buying;
+        Log.Info("UIState : " + player.localUiState);
         IngameStateManager.Data = location;
     }
 }

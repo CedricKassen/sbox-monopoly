@@ -4,10 +4,16 @@
 
 <root>
 	<div class="curtain">
-		<div class="modal">
-			<ModalHeadline OnClose="@OnClose" Name="@Name"/>
-			@Content
-		</div>
+		@if (Content != null) {
+			<div class="modal">
+				<ModalHeadline OnClose="@OnClose" Name="@Name"/>
+				@Content
+			</div>
+		}
+
+		@if (CustomModalBody != null) {
+			@CustomModalBody
+		}
 	</div>
 </root>
 
@@ -15,9 +21,12 @@
 
 	[Property]
 	public RenderFragment Content { get; set; }
+	
+	[Property]
+    public RenderFragment CustomModalBody { get; set; }
 
 	[Property]
-	public Func<IngameUI.IngameUiStates> OnClose { get; set; }
+	public Action OnClose { get; set; }
 
 	[Property]
 	public string Name { get; set; }

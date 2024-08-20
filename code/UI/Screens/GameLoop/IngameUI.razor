@@ -1,6 +1,7 @@
 @namespace Monopoly.UI.Screens.GameLoop
 @inherits Sandbox.UI.Panel
 @using System
+@using Microsoft.VisualBasic
 @using Sandbox.Constants
 @using Sandbox.Network
 @implements Sandbox.UI.INavigatorPage
@@ -15,14 +16,14 @@
 
     <div id="mainPanel">
         <div class="autogrow"></div>
-        <button class="secondaryButton" onclick="@(() => _stateManager.State = IngameUiStates.Bank)"> 🏦 </button>
+        <button class="secondaryButton" onclick="@(() => _player.localUiState = LocalUIStates.Bank)"> 🏦 </button>
         <button class="secondaryButton" onclick="@(() => _stateManager.State = IngameUiStates.Trade)"> 💸 </button>
         <button class="mainButton @(Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll">
             GO
         </button>
-        <button class="secondaryButton" onclick="@(() => _stateManager.State = IngameUiStates.Building)"> 🏠 </button>
+        <button class="secondaryButton" onclick="@(() => _player.localUiState = LocalUIStates.Building)"> 🏠 </button>
         <div class="autogrow"></div>
-        <button class="secondaryButton" onclick="@(() => _stateManager.State = IngameUiStates.Options)"> ⚙️ </button>
+        <button class="secondaryButton" onclick="@(() => _player.localUiState = LocalUIStates.Options)"> ⚙️ </button>
     </div>
 
     <div style="position: absolute; bottom: 0; left: 0; width: 100%; flex-direction: row; justify-content: center">
@@ -32,8 +33,75 @@
     </div>
 
     @switch (_stateManager.State) {
-        case IngameUiStates.Bank:
-            <Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Bank">
+        case IngameUiStates.Trade:
+            <Modal OnClose=@CloseGlobalModal Name="Trading">
+                <Content>
+                    <p> Hello :3 </p>
+                </Content>
+            </Modal>
+            break;
+        case IngameUiStates.Auction:
+            var location = _stateManager.Data as GameLocation;
+            var biddings = _stateManager.GetSortedBiddings();
+            var timer = 100 / _stateManager.AuctionTime * _stateManager.AuctionTimer;
+            
+            <Modal>
+                <CustomModalBody>
+                    <div class="auction">
+                        <div class="timer">
+                            <div style="width: @(timer)%;"></div>
+                        </div>
+                        <div class="auctionBody">
+                            <div class="playerRow">
+                                @if (biddings.Count > 0) {
+                                    @foreach (var bid in biddings) {
+                                        var player = Lobby.Players.First(p => p.SteamId == bid.Key);
+                                        
+                                        <div class="playerBid">
+                                            <img src=@($"avatar:{bid.Key}") style="height: 100%; aspect-ratio: 1 / 1"/>
+                                            <div style="flex-direction: column">
+                                                <p style="font-weight: bold; font-size: 24px">@player.Name</p>
+                                                <p>$@bid.Value</p>
+                                            </div>
+                                        </div>
+                                    }
+                                } else {
+                                    <div class="playerBid">
+                                        <h3> No bids to display found </h3>
+                                    </div>
+                                }
+                            </div>
+                            <PropertyCard Name=@location.Name Rent=@location.Normal_Rent HousePrice=@location.House_Cost Color=@location.Color.ToString()></PropertyCard>
+                        </div>
+                        <div style="justify-content: space-evenly">
+                            <button onclick=@(() => BidAmount(10)) style="width: 140px; justify-content: center; background-color: #0d151d"> $10 </button>
+                            <button onclick=@(() => BidAmount(50)) style="width: 140px; justify-content: center; background-color: #0d151d"> $50 </button>
+                            <button onclick=@(() => BidAmount(100)) style="width: 140px; justify-content: center; background-color: #0d151d"> $100 </button>
+                        </div>
+                    </div>
+                </CustomModalBody>
+            </Modal>
+            break;
+        case IngameUiStates.Chance:
+            var card = _stateManager.Data as Card;
+            <Modal OnClose=@CloseGlobalModal Name="Options">
+                <Content>
+                    <ChanceCard Text=@card.Text ImageUrl=@card.ImageUrl></ChanceCard>
+                </Content>
+            </Modal>
+            break;
+        case IngameUiStates.Community_Chest:
+            <Modal OnClose=@CloseGlobalModal Name="Options">
+                <Content>
+                    <p> Community Chest </p>
+                </Content>
+            </Modal>
+            break;
+    }
+    
+    @switch (_player.localUiState) {
+        case LocalUIStates.Bank:
+            <Modal OnClose=@CloseLocalModal Name="Bank">
                 <Content>
                     <div class="table">
                         @foreach (var property in _stateManager.OwnedFields.ToArray().Where(pair => pair.Value == (ulong)Game.SteamId)) {
@@ -49,51 +117,31 @@
                 </Content>
             </Modal>
             break;
-        case IngameUiStates.Trade:
-            <Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Trading">
+        case LocalUIStates.Building:
+            <Modal OnClose=@CloseLocalModal Name="Building">
                 <Content>
                     <p> Hello :3 </p>
                 </Content>
             </Modal>
             break;
-        case IngameUiStates.Building:
-            <Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Building">
-                <Content>
-                    <p> Hello :3 </p>
-                </Content>
-            </Modal>
-            break;
-        case IngameUiStates.Buying:
+        case LocalUIStates.Buying:
             var location = _stateManager.Data as GameLocation;
-            <Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Buying">
-                <Content>
-                    <PropertyCard Name=@location.Name Rent=@location.Normal_Rent HousePrice=@location.House_Cost Color=@location.Color.ToString()></PropertyCard>
-                    <div style="gap: 12px">
-                        <button onclick=@Buy> Buy </button>
-                        <button> Auction </button>
+            <Modal>
+                <CustomModalBody>
+                    <div style="flex-direction: column; gap: 16px; align-items: center">
+                        <PropertyCard Name=@location.Name Rent=@location.Normal_Rent HousePrice=@location.House_Cost Color=@location.Color.ToString()></PropertyCard>
+                        <div style="gap: 12px">
+                            <button onclick=@Buy style="padding: 2px 8px"> Buy </button>
+                            <button onclick=@Auction style="padding: 2px 8px"> Auction </button>
+                        </div>
                     </div>
-                </Content>
+                </CustomModalBody>
             </Modal>
             break;
-        case IngameUiStates.Options:
-            <Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Options">
+        case LocalUIStates.Options:
+            <Modal OnClose=@CloseLocalModal Name="Options">
                 <Content>
                     <button onclick=@LeaveLobby> Leave Game </button>
-                </Content>
-            </Modal>
-            break;
-        case IngameUiStates.Chance:
-            var card = _stateManager.Data as Card;
-            <Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Options">
-                <Content>
-                    <ChanceCard Text=@card.Text ImageUrl=@card.ImageUrl></ChanceCard>
-                </Content>
-            </Modal>
-            break;
-        case IngameUiStates.Community_Chest:
-            <Modal OnClose=@(() => _stateManager.State = IngameUiStates.None) Name="Options">
-                <Content>
-                    <p> Community Chest </p>
                 </Content>
             </Modal>
             break;
@@ -108,15 +156,20 @@
 </root>
 
 @code {
-
     public enum IngameUiStates {
-        Bank,
         Trade,
+        Chance,
+        Community_Chest,
+        Auction,
+        None
+    }
+    
+    public enum LocalUIStates {
+        Trade,
+        Bank,
         Options,
         Building,
         Buying,
-        Chance,
-        Community_Chest,
         None
     }
 
@@ -128,15 +181,19 @@
 
     private readonly List<Dice> _dice = new(Game.ActiveScene.GetAllComponents<Dice>());
     private readonly IngameStateManager _stateManager = Game.ActiveScene.GetAllComponents<IngameStateManager>().First();
+    private Player _player { get; set; } = null;
 
     private bool _showRoll;
-
 
     /// <summary>
     ///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
     /// </summary>
     protected override int BuildHash() {
-        return HashCode.Combine(Lobby, _showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data, _stateManager.OwnedFields);
+        if (_player == null) {
+            _player = Game.ActiveScene.GetAllComponents<Player>().First(player => player.SteamId == (ulong)Game.SteamId);
+        }
+
+        return HashCode.Combine(_showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data, _stateManager.OwnedFields, _player.localUiState, _stateManager.AuctionTimer);
     }
 
     private void LeaveLobby() {
@@ -166,11 +223,31 @@
 
     private void Buy() {
         _turnManager.EmitPropertyAquiredEvent(Lobby.Players[_turnManager.CurrentPlayerIndex].CurrentField);
-        _stateManager.State = IngameUiStates.None;
+        CloseLocalModal();
+    }
+    
+    private void Auction() {
+        var player = Lobby.Players[_turnManager.CurrentPlayerIndex];
+        _turnManager.EmitPropertyAuctionEvent(player.CurrentField);
+        player.localUiState = LocalUIStates.None;
+        _stateManager.State = IngameUiStates.Auction;
     }
 
     private void EndTurn() {
         _turnManager.EmitTurnFinishedEvent();
     }
 
+    private void CloseLocalModal() {
+        _player.localUiState = LocalUIStates.None;
+    }
+    
+    private void CloseGlobalModal() {
+        _stateManager.State = IngameUiStates.None;
+    }
+
+    private void BidAmount(int amount) {
+        
+        if (_player.Money >= _stateManager.AuctionBiddings[_player.SteamId] + amount)
+        _turnManager.EmitAuctionBidEvent(_player.SteamId, amount);
+    }
 }

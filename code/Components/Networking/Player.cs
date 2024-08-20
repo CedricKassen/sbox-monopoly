@@ -1,3 +1,5 @@
+using Monopoly.UI.Screens.GameLoop;
+
 public sealed class Player : Component {
 	private string _name;
 	private ulong _steamId;
@@ -27,6 +29,9 @@ public sealed class Player : Component {
 	[Property] public int CurrentField { get; set; }
 
 	[Property] public Connection Connection { get; set; }
+
+	[Property]
+	public IngameUI.LocalUIStates localUiState { get; set; } = IngameUI.LocalUIStates.None;
 
 
 	protected override void OnUpdate() { }
