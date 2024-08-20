@@ -7,23 +7,41 @@ namespace Sandbox.Components.GameLoop;
 public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGameEventHandler<MovementDoneEvent>,
                                 IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>, IGameEventHandler<AuctionFinishedEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
-
 	[Property] public Lobby Lobby { get; set; }
-
 	[Property] public MovementManager MovementManager { get; set; }
 	[Property] public CardActionManager CardActionManager { get; set; }
 	[Property] public IngameStateManager IngameStateManager { get; set; }
 	[Property] public TurnManager TurnManager { get; set; }
 
 	public void OnGameEvent(MovementDoneEvent eventArgs) {
-		IngameStateManager.OwnedFields.TryGetValue(eventArgs.Location.GameObject.Name, out var ownedField);
-		if (ownedField == 0 || eventArgs.Location.Type == GameLocation.PropertyType.Event) {
-			CardActionManager.DisplayCardFor(GetPlayerFromEvent(eventArgs), eventArgs.Location);
+		IngameStateManager.OwnedFields.TryGetValue(eventArgs.Location.GameObject.Name, out var fieldOwner);
+		var currentPlayer = GetPlayerFromEvent(eventArgs);
+		
+		if (fieldOwner == 0 || eventArgs.Location.Type == GameLocation.PropertyType.Event) {
+			CardActionManager.DisplayCardFor(currentPlayer, eventArgs.Location);
 			return;
 		}
 
-		if (ownedField != (ulong)Game.SteamId) {
-			Log.Info("Pay " + eventArgs.Location.Normal_Rent[0]);
+		if (fieldOwner != eventArgs.playerId) {
+			if (eventArgs.Location.Type == GameLocation.PropertyType.Normal) {
+				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, eventArgs.Location.Normal_Rent[eventArgs.Location.Houses] );
+			}
+
+			if (eventArgs.Location.Type == GameLocation.PropertyType.Railroad) {
+				var railroadCount = IngameStateManager.OwnedFields.Count(f => f.Value == fieldOwner &&
+				                                                              (f.Key == "railroad1" ||
+				                                                               f.Key == "railroad2" ||
+				                                                               f.Key == "railroad3" ||
+				                                                               f.Key == "railroad4")); 
+				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, eventArgs.Location.Railroad_Rent[railroadCount - 1] );
+			}
+
+			if (eventArgs.Location.Type == GameLocation.PropertyType.Utility) {
+				var utilityCount = IngameStateManager.OwnedFields.Count(f => f.Value == fieldOwner &&
+				                                                              (f.Key == "electricCompany" ||
+				                                                               f.Key == "waterCompany"));
+				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, eventArgs.Location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount );
+			}
 		}
 	}
 
@@ -34,10 +52,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(RolledEvent eventArgs) {
 		MovementManager.StartMovement(GetPlayerFromEvent(eventArgs), eventArgs.Number);
-	}
-
-	private Player GetPlayerFromEvent(BaseEvent eventArgs) {
-		return Lobby.Players.Find(player => player.SteamId == eventArgs.playerId);
+		GetPlayerFromEvent(eventArgs).LastDiceCount = eventArgs.Number;
 	}
 
 	public void OnGameEvent(PropertyAuctionEvent eventArgs) {
@@ -50,7 +65,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
 		TurnManager.EmitPropertyAquiredEvent(eventArgs.PropertyIndex, eventArgs.playerId);
-		Lobby.Players.First(p => p.SteamId == eventArgs.playerId).Money -= eventArgs.Amount;
+		GetPlayerFromEvent(eventArgs).Money -= eventArgs.Amount;
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
+	}
+	
+	private Player GetPlayerFromEvent(BaseEvent eventArgs) {
+		return Lobby.Players.Find(player => player.SteamId == eventArgs.playerId);
 	}
 }

@@ -50,6 +50,10 @@ public sealed class GameLocation : Component {
 	[Property]
 	[ShowIf("Type", PropertyType.Event)]
 	public string EventId { get; set; }
+	
+	[Property]
+	[ShowIf("Type", PropertyType.Normal)]
+	public int Houses { get; set; } = 0;
 
 	protected override void OnUpdate() { }
 }
