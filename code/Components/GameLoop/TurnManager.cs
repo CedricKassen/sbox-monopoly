@@ -31,15 +31,15 @@ public class TurnManager : Component {
 	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
 
 	[Broadcast]
-	public void EmitRolledEvent(int value) {
-		GameParentObject.Dispatch(new RolledEvent { playerId = CurrentLobby.Players[0].SteamId, Number = value });
+	public void EmitRolledEvent(ulong playerId, int value) {
+		GameParentObject.Dispatch(new RolledEvent { playerId = playerId, Number = value });
 		CurrentPhase = Phase.RoundAction;
 	}
 
 	[Broadcast]
-	public void EmitPropertyAquiredEvent(int propertyIndex, ulong playerId = 0) {
+	public void EmitPropertyAquiredEvent(ulong playerId, int propertyIndex) {
 		GameParentObject.Dispatch(
-			new PropertyAquiredEvent { playerId = playerId != 0 ? playerId : CurrentLobby.Players[0].SteamId, PropertyIndex = propertyIndex });
+			new PropertyAquiredEvent { playerId = playerId, PropertyIndex = propertyIndex });
 		CurrentPhase = Phase.PlayerAction;
 	}
 	

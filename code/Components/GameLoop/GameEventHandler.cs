@@ -47,7 +47,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PropertyAquiredEvent eventArgs) {
 		var location = LocationContainer.Children[eventArgs.PropertyIndex];
-		IngameStateManager.OwnedFields[location.Name] = eventArgs.playerId;
+		var component = location.Components.Get<GameLocation>();
+		var player = GetPlayerFromEvent(eventArgs.playerId);
+		
+		if (component.Price <= player.Money) {
+			player.Money -= component.Price;
+			IngameStateManager.OwnedFields[location.Name] = eventArgs.playerId;
+		}
 	}
 
 	public void OnGameEvent(RolledEvent eventArgs) {
@@ -65,7 +71,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
-		TurnManager.EmitPropertyAquiredEvent(eventArgs.PropertyIndex, eventArgs.playerId);
+		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex);
 		GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
 	}

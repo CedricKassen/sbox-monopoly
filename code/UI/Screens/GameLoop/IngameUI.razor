@@ -147,7 +147,7 @@
     }
 
 
-    @if (_turnManager.CurrentPhase == TurnManager.Phase.PlayerAction) {
+    @if (_turnManager.CurrentPhase == TurnManager.Phase.PlayerAction && Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId) {
         <div class="endTurn">
             <button onclick=@EndTurn> End Turn </button>
         </div>
@@ -213,7 +213,7 @@
             await Task.DelayRealtimeSeconds(0.5f);
         }
 
-        _turnManager.EmitRolledEvent(_dice.Aggregate(0, (accumulator, dice) => dice.GetRollValue() + accumulator));
+        _turnManager.EmitRolledEvent((ulong)Game.SteamId, _dice.Aggregate(0, (accumulator, dice) => dice.GetRollValue() + accumulator));
 
         _showRoll = true;
         await Task.DelayRealtimeSeconds(2f);
@@ -221,7 +221,7 @@
     }
 
     private void Buy() {
-        _turnManager.EmitPropertyAquiredEvent(Lobby.Players[_turnManager.CurrentPlayerIndex].CurrentField);
+        _turnManager.EmitPropertyAquiredEvent((ulong)Game.SteamId, Lobby.Players[_turnManager.CurrentPlayerIndex].CurrentField);
         CloseLocalModal();
     }
     
