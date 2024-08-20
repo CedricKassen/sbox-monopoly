@@ -37,9 +37,9 @@ public class TurnManager : Component {
 	}
 
 	[Broadcast]
-	public void EmitPropertyAquiredEvent(int propertyIndex) {
+	public void EmitPropertyAquiredEvent(int propertyIndex, ulong playerId = 0) {
 		GameParentObject.Dispatch(
-			new PropertyAquiredEvent { playerId = CurrentLobby.Players[0].SteamId, PropertyIndex = propertyIndex });
+			new PropertyAquiredEvent { playerId = playerId != 0 ? playerId : CurrentLobby.Players[0].SteamId, PropertyIndex = propertyIndex });
 		CurrentPhase = Phase.PlayerAction;
 	}
 	
@@ -88,5 +88,11 @@ public class TurnManager : Component {
 	[Broadcast]
 	public void EmitAuctionBidEvent(ulong PlayerId, int Amount) {
 		GameParentObject.Dispatch(new AuctionBidEvent {playerId = PlayerId, Amount = Amount});
+	}
+
+	[Broadcast]
+	public void EmitAuctionFinishedEvent(int PropertyIndex, ulong PlayerId, int Amount) {
+		CurrentPhase = Phase.PlayerAction;
+		GameParentObject.Dispatch(new AuctionFinishedEvent {PropertyIndex = PropertyIndex, playerId = PlayerId, Amount = Amount});
 	}
 }

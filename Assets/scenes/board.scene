@@ -1944,6 +1944,10 @@
               "AuctionTime": 8,
               "AuctionBiddings": {},
               "AuctionTimer": 0,
+              "LocationContainer": {
+                "_type": "gameobject",
+                "go": "024eb414-bc10-4ad9-885d-eae5e42de48d"
+              },
               "OwnedFields": {
                 "brown1": 0,
                 "brown2": 0,
@@ -1976,7 +1980,13 @@
                 "chanceJailFree": 0,
                 "communityJailFree": 0
               },
-              "State": "None"
+              "State": "None",
+              "TurnManager": {
+                "_type": "component",
+                "component_id": "3a3de850-0708-4654-ac37-0751891b2abc",
+                "go": "4d880113-7b4d-4756-ad95-7eed4744d084",
+                "component_type": "TurnManager"
+              }
             }
           ],
           "Children": [
@@ -2076,6 +2086,12 @@
                     "component_id": "069b4e7c-3cce-45d4-9a2b-a244aa336851",
                     "go": "dd179206-68ac-4c6b-9019-f033562ff797",
                     "component_type": "MovementManager"
+                  },
+                  "TurnManager": {
+                    "_type": "component",
+                    "component_id": "3a3de850-0708-4654-ac37-0751891b2abc",
+                    "go": "4d880113-7b4d-4756-ad95-7eed4744d084",
+                    "component_type": "TurnManager"
                   }
                 }
               ]
@@ -2115,8 +2131,8 @@
                   "BlockedCards": {},
                   "ChanceCards": [
                     {
-                      "ActionId": 13,
-                      "Text": "Speeding fine $15",
+                      "ActionId": 12,
+                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
                       "Action": null
                     },
                     {
@@ -2125,23 +2141,18 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 7,
-                      "Text": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.",
+                      "ActionId": 1,
+                      "Text": "Advance to Boardwalk",
                       "Action": null
                     },
                     {
-                      "ActionId": 3,
-                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
+                      "ActionId": 16,
+                      "Text": "Your building loan matures. Collect $150",
                       "Action": null
                     },
                     {
-                      "ActionId": 15,
-                      "Text": "You have been elected Chairman of the Board. Pay each player $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 9,
-                      "Text": "Get Out of Jail Free",
+                      "ActionId": 14,
+                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
                       "Action": null
                     },
                     {
@@ -2156,18 +2167,28 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 8,
-                      "Text": "Bank pays you dividend of $50",
-                      "Action": null
-                    },
-                    {
                       "ActionId": 6,
                       "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
                       "Action": null
                     },
                     {
-                      "ActionId": 12,
-                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
+                      "ActionId": 7,
+                      "Text": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Speeding fine $15",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 15,
+                      "Text": "You have been elected Chairman of the Board. Pay each player $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 3,
+                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
                       "Action": null
                     },
                     {
@@ -2176,18 +2197,13 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 14,
-                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
+                      "ActionId": 8,
+                      "Text": "Bank pays you dividend of $50",
                       "Action": null
                     },
                     {
-                      "ActionId": 1,
-                      "Text": "Advance to Boardwalk",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 16,
-                      "Text": "Your building loan matures. Collect $150",
+                      "ActionId": 9,
+                      "Text": "Get Out of Jail Free",
                       "Action": null
                     },
                     {
@@ -2198,28 +2214,18 @@
                   ],
                   "CommunityCards": [
                     {
-                      "ActionId": 5,
-                      "Text": "Get Out of Jail Free",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 3,
-                      "Text": "Doctor\u2019s fee. Pay $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 6,
-                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 16,
-                      "Text": "You inherit $100",
+                      "ActionId": 13,
+                      "Text": "Receive $25 consultancy fee",
                       "Action": null
                     },
                     {
                       "ActionId": 10,
                       "Text": "Life insurance matures. Collect $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 16,
+                      "Text": "You inherit $100",
                       "Action": null
                     },
                     {
@@ -2233,6 +2239,16 @@
                       "Action": null
                     },
                     {
+                      "ActionId": 5,
+                      "Text": "Get Out of Jail Free",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 11,
+                      "Text": "Pay hospital fees of $100",
+                      "Action": null
+                    },
+                    {
                       "ActionId": 15,
                       "Text": "You have won second prize in a beauty contest. Collect $10",
                       "Action": null
@@ -2243,18 +2259,13 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 11,
-                      "Text": "Pay hospital fees of $100",
-                      "Action": null
-                    },
-                    {
                       "ActionId": 14,
                       "Text": "You are assessed for street repair. $40 per house. $115 per hotel",
                       "Action": null
                     },
                     {
-                      "ActionId": 12,
-                      "Text": "Pay school fees of $50",
+                      "ActionId": 6,
+                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
                       "Action": null
                     },
                     {
@@ -2263,18 +2274,23 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 9,
-                      "Text": "It is your birthday. Collect $10 from every player",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 13,
-                      "Text": "Receive $25 consultancy fee",
+                      "ActionId": 12,
+                      "Text": "Pay school fees of $50",
                       "Action": null
                     },
                     {
                       "ActionId": 4,
                       "Text": "From sale of stock you get $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 3,
+                      "Text": "Doctor\u2019s fee. Pay $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 9,
+                      "Text": "It is your birthday. Collect $10 from every player",
                       "Action": null
                     }
                   ],

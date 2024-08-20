@@ -42,16 +42,14 @@
             break;
         case IngameUiStates.Auction:
             var location = _stateManager.Data as GameLocation;
-            var biddings = _stateManager.AuctionBiddings.ToList();
-            
-            biddings.Sort((left, right) => left.Value > right.Value ? left.Value : right.Value);
+            var biddings = _stateManager.GetSortedBiddings();
             var timer = 100 / _stateManager.AuctionTime * _stateManager.AuctionTimer;
             
             <Modal>
                 <CustomModalBody>
                     <div class="auction">
                         <div class="timer">
-                            <div style="width: @(timer)%; height: 100%; background-color: #0c499a; margin: 0; border-radius: 0"></div>
+                            <div style="width: @(timer)%;"></div>
                         </div>
                         <div class="auctionBody">
                             <div class="playerRow">

@@ -38,6 +38,8 @@ public sealed class IngameStateManager : Component, IGameEventHandler<AuctionBid
 		{ "communityJailFree", 0 }
 	};
 
+	[Property] public TurnManager TurnManager { get; set; }
+	[Property] public GameObject LocationContainer { get; set; }
 	[Property, HostSync] public IngameUI.IngameUiStates State { get; set; } = IngameUI.IngameUiStates.None;
 	[Property, HostSync] public NetDictionary<ulong, int> AuctionBiddings { get; set; } = new();
 	[Property] public readonly int AuctionTime = 8;
@@ -62,6 +64,25 @@ public sealed class IngameStateManager : Component, IGameEventHandler<AuctionBid
 
 		if (AuctionTimer < 0) {
 			AuctionTimer = 0;
+			
+			var location = Data as GameLocation;
+			var locationIndex = LocationContainer.Children.FindIndex(c =>
+					c.Components.Get<GameLocation>().Id == location.Id);
+			var biddingList = GetSortedBiddings();
+			
+			
+			Log.Info(biddingList.Count);
+			
+			Log.Info(TurnManager);
+			
+			TurnManager.EmitAuctionFinishedEvent(locationIndex, biddingList[0].Key, biddingList[0].Value);
 		}
+	}
+
+	public List<KeyValuePair<ulong, int>> GetSortedBiddings() {
+		var list = AuctionBiddings.ToList();
+		list.Sort((left, right) => left.Value > right.Value ? 1 : -1);
+		
+		return list;
 	}
 }

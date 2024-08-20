@@ -1,10 +1,11 @@
-﻿using Sandbox.Events;
+﻿using Monopoly.UI.Screens.GameLoop;
+using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 
 namespace Sandbox.Components.GameLoop;
 
 public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGameEventHandler<MovementDoneEvent>,
-                                IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent> {
+                                IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>, IGameEventHandler<AuctionFinishedEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
 
 	[Property] public Lobby Lobby { get; set; }
@@ -12,6 +13,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	[Property] public MovementManager MovementManager { get; set; }
 	[Property] public CardActionManager CardActionManager { get; set; }
 	[Property] public IngameStateManager IngameStateManager { get; set; }
+	[Property] public TurnManager TurnManager { get; set; }
 
 	public void OnGameEvent(MovementDoneEvent eventArgs) {
 		IngameStateManager.OwnedFields.TryGetValue(eventArgs.Location.GameObject.Name, out var ownedField);
@@ -44,5 +46,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		foreach (var player in Lobby.Players) {
 			IngameStateManager.AuctionBiddings[player.SteamId] = 0;
 		}
+	}
+
+	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
+		TurnManager.EmitPropertyAquiredEvent(eventArgs.PropertyIndex, eventArgs.playerId);
+		Lobby.Players.First(p => p.SteamId == eventArgs.playerId).Money -= eventArgs.Amount;
+		IngameStateManager.State = IngameUI.IngameUiStates.None;
 	}
 }
