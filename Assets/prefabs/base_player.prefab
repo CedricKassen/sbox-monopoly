@@ -9,7 +9,9 @@
         "__type": "Player",
         "__guid": "320bb37f-1eae-4cdd-b08b-d865230c02a1",
         "CurrentField": 0,
-        "Money": 0,
+        "LastDiceCount": 0,
+        "localUiState": "None",
+        "Money": 1500,
         "SteamId": 0
       }
     ],

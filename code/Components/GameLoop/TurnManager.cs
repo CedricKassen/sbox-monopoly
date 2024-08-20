@@ -51,8 +51,8 @@ public class TurnManager : Component {
 	}
 
 	[Broadcast]
-	public void EmitPlayerPaymentEvent(ulong playerId, int amount) {
-		GameParentObject.Dispatch(new PlayerPaymentEvent());
+	public void EmitPlayerPaymentEvent(ulong playerId, ulong recipientId, int amount) {
+		GameParentObject.Dispatch(new PlayerPaymentEvent {playerId = playerId, Amount = amount, Recipient = recipientId});
 		CurrentPhase = Phase.PlayerAction;
 	}
 

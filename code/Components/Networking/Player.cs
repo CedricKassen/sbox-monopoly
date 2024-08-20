@@ -32,6 +32,9 @@ public sealed class Player : Component {
 
 	[Property]
 	public IngameUI.LocalUIStates localUiState { get; set; } = IngameUI.LocalUIStates.None;
+	
+	[Property]
+	public int LastDiceCount { get; set; } = 0;
 
 
 	protected override void OnUpdate() { }
