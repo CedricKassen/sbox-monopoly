@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 public sealed class GameLocation : Component {
 	public enum Colors {
 		Brown,
@@ -54,6 +56,18 @@ public sealed class GameLocation : Component {
 	[Property]
 	[ShowIf("Type", PropertyType.Normal)]
 	public int Houses { get; set; } = 0;
+	
+	[Property]
+	[HideIf("Type", PropertyType.Event)]
+	public bool Mortgaged { get; set; } = false;
+
+	[Property]
+	public int PropertyIndex { get; set; }
+
+	protected override Task OnLoad() {
+		PropertyIndex = GameObject.Parent.Children.FindIndex(o => o.Id == GameObject.Id);
+		return base.OnLoad();
+	}
 
 	protected override void OnUpdate() { }
 }

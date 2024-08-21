@@ -107,8 +107,14 @@
                             var curLocation = Game.ActiveScene.GetAllObjects(true).First(o => o.Name == property.Key).Components.Get<GameLocation>();
                             <div class="row">
                                 <p> @curLocation.Name </p>
+                                <p> Mortgage: $@(curLocation.Price / 2)</p>
                                 <div>
-                                    <button> Mortgage </button>
+                                    @if (!curLocation.Mortgaged) {
+                                        <button onclick=@(() => Mortgage(curLocation.PropertyIndex))> Mortgage </button>   
+                                    }
+                                    else {
+                                        <button onclick=@(() => PayMortgage(curLocation.PropertyIndex))> Pay Mortgage </button>
+                                    }
                                 </div>
                             </div>
                         }
@@ -245,8 +251,15 @@
     }
 
     private void BidAmount(int amount) {
-        
         if (_player.Money >= _stateManager.AuctionBiddings[_player.SteamId] + amount)
         _turnManager.EmitAuctionBidEvent(_player.SteamId, amount);
+    }
+
+    private void Mortgage(int propertyIndex) {
+        _turnManager.EmitPropertyMortgagedEvent(propertyIndex, (ulong)Game.SteamId);
+    }
+    
+    private void PayMortgage(int propertyIndex) {
+        _turnManager.EmitPropertyMortgagePayedEvent(propertyIndex, (ulong)Game.SteamId);
     }
 }
