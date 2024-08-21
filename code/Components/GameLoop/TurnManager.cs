@@ -89,4 +89,16 @@ public class TurnManager : Component {
 		CurrentPhase = Phase.PlayerAction;
 		GameParentObject.Dispatch(new AuctionFinishedEvent {PropertyIndex = PropertyIndex, playerId = PlayerId, Amount = Amount});
 	}
+	
+	[Broadcast]
+	public void EmitPropertyMortgagedEvent(int PropertyIndex, ulong PlayerId) {
+		CurrentPhase = Phase.PlayerAction;
+		GameParentObject.Dispatch(new PropertyMortgagedEvent {PropertyIndex = PropertyIndex, playerId = PlayerId});
+	}
+	
+	[Broadcast]
+	public void EmitPropertyMortgagePayedEvent(int PropertyIndex, ulong PlayerId) {
+		CurrentPhase = Phase.PlayerAction;
+		GameParentObject.Dispatch(new PropertyMortgagePayedEvent {PropertyIndex = PropertyIndex, playerId = PlayerId});
+	}
 }

@@ -172,6 +172,13 @@ PlayerCard {
     width: 100%;
     background-color: #666666cc;
   }
+
+  .ownership-dot-mortgage {
+    height: 100%;
+    width: 5px;
+    transform: rotate(45deg) translate(-6px, -3px);
+    background-color: $red300;
+  }
 }
 
 .propertyCard {
