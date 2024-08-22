@@ -30,11 +30,11 @@ public sealed class Player : Component {
 
 	[Property] public Connection Connection { get; set; }
 
-	[Property]
-	public IngameUI.LocalUIStates localUiState { get; set; } = IngameUI.LocalUIStates.None;
-	
-	[Property]
-	public int LastDiceCount { get; set; } = 0;
+	[Property] public IngameUI.LocalUIStates localUiState { get; set; } = IngameUI.LocalUIStates.None;
+
+	[Property] public int LastDiceCount { get; set; } = 0;
+
+	[Property] public int DoublesCount { get; set; } = 0;
 
 
 	protected override void OnUpdate() { }
