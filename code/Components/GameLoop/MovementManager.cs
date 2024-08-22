@@ -80,8 +80,14 @@ public sealed class MovementManager : Component {
 		Travelled++;
 		_timer = 0;
 
+		if (CurrentField == 0) {
+			if (Networking.IsHost) {
+				Player.Money += 200;	
+			}
+		}
+
 		if (ToTravel == Travelled || ToTravel == -Travelled) {
-			CurrentField += Backwards ? 1 : -1;
+			CurrentField = Math.Mod(CurrentField + (Backwards ? 1 : -1), 40);
 
 			Player.CurrentField = CurrentField;
 			var steamID = Player.SteamId;
