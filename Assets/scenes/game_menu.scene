@@ -67,6 +67,41 @@
           "Enabled": true
         }
       ]
+    },
+    {
+      "__guid": "bbf82a2f-5f04-4c92-8184-a9c752ed0d37",
+      "Flags": 0,
+      "Name": "MusicManager",
+      "Position": "-307.5419,-10.62484,218.1892",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SoundBoxComponent",
+          "__guid": "3ea2ab12-8bf3-4adc-9de0-bb16cfb853d7",
+          "DistanceAttenuation": false,
+          "DistanceAttenuationOverride": false,
+          "Force2d": true,
+          "MaxRepeatTime": 0,
+          "MinRepeatTime": 1,
+          "Occlusion": false,
+          "OcclusionOverride": false,
+          "OcclusionRadius": 32,
+          "Pitch": 1,
+          "PlayOnStart": true,
+          "ReflectionOverride": false,
+          "Reflections": false,
+          "Repeat": true,
+          "Scale": "50,50,50",
+          "SoundEvent": "sounds/menu_music.sound",
+          "SoundOverride": true,
+          "StopOnNew": false,
+          "TargetMixer": {
+            "Name": "music",
+            "Id": "f60323ac-d7a9-4b91-ba47-59f9a8f3132b"
+          },
+          "Volume": 0.11
+        }
+      ]
     }
   ],
   "SceneProperties": {
