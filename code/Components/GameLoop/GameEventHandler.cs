@@ -31,8 +31,17 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(MovementDoneEvent eventArgs) {
 		IngameStateManager.OwnedFields.TryGetValue(eventArgs.Location.GameObject.Name, out var fieldOwner);
 		var currentPlayer = GetPlayerFromEvent(eventArgs.playerId);
-
+		
+		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.PlayerAction);
+		
 		if (fieldOwner == 0 || eventArgs.Location.Type == GameLocation.PropertyType.Event) {
+			if (eventArgs.Location.EventId == "start") {
+				if (Networking.IsHost) {
+					currentPlayer.Money += 200;	
+				}
+				return;
+			}
+			
 			CardActionManager.DisplayCardFor(currentPlayer, eventArgs.Location);
 			return;
 		}
@@ -155,10 +164,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	private void ChangeDiceOwnershipToCurrentPlayer() {
-		if (Networking.IsHost) {
-			foreach (var dice in Game.ActiveScene.GetAllComponents<Dice>()) {
-				dice.Network.AssignOwnership(
-					TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
+		var diceList = new List<Dice>(Game.ActiveScene.GetAllComponents<Dice>());
+		
+		if (Networking.IsHost && diceList.Count > 0) {
+			foreach (var dice in diceList) {
+				dice.Network.AssignOwnership(TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
 			}
 		}
 	}
