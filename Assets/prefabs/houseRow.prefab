@@ -11,7 +11,6 @@
         "Name": "House 4",
         "Position": "0.000006808258,-14.26129,0",
         "Rotation": "0,0,1,-0.00000004371139",
-        "Enabled": true,
         "__Prefab": "prefabs/house.prefab",
         "__PrefabVariables": {}
       },
@@ -21,7 +20,6 @@
         "Name": "House 3",
         "Position": "0.0000059827,-4.817997,0",
         "Rotation": "0,0,1,-0.00000004371139",
-        "Enabled": true,
         "__Prefab": "prefabs/house.prefab",
         "__PrefabVariables": {}
       },
@@ -31,7 +29,6 @@
         "Name": "House 2",
         "Position": "0.000005123445,5.010722,0",
         "Rotation": "0,0,1,-0.00000004371139",
-        "Enabled": true,
         "__Prefab": "prefabs/house.prefab",
         "__PrefabVariables": {}
       },
@@ -41,7 +38,6 @@
         "Name": "House",
         "Position": "0.000004314734,14.2613,0",
         "Rotation": "0,0,1,-0.00000004371139",
-        "Enabled": true,
         "__Prefab": "prefabs/house.prefab",
         "__PrefabVariables": {}
       }
