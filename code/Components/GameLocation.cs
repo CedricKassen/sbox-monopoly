@@ -45,6 +45,11 @@ public sealed class GameLocation : Component {
 
     [Property]
     [ShowIf("Type", PropertyType.Normal)]
+    [Description("Array of the indices of all members of the group to which this location belongs")]
+    public int[] GroupMembers { get; set; }
+
+    [Property]
+    [ShowIf("Type", PropertyType.Normal)]
     public int[] Normal_Rent { get; set; } = { 0, 1, 2, 3, 4, 5 };
 
     [Property]
