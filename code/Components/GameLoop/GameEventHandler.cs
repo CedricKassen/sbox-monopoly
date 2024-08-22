@@ -131,8 +131,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	private void ChangeDiceOwnershipToCurrentPlayer() {
-		if (Networking.IsHost) {
-			foreach (var dice in Game.ActiveScene.GetAllComponents<Dice>()) {
+		var diceList = new List<Dice>(Game.ActiveScene.GetAllComponents<Dice>());
+		
+		if (Networking.IsHost && diceList.Count > 0) {
+			foreach (var dice in diceList) {
 				dice.Network.AssignOwnership(TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
 			}
 		}
