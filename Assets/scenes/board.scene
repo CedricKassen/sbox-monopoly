@@ -12,7 +12,7 @@
           "__guid": "69d2bf3c-4940-40d9-a192-d28075f7ebb6",
           "Flags": 0,
           "Name": "start",
-          "Position": "12.91069,-165.1257,-33.72451",
+          "Position": "7.262482,-172.4475,-33.72451",
           "Enabled": true,
           "Components": [
             {
@@ -1387,7 +1387,7 @@
           "__guid": "8eebf108-ade5-470a-be42-1d5a09256bcd",
           "Flags": 0,
           "Name": "goToJail",
-          "Position": "429.9303,-165.7601,-61.09317",
+          "Position": "437.6458,-172.9778,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -1426,7 +1426,8 @@
           "__guid": "c323c06f-74b8-482a-b7f9-1bd8b47d8ff6",
           "Flags": 0,
           "Name": "green1",
-          "Position": "377.6019,-176.6429,-61.09317",
+          "Position": "382.0531,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1459,13 +1460,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "65a10a35-9500-47be-a264-71c6c7f06666",
+              "Flags": 0,
+              "Name": "buildings (18)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "38444516-43e4-476d-8d2e-84a74223fea9",
           "Flags": 0,
           "Name": "green2",
-          "Position": "338.8383,-176.6429,-61.09317",
+          "Position": "342.1795,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1498,13 +1511,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "7507e1df-4fd3-4d52-963a-c2a7d2be82df",
+              "Flags": 0,
+              "Name": "buildings (19)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "4f689089-08fd-467f-b30e-e13e5e91914c",
           "Flags": 0,
           "Name": "communityChest3",
-          "Position": "300.7648,-176.6429,-61.09317",
+          "Position": "302.307,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1543,7 +1568,8 @@
           "__guid": "d3460535-765f-42bb-b631-689e1f10737d",
           "Flags": 0,
           "Name": "green3",
-          "Position": "261.61,-176.6429,-61.09317",
+          "Position": "262.434,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1576,13 +1602,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "48d1f1d9-5cf7-49b1-bfc2-6c4bbe7d6e2e",
+              "Flags": 0,
+              "Name": "buildings (20)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "03acd3d3-6e22-492d-854c-d53091b68754",
           "Flags": 0,
           "Name": "railroad4",
-          "Position": "222.3676,-176.6429,-61.09317",
+          "Position": "222.561,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1621,7 +1659,8 @@
           "__guid": "90b94eba-a375-4db0-a7c6-19c71a24cc02",
           "Flags": 0,
           "Name": "chance3",
-          "Position": "183.6045,-176.6429,-61.09317",
+          "Position": "182.688,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1660,7 +1699,8 @@
           "__guid": "729f9184-3260-453d-8cc8-213ad66cd5bf",
           "Flags": 0,
           "Name": "blue1",
-          "Position": "144.8873,-176.6429,-61.09317",
+          "Position": "142.815,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1693,13 +1733,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "40fefc8d-fdb6-4f90-b2aa-f7c271030f7c",
+              "Flags": 0,
+              "Name": "buildings (21)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "0424be78-b4be-4925-bf04-3f8cbdaade11",
           "Flags": 0,
           "Name": "luxuryTax",
-          "Position": "107.085,-176.6429,-61.09317",
+          "Position": "102.942,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1738,7 +1790,8 @@
           "__guid": "321cbec3-533a-4980-a2c7-7a517153d12a",
           "Flags": 0,
           "Name": "blue2",
-          "Position": "68.12912,-176.6429,-61.09317",
+          "Position": "63.069,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1770,6 +1823,17 @@
                 4,
                 10
               ]
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "28d24ccc-6ae9-4ad9-8314-e0102bfa09d6",
+              "Flags": 0,
+              "Name": "buildings (22)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
             }
           ]
         }
@@ -2335,28 +2399,18 @@
                   "BlockedCards": {},
                   "ChanceCards": [
                     {
-                      "ActionId": 9,
-                      "Text": "Get Out of Jail Free",
+                      "ActionId": 3,
+                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
                       "Action": null
                     },
                     {
-                      "ActionId": 8,
-                      "Text": "Bank pays you dividend of $50",
+                      "ActionId": 1,
+                      "Text": "Advance to Boardwalk",
                       "Action": null
                     },
                     {
-                      "ActionId": 7,
-                      "Text": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 13,
-                      "Text": "Speeding fine $15",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 16,
-                      "Text": "Your building loan matures. Collect $150",
+                      "ActionId": 15,
+                      "Text": "You have been elected Chairman of the Board. Pay each player $50",
                       "Action": null
                     },
                     {
@@ -2366,28 +2420,33 @@
                       "Action": null
                     },
                     {
+                      "ActionId": 12,
+                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Speeding fine $15",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 7,
+                      "Text": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 16,
+                      "Text": "Your building loan matures. Collect $150",
+                      "Action": null
+                    },
+                    {
                       "ActionId": 14,
                       "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
                       "Action": null
                     },
                     {
-                      "ActionId": 3,
-                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 15,
-                      "Text": "You have been elected Chairman of the Board. Pay each player $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 10,
-                      "Text": "Go Back 3 Spaces",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 5,
-                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
+                      "ActionId": 8,
+                      "Text": "Bank pays you dividend of $50",
                       "Action": null
                     },
                     {
@@ -2396,30 +2455,40 @@
                       "Action": null
                     },
                     {
+                      "ActionId": 6,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 9,
+                      "Text": "Get Out of Jail Free",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 10,
+                      "Text": "Go Back 3 Spaces",
+                      "Action": null
+                    },
+                    {
                       "ActionId": 2,
                       "Text": "Advance to Go (Collect $200)",
                       "Action": null
                     },
                     {
-                      "ActionId": 1,
-                      "Text": "Advance to Boardwalk",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 12,
-                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 6,
+                      "ActionId": 5,
                       "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
                       "Action": null
                     }
                   ],
                   "CommunityCards": [
                     {
-                      "ActionId": 5,
-                      "Text": "Get Out of Jail Free",
+                      "ActionId": 3,
+                      "Text": "Doctor\u2019s fee. Pay $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 1,
+                      "Text": "Advance to Go (Collect $200)",
                       "Action": null
                     },
                     {
@@ -2428,28 +2497,13 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 15,
-                      "Text": "You have won second prize in a beauty contest. Collect $10",
+                      "ActionId": 14,
+                      "Text": "You are assessed for street repair. $40 per house. $115 per hotel",
                       "Action": null
                     },
                     {
-                      "ActionId": 13,
-                      "Text": "Receive $25 consultancy fee",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 7,
-                      "Text": "Holiday fund matures. Receive $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 16,
-                      "Text": "You inherit $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 1,
-                      "Text": "Advance to Go (Collect $200)",
+                      "ActionId": 9,
+                      "Text": "It is your birthday. Collect $10 from every player",
                       "Action": null
                     },
                     {
@@ -2458,8 +2512,13 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 9,
-                      "Text": "It is your birthday. Collect $10 from every player",
+                      "ActionId": 16,
+                      "Text": "You inherit $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 7,
+                      "Text": "Holiday fund matures. Receive $100",
                       "Action": null
                     },
                     {
@@ -2473,13 +2532,13 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 14,
-                      "Text": "You are assessed for street repair. $40 per house. $115 per hotel",
+                      "ActionId": 8,
+                      "Text": "Income tax refund. Collect $20",
                       "Action": null
                     },
                     {
-                      "ActionId": 8,
-                      "Text": "Income tax refund. Collect $20",
+                      "ActionId": 6,
+                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
                       "Action": null
                     },
                     {
@@ -2488,13 +2547,18 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 3,
-                      "Text": "Doctor\u2019s fee. Pay $50",
+                      "ActionId": 5,
+                      "Text": "Get Out of Jail Free",
                       "Action": null
                     },
                     {
-                      "ActionId": 6,
-                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
+                      "ActionId": 15,
+                      "Text": "You have won second prize in a beauty contest. Collect $10",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Receive $25 consultancy fee",
                       "Action": null
                     }
                   ],
@@ -2547,7 +2611,7 @@
                   "MaxPlayers": 5,
                   "PlayerPrefabs": [
                     {
-                      "Id": 16,
+                      "Id": 21,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/car.prefab"
@@ -2557,7 +2621,7 @@
                       "Height": 288
                     },
                     {
-                      "Id": 17,
+                      "Id": 22,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/ship.prefab"
@@ -2567,7 +2631,7 @@
                       "Height": 320
                     },
                     {
-                      "Id": 18,
+                      "Id": 23,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/timble.prefab"
@@ -2577,7 +2641,7 @@
                       "Height": 512
                     },
                     {
-                      "Id": 19,
+                      "Id": 24,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/tophat.prefab"
@@ -2587,7 +2651,7 @@
                       "Height": 384
                     },
                     {
-                      "Id": 20,
+                      "Id": 25,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/wheelbarrow.prefab"
@@ -2621,7 +2685,7 @@
           "__guid": "a3288d41-e7b9-4ea3-811e-936576727563",
           "MusicDuration": 238.21062,
           "MusicStart": {
-            "Relative": 3559.7976
+            "Relative": 4339.6646
           },
           "DistanceAttenuation": false,
           "DistanceAttenuationOverride": false,
