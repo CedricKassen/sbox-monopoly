@@ -1,0 +1,25 @@
+{
+  "RootObject": {
+    "__guid": "7ca83409-816c-4f83-9192-93c19597afb2",
+    "Flags": 0,
+    "Name": "House",
+    "Position": "-159.9552,83.27681,144.9811",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "792cdc23-dbf1-44e9-87f5-bd1c08e8fefa",
+        "BodyGroups": 18446744073709551615,
+        "Model": "models/house.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

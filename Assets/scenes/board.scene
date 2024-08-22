@@ -12,7 +12,7 @@
           "__guid": "69d2bf3c-4940-40d9-a192-d28075f7ebb6",
           "Flags": 0,
           "Name": "start",
-          "Position": "12.91069,-165.1257,-33.72451",
+          "Position": "7.262482,-172.4475,-33.72451",
           "Enabled": true,
           "Components": [
             {
@@ -51,7 +51,7 @@
           "__guid": "be16af03-40a6-4655-9699-6e7e24e64f29",
           "Flags": 0,
           "Name": "brown1",
-          "Position": "1.111725,-112.6371,-61.09317",
+          "Position": "0,-117.6987,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -84,13 +84,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "ce01bdc4-f3f2-4837-818a-ac8ff4e4d5d1",
+              "Flags": 0,
+              "Name": "buildings",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "a589e0f1-4009-4887-970e-2e59222206f1",
           "Flags": 0,
           "Name": "communityChest1",
-          "Position": "1.111725,-73.50697,-61.09317",
+          "Position": "0,-77,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -129,7 +140,7 @@
           "__guid": "05fe5d72-2678-441f-8ab7-c770e75ec2e6",
           "Flags": 0,
           "Name": "brown2",
-          "Position": "1.111725,-35.30772,-61.09317",
+          "Position": "0,-37.87962,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -162,13 +173,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "a89c2c35-d2e9-40b3-844f-ee895b8bc81d",
+              "Flags": 0,
+              "Name": "buildings (2)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "3c6ca99d-999a-4d4c-a3c4-2ba9938b77ff",
           "Flags": 0,
           "Name": "incomeTax",
-          "Position": "1.111725,2.866219,-61.09317",
+          "Position": "0,2.0295,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -207,7 +229,7 @@
           "__guid": "e473eab9-fefd-4dde-b39f-415a54208ffb",
           "Flags": 0,
           "Name": "railroad1",
-          "Position": "1.111725,42.4017,-61.09317",
+          "Position": "0,41.939,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -246,7 +268,7 @@
           "__guid": "43793b8f-b8fa-4b5b-8ac7-7c80864c289d",
           "Flags": 0,
           "Name": "lightBlue1",
-          "Position": "1.111725,81.49652,-61.09317",
+          "Position": "0,81.8485,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -279,13 +301,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "c899dc0d-0b8a-441a-bc83-72a3fa44142b",
+              "Flags": 0,
+              "Name": "buildings (3)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "5b93ea35-ffba-4961-81a9-170f218a2027",
           "Flags": 0,
           "Name": "chance1",
-          "Position": "1.111725,121.4953,-61.09317",
+          "Position": "0,121.758,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -324,7 +357,7 @@
           "__guid": "bfbee061-ca1c-4955-a357-03e19b47870b",
           "Flags": 0,
           "Name": "lightBlue2",
-          "Position": "1.111725,158.7676,-61.09317",
+          "Position": "0,161.6675,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -357,13 +390,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "8aa79426-fc24-49cf-bc7d-07116755e05b",
+              "Flags": 0,
+              "Name": "buildings (4)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "0ab3c9cb-e719-488e-be15-a86e50c64abc",
           "Flags": 0,
           "Name": "lightBlue3",
-          "Position": "1.111725,198.2553,-61.09317",
+          "Position": "0,201.477,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -396,13 +440,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "92ae6f92-8457-458c-be90-8f0ebe9ac9b6",
+              "Flags": 0,
+              "Name": "buildings (5)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "a81f03ef-8d98-48db-9704-14b414a4d530",
           "Flags": 0,
           "Name": "jail",
-          "Position": "15.69002,250.7109,-61.09317",
+          "Position": "6.194794,256.9642,-61.09317",
           "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
@@ -442,7 +497,7 @@
           "__guid": "54142386-c8fb-40a0-9084-eb80dce87ad3",
           "Flags": 0,
           "Name": "pink1",
-          "Position": "63,268.1399,-61.09317",
+          "Position": "62.04691,264.463,-61.09317",
           "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
@@ -476,13 +531,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "d7f9d4f8-9463-4ba7-81d7-7a4657bd7bfb",
+              "Flags": 0,
+              "Name": "buildings (6)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "4429305f-adf4-4c31-bd84-ea50af9986be",
           "Flags": 0,
           "Name": "electricCompany",
-          "Position": "102,259.7269,-61.09317",
+          "Position": "102.06,264.463,-61.09317",
           "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
@@ -522,7 +588,7 @@
           "__guid": "de87ea96-4c4c-4653-9145-8aef35598c42",
           "Flags": 0,
           "Name": "pink2",
-          "Position": "141,259.7269,-61.09317",
+          "Position": "142.0732,264.463,-61.09317",
           "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
@@ -556,13 +622,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "66662d98-d3ad-46ba-94e7-7ad18af3bba9",
+              "Flags": 0,
+              "Name": "buildings (7)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "e09a06e9-27ca-4515-b0d9-8ade5e8efa3b",
           "Flags": 0,
           "Name": "pink3",
-          "Position": "182.7813,259.7269,-61.09317",
+          "Position": "182.086,264.463,-61.09317",
           "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
@@ -596,13 +673,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "4234b5ec-c908-4b77-9e22-bbfb9c7533f9",
+              "Flags": 0,
+              "Name": "buildings (8)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "2b28f563-7d20-44cf-9ebc-88a40246f605",
           "Flags": 0,
           "Name": "railroad2",
-          "Position": "224.817,259.7269,-61.09317",
+          "Position": "222.099,264.463,-61.09317",
           "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
@@ -642,7 +730,7 @@
           "__guid": "1d20c0b1-e63c-4724-9638-50c83fb3f4da",
           "Flags": 0,
           "Name": "orange1",
-          "Position": "261.5884,259.7269,-61.09317",
+          "Position": "262.112,264.463,-61.09317",
           "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
@@ -676,13 +764,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "bf50336e-7389-4818-889d-0776379f519e",
+              "Flags": 0,
+              "Name": "buildings (9)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "9315be49-dfba-45e4-a87d-b3a7c0cbdbf3",
           "Flags": 0,
           "Name": "communityChest2",
-          "Position": "299.9954,259.7269,-61.09317",
+          "Position": "302.125,264.463,-61.09317",
           "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
@@ -722,7 +821,7 @@
           "__guid": "d96d4e0c-3df5-4c01-a115-40a6e48e5212",
           "Flags": 0,
           "Name": "orange2",
-          "Position": "339.0019,259.7269,-61.09317",
+          "Position": "342.138,264.463,-61.09317",
           "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
@@ -756,13 +855,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "602364e6-eace-4b34-b0d0-27477c3c5559",
+              "Flags": 0,
+              "Name": "buildings (10)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "ebe562f4-1d55-43cb-bf69-77ab7f16b169",
           "Flags": 0,
           "Name": "orange3",
-          "Position": "377.5777,259.7269,-61.09317",
+          "Position": "382.151,264.463,-61.09317",
           "Rotation": "0,0,-0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
@@ -796,13 +906,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "3220dff6-0116-4da9-b277-f33978e9897f",
+              "Flags": 0,
+              "Name": "buildings (11)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "fade20d1-25c5-419e-bd9f-3823152352b1",
           "Flags": 0,
           "Name": "freeParking",
-          "Position": "430.2625,250.8535,-61.09317",
+          "Position": "437.094,256.8743,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -840,7 +961,8 @@
           "__guid": "4ce5a2a2-03ee-43a4-8cb3-85c0ddf5931e",
           "Flags": 0,
           "Name": "red1",
-          "Position": "443.824,196.5553,-61.09317",
+          "Position": "444.0463,202.0962,-61.09317",
+          "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
           "Components": [
             {
@@ -873,13 +995,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "53b8e9db-aee9-4981-b9d6-68d990b235c7",
+              "Flags": 0,
+              "Name": "buildings (12)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "242701a4-7b73-4052-8d30-f58c4bb54401",
           "Flags": 0,
           "Name": "chance2",
-          "Position": "443.824,157.5074,-61.09317",
+          "Position": "444.046,162.194,-61.09317",
+          "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
           "Components": [
             {
@@ -918,7 +1052,8 @@
           "__guid": "4cdc3b45-b2e8-403c-87b5-33a1a7020fbf",
           "Flags": 0,
           "Name": "red2",
-          "Position": "443.824,118.9885,-61.09317",
+          "Position": "444.046,122.2917,-61.09317",
+          "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
           "Components": [
             {
@@ -951,13 +1086,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "24322307-abf5-4e9a-97b0-30fb7bfbeeb1",
+              "Flags": 0,
+              "Name": "buildings (13)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "302c03f1-265c-482d-ae59-508de6e5c573",
           "Flags": 0,
           "Name": "red3",
-          "Position": "443.824,81.07051,-61.09317",
+          "Position": "444.046,82.39,-61.09317",
+          "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
           "Components": [
             {
@@ -990,13 +1137,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "09e592e3-db14-49ec-8123-d2f12899d5ef",
+              "Flags": 0,
+              "Name": "buildings (14)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "861703b1-00de-4959-884b-4e0ee84fec1e",
           "Flags": 0,
           "Name": "railroad3",
-          "Position": "443.824,42.89046,-61.09317",
+          "Position": "444.046,42.488,-61.09317",
+          "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
           "Components": [
             {
@@ -1035,7 +1194,8 @@
           "__guid": "0b0c4a73-2dca-44e3-b10c-011a3925dfcb",
           "Flags": 0,
           "Name": "yellow1",
-          "Position": "443.824,3.786041,-61.09317",
+          "Position": "444.046,2.586,-61.09317",
+          "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
           "Components": [
             {
@@ -1068,13 +1228,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "62bf5143-f1f7-46b9-8058-2e55ae80c152",
+              "Flags": 0,
+              "Name": "buildings (15)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "650a5286-64ec-40e6-a8a7-af3262ce3f19",
           "Flags": 0,
           "Name": "yellow2",
-          "Position": "443.824,-36.18573,-61.09317",
+          "Position": "444.046,-37.316,-61.09317",
+          "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
           "Components": [
             {
@@ -1107,13 +1279,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "3515e07f-d228-49ee-8d9b-b53680e7161c",
+              "Flags": 0,
+              "Name": "buildings (16)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "b0d14978-84e5-44c6-a3b7-91375b3bbb9e",
           "Flags": 0,
           "Name": "waterCompany",
-          "Position": "443.824,-73.9437,-61.09317",
+          "Position": "444.046,-77.218,-61.09317",
+          "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
           "Components": [
             {
@@ -1152,7 +1336,8 @@
           "__guid": "af269b1c-649b-4106-9e53-b0af38f0801f",
           "Flags": 0,
           "Name": "yellow3",
-          "Position": "443.824,-112.5264,-61.09317",
+          "Position": "444.046,-117.12,-61.09317",
+          "Rotation": "0,0,1,-0.00000004371139",
           "Enabled": true,
           "Components": [
             {
@@ -1185,13 +1370,24 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "6dfe2b06-0eb1-414a-a77e-9002128b6687",
+              "Flags": 0,
+              "Name": "buildings (17)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "8eebf108-ade5-470a-be42-1d5a09256bcd",
           "Flags": 0,
           "Name": "goToJail",
-          "Position": "429.9303,-165.7601,-61.09317",
+          "Position": "437.6458,-172.9778,-61.09317",
           "Enabled": true,
           "Components": [
             {
@@ -1230,7 +1426,8 @@
           "__guid": "c323c06f-74b8-482a-b7f9-1bd8b47d8ff6",
           "Flags": 0,
           "Name": "green1",
-          "Position": "377.6019,-176.6429,-61.09317",
+          "Position": "382.0531,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1263,13 +1460,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "65a10a35-9500-47be-a264-71c6c7f06666",
+              "Flags": 0,
+              "Name": "buildings (18)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "38444516-43e4-476d-8d2e-84a74223fea9",
           "Flags": 0,
           "Name": "green2",
-          "Position": "338.8383,-176.6429,-61.09317",
+          "Position": "342.1795,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1302,13 +1511,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "7507e1df-4fd3-4d52-963a-c2a7d2be82df",
+              "Flags": 0,
+              "Name": "buildings (19)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "4f689089-08fd-467f-b30e-e13e5e91914c",
           "Flags": 0,
           "Name": "communityChest3",
-          "Position": "300.7648,-176.6429,-61.09317",
+          "Position": "302.307,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1347,7 +1568,8 @@
           "__guid": "d3460535-765f-42bb-b631-689e1f10737d",
           "Flags": 0,
           "Name": "green3",
-          "Position": "261.61,-176.6429,-61.09317",
+          "Position": "262.434,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1380,13 +1602,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "48d1f1d9-5cf7-49b1-bfc2-6c4bbe7d6e2e",
+              "Flags": 0,
+              "Name": "buildings (20)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "03acd3d3-6e22-492d-854c-d53091b68754",
           "Flags": 0,
           "Name": "railroad4",
-          "Position": "222.3676,-176.6429,-61.09317",
+          "Position": "222.561,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1425,7 +1659,8 @@
           "__guid": "90b94eba-a375-4db0-a7c6-19c71a24cc02",
           "Flags": 0,
           "Name": "chance3",
-          "Position": "183.6045,-176.6429,-61.09317",
+          "Position": "182.688,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1464,7 +1699,8 @@
           "__guid": "729f9184-3260-453d-8cc8-213ad66cd5bf",
           "Flags": 0,
           "Name": "blue1",
-          "Position": "144.8873,-176.6429,-61.09317",
+          "Position": "142.815,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1497,13 +1733,25 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "40fefc8d-fdb6-4f90-b2aa-f7c271030f7c",
+              "Flags": 0,
+              "Name": "buildings (21)",
+              "Position": "33.16655,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
           "__guid": "0424be78-b4be-4925-bf04-3f8cbdaade11",
           "Flags": 0,
           "Name": "luxuryTax",
-          "Position": "107.085,-176.6429,-61.09317",
+          "Position": "102.942,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1542,7 +1790,8 @@
           "__guid": "321cbec3-533a-4980-a2c7-7a517153d12a",
           "Flags": 0,
           "Name": "blue2",
-          "Position": "68.12912,-176.6429,-61.09317",
+          "Position": "63.069,-179.5341,-61.09317",
+          "Rotation": "0,0,0.7071068,0.7071068",
           "Enabled": true,
           "Components": [
             {
@@ -1575,117 +1824,16 @@
                 10
               ]
             }
-          ]
-        }
-      ]
-    },
-    {
-      "__guid": "6b2cf70b-803b-485f-87fb-64cb4f6df7b8",
-      "Flags": 0,
-      "Name": "Houses",
-      "Position": "-30.24338,-230.3728,-144.9811",
-      "Enabled": true,
-      "Children": [
-        {
-          "__guid": "d4a437b7-d6c4-49eb-8ad9-8c14ddfb1019",
-          "Flags": 0,
-          "Name": "Mediterranean Avenue",
-          "Position": "0,0,0",
-          "Enabled": true,
+          ],
           "Children": [
             {
-              "__guid": "a3f07326-130f-4935-ac32-adfe28c742b4",
+              "__guid": "28d24ccc-6ae9-4ad9-8314-e0102bfa09d6",
               "Flags": 0,
-              "Name": "House4",
-              "Position": "-159.9552,56.67157,144.9811",
+              "Name": "buildings (22)",
+              "Position": "33.16655,0,0",
               "Enabled": true,
-              "Components": [
-                {
-                  "__type": "Sandbox.ModelRenderer",
-                  "__guid": "ea409b4b-29cf-47de-bf8f-6280c360d940",
-                  "BodyGroups": 18446744073709551615,
-                  "Model": "models/house.vmdl",
-                  "RenderType": "On",
-                  "Tint": "1,1,1,1"
-                }
-              ]
-            },
-            {
-              "__guid": "c8c1cf98-0ba7-4dfa-b819-3ef3f759b135",
-              "Flags": 0,
-              "Name": "House3",
-              "Position": "-159.9552,65.62495,144.9811",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "Sandbox.ModelRenderer",
-                  "__guid": "219b1d80-55aa-4716-a20f-18990d15af5b",
-                  "BodyGroups": 18446744073709551615,
-                  "Model": "models/house.vmdl",
-                  "RenderType": "On",
-                  "Tint": "1,1,1,1"
-                }
-              ]
-            },
-            {
-              "__guid": "61042a98-7211-406d-a80c-b259ba1c7b4f",
-              "Flags": 0,
-              "Name": "House2",
-              "Position": "-159.9552,74.40211,144.9811",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "Sandbox.ModelRenderer",
-                  "__guid": "62df1f21-b819-4632-a272-095a8ff29661",
-                  "BodyGroups": 18446744073709551615,
-                  "Model": "models/house.vmdl",
-                  "RenderType": "On",
-                  "Tint": "1,1,1,1"
-                }
-              ]
-            },
-            {
-              "__guid": "5e06d8d5-32c1-4e6b-828e-ecbda2c34813",
-              "Flags": 0,
-              "Name": "House1",
-              "Position": "-159.9552,83.27681,144.9811",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "Sandbox.ModelRenderer",
-                  "__guid": "2ff94d51-364e-4484-a653-e21ea9aecfd9",
-                  "BodyGroups": 18446744073709551615,
-                  "Model": "models/house.vmdl",
-                  "RenderType": "On",
-                  "Tint": "1,1,1,1"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "__guid": "d8393193-6ade-4002-8834-d214969f509d",
-          "Flags": 0,
-          "Name": "Baltic Avenue",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Children": [
-            {
-              "__guid": "b74cdc6b-90b3-4893-8d2c-62b452bb0d9e",
-              "Flags": 0,
-              "Name": "Hotel",
-              "Position": "-160.3419,149.8225,144.9811",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "Sandbox.ModelRenderer",
-                  "__guid": "8357cb7e-fc74-4d8d-ac87-4dc493d8f3d2",
-                  "BodyGroups": 18446744073709551615,
-                  "Model": "models/hotel.vmdl",
-                  "RenderType": "On",
-                  "Tint": "1,1,1,1"
-                }
-              ]
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
             }
           ]
         }
@@ -1829,7 +1977,7 @@
       "__guid": "fc73cfbe-99d0-4060-8433-e4159fa16013",
       "Flags": 0,
       "Name": "Sun",
-      "Rotation": "-0.0729315,0.4822396,0.1305433,0.8631827",
+      "Rotation": "-0.07033519,0.4650721,0.1319603,0.8725522",
       "Tags": "light_directional,light",
       "Enabled": true,
       "Components": [
@@ -2256,33 +2404,8 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 4,
-                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 2,
-                      "Text": "Advance to Go (Collect $200)",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 6,
-                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 5,
-                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
-                      "Action": null
-                    },
-                    {
                       "ActionId": 1,
                       "Text": "Advance to Boardwalk",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 9,
-                      "Text": "Get Out of Jail Free",
                       "Action": null
                     },
                     {
@@ -2291,8 +2414,19 @@
                       "Action": null
                     },
                     {
+                      "ActionId": 11,
+                      "Text": "Go to Jail. Go directly to Jail, do not pass Go, do not collect $200",
+                      "ImageUrl": "ui/jail.png",
+                      "Action": null
+                    },
+                    {
                       "ActionId": 12,
                       "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Speeding fine $15",
                       "Action": null
                     },
                     {
@@ -2306,17 +2440,6 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 11,
-                      "Text": "Go to Jail. Go directly to Jail, do not pass Go, do not collect $200",
-                      "ImageUrl": "ui/jail.png",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 13,
-                      "Text": "Speeding fine $15",
-                      "Action": null
-                    },
-                    {
                       "ActionId": 14,
                       "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
                       "Action": null
@@ -2327,50 +2450,40 @@
                       "Action": null
                     },
                     {
+                      "ActionId": 4,
+                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 6,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 9,
+                      "Text": "Get Out of Jail Free",
+                      "Action": null
+                    },
+                    {
                       "ActionId": 10,
                       "Text": "Go Back 3 Spaces",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 2,
+                      "Text": "Advance to Go (Collect $200)",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 5,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
                       "Action": null
                     }
                   ],
                   "CommunityCards": [
                     {
-                      "ActionId": 11,
-                      "Text": "Pay hospital fees of $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 10,
-                      "Text": "Life insurance matures. Collect $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 7,
-                      "Text": "Holiday fund matures. Receive $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 4,
-                      "Text": "From sale of stock you get $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 5,
-                      "Text": "Get Out of Jail Free",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 2,
-                      "Text": "Bank error in your favor. Collect $200",
-                      "Action": null
-                    },
-                    {
                       "ActionId": 3,
                       "Text": "Doctor\u2019s fee. Pay $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 13,
-                      "Text": "Receive $25 consultancy fee",
                       "Action": null
                     },
                     {
@@ -2379,13 +2492,23 @@
                       "Action": null
                     },
                     {
+                      "ActionId": 4,
+                      "Text": "From sale of stock you get $50",
+                      "Action": null
+                    },
+                    {
                       "ActionId": 14,
                       "Text": "You are assessed for street repair. $40 per house. $115 per hotel",
                       "Action": null
                     },
                     {
-                      "ActionId": 15,
-                      "Text": "You have won second prize in a beauty contest. Collect $10",
+                      "ActionId": 9,
+                      "Text": "It is your birthday. Collect $10 from every player",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 11,
+                      "Text": "Pay hospital fees of $100",
                       "Action": null
                     },
                     {
@@ -2394,13 +2517,13 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 6,
-                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
+                      "ActionId": 7,
+                      "Text": "Holiday fund matures. Receive $100",
                       "Action": null
                     },
                     {
-                      "ActionId": 8,
-                      "Text": "Income tax refund. Collect $20",
+                      "ActionId": 2,
+                      "Text": "Bank error in your favor. Collect $200",
                       "Action": null
                     },
                     {
@@ -2409,8 +2532,33 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 9,
-                      "Text": "It is your birthday. Collect $10 from every player",
+                      "ActionId": 8,
+                      "Text": "Income tax refund. Collect $20",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 6,
+                      "Text": "Go to Jail. Go directly to jail, do not pass Go, do not collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 10,
+                      "Text": "Life insurance matures. Collect $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 5,
+                      "Text": "Get Out of Jail Free",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 15,
+                      "Text": "You have won second prize in a beauty contest. Collect $10",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Receive $25 consultancy fee",
                       "Action": null
                     }
                   ],
@@ -2463,7 +2611,7 @@
                   "MaxPlayers": 5,
                   "PlayerPrefabs": [
                     {
-                      "Id": 106,
+                      "Id": 21,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/car.prefab"
@@ -2473,7 +2621,7 @@
                       "Height": 288
                     },
                     {
-                      "Id": 107,
+                      "Id": 22,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/ship.prefab"
@@ -2483,7 +2631,7 @@
                       "Height": 320
                     },
                     {
-                      "Id": 108,
+                      "Id": 23,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/timble.prefab"
@@ -2493,7 +2641,7 @@
                       "Height": 512
                     },
                     {
-                      "Id": 109,
+                      "Id": 24,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/tophat.prefab"
@@ -2503,7 +2651,7 @@
                       "Height": 384
                     },
                     {
-                      "Id": 110,
+                      "Id": 25,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/wheelbarrow.prefab"
@@ -2537,7 +2685,7 @@
           "__guid": "a3288d41-e7b9-4ea3-811e-936576727563",
           "MusicDuration": 238.21062,
           "MusicStart": {
-            "Relative": 6043.074
+            "Relative": 4339.6646
           },
           "DistanceAttenuation": false,
           "DistanceAttenuationOverride": false,
@@ -2563,6 +2711,12 @@
           "Volume": 0.24
         }
       ]
+    },
+    {
+      "__guid": "73958228-a7a3-40e6-81bb-c3527ad9bd8f",
+      "Flags": 0,
+      "Name": "GameObject",
+      "Enabled": true
     }
   ],
   "SceneProperties": {

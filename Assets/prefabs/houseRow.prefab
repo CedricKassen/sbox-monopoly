@@ -1,0 +1,53 @@
+{
+  "RootObject": {
+    "__guid": "ae1f40f3-a331-4168-be96-2a015bb1e9f0",
+    "Flags": 0,
+    "Name": "houserow",
+    "Enabled": true,
+    "Children": [
+      {
+        "__guid": "35377f26-b00f-4889-81e5-6f5631ded940",
+        "Flags": 0,
+        "Name": "House 4",
+        "Position": "0.000006808258,-14.26129,0",
+        "Rotation": "0,0,1,-0.00000004371139",
+        "__Prefab": "prefabs/house.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "8a753475-8b24-418c-be75-f57f20678b9d",
+        "Flags": 0,
+        "Name": "House 3",
+        "Position": "0.0000059827,-4.817997,0",
+        "Rotation": "0,0,1,-0.00000004371139",
+        "__Prefab": "prefabs/house.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "c5ae863e-bc6a-4e61-a905-228504881df4",
+        "Flags": 0,
+        "Name": "House 2",
+        "Position": "0.000005123445,5.010722,0",
+        "Rotation": "0,0,1,-0.00000004371139",
+        "__Prefab": "prefabs/house.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "7ca83409-816c-4f83-9192-93c19597afb2",
+        "Flags": 0,
+        "Name": "House",
+        "Position": "0.000004314734,14.2613,0",
+        "Rotation": "0,0,1,-0.00000004371139",
+        "__Prefab": "prefabs/house.prefab",
+        "__PrefabVariables": {}
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

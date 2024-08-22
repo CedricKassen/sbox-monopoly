@@ -1,0 +1,38 @@
+{
+  "RootObject": {
+    "__guid": "2ae493e2-558a-41e1-91f8-931ab7969b16",
+    "Flags": 0,
+    "Name": "buildings",
+    "Components": [
+      {
+        "__type": "Buildings",
+        "__guid": "e865e792-798b-4304-a417-2ab876afba4b"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "b74cdc6b-90b3-4893-8d2c-62b452bb0d9e",
+        "Flags": 0,
+        "Name": "Hotel",
+        "Rotation": "0.000000000000000000000003640259,0.00000000000000008327941,-1,-0.00000004371139",
+        "__Prefab": "prefabs/hotel.prefab",
+        "__PrefabVariables": {}
+      },
+      {
+        "__guid": "ae1f40f3-a331-4168-be96-2a015bb1e9f0",
+        "Flags": 0,
+        "Name": "HouseRow",
+        "Enabled": true,
+        "__Prefab": "prefabs/houserow.prefab",
+        "__PrefabVariables": {}
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
