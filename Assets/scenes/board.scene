@@ -1,5 +1,5 @@
 {
-  "__guid": "6729b61b-27cd-469a-83bf-eabc19a73094",
+  "__guid": "22bc57c0-ae6e-4014-897d-744b63419cdc",
   "GameObjects": [
     {
       "__guid": "024eb414-bc10-4ad9-885d-eae5e42de48d",
@@ -58,6 +58,10 @@
               "__type": "GameLocation",
               "__guid": "3cd895b6-f3f2-4895-9a69-5becd9b64e76",
               "Color": "Brown",
+              "GroupMembers": [
+                1,
+                3
+              ],
               "House_Cost": 50,
               "Houses": 0,
               "Mortgaged": false,
@@ -147,6 +151,10 @@
               "__type": "GameLocation",
               "__guid": "0aed9d60-8b32-4e6a-ad6c-aab133d202c0",
               "Color": "Brown",
+              "GroupMembers": [
+                1,
+                3
+              ],
               "House_Cost": 50,
               "Houses": 0,
               "Mortgaged": false,
@@ -275,6 +283,11 @@
               "__type": "GameLocation",
               "__guid": "efe95e37-ee22-4665-a68d-146102b7203b",
               "Color": "LightBlue",
+              "GroupMembers": [
+                6,
+                8,
+                9
+              ],
               "House_Cost": 50,
               "Houses": 0,
               "Mortgaged": false,
@@ -364,6 +377,11 @@
               "__type": "GameLocation",
               "__guid": "b0da137c-8668-4eb4-9439-2ea229e89e13",
               "Color": "LightBlue",
+              "GroupMembers": [
+                6,
+                8,
+                9
+              ],
               "House_Cost": 0,
               "Houses": 0,
               "Mortgaged": false,
@@ -414,6 +432,11 @@
               "__type": "GameLocation",
               "__guid": "279a95a5-4ad4-409d-99b6-df9f32f08d8f",
               "Color": "LightBlue",
+              "GroupMembers": [
+                6,
+                8,
+                9
+              ],
               "House_Cost": 50,
               "Houses": 0,
               "Mortgaged": false,
@@ -505,6 +528,11 @@
               "__type": "GameLocation",
               "__guid": "8f440de9-73e6-42c8-b523-7d0f4997e5d6",
               "Color": "Pink",
+              "GroupMembers": [
+                11,
+                13,
+                14
+              ],
               "House_Cost": 100,
               "Houses": 0,
               "Mortgaged": false,
@@ -556,6 +584,7 @@
               "__type": "GameLocation",
               "__guid": "c9d81f0b-22ad-49a3-8de9-b75153470f5c",
               "Color": "Brown",
+              "GroupMembers": [],
               "House_Cost": 0,
               "Houses": 0,
               "Mortgaged": false,
@@ -596,6 +625,11 @@
               "__type": "GameLocation",
               "__guid": "3dcb2e5a-5ca8-4096-a8ec-e0c365e4be1b",
               "Color": "Pink",
+              "GroupMembers": [
+                11,
+                13,
+                14
+              ],
               "House_Cost": 100,
               "Houses": 0,
               "Mortgaged": false,
@@ -647,6 +681,11 @@
               "__type": "GameLocation",
               "__guid": "26b3c015-0c67-450c-b72e-381bde9e2f8e",
               "Color": "Pink",
+              "GroupMembers": [
+                11,
+                13,
+                14
+              ],
               "House_Cost": 100,
               "Houses": 0,
               "Mortgaged": false,
@@ -738,6 +777,11 @@
               "__type": "GameLocation",
               "__guid": "ea9311d3-734e-4a13-9df1-80d5bc1b7380",
               "Color": "Orange",
+              "GroupMembers": [
+                16,
+                18,
+                19
+              ],
               "House_Cost": 100,
               "Houses": 0,
               "Mortgaged": false,
@@ -829,6 +873,11 @@
               "__type": "GameLocation",
               "__guid": "84230ddf-f95c-4f9e-9e08-9c96686d27b7",
               "Color": "Orange",
+              "GroupMembers": [
+                16,
+                18,
+                19
+              ],
               "House_Cost": 100,
               "Houses": 0,
               "Mortgaged": false,
@@ -880,6 +929,11 @@
               "__type": "GameLocation",
               "__guid": "cd607765-ab2c-42f8-943c-9b4070126ab7",
               "Color": "Orange",
+              "GroupMembers": [
+                16,
+                18,
+                19
+              ],
               "House_Cost": 100,
               "Houses": 0,
               "Mortgaged": false,
@@ -930,6 +984,7 @@
               "__type": "GameLocation",
               "__guid": "2130dfb3-63c9-4047-9660-2a19623b6eb5",
               "Color": "Brown",
+              "GroupMembers": [],
               "House_Cost": 0,
               "Houses": 0,
               "Mortgaged": false,
@@ -969,6 +1024,11 @@
               "__type": "GameLocation",
               "__guid": "e26a0864-213b-4ad7-872a-f5496250f4b3",
               "Color": "Red",
+              "GroupMembers": [
+                21,
+                23,
+                24
+              ],
               "House_Cost": 150,
               "Houses": 0,
               "Mortgaged": false,
@@ -1060,6 +1120,11 @@
               "__type": "GameLocation",
               "__guid": "c93e34d4-e7c4-4b0c-a1b7-61b9fa71479a",
               "Color": "Red",
+              "GroupMembers": [
+                21,
+                23,
+                24
+              ],
               "House_Cost": 150,
               "Houses": 0,
               "Mortgaged": false,
@@ -1111,6 +1176,11 @@
               "__type": "GameLocation",
               "__guid": "ecd2e475-734c-4b60-8d13-2b27265c022f",
               "Color": "Red",
+              "GroupMembers": [
+                21,
+                23,
+                24
+              ],
               "House_Cost": 150,
               "Houses": 0,
               "Mortgaged": false,
@@ -1202,6 +1272,11 @@
               "__type": "GameLocation",
               "__guid": "38111f50-9eb2-44e4-af02-5f014c629253",
               "Color": "Yellow",
+              "GroupMembers": [
+                26,
+                27,
+                29
+              ],
               "House_Cost": 150,
               "Houses": 0,
               "Mortgaged": false,
@@ -1253,6 +1328,11 @@
               "__type": "GameLocation",
               "__guid": "a0b36246-cda9-438b-9604-e4c556280dbd",
               "Color": "Yellow",
+              "GroupMembers": [
+                26,
+                27,
+                29
+              ],
               "House_Cost": 150,
               "Houses": 0,
               "Mortgaged": false,
@@ -1344,6 +1424,11 @@
               "__type": "GameLocation",
               "__guid": "a36d9341-bbb6-4f7b-a543-61ee28137aa1",
               "Color": "Yellow",
+              "GroupMembers": [
+                26,
+                27,
+                29
+              ],
               "House_Cost": 150,
               "Houses": 0,
               "Mortgaged": false,
@@ -1434,6 +1519,11 @@
               "__type": "GameLocation",
               "__guid": "7d8883ab-ef7b-456b-8a87-9ae28a4f1436",
               "Color": "Green",
+              "GroupMembers": [
+                31,
+                32,
+                34
+              ],
               "House_Cost": 200,
               "Houses": 0,
               "Mortgaged": false,
@@ -1485,6 +1575,11 @@
               "__type": "GameLocation",
               "__guid": "f4705905-cb4e-4b86-b0ff-ed45896c0a2b",
               "Color": "Green",
+              "GroupMembers": [
+                31,
+                32,
+                34
+              ],
               "House_Cost": 200,
               "Houses": 0,
               "Mortgaged": false,
@@ -1576,6 +1671,11 @@
               "__type": "GameLocation",
               "__guid": "102d6511-465c-46b1-bdb3-3fd143ef3f42",
               "Color": "Green",
+              "GroupMembers": [
+                31,
+                32,
+                34
+              ],
               "House_Cost": 200,
               "Houses": 0,
               "Mortgaged": false,
@@ -1707,6 +1807,10 @@
               "__type": "GameLocation",
               "__guid": "7996d06b-dd66-4567-b051-8ffd0c60e4ec",
               "Color": "Blue",
+              "GroupMembers": [
+                37,
+                39
+              ],
               "House_Cost": 200,
               "Houses": 0,
               "Mortgaged": false,
@@ -1798,6 +1902,10 @@
               "__type": "GameLocation",
               "__guid": "d31a755f-3fc6-4337-b37c-78e1bbb3dc76",
               "Color": "Blue",
+              "GroupMembers": [
+                37,
+                39
+              ],
               "House_Cost": 200,
               "Houses": 0,
               "Mortgaged": false,
@@ -2399,8 +2507,8 @@
                   "BlockedCards": {},
                   "ChanceCards": [
                     {
-                      "ActionId": 3,
-                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
+                      "ActionId": 10,
+                      "Text": "Go Back 3 Spaces",
                       "Action": null
                     },
                     {
@@ -2409,8 +2517,63 @@
                       "Action": null
                     },
                     {
+                      "ActionId": 7,
+                      "Text": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 4,
+                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 12,
+                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 14,
+                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Speeding fine $15",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 8,
+                      "Text": "Bank pays you dividend of $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 16,
+                      "Text": "Your building loan matures. Collect $150",
+                      "Action": null
+                    },
+                    {
                       "ActionId": 15,
                       "Text": "You have been elected Chairman of the Board. Pay each player $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 9,
+                      "Text": "Get Out of Jail Free",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 3,
+                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 5,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 2,
+                      "Text": "Advance to Go (Collect $200)",
                       "Action": null
                     },
                     {
@@ -2420,105 +2583,15 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 12,
-                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 13,
-                      "Text": "Speeding fine $15",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 7,
-                      "Text": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times amount thrown.",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 16,
-                      "Text": "Your building loan matures. Collect $150",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 14,
-                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 8,
-                      "Text": "Bank pays you dividend of $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 4,
-                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
                       "ActionId": 6,
-                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 9,
-                      "Text": "Get Out of Jail Free",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 10,
-                      "Text": "Go Back 3 Spaces",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 2,
-                      "Text": "Advance to Go (Collect $200)",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 5,
                       "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
                       "Action": null
                     }
                   ],
                   "CommunityCards": [
                     {
-                      "ActionId": 3,
-                      "Text": "Doctor\u2019s fee. Pay $50",
-                      "Action": null
-                    },
-                    {
                       "ActionId": 1,
                       "Text": "Advance to Go (Collect $200)",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 4,
-                      "Text": "From sale of stock you get $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 14,
-                      "Text": "You are assessed for street repair. $40 per house. $115 per hotel",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 9,
-                      "Text": "It is your birthday. Collect $10 from every player",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 11,
-                      "Text": "Pay hospital fees of $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 16,
-                      "Text": "You inherit $100",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 7,
-                      "Text": "Holiday fund matures. Receive $100",
                       "Action": null
                     },
                     {
@@ -2527,13 +2600,23 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 12,
-                      "Text": "Pay school fees of $50",
+                      "ActionId": 8,
+                      "Text": "Income tax refund. Collect $20",
                       "Action": null
                     },
                     {
-                      "ActionId": 8,
-                      "Text": "Income tax refund. Collect $20",
+                      "ActionId": 3,
+                      "Text": "Doctor\u2019s fee. Pay $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 14,
+                      "Text": "You are assessed for street repair. $40 per house. $115 per hotel",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 10,
+                      "Text": "Life insurance matures. Collect $100",
                       "Action": null
                     },
                     {
@@ -2542,8 +2625,8 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 10,
-                      "Text": "Life insurance matures. Collect $100",
+                      "ActionId": 9,
+                      "Text": "It is your birthday. Collect $10 from every player",
                       "Action": null
                     },
                     {
@@ -2557,8 +2640,33 @@
                       "Action": null
                     },
                     {
+                      "ActionId": 11,
+                      "Text": "Pay hospital fees of $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 7,
+                      "Text": "Holiday fund matures. Receive $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 4,
+                      "Text": "From sale of stock you get $50",
+                      "Action": null
+                    },
+                    {
                       "ActionId": 13,
                       "Text": "Receive $25 consultancy fee",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 16,
+                      "Text": "You inherit $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 12,
+                      "Text": "Pay school fees of $50",
                       "Action": null
                     }
                   ],
@@ -2611,7 +2719,7 @@
                   "MaxPlayers": 5,
                   "PlayerPrefabs": [
                     {
-                      "Id": 21,
+                      "Id": 126,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/car.prefab"
@@ -2621,7 +2729,7 @@
                       "Height": 288
                     },
                     {
-                      "Id": 22,
+                      "Id": 127,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/ship.prefab"
@@ -2631,7 +2739,7 @@
                       "Height": 320
                     },
                     {
-                      "Id": 23,
+                      "Id": 128,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/timble.prefab"
@@ -2641,7 +2749,7 @@
                       "Height": 512
                     },
                     {
-                      "Id": 24,
+                      "Id": 129,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/tophat.prefab"
@@ -2651,7 +2759,7 @@
                       "Height": 384
                     },
                     {
-                      "Id": 25,
+                      "Id": 130,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/wheelbarrow.prefab"
