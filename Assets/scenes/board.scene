@@ -84,6 +84,17 @@
                 10
               ]
             }
+          ],
+          "Children": [
+            {
+              "__guid": "ce01bdc4-f3f2-4837-818a-ac8ff4e4d5d1",
+              "Flags": 0,
+              "Name": "buildings (1)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            }
           ]
         },
         {
@@ -2425,7 +2436,7 @@
           "__guid": "a3288d41-e7b9-4ea3-811e-936576727563",
           "MusicDuration": 238.21062,
           "MusicStart": {
-            "Relative": 1169.7914
+            "Relative": 1325.7256
           },
           "DistanceAttenuation": false,
           "DistanceAttenuationOverride": false,
