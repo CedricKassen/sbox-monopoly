@@ -47,7 +47,7 @@ public sealed class MovementManager : Component {
 		PlayerBody = player.GameObject.Components.Get<Rigidbody>();
 
 		// If movement is backwards, first iteration is used to rotate player so the starting field is the current field not the next one
-		CurrentField = (player.CurrentField + (Backwards ? 0 : 1)) % 40;
+		CurrentField = Math.Mod(player.CurrentField + (Backwards ? 0 : 1), 40);
 
 		Log.Info("Move " + ToTravel + " Fields");
 	}

@@ -1,4 +1,5 @@
-﻿using Monopoly.UI.Screens.GameLoop;
+﻿using System.Threading.Tasks;
+using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 using Sandbox.Network;
@@ -8,7 +9,7 @@ namespace Sandbox.Components.GameLoop;
 public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGameEventHandler<MovementDoneEvent>,
                                 IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>, 
                                 IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<PlayerPaymentEvent>,
-								IGameEventHandler<TurnFinishedEvent> {
+								IGameEventHandler<TurnFinishedEvent>, IGameEventHandler<PropertyMortgagedEvent>, IGameEventHandler<PropertyMortgagePayedEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
 	[Property] public Lobby Lobby { get; set; }
 	[Property] public MovementManager MovementManager { get; set; }
@@ -25,7 +26,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			return;
 		}
 
-		if (fieldOwner != eventArgs.playerId) {
+		TurnManager.CurrentPhase = TurnManager.Phase.PlayerAction;
+
+		if (fieldOwner != eventArgs.playerId && !eventArgs.Location.Mortgaged) {
 			if (eventArgs.Location.Type == GameLocation.PropertyType.Normal) {
 				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, eventArgs.Location.Normal_Rent[eventArgs.Location.Houses] );
 			}
@@ -46,6 +49,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, eventArgs.Location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount );
 			}
 		}
+	}
+
+	protected override Task OnLoad() {
+		ChangeDiceOwnershipToCurrentPlayer();
+		return base.OnLoad();
 	}
 
 	public void OnGameEvent(PropertyAquiredEvent eventArgs) {
@@ -83,10 +91,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
 	}
 	
-	private Player GetPlayerFromEvent(ulong playerId) {
-		return Lobby.Players.Find(player => player.SteamId == playerId);
-	}
-
 	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
 		if (Networking.IsHost) {
 			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
@@ -96,7 +100,37 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
 		TurnManager.CurrentPlayerIndex = (TurnManager.CurrentPlayerIndex + 1) % TurnManager.CurrentLobby.Players.Count;
+		ChangeDiceOwnershipToCurrentPlayer();
+	}
 
+	public void OnGameEvent(PropertyMortgagedEvent eventArgs) {
+		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
+		
+		if (Networking.IsHost && !property.Mortgaged) {
+			GetPlayerFromEvent(eventArgs.playerId).Money += property.Price / 2;
+			property.Mortgaged = true;
+		}
+	}
+
+	public void OnGameEvent(PropertyMortgagePayedEvent eventArgs) {
+		var player = GetPlayerFromEvent(eventArgs.playerId);
+		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
+		
+		if (Networking.IsHost && player.Money > property.Price / 2 && property.Mortgaged) {
+			player.Money -= property.Price / 2;
+			property.Mortgaged = false;
+		}
+	}
+	
+	private Player GetPlayerFromEvent(ulong playerId) {
+		return Lobby.Players.Find(player => player.SteamId == playerId);
+	}
+
+	private GameLocation GetLocationFromPropertyIndex(int propertyIndex) {
+		return LocationContainer.Children[propertyIndex].Components.Get<GameLocation>();
+	}
+
+	private void ChangeDiceOwnershipToCurrentPlayer() {
 		if (Networking.IsHost) {
 			foreach (var dice in Game.ActiveScene.GetAllComponents<Dice>()) {
 				dice.Network.AssignOwnership(TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
