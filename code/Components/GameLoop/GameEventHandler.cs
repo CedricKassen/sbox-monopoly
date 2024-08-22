@@ -21,12 +21,19 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		IngameStateManager.OwnedFields.TryGetValue(eventArgs.Location.GameObject.Name, out var fieldOwner);
 		var currentPlayer = GetPlayerFromEvent(eventArgs.playerId);
 		
+		TurnManager.CurrentPhase = TurnManager.Phase.PlayerAction;
+		
 		if (fieldOwner == 0 || eventArgs.Location.Type == GameLocation.PropertyType.Event) {
+			if (eventArgs.Location.EventId == "start") {
+				if (Networking.IsHost) {
+					currentPlayer.Money += 200;	
+				}
+				return;
+			}
+			
 			CardActionManager.DisplayCardFor(currentPlayer, eventArgs.Location);
 			return;
 		}
-
-		TurnManager.CurrentPhase = TurnManager.Phase.PlayerAction;
 
 		if (fieldOwner != eventArgs.playerId && !eventArgs.Location.Mortgaged) {
 			if (eventArgs.Location.Type == GameLocation.PropertyType.Normal) {
