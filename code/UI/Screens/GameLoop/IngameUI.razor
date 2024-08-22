@@ -218,8 +218,8 @@
         while (_dice.Any(dice => dice.IsRolling)) {
             await Task.DelayRealtimeSeconds(0.5f);
         }
-
-        _turnManager.EmitRolledEvent((ulong)Game.SteamId, _dice.Aggregate(0, (accumulator, dice) => dice.GetRollValue() + accumulator));
+	    
+        _turnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRollValue(), _dice[1].GetRollValue());
 
         _showRoll = true;
         await Task.DelayRealtimeSeconds(2f);
@@ -233,13 +233,13 @@
     
     private void Auction() {
         var player = Lobby.Players[_turnManager.CurrentPlayerIndex];
-        _turnManager.EmitPropertyAuctionEvent(player.CurrentField);
+        _turnManager.EmitPropertyAuctionEvent(player.CurrentField, player.SteamId);
         
         player.localUiState = LocalUIStates.None;
     }
 
     private void EndTurn() {
-        _turnManager.EmitTurnFinishedEvent();
+        _turnManager.EmitTurnFinishedEvent((ulong) Game.SteamId);
     }
 
     private void CloseLocalModal() {
