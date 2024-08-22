@@ -1,6 +1,7 @@
 @namespace Monopoly.UI.Screens.GameLoop
 @inherits Sandbox.UI.Panel
 @using System
+@using EnumExtensions
 @using Sandbox.Constants
 @using Sandbox.Network
 @implements Sandbox.UI.INavigatorPage
@@ -125,7 +126,23 @@
         case LocalUIStates.Building:
             <Modal OnClose=@CloseLocalModal Name="Building">
                 <Content>
-                    <p> Hello :3 </p>
+                        <div class="table">
+                            @foreach (var property in _stateManager.OwnedFields.ToArray().Where(pair => pair.Value == (ulong)Game.SteamId)) {
+                                var curLocation = Game.ActiveScene.GetAllObjects(true).First(o => o.Name == property.Key).Components.Get<GameLocation>();
+                                @if (curLocation.Type.Equals(GameLocation.PropertyType.Normal)) {
+                                    <div class="row">
+                                        <div class="ownership-dot @(curLocation.Color.ToClass())"></div>
+                                        <p> @curLocation.Name </p>
+                                        <p> Cost: $@(curLocation.House_Cost / 2)</p>
+                                        <div>
+                                            <button disabled="@(curLocation.Houses == 5)" onclick=@(() => BuildHouse(curLocation.PropertyIndex))> Add </button>
+                                            <button disabled="@(curLocation.Houses == 0)" onclick=@(() => DestroyHouse(curLocation.PropertyIndex))> Destroy </button>
+                                        </div>
+                                    </div> 
+                                }
+                                
+                            }
+                        </div>
                 </Content>
             </Modal>
             break;
@@ -261,5 +278,13 @@
     
     private void PayMortgage(int propertyIndex) {
         _turnManager.EmitPropertyMortgagePayedEvent(propertyIndex, (ulong)Game.SteamId);
+    }
+    
+    private void BuildHouse(int propertyIndex) {
+        _turnManager.EmitBuildHouseEvent(propertyIndex, (ulong)Game.SteamId);
+    }
+    
+    private void DestroyHouse(int propertyIndex) {
+        _turnManager.EmitDestroyHouseEvent(propertyIndex, (ulong)Game.SteamId);
     }
 }
