@@ -126,23 +126,22 @@
         case LocalUIStates.Building:
             <Modal OnClose=@CloseLocalModal Name="Building">
                 <Content>
-                        <div class="table">
-                            @foreach (var property in _stateManager.OwnedFields.ToArray().Where(pair => pair.Value == (ulong)Game.SteamId)) {
-                                var curLocation = Game.ActiveScene.GetAllObjects(true).First(o => o.Name == property.Key).Components.Get<GameLocation>();
-                                @if (curLocation.Type.Equals(GameLocation.PropertyType.Normal)) {
-                                    <div class="row">
-                                        <div class="ownership-dot @(curLocation.Color.ToClass())"></div>
-                                        <p> @curLocation.Name </p>
-                                        <p> Cost: $@(curLocation.House_Cost / 2)</p>
-                                        <div>
-                                            <button disabled="@(curLocation.Houses == 5)" onclick=@(() => BuildHouse(curLocation.PropertyIndex))> Add </button>
-                                            <button disabled="@(curLocation.Houses == 0)" onclick=@(() => DestroyHouse(curLocation.PropertyIndex))> Destroy </button>
-                                        </div>
-                                    </div> 
-                                }
-                                
+                    <div class="table">
+                        @foreach (var curLocation in _locations.FindAll(loc => OwnsAllFrom(loc, (ulong) Game.SteamId))) {
+                            @if (curLocation.Type.Equals(GameLocation.PropertyType.Normal)) {
+                                <div class="row">
+                                    <div class="ownership-dot @(curLocation.Color.ToClass())"></div>
+                                    <p> @curLocation.Name </p>
+                                    <p> Cost: $@(curLocation.House_Cost / 2)</p>
+                                    <div>
+                                        <button disabled="@(curLocation.Houses == 5)" onclick=@(() => BuildHouse(curLocation.PropertyIndex))> Add </button>
+                                        <button disabled="@(curLocation.Houses == 0)" onclick=@(() => DestroyHouse(curLocation.PropertyIndex))> Destroy </button>
+                                    </div>
+                                </div>
                             }
-                        </div>
+
+                        }
+                    </div>
                 </Content>
             </Modal>
             break;
@@ -200,6 +199,8 @@
 
     [Property]
     private TurnManager _turnManager { get; } = Game.ActiveScene.GetAllComponents<TurnManager>().First();
+
+    private List<GameLocation> _locations { get; } = new(Game.ActiveScene.GetAllComponents<GameLocation>());
 
     private readonly List<Dice> _dice = new(Game.ActiveScene.GetAllComponents<Dice>());
     private readonly IngameStateManager _stateManager = Game.ActiveScene.GetAllComponents<IngameStateManager>().First();
@@ -282,6 +283,16 @@
     
     private void BuildHouse(int propertyIndex) {
         _turnManager.EmitBuildHouseEvent(propertyIndex, (ulong)Game.SteamId);
+    }
+
+    private bool OwnsAllFrom(GameLocation location, ulong playerId) {
+        if (!location.Type.Equals(GameLocation.PropertyType.Normal)) {
+            return false;
+        }
+        
+        // CEDRIC??? we should use the index as key instead of the name, the index is way easier to access at i think any moment?
+        return location.GroupMembers
+            .All(member => _stateManager.OwnedFields[location.GameObject.Parent.Children[member].Name] == playerId);
     }
     
     private void DestroyHouse(int propertyIndex) {
