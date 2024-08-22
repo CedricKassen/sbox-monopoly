@@ -2684,9 +2684,6 @@
           "__type": "MusicManager",
           "__guid": "a3288d41-e7b9-4ea3-811e-936576727563",
           "MusicDuration": 238.21062,
-          "MusicStart": {
-            "Relative": 4339.6646
-          },
           "DistanceAttenuation": false,
           "DistanceAttenuationOverride": false,
           "Force2d": true,
