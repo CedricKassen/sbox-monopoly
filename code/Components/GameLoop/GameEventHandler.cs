@@ -26,6 +26,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			return;
 		}
 
+		TurnManager.CurrentPhase = TurnManager.Phase.PlayerAction;
+
 		if (fieldOwner != eventArgs.playerId && !eventArgs.Location.Mortgaged) {
 			if (eventArgs.Location.Type == GameLocation.PropertyType.Normal) {
 				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, eventArgs.Location.Normal_Rent[eventArgs.Location.Houses] );

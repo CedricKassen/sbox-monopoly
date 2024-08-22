@@ -178,6 +178,7 @@ PlayerCard {
     width: 5px;
     transform: rotate(45deg) translate(-6px, -3px);
     background-color: $red300;
+    border: 1px solid $black;
   }
 }
 
