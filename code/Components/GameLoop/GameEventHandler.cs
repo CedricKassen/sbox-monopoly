@@ -1,4 +1,5 @@
-﻿using Monopoly.UI.Screens.GameLoop;
+﻿using System.Threading.Tasks;
+using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 using Sandbox.Network;
@@ -48,6 +49,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 	}
 
+	protected override Task OnLoad() {
+		ChangeDiceOwnershipToCurrentPlayer();
+		return base.OnLoad();
+	}
+
 	public void OnGameEvent(PropertyAquiredEvent eventArgs) {
 		var location = LocationContainer.Children[eventArgs.PropertyIndex];
 		var component = location.Components.Get<GameLocation>();
@@ -92,12 +98,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
 		TurnManager.CurrentPlayerIndex = (TurnManager.CurrentPlayerIndex + 1) % TurnManager.CurrentLobby.Players.Count;
-
-		if (Networking.IsHost) {
-			foreach (var dice in Game.ActiveScene.GetAllComponents<Dice>()) {
-				dice.Network.AssignOwnership(TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
-			}
-		}
+		ChangeDiceOwnershipToCurrentPlayer();
 	}
 
 	public void OnGameEvent(PropertyMortgagedEvent eventArgs) {
@@ -125,5 +126,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	private GameLocation GetLocationFromPropertyIndex(int propertyIndex) {
 		return LocationContainer.Children[propertyIndex].Components.Get<GameLocation>();
+	}
+
+	private void ChangeDiceOwnershipToCurrentPlayer() {
+		if (Networking.IsHost) {
+			foreach (var dice in Game.ActiveScene.GetAllComponents<Dice>()) {
+				dice.Network.AssignOwnership(TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
+			}
+		}
 	}
 }
