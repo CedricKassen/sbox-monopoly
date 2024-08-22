@@ -1,0 +1,26 @@
+{
+  "RootObject": {
+    "__guid": "b74cdc6b-90b3-4893-8d2c-62b452bb0d9e",
+    "Flags": 0,
+    "Name": "hotel",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "8357cb7e-fc74-4d8d-ac87-4dc493d8f3d2",
+        "BodyGroups": 18446744073709551615,
+        "Model": "models/hotel.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
