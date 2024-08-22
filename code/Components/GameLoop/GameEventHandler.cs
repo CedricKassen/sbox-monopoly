@@ -22,7 +22,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
     public void OnGameEvent(AuctionFinishedEvent eventArgs) {
         TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex);
 
-        if (Networking.IsHost) GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+        if (Networking.IsHost) {
+            GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+        }
 
         IngameStateManager.State = IngameUI.IngameUiStates.None;
     }
@@ -52,45 +54,60 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
     }
 
     public void OnGameEvent(MovementDoneEvent eventArgs) {
-        IngameStateManager.OwnedFields.TryGetValue(eventArgs.Location.GameObject.Name, out var fieldOwner);
+        var location = eventArgs.Location;
+        IngameStateManager.OwnedFields.TryGetValue(location.GameObject.Name, out var fieldOwner);
         var currentPlayer = GetPlayerFromEvent(eventArgs.playerId);
 
         TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.PlayerAction);
 
-        if (fieldOwner == 0 || eventArgs.Location.Type == GameLocation.PropertyType.Event) {
-            if (eventArgs.Location.EventId == "start") {
-                if (Networking.IsHost) currentPlayer.Money += 200;
+        if (fieldOwner == 0 || location.Type == GameLocation.PropertyType.Event) {
+            if (location.EventId == "start") {
+                if (Networking.IsHost) {
+                    currentPlayer.Money += 200;
+                }
+
                 return;
             }
 
-            CardActionManager.DisplayCardFor(currentPlayer, eventArgs.Location);
+            CardActionManager.DisplayCardFor(currentPlayer, location);
             return;
         }
 
         // TODO if field action event is done!
         TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
 
-        if (fieldOwner != eventArgs.playerId && !eventArgs.Location.Mortgaged) {
-            if (eventArgs.Location.Type == GameLocation.PropertyType.Normal)
-                TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
-                    eventArgs.Location.Normal_Rent[eventArgs.Location.Houses]);
+        if (fieldOwner != eventArgs.playerId && !location.Mortgaged) {
+            if (location.Type == GameLocation.PropertyType.Normal) {
+                var price = 0;
+                // If location has zero houses we need to check if the location owner owns the whole group
+                if (location.Houses == 0) {
+                    price = OwnsAllFrom(location, eventArgs.playerId)
+                        ? location.Normal_Rent[0] * 2
+                        : location.Normal_Rent[0];
+                } else {
+                    price = location.Normal_Rent[location.Houses];
+                }
 
-            if (eventArgs.Location.Type == GameLocation.PropertyType.Railroad) {
+                TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
+                    price);
+            }
+
+            if (location.Type == GameLocation.PropertyType.Railroad) {
                 var railroadCount = IngameStateManager.OwnedFields.Count(f => f.Value == fieldOwner &&
                                                                               (f.Key == "railroad1" ||
                                                                                f.Key == "railroad2" ||
                                                                                f.Key == "railroad3" ||
                                                                                f.Key == "railroad4"));
                 TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
-                    eventArgs.Location.Railroad_Rent[railroadCount - 1]);
+                    location.Railroad_Rent[railroadCount - 1]);
             }
 
-            if (eventArgs.Location.Type == GameLocation.PropertyType.Utility) {
+            if (location.Type == GameLocation.PropertyType.Utility) {
                 var utilityCount = IngameStateManager.OwnedFields.Count(f => f.Value == fieldOwner &&
                                                                              (f.Key == "electricCompany" ||
                                                                               f.Key == "waterCompany"));
                 TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
-                    eventArgs.Location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount);
+                    location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount);
             }
         }
     }
@@ -117,7 +134,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
         IngameStateManager.AuctionBiddings = new NetDictionary<ulong, int>();
         IngameStateManager.State = IngameUI.IngameUiStates.Auction;
 
-        foreach (var player in Lobby.Players) IngameStateManager.AuctionBiddings[player.SteamId] = 0;
+        foreach (var player in Lobby.Players) {
+            IngameStateManager.AuctionBiddings[player.SteamId] = 0;
+        }
     }
 
     public void OnGameEvent(PropertyMortgagedEvent eventArgs) {
@@ -146,15 +165,17 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
         Log.Info(eventArgs.Doubles);
         Log.Info(eventArgs.Number);
 
-        if (eventArgs.Doubles)
+        if (eventArgs.Doubles) {
             player.DoublesCount++;
-        else
+        } else {
             player.DoublesCount = 0;
+        }
 
-        if (player.DoublesCount < 3)
+        if (player.DoublesCount < 3) {
             MovementManager.StartMovement(player, eventArgs.Number);
-        else
+        } else {
             CardActionHelper.GoToJail(player, MovementManager);
+        }
 
         player.LastDiceCount = eventArgs.Number;
     }
@@ -163,6 +184,17 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
     public void OnGameEvent(TurnFinishedEvent eventArgs) {
         TurnManager.CurrentPlayerIndex = (TurnManager.CurrentPlayerIndex + 1) % TurnManager.CurrentLobby.Players.Count;
         ChangeDiceOwnershipToCurrentPlayer();
+    }
+
+    private bool OwnsAllFrom(GameLocation location, ulong playerId) {
+        if (!location.Type.Equals(GameLocation.PropertyType.Normal)) {
+            return false;
+        }
+
+        // CEDRIC??? we should use the index as key instead of the name, the index is way easier to access at i think any moment?
+        return location.GroupMembers
+            .All(member =>
+                IngameStateManager.OwnedFields[location.GameObject.Parent.Children[member].Name] == playerId);
     }
 
     protected override Task OnLoad() {
@@ -181,9 +213,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
     private void ChangeDiceOwnershipToCurrentPlayer() {
         var diceList = new List<Dice>(Game.ActiveScene.GetAllComponents<Dice>());
 
-        if (Networking.IsHost && diceList.Count > 0)
-            foreach (var dice in diceList)
+        if (Networking.IsHost && diceList.Count > 0) {
+            foreach (var dice in diceList) {
                 dice.Network.AssignOwnership(
                     TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
+            }
+        }
     }
 }
