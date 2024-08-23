@@ -6,6 +6,10 @@ using Sandbox.Constants;
 public sealed class CardActionManager : Component {
 	[Property] private readonly Dictionary<Card, bool> BlockedCards = new();
 
+	[HostSync] private NetList<int> ChanceCardsOrder { get; set; }
+
+	[HostSync] private NetList<int> CommunityCardsOrder { get; set; }
+
 	[Property] private List<Card> ChanceCards;
 
 	[Property] private List<Card> CommunityCards;
@@ -17,25 +21,61 @@ public sealed class CardActionManager : Component {
 	[Property] public TurnManager TurnManager { get; set; }
 
 	protected override Task OnLoad() {
-		FillChangeCards();
-		FillCommunityCards();
+		RefillChangeCards();
+		RefillCommunityCards();
 		return base.OnLoad();
 	}
 
-	private void FillChangeCards() {
-		ChanceCards = new List<Card>(Cards.Chance_Standard);
 
-		ChanceCards.RemoveAll(card => BlockedCards.ContainsKey(card));
-
-		CardActionHelper.Shuffle(ChanceCards);
+	private void RefillChangeCards() {
+		if (Networking.IsHost) {
+			ChanceCardsOrder = CreateCardOrderListFromCardCount(Cards.Chance_Standard.Count);
+			FillChanceCards();
+		}
 	}
 
+	private void RefillCommunityCards() {
+		if (Networking.IsHost) {
+			CommunityCardsOrder = CreateCardOrderListFromCardCount(Cards.CommunityChest_Standard.Count);
+			FillCommunityCards();
+		}
+	}
+
+	[Broadcast]
 	private void FillCommunityCards() {
-		CommunityCards = new List<Card>(Cards.CommunityChest_Standard);
+		CommunityCards = new();
+		Log.Info("Test");
+		foreach (var index in CommunityCardsOrder) {
+			Card card = Cards.CommunityChest_Standard[index];
+			if (BlockedCards.ContainsKey(card)) {
+				continue;
+			}
 
-		CommunityCards.RemoveAll(card => BlockedCards.ContainsKey(card));
+			CommunityCards.Add(card);
+		}
+	}
 
-		CardActionHelper.Shuffle(CommunityCards);
+	[Broadcast]
+	private void FillChanceCards() {
+		ChanceCards = new();
+		foreach (var index in ChanceCardsOrder) {
+			Card card = Cards.Chance_Standard[index];
+			if (BlockedCards.ContainsKey(card)) {
+				continue;
+			}
+
+			ChanceCards.Add(card);
+		}
+	}
+
+	private NetList<int> CreateCardOrderListFromCardCount(int count) {
+		List<int> indexes = new();
+		for (int i = 0; i < count; i++) {
+			indexes.Add(i);
+		}
+
+		CardActionHelper.Shuffle(indexes);
+		return CardActionHelper.CreateNetList(indexes);
 	}
 
 
@@ -94,7 +134,7 @@ public sealed class CardActionManager : Component {
 		card.Action(player, MovementManager, BlockedCards, IngameStateManager, card);
 
 		if (ChanceCards.Count == 0) {
-			FillChangeCards();
+			RefillChangeCards();
 		}
 	}
 
@@ -105,12 +145,13 @@ public sealed class CardActionManager : Component {
 		Log.Info("Drew " + card.Text);
 
 		IngameStateManager.Data = card;
+		Log.Info(IngameStateManager.State);
 		IngameStateManager.State = IngameUI.IngameUiStates.Community_Chest;
 
 		card.Action(player, MovementManager, BlockedCards, IngameStateManager, card);
 
 		if (CommunityCards.Count == 0) {
-			FillCommunityCards();
+			RefillCommunityCards();
 		}
 	}
 
