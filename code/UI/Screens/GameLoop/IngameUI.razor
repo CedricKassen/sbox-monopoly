@@ -224,7 +224,7 @@
 	}
 	
 	private void ChangeGameUIState(IngameUiStates newState) {
-		if (_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
+		if (!_turnManager.CurrentPhase.Equals(TurnManager.Phase.PlayerAction)) {
 			// Disabled sound
 			return;
 		}
@@ -234,7 +234,7 @@
 	}
 	
 	private void ChangeLocalUIState(LocalUIStates newState) {
-		if (_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
+		if (!_turnManager.CurrentPhase.Equals(TurnManager.Phase.PlayerAction)) {
 			// Disabled sound
 			return;
 		}
