@@ -176,8 +176,11 @@
 	    </div>
     }
     
+    @if (!IsCurrentPlayer() && _turnManager.CurrentPhase.Equals(TurnManager.Phase.PlayerAction)) {
+	    <h1>Waiting for @(GetCurrentPlayer().Name)...</h1>
+    }
 
-    @if (_turnManager.CurrentPhase == TurnManager.Phase.PlayerAction && Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId) {
+    @if (IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.PlayerAction) {
         <div class="endTurn">
             <button onclick=@EndTurn> End Turn </button>
         </div>
@@ -226,13 +229,13 @@
 
         return HashCode.Combine(_showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data, _stateManager.OwnedFields, _player.localUiState, _stateManager.AuctionTimer);
     }
-
-	private bool IsRollBtnActive() {
-		return IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling;
+	
+	private bool IsCurrentPlayer() {
+		return GetCurrentPlayer().SteamId == (ulong)Game.SteamId;
 	}
 
-	private bool IsCurrentPlayer() {
-		return Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId;
+	private Player GetCurrentPlayer() {
+		return Lobby.Players[_turnManager.CurrentPlayerIndex];
 	}
 	
 	private void ChangeGameUIState(IngameUiStates newState) {
