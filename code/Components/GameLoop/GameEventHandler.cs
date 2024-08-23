@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
 using Sandbox.Events;
@@ -178,19 +179,22 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		if (Networking.IsHost && !property.Mortgaged) {
 			GetPlayerFromEvent(eventArgs.playerId).Money += property.Price / 2;
-			property.Mortgaged = true;
 		}
+
+		property.Mortgaged = true;
 	}
 
 
 	public void OnGameEvent(PropertyMortgagePayedEvent eventArgs) {
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
+		var price = (int)Math.Ceiling(property.Price / 2 * 0.1);
 
-		if (Networking.IsHost && player.Money > property.Price / 2 && property.Mortgaged) {
-			player.Money -= property.Price / 2;
-			property.Mortgaged = false;
+		if (Networking.IsHost && player.Money > price && property.Mortgaged) {
+			player.Money -= price;
 		}
+
+		property.Mortgaged = false;
 	}
 
 	public void OnGameEvent(RolledEvent eventArgs) {
