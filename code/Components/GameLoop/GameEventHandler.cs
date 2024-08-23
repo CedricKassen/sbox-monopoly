@@ -20,7 +20,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	[Property] public TurnManager TurnManager { get; set; }
 
 	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
-		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex);
+		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex, true);
 
 		if (Networking.IsHost) {
 			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
@@ -128,11 +128,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PropertyAquiredEvent eventArgs) {
 		var location = LocationContainer.Children[eventArgs.PropertyIndex];
-		var component = location.Components.Get<GameLocation>();
+		var gameLocation = location.Components.Get<GameLocation>();
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 
-		if (component.Price <= player.Money && Networking.IsHost) {
-			player.Money -= component.Price;
+		// if property was acquired from auction money got already subtracted
+		var costs = eventArgs.FromAuction ? 0 : gameLocation.Price;
+
+		if (costs <= player.Money && Networking.IsHost) {
+			player.Money -= costs;
 			IngameStateManager.OwnedFields[location.Name] = eventArgs.playerId;
 		}
 	}
