@@ -105,8 +105,11 @@ public sealed class CardActionManager : Component {
 					TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Tax,
 						player.SteamId);
 				}
+				else if (location.EventId == "police") {
+					TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Police,
+						player.SteamId);
+				}
 				else if (location.EventId == "jail") {
-					CardActionHelper.GoToJail(player, MovementManager);
 					TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Jail,
 						player.SteamId);
 				}
@@ -148,7 +151,7 @@ public sealed class CardActionManager : Component {
 		Log.Info(IngameStateManager.State);
 		IngameStateManager.State = IngameUI.IngameUiStates.Community_Chest;
 
-		card.Action(player, MovementManager, BlockedCards, IngameStateManager, card);
+		card.Action(player, MovementManager, TurnManager, BlockedCards, IngameStateManager, card);
 
 		if (CommunityCards.Count == 0) {
 			RefillCommunityCards();
