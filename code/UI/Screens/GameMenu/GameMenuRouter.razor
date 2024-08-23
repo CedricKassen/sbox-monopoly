@@ -1,3 +1,4 @@
+@using EnumExtensions.Settings
 @inherits Sandbox.UI.NavHostPanel
 @namespace Monopoly.UI.Screens.GameMenu
 
@@ -8,9 +9,12 @@
 @code
 {
 	public GameMenuRouter() {
+		UserSettingsSystem.Load();
+
 		DefaultUrl = "/";
 		AddDestination("/", typeof(MainMenuUI));
 		AddDestination("/hub", typeof(LobbyHubUI));
 		AddDestination("/create", typeof(LobbyCreationUI));
+		AddDestination("/settings", typeof(SettingsUI));
 	}
 }
