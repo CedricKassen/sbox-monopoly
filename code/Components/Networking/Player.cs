@@ -24,9 +24,9 @@ public sealed class Player : Component {
 		}
 	}
 
-	[Property] public int Money { get; set; } = 2000;
+	[Property] [HostSync] public int Money { get; set; } = 2000;
 
-	[Property] public int CurrentField { get; set; }
+	[Property] [HostSync] public int CurrentField { get; set; }
 
 	[Property] public Connection Connection { get; set; }
 
