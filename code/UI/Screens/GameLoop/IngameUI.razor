@@ -132,7 +132,7 @@
                                 <div class="row">
                                     <div class="ownership-dot @(curLocation.Color.ToClass())"></div>
                                     <p> @curLocation.Name </p>
-                                    <p> Cost: $@(curLocation.House_Cost / 2)</p>
+                                    <p> Cost: $@(curLocation.House_Cost)</p>
                                     <div>
                                         <button disabled="@(curLocation.Houses == 5)" onclick=@(() => BuildHouse(curLocation.PropertyIndex))> Add </button>
                                         <button disabled="@(curLocation.Houses == 0)" onclick=@(() => DestroyHouse(curLocation.PropertyIndex))> Destroy </button>
