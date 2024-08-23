@@ -37,9 +37,9 @@ public class TurnManager : Component {
 	}
 
 	[Broadcast]
-	public void EmitPropertyAquiredEvent(ulong playerId, int propertyIndex) {
+	public void EmitPropertyAquiredEvent(ulong playerId, int propertyIndex, bool fromAuction) {
 		GameParentObject.Dispatch(
-			new PropertyAquiredEvent { playerId = playerId, PropertyIndex = propertyIndex });
+			new PropertyAquiredEvent { playerId = playerId, PropertyIndex = propertyIndex, FromAuction = fromAuction });
 		ChangePhase(playerId, Phase.PlayerAction);
 	}
 
@@ -98,6 +98,18 @@ public class TurnManager : Component {
 	public void EmitPropertyMortgagedEvent(int propertyIndex, ulong playerId) {
 		ChangePhase(playerId, Phase.PlayerAction);
 		GameParentObject.Dispatch(new PropertyMortgagedEvent { PropertyIndex = propertyIndex, playerId = playerId });
+	}
+
+	[Broadcast]
+	public void EmitBuildHouseEvent(int propertyIndex, ulong playerId) {
+		ChangePhase(playerId, Phase.PlayerAction);
+		GameParentObject.Dispatch(new BuildHouseEvent(propertyIndex, playerId));
+	}
+
+	[Broadcast]
+	public void EmitDestroyHouseEvent(int propertyIndex, ulong playerId) {
+		ChangePhase(playerId, Phase.PlayerAction);
+		GameParentObject.Dispatch(new DestroyHouseEvent(propertyIndex, playerId));
 	}
 
 	[Broadcast]
