@@ -130,8 +130,8 @@ public sealed class CardActionManager : Component {
 
 		IngameStateManager.Data = card;
 		IngameStateManager.State = IngameUI.IngameUiStates.Chance;
-
-		card.Action(player, MovementManager, BlockedCards, IngameStateManager, card);
+		
+		card.Action(player, MovementManager, TurnManager, BlockedCards, IngameStateManager, card);
 
 		if (ChanceCards.Count == 0) {
 			RefillChangeCards();
