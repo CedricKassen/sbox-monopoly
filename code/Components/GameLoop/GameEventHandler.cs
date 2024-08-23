@@ -120,16 +120,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 					price = location.Normal_Rent[location.Houses];
 				}
 
-				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
-					price);
+
+				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, price);
 			}
 
 			if (location.Type == GameLocation.PropertyType.Railroad) {
-				var railroadCount = IngameStateManager.OwnedFields.Count(f => f.Value == fieldOwner &&
-				                                                              (f.Key == "railroad1" ||
-				                                                               f.Key == "railroad2" ||
-				                                                               f.Key == "railroad3" ||
-				                                                               f.Key == "railroad4"));
+				var railroadCount = IngameStateManager.OwnedFields
+				                                      .Count(f => f.Value == fieldOwner && f.Key.Contains("railroad"));
 				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
 					location.Railroad_Rent[railroadCount - 1]);
 			}
@@ -138,6 +135,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				var utilityCount = IngameStateManager.OwnedFields.Count(f => f.Value == fieldOwner &&
 				                                                             (f.Key == "electricCompany" ||
 				                                                              f.Key == "waterCompany"));
+
 				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
 					location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount);
 			}
@@ -188,7 +186,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(PropertyMortgagePayedEvent eventArgs) {
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
-		var price = (int)Math.Ceiling(property.Price / 2 * 0.1);
+		var price = (int)Math.Ceiling(property.Price / 2 * 1.1);
 
 		if (Networking.IsHost && player.Money > price && property.Mortgaged) {
 			player.Money -= price;
