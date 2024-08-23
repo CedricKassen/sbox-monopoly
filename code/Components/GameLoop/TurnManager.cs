@@ -50,7 +50,7 @@ public class TurnManager : Component {
 		ChangePhase(playerId, Phase.Auction);
 	}
 
-	[Broadcast]
+	[Broadcast(NetPermission.HostOnly)]
 	public void EmitPlayerPaymentEvent(ulong playerId, ulong recipientId, int amount) {
 		GameParentObject.Dispatch(new PlayerPaymentEvent {
 			playerId = playerId, Amount = amount, Recipient = recipientId
