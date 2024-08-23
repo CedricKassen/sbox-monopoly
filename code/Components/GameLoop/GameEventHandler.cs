@@ -38,11 +38,22 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		var player = GetPlayerFromEvent(eventArgs.PlayerId);
 
+		// Check if player can afford this house 
 		if (player.Money - property.House_Cost < 0) {
 			Log.Warning("Player can afford this house!");
 			return;
 		}
 
+		// Check if player builds evenly
+		foreach (var member in property.GroupMembers) {
+			// If one street of the group got more houses then current street prevent destroying we cant go from 2 1 1 -> 3 1 1
+			if (property.Houses > LocationContainer.Children[member].Components.Get<GameLocation>().Houses) {
+				Log.Warning("Abort!");
+				return;
+			}
+		}
+
+		Log.Warning("Build!");
 		player.Money -= property.House_Cost;
 		property.Houses++;
 	}
@@ -53,6 +64,17 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			Log.Error("Tried to remove house from empty property!");
 			return;
 		}
+
+		// Check if player builds evenly
+		foreach (var member in property.GroupMembers) {
+			// If one street of the group got less houses then current street prevent building we cant go from 2 1 1 -> 2 1 0
+			if (property.Houses < LocationContainer.Children[member].Components.Get<GameLocation>().Houses) {
+				Log.Warning("Abort!");
+				return;
+			}
+		}
+
+		Log.Warning("Build!");
 
 		var player = GetPlayerFromEvent(eventArgs.PlayerId);
 		player.Money += property.House_Cost / 2;

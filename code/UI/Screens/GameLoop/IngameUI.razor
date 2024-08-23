@@ -245,7 +245,7 @@
     }
 
     private void Buy() {
-        _turnManager.EmitPropertyAquiredEvent((ulong)Game.SteamId, Lobby.Players[_turnManager.CurrentPlayerIndex].CurrentField);
+        _turnManager.EmitPropertyAquiredEvent((ulong)Game.SteamId, Lobby.Players[_turnManager.CurrentPlayerIndex].CurrentField, false);
         CloseLocalModal();
     }
     
