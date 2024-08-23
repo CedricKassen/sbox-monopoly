@@ -152,17 +152,26 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(GoToJailEvent eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.playerId);
+
+		if (Networking.IsHost) {
+			// Set Jail Status here
+			player.JailTurnCounter++;
+		}
+
 		CardActionHelper.GoToJail(player, MovementManager);
 		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InAction);
 	}
 
 	public void OnGameEvent(LandOnJailEvent eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.playerId);
-		if (Networking.IsHost) {
-			player.JailTurnCounter++;
-		}
 
-		TurnManager.EmitTurnFinishedEvent(eventArgs.playerId);
+		// If player lands on the jail field with > 0 it means he was sent to jail so we end the turn immediately 
+		if (player.JailTurnCounter > 0) {
+			TurnManager.EmitTurnFinishedEvent(eventArgs.playerId);
+		}
+		else {
+			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
+		}
 	}
 
 	public void OnGameEvent(PropertyAquiredEvent eventArgs) {
@@ -228,7 +237,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			MovementManager.StartMovement(player, eventArgs.Number);
 		}
 		else {
-			CardActionHelper.GoToJail(player, MovementManager);
+			TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Police, player.SteamId);
 		}
 
 		player.LastDiceCount = eventArgs.Number;
@@ -251,7 +260,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			               IngameStateManager.OwnedFields[location.GameObject.Parent.Children[member].Name] ==
 			               playerId);
 	}
-	
+
 
 	protected override void OnStart() {
 		ChangeDiceOwnershipToCurrentPlayer();
