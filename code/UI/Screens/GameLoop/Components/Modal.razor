@@ -1,5 +1,6 @@
 ﻿@using System
 @using Sandbox.Razor
+@inherits Sandbox.UI.Panel
 @namespace Monopoly.UI.Screens.GameLoop
 
 <root>
@@ -30,5 +31,13 @@
 
 	[Property]
 	public string Name { get; set; }
+
+	protected override int BuildHash() {
+		if (Content != null) {
+			return Content.GetHashCode();
+		}
+		
+		return CustomModalBody?.GetHashCode() ?? base.BuildHash();
+	}
 
 }
