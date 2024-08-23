@@ -12,7 +12,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<PlayerPaymentEvent>,
                                 IGameEventHandler<TurnFinishedEvent>, IGameEventHandler<PropertyMortgagedEvent>,
                                 IGameEventHandler<PropertyMortgagePayedEvent>, IGameEventHandler<BuildHouseEvent>,
-                                IGameEventHandler<DestroyHouseEvent> {
+                                IGameEventHandler<DestroyHouseEvent>, IGameEventHandler<GoToJailEvent>,
+                                IGameEventHandler<LandOnJailEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
 	[Property] public Lobby Lobby { get; set; }
 	[Property] public MovementManager MovementManager { get; set; }
@@ -147,6 +148,21 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
 			GetPlayerFromEvent(eventArgs.Recipient).Money += eventArgs.Amount;
 		}
+	}
+
+	public void OnGameEvent(GoToJailEvent eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.playerId);
+		CardActionHelper.GoToJail(player, MovementManager);
+		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InAction);
+	}
+
+	public void OnGameEvent(LandOnJailEvent eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.playerId);
+		if (Networking.IsHost) {
+			player.JailTurnCounter++;
+		}
+
+		TurnManager.EmitTurnFinishedEvent(eventArgs.playerId);
 	}
 
 	public void OnGameEvent(PropertyAquiredEvent eventArgs) {

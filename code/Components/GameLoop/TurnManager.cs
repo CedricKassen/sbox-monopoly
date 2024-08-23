@@ -1,4 +1,5 @@
-﻿using Sandbox.Events;
+﻿using Sandbox.Constants;
+using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 
 public class TurnManager : Component {
@@ -6,7 +7,8 @@ public class TurnManager : Component {
 		Rolling,
 		RoundAction,
 		Auction,
-		PlayerAction
+		PlayerAction,
+		InAction
 	}
 
 	public enum PlayerActionType {
@@ -17,6 +19,7 @@ public class TurnManager : Component {
 	public enum SpecialPropertyActionType {
 		CommunityChest,
 		Chance,
+		Police,
 		Jail,
 		Tax,
 		None
@@ -63,11 +66,14 @@ public class TurnManager : Component {
 		GameParentObject.Dispatch(new SpecialPropertyActionEvent());
 
 		if (type == SpecialPropertyActionType.Jail) {
-			GameParentObject.Dispatch(new TurnFinishedEvent());
-			ChangePhase(playerId, Phase.Rolling);
+			GameParentObject.Dispatch(new LandOnJailEvent(playerId));
 		}
-
-		ChangePhase(playerId, Phase.PlayerAction);
+		else if (type == SpecialPropertyActionType.Police) {
+			GameParentObject.Dispatch(new GoToJailEvent(playerId));
+		}
+		else {
+			ChangePhase(playerId, Phase.PlayerAction);
+		}
 	}
 
 	[Broadcast]
