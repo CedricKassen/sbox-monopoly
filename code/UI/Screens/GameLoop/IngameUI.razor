@@ -18,7 +18,7 @@
         <div class="autogrow"></div>
         <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Bank))"> 🏦 </button>
         <button class="secondaryButton" onclick="@(() => ChangeGameUIState(IngameUiStates.Trade))"> 💸 </button>
-        <button class="mainButton @(IsRollBtnActive() ? "active" : "")" onclick="@Roll">
+        <button class="mainButton @(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll">
             GO
         </button>
         <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Building))"> 🏠 </button>
@@ -168,6 +168,14 @@
             break;
     }
 
+    @if (IsCurrentPlayer() && _turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
+	    <div class="jailDecision">
+		    <button onclick=@EndTurn> Roll dice (@(_player.JailTurnCounter-1)/3) </button>
+		    <button onclick=@EndTurn> Pay $50 </button>
+		    <button onclick=@EndTurn> Use Card </button>
+	    </div>
+    }
+    
 
     @if (_turnManager.CurrentPhase == TurnManager.Phase.PlayerAction && Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId) {
         <div class="endTurn">
@@ -220,7 +228,11 @@
     }
 
 	private bool IsRollBtnActive() {
-		return Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId && _turnManager.CurrentPhase == TurnManager.Phase.Rolling;
+		return IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling;
+	}
+
+	private bool IsCurrentPlayer() {
+		return Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId;
 	}
 	
 	private void ChangeGameUIState(IngameUiStates newState) {
