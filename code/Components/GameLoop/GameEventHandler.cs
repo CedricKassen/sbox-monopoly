@@ -237,6 +237,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
 		TurnManager.CurrentPlayerIndex = (TurnManager.CurrentPlayerIndex + 1) % TurnManager.CurrentLobby.Players.Count;
+		SetCurrentPlayersJailState();
 		ChangeDiceOwnershipToCurrentPlayer();
 	}
 
@@ -250,11 +251,12 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			               IngameStateManager.OwnedFields[location.GameObject.Parent.Children[member].Name] ==
 			               playerId);
 	}
+	
 
-	protected override Task OnLoad() {
+	protected override void OnStart() {
 		ChangeDiceOwnershipToCurrentPlayer();
-		return base.OnLoad();
 	}
+
 
 	private Player GetPlayerFromEvent(ulong playerId) {
 		return Lobby.Players.Find(player => player.SteamId == playerId);
@@ -262,6 +264,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	private GameLocation GetLocationFromPropertyIndex(int propertyIndex) {
 		return LocationContainer.Children[propertyIndex].Components.Get<GameLocation>();
+	}
+
+	private void SetCurrentPlayersJailState() {
+		Player currentPlayer = TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex];
+		if (currentPlayer.JailTurnCounter > 0) {
+			TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.Jail);
+		}
 	}
 
 	private void ChangeDiceOwnershipToCurrentPlayer() {

@@ -16,14 +16,14 @@
 
     <div id="mainPanel">
         <div class="autogrow"></div>
-        <button class="secondaryButton" onclick="@(() => _player.localUiState = LocalUIStates.Bank)"> 🏦 </button>
-        <button class="secondaryButton" onclick="@(() => _stateManager.State = IngameUiStates.Trade)"> 💸 </button>
-        <button class="mainButton @(Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll">
+        <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Bank))"> 🏦 </button>
+        <button class="secondaryButton" onclick="@(() => ChangeGameUIState(IngameUiStates.Trade))"> 💸 </button>
+        <button class="mainButton @(IsRollBtnActive() ? "active" : "")" onclick="@Roll">
             GO
         </button>
-        <button class="secondaryButton" onclick="@(() => _player.localUiState = LocalUIStates.Building)"> 🏠 </button>
+        <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Building))"> 🏠 </button>
         <div class="autogrow"></div>
-        <button class="secondaryButton" onclick="@(() => _player.localUiState = LocalUIStates.Options)"> ⚙️ </button>
+        <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Options))"> ⚙️ </button>
     </div>
 
     <div style="position: absolute; bottom: 0; left: 0; width: 100%; flex-direction: row; justify-content: center">
@@ -219,6 +219,30 @@
         return HashCode.Combine(_showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data, _stateManager.OwnedFields, _player.localUiState, _stateManager.AuctionTimer);
     }
 
+	private bool IsRollBtnActive() {
+		return Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId && _turnManager.CurrentPhase == TurnManager.Phase.Rolling;
+	}
+	
+	private void ChangeGameUIState(IngameUiStates newState) {
+		if (_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
+			// Disabled sound
+			return;
+		}
+
+		// Btn click sound
+		_stateManager.State = newState;
+	}
+	
+	private void ChangeLocalUIState(LocalUIStates newState) {
+		if (_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
+			// Disabled sound
+			return;
+		}
+
+		// Btn click sound
+		_player.localUiState = newState;
+	}
+	
     private void LeaveLobby() {
         _stateManager.State = IngameUiStates.None;
         GameNetworkSystem.Disconnect();

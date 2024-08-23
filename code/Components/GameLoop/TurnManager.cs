@@ -8,7 +8,8 @@ public class TurnManager : Component {
 		RoundAction,
 		Auction,
 		PlayerAction,
-		InAction
+		InAction,
+		Jail
 	}
 
 	public enum PlayerActionType {
