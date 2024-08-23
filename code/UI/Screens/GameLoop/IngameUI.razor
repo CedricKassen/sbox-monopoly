@@ -289,9 +289,8 @@
         if (!location.Type.Equals(GameLocation.PropertyType.Normal)) {
             return false;
         }
-        
-        // CEDRIC??? we should use the index as key instead of the name, the index is way easier to access at i think any moment?
-        return location.GroupMembers
+	    
+	    return location.GroupMembers
             .All(member => _stateManager.OwnedFields[location.GameObject.Parent.Children[member].Name] == playerId);
     }
     

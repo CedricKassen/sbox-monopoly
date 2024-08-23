@@ -52,7 +52,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			}
 		}
 
-		player.Money -= property.House_Cost;
+		if (Networking.IsHost) {
+			player.Money -= property.House_Cost;
+		}
+
 		property.Houses++;
 	}
 
@@ -73,7 +76,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 
 		var player = GetPlayerFromEvent(eventArgs.PlayerId);
-		player.Money += property.House_Cost / 2;
+		if (Networking.IsHost) {
+			player.Money += property.House_Cost / 2;
+		}
+
 		property.Houses--;
 	}
 
@@ -221,7 +227,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			return false;
 		}
 
-		// CEDRIC??? we should use the index as key instead of the name, the index is way easier to access at i think any moment?
 		return location.GroupMembers
 		               .All(member =>
 			               IngameStateManager.OwnedFields[location.GameObject.Parent.Children[member].Name] ==
