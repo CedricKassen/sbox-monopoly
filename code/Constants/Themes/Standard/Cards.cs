@@ -217,7 +217,6 @@ public static class Cards {
 	private static void GetOutOfJailCardChance(Player player, MovementManager move, TurnManager turnManager,
 	                                           Dictionary<int, bool> blocked = null,
 	                                           IngameStateManager stateManager = null, Card card = null) {
-		Log.Info(card.ActionId);
 		blocked.Add(card.ActionId, true);
 		stateManager.OwnedFields["chanceJailFree"] = player.SteamId;
 	}

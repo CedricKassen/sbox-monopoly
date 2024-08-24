@@ -6,7 +6,6 @@ public delegate void CardAction(Player player, MovementManager movementManager =
                                 Dictionary<int, bool> blockedCards = null,
                                 IngameStateManager ingameStateManager = null, Card card = null);
 
-[Serializable]
 public class Card {
 	public Card(int actionId, CardAction action, string text, string imageUrl = null) {
 		ActionId = actionId;
@@ -64,13 +63,10 @@ public static class CardActionHelper {
 			}
 
 			var ownerId = stateManager.OwnedFields[locationObj.Name];
-			Log.Info(ownerId);
 			if (ownerId != player.SteamId) {
 				continue;
 			}
 
-			Log.Info(location.Houses);
-			Log.Info(amount);
 			amount += location.Houses != 5 ? location.Houses * housePrice : hotelPrice;
 		}
 

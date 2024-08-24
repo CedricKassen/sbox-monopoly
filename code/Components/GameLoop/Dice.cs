@@ -20,7 +20,6 @@ public sealed class Dice : Component {
 			return;
 		}
 
-
 		IsRolling = true;
 		Rigidbody.Velocity += Vector3.Up * new Random().Next(400, 700);
 		Rigidbody.AngularVelocity +=

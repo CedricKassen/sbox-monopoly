@@ -36,6 +36,15 @@ public sealed class MovementManager : Component {
 		CardActionHelper.MoveTo(next, player, this);
 	}
 
+	[Button("Go to police field field")]
+	public void GoToPoliceField() {
+		var player = Game.ActiveScene.GetAllComponents<Player>().First();
+
+		var lines = new List<int> { 2, 17, 33 };
+		var next = lines.Find(field => player.CurrentField < field || (player.CurrentField > 33 && field == 2));
+		CardActionHelper.MoveTo(next, player, this);
+	}
+
 	public void StartMovement(Player player, int fieldsToTravel) {
 		Backwards = fieldsToTravel < 0;
 
@@ -49,7 +58,7 @@ public sealed class MovementManager : Component {
 		// If movement is backwards, first iteration is used to rotate player so the starting field is the current field not the next one
 		CurrentField = Math.Mod(player.CurrentField + (Backwards ? 0 : 1), 40);
 
-		Log.Info("Move " + ToTravel + " Fields");
+		Log.Info(Player.Name + " move " + ToTravel + " Fields from " + CurrentField);
 	}
 
 
@@ -82,15 +91,17 @@ public sealed class MovementManager : Component {
 
 		if (CurrentField == 0) {
 			if (Networking.IsHost) {
-				Player.Money += 200;	
+				Player.Money += 200;
 			}
 		}
 
 		if (ToTravel == Travelled || ToTravel == -Travelled) {
 			CurrentField = Math.Mod(CurrentField + (Backwards ? 1 : -1), 40);
 
+			Log.Info(Player.Name + " landed on " + CurrentField);
+
 			Player.CurrentField = CurrentField;
-			var steamID = Player.SteamId;
+			var steamId = Player.SteamId;
 
 			ToTravel = 0;
 			Travelled = 0;
@@ -98,8 +109,15 @@ public sealed class MovementManager : Component {
 			Player = null;
 			PlayerBody = null;
 
-			var currentLocation = LocationContainer.Children[CurrentField].Components.Get<GameLocation>();
-			Game.ActiveScene.Dispatch(new MovementDoneEvent { playerId = steamID, Location = currentLocation });
+			if (Networking.IsHost) {
+				EmitMovementDoneEvent(steamId);
+			}
 		}
+	}
+
+	[Broadcast]
+	private void EmitMovementDoneEvent(ulong playerId) {
+		var currentLocation = LocationContainer.Children[CurrentField].Components.Get<GameLocation>();
+		Game.ActiveScene.Dispatch(new MovementDoneEvent { playerId = playerId, Location = currentLocation });
 	}
 }

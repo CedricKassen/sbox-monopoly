@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Sandbox.Components.GameLoop;
 using Sandbox.Events;
+using Sandbox.Events.GameStateEvents;
 using Sandbox.Events.LobbyEvents;
 using Sandbox.Network;
 using Sandbox.UI;
@@ -160,7 +161,6 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 
 				if (!diceSpawned) {
 					GameObject parent = Game.ActiveScene.Children[1];
-					Log.Info(parent.Name);
 
 					var dice1 = DicePrefab.Clone();
 					dice1.BreakFromPrefab();
@@ -175,6 +175,13 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 					diceSpawned = true;
 				}
 			}
+
+			EmitStartGame();
 		}
+	}
+
+
+	public void EmitStartGame() {
+		Game.ActiveScene.Dispatch(new GameStartEvent());
 	}
 }

@@ -1,8 +1,11 @@
 @namespace Monopoly.UI.Screens.GameLoop
 @inherits Sandbox.UI.Panel
 @using System
+@using System.Runtime.CompilerServices
 @using EnumExtensions
 @using Sandbox.Constants
+@using Sandbox.Events
+@using Sandbox.Events.TurnEvents
 @using Sandbox.Network
 @implements Sandbox.UI.INavigatorPage
 
@@ -19,7 +22,7 @@
         <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Bank))"> 🏦 </button>
 	    <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Trade))"> 💸 </button>
 	    <button class="mainButton @(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll">
-            GO
+             GO
         </button>
         <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Building))"> 🏠 </button>
         <div class="autogrow"></div>
@@ -297,6 +300,7 @@
 </root>
 
 @code {
+	
     public enum IngameUiStates {
         Trade,
         Chance,
@@ -332,7 +336,17 @@
 
     private bool _showRoll;
 
-    /// <summary>
+	public override void Tick() {
+		if (Input.Down("Jump")) {
+			EmitDebugEvent(1);
+		}
+	}
+	
+	private void EmitDebugEvent(int id) {
+		_turnManager.EmitDebugEvent(id);
+	}
+
+	/// <summary>
     ///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
     /// </summary>
     protected override int BuildHash() {

@@ -66,7 +66,7 @@ public class TurnManager : Component {
 		ChangePhase(playerId, Phase.PlayerAction);
 	}
 
-	[Broadcast]
+	[Broadcast(NetPermission.HostOnly)]
 	public void EmitSpecialPropertyActionEvent(SpecialPropertyActionType type, ulong playerId) {
 		GameParentObject.Dispatch(new SpecialPropertyActionEvent());
 
@@ -174,5 +174,10 @@ public class TurnManager : Component {
 	public void EmitTradingDeniedEvent(ulong PlayerId) {
 		GameParentObject.Dispatch(
 			new TradingDeniedEvent() { playerId = PlayerId });
+	}
+
+	[Broadcast]
+	public void EmitDebugEvent(int id) {
+		Game.ActiveScene.Dispatch(new DebugEvent(id));
 	}
 }

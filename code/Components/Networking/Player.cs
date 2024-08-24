@@ -37,7 +37,7 @@ public sealed class Player : Component {
 	[Property] public int DoublesCount { get; set; } = 0;
 
 	[Description("0 Means player is not in jail, 1 means the NEXT turn is the first and so forth")]
-	[Property]
+	[Property, HostSync]
 	public int JailTurnCounter { get; set; } = 0;
 
 

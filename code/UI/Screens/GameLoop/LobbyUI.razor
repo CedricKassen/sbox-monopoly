@@ -75,9 +75,6 @@
 	}
 
 	public void PawnSelectionChanged(int pawnId, ulong callerSteamId) {
-		foreach (var selectedPawnsValue in Lobby.SelectedPawns.Values) {
-			Log.Info(selectedPawnsValue);
-		}
 		Lobby.PawnSelectionChanged(pawnId, callerSteamId);
 	}
 

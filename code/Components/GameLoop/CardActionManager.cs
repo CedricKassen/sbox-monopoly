@@ -3,8 +3,10 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
+using Sandbox.Events;
+using Sandbox.Events.GameStateEvents;
 
-public sealed class CardActionManager : Component {
+public sealed class CardActionManager : Component, IGameEventHandler<GameStartEvent> {
 	[Property] private readonly Dictionary<int, bool> BlockedCards = new();
 
 	[HostSync] private NetList<int> ChanceCardsOrder { get; set; }
@@ -24,13 +26,6 @@ public sealed class CardActionManager : Component {
 	public void RemoveBlockedCard(int actionId) {
 		BlockedCards.Remove(actionId);
 	}
-
-	protected override Task OnLoad() {
-		RefillChangeCards();
-		RefillCommunityCards();
-		return base.OnLoad();
-	}
-
 
 	private void RefillChangeCards() {
 		if (Networking.IsHost) {
@@ -63,7 +58,10 @@ public sealed class CardActionManager : Component {
 	private void FillChanceCards() {
 		ChanceCards = new();
 		foreach (var index in ChanceCardsOrder) {
+			Log.Info("\n");
+			Log.Info(index);
 			Card card = Cards.Chance_Standard[index];
+			Log.Info(card.Text);
 			if (BlockedCards.ContainsKey(card.ActionId)) {
 				continue;
 			}
@@ -84,8 +82,6 @@ public sealed class CardActionManager : Component {
 
 
 	public void DisplayCardFor(Player player, GameLocation location) {
-		Log.Info("Show " + location.EventId);
-
 		switch (location.Type) {
 			case GameLocation.PropertyType.Event:
 				if (location.EventId == "chance") {
@@ -134,17 +130,21 @@ public sealed class CardActionManager : Component {
 		ChanceCards.Remove(card);
 
 		Log.Info("Drew " + card.Text);
+		Log.Info(player);
+		Log.Info(card.Action);
 
 		IngameStateManager.Data = card;
 		IngameStateManager.State = IngameUI.IngameUiStates.Chance;
 
 
+		Log.Info("before action");
 		card.Action(player,
 			MovementManager,
 			TurnManager,
 			BlockedCards,
 			IngameStateManager,
 			card);
+		Log.Info("after action");
 
 		if (ChanceCards.Count == 0) {
 			RefillChangeCards();
@@ -173,5 +173,10 @@ public sealed class CardActionManager : Component {
 		// IngameStateManager.State = IngameUI.IngameUiStates.Buying;
 		player.localUiState = IngameUI.LocalUIStates.Buying;
 		IngameStateManager.Data = location;
+	}
+
+	public void OnGameEvent(GameStartEvent eventArgs) {
+		RefillChangeCards();
+		RefillCommunityCards();
 	}
 }
