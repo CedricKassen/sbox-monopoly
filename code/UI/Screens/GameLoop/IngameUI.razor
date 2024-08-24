@@ -17,7 +17,7 @@
     <div id="mainPanel">
         <div class="autogrow"></div>
         <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Bank))"> 🏦 </button>
-	    <button class="secondaryButton" onclick="@(() => ChangeGameUIState(IngameUiStates.Trade))"> 💸 </button>
+	    <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Trade))"> 💸 </button>
 	    <button class="mainButton @(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll">
             GO
         </button>
