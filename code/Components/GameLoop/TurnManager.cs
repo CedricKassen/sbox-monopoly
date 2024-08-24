@@ -148,10 +148,12 @@ public class TurnManager : Component {
 		CurrentPhase = phase;
 	}
 
+	[Broadcast]
 	public void EmitPayJailFineEvent(ulong playerId) {
 		GameParentObject.Dispatch(new PayJailFineEvent(playerId));
 	}
 
+	[Broadcast]
 	public void EmitUseJailCardEvent(ulong playerId) {
 		GameParentObject.Dispatch(new UseJailCardEvent(playerId));
 	}

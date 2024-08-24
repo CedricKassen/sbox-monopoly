@@ -197,11 +197,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(UseJailCardEvent eventArgs) {
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 
-		string ownedJailFreeCard = IngameStateManager.OwnedFields.First(pair => pair.Key.Contains("JailFree")).Key;
-
 		if (Networking.IsHost) {
+			string ownedJailFreeCard = IngameStateManager.OwnedFields
+			                                             .First(pair =>
+				                                             pair.Key.Contains("JailFree") &&
+				                                             pair.Value == player.SteamId).Key;
 			player.JailTurnCounter = 0;
 			IngameStateManager.OwnedFields[ownedJailFreeCard] = 0;
+			CardActionManager.RemoveBlockedCard(null);
 		}
 
 		TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Rolling);
