@@ -7,37 +7,56 @@ using Sandbox.Network;
 namespace Sandbox.Components.GameLoop;
 
 public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGameEventHandler<MovementDoneEvent>,
-                                IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>, 
+                                IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>,
                                 IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<PlayerPaymentEvent>,
-								IGameEventHandler<TurnFinishedEvent>, IGameEventHandler<PropertyMortgagedEvent>, IGameEventHandler<PropertyMortgagePayedEvent> {
-	[Property] public GameObject LocationContainer { get; set; }
-	[Property] public Lobby Lobby { get; set; }
-	[Property] public MovementManager MovementManager { get; set; }
-	[Property] public CardActionManager CardActionManager { get; set; }
-	[Property] public IngameStateManager IngameStateManager { get; set; }
-	[Property] public TurnManager TurnManager { get; set; }
+                                IGameEventHandler<TurnFinishedEvent>, IGameEventHandler<PropertyMortgagedEvent>,
+                                IGameEventHandler<PropertyMortgagePayedEvent>,
+                                IGameEventHandler<TradingRequestedEvent>, IGameEventHandler<TradingAcceptedEvent>,
+                                IGameEventHandler<TradingDeniedEvent> {
+	[Property]
+	public GameObject LocationContainer { get; set; }
+
+	[Property]
+	public Lobby Lobby { get; set; }
+
+	[Property]
+	public MovementManager MovementManager { get; set; }
+
+	[Property]
+	public CardActionManager CardActionManager { get; set; }
+
+	[Property]
+	public IngameStateManager IngameStateManager { get; set; }
+
+	[Property]
+	public TradeState TradeState { get; set; }
+
+	[Property]
+	public TurnManager TurnManager { get; set; }
 
 	public void OnGameEvent(MovementDoneEvent eventArgs) {
 		IngameStateManager.OwnedFields.TryGetValue(eventArgs.Location.GameObject.Name, out var fieldOwner);
 		var currentPlayer = GetPlayerFromEvent(eventArgs.playerId);
-		
+
 		TurnManager.CurrentPhase = TurnManager.Phase.PlayerAction;
-		
+
 		if (fieldOwner == 0 || eventArgs.Location.Type == GameLocation.PropertyType.Event) {
 			if (eventArgs.Location.EventId == "start") {
 				if (Networking.IsHost) {
-					currentPlayer.Money += 200;	
+					currentPlayer.Money += 200;
 				}
+
 				return;
 			}
-			
+
 			CardActionManager.DisplayCardFor(currentPlayer, eventArgs.Location);
 			return;
 		}
 
 		if (fieldOwner != eventArgs.playerId && !eventArgs.Location.Mortgaged) {
 			if (eventArgs.Location.Type == GameLocation.PropertyType.Normal) {
-				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, eventArgs.Location.Normal_Rent[eventArgs.Location.Houses] );
+				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
+					eventArgs.Location.Normal_Rent[eventArgs.Location.Houses]);
 			}
 
 			if (eventArgs.Location.Type == GameLocation.PropertyType.Railroad) {
@@ -45,15 +64,17 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				                                                              (f.Key == "railroad1" ||
 				                                                               f.Key == "railroad2" ||
 				                                                               f.Key == "railroad3" ||
-				                                                               f.Key == "railroad4")); 
-				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, eventArgs.Location.Railroad_Rent[railroadCount - 1] );
+				                                                               f.Key == "railroad4"));
+				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
+					eventArgs.Location.Railroad_Rent[railroadCount - 1]);
 			}
 
 			if (eventArgs.Location.Type == GameLocation.PropertyType.Utility) {
 				var utilityCount = IngameStateManager.OwnedFields.Count(f => f.Value == fieldOwner &&
-				                                                              (f.Key == "electricCompany" ||
-				                                                               f.Key == "waterCompany"));
-				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, eventArgs.Location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount );
+				                                                             (f.Key == "electricCompany" ||
+				                                                              f.Key == "waterCompany"));
+				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
+					eventArgs.Location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount);
 			}
 		}
 	}
@@ -67,7 +88,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var location = LocationContainer.Children[eventArgs.PropertyIndex];
 		var component = location.Components.Get<GameLocation>();
 		var player = GetPlayerFromEvent(eventArgs.playerId);
-		
+
 		if (component.Price <= player.Money && Networking.IsHost) {
 			player.Money -= component.Price;
 			IngameStateManager.OwnedFields[location.Name] = eventArgs.playerId;
@@ -95,9 +116,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		if (Networking.IsHost) {
 			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
 		}
+
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
 	}
-	
+
 	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
 		if (Networking.IsHost) {
 			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
@@ -112,7 +134,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PropertyMortgagedEvent eventArgs) {
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
-		
+
 		if (Networking.IsHost && !property.Mortgaged) {
 			GetPlayerFromEvent(eventArgs.playerId).Money += property.Price / 2;
 			property.Mortgaged = true;
@@ -122,13 +144,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(PropertyMortgagePayedEvent eventArgs) {
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
-		
+
 		if (Networking.IsHost && player.Money > property.Price / 2 && property.Mortgaged) {
 			player.Money -= property.Price / 2;
 			property.Mortgaged = false;
 		}
 	}
-	
+
 	private Player GetPlayerFromEvent(ulong playerId) {
 		return Lobby.Players.Find(player => player.SteamId == playerId);
 	}
@@ -139,11 +161,68 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	private void ChangeDiceOwnershipToCurrentPlayer() {
 		var diceList = new List<Dice>(Game.ActiveScene.GetAllComponents<Dice>());
-		
+
 		if (Networking.IsHost && diceList.Count > 0) {
 			foreach (var dice in diceList) {
-				dice.Network.AssignOwnership(TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
+				dice.Network.AssignOwnership(
+					TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
 			}
+		}
+	}
+
+	public void OnGameEvent(TradingRequestedEvent eventArgs) {
+		IngameStateManager.State = IngameUI.IngameUiStates.Trade;
+	}
+
+	public void OnGameEvent(TradingDeniedEvent eventArgs) {
+		IngameStateManager.State = IngameUI.IngameUiStates.None;
+
+		ResetTrading();
+		CloseLocalUIForEveryPlayer();
+	}
+
+	public void OnGameEvent(TradingAcceptedEvent eventArgs) {
+		IngameStateManager.State = IngameUI.IngameUiStates.None;
+
+		foreach (var (key, value) in TradeState.OfferTradeFields) {
+			if (value) {
+				IngameStateManager.OwnedFields[key] = TradeState.TradingPartner.SteamId;
+			}
+		}
+
+		foreach (var (key, value) in TradeState.RequestTradeFields) {
+			if (value) {
+				IngameStateManager.OwnedFields[key] = TradeState.TradingCreator.SteamId;
+			}
+		}
+
+		if (Networking.IsHost) {
+			TradeState.TradingCreator.Money -= TradeState.TradingOfferAmount;
+			TradeState.TradingCreator.Money += TradeState.TradingRequestAmount;
+
+			TradeState.TradingPartner.Money += TradeState.TradingOfferAmount;
+			TradeState.TradingPartner.Money -= TradeState.TradingRequestAmount;
+		}
+
+		ResetTrading();
+		CloseLocalUIForEveryPlayer();
+	}
+
+	private void CloseLocalUIForEveryPlayer() {
+		foreach (var player in Lobby.Players) {
+			player.localUiState = IngameUI.LocalUIStates.None;
+		}
+	}
+
+	private void ResetTrading() {
+		TradeState.TradingCreator = null;
+		TradeState.TradingPartner = null;
+		TradeState.TradingOfferAmount = 0;
+		TradeState.TradingRequestAmount = 0;
+
+		foreach (var key in TradeState.OfferTradeFields.Keys) {
+			TradeState.OfferTradeFields[key] = false;
+			TradeState.RequestTradeFields[key] = false;
 		}
 	}
 }

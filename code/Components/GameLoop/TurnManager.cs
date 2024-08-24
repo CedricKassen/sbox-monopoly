@@ -22,13 +22,17 @@ public class TurnManager : Component {
 		None
 	}
 
-	[Property] public GameObject GameParentObject { get; set; }
+	[Property]
+	public GameObject GameParentObject { get; set; }
 
-	[Property, HostSync] public Phase CurrentPhase { get; set; }
+	[Property, HostSync]
+	public Phase CurrentPhase { get; set; }
 
-	[Property] public Lobby CurrentLobby { get; set; }
+	[Property]
+	public Lobby CurrentLobby { get; set; }
 
-	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
+	[Property, HostSync]
+	public int CurrentPlayerIndex { get; set; }
 
 	[Broadcast]
 	public void EmitRolledEvent(ulong playerId, int value) {
@@ -42,7 +46,7 @@ public class TurnManager : Component {
 			new PropertyAquiredEvent { playerId = playerId, PropertyIndex = propertyIndex });
 		CurrentPhase = Phase.PlayerAction;
 	}
-	
+
 	[Broadcast]
 	public void EmitPropertyAuctionEvent(int propertyIndex) {
 		GameParentObject.Dispatch(
@@ -52,7 +56,9 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void EmitPlayerPaymentEvent(ulong playerId, ulong recipientId, int amount) {
-		GameParentObject.Dispatch(new PlayerPaymentEvent {playerId = playerId, Amount = amount, Recipient = recipientId});
+		GameParentObject.Dispatch(new PlayerPaymentEvent {
+			playerId = playerId, Amount = amount, Recipient = recipientId
+		});
 		CurrentPhase = Phase.PlayerAction;
 	}
 
@@ -81,24 +87,46 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void EmitAuctionBidEvent(ulong PlayerId, int Amount) {
-		GameParentObject.Dispatch(new AuctionBidEvent {playerId = PlayerId, Amount = Amount});
+		GameParentObject.Dispatch(new AuctionBidEvent { playerId = PlayerId, Amount = Amount });
 	}
 
 	[Broadcast]
 	public void EmitAuctionFinishedEvent(int PropertyIndex, ulong PlayerId, int Amount) {
 		CurrentPhase = Phase.PlayerAction;
-		GameParentObject.Dispatch(new AuctionFinishedEvent {PropertyIndex = PropertyIndex, playerId = PlayerId, Amount = Amount});
+		GameParentObject.Dispatch(new AuctionFinishedEvent {
+			PropertyIndex = PropertyIndex, playerId = PlayerId, Amount = Amount
+		});
 	}
-	
+
 	[Broadcast]
 	public void EmitPropertyMortgagedEvent(int PropertyIndex, ulong PlayerId) {
 		CurrentPhase = Phase.PlayerAction;
-		GameParentObject.Dispatch(new PropertyMortgagedEvent {PropertyIndex = PropertyIndex, playerId = PlayerId});
+		GameParentObject.Dispatch(new PropertyMortgagedEvent { PropertyIndex = PropertyIndex, playerId = PlayerId });
 	}
-	
+
 	[Broadcast]
 	public void EmitPropertyMortgagePayedEvent(int PropertyIndex, ulong PlayerId) {
 		CurrentPhase = Phase.PlayerAction;
-		GameParentObject.Dispatch(new PropertyMortgagePayedEvent {PropertyIndex = PropertyIndex, playerId = PlayerId});
+		GameParentObject.Dispatch(new PropertyMortgagePayedEvent {
+			PropertyIndex = PropertyIndex, playerId = PlayerId
+		});
+	}
+
+	[Broadcast]
+	public void EmitTradingRequestedEvent(ulong PlayerId, ulong TradingRecipient) {
+		GameParentObject.Dispatch(
+			new TradingRequestedEvent { TradingRecipient = TradingRecipient, playerId = PlayerId });
+	}
+
+	[Broadcast]
+	public void EmitTradingAcceptedEvent(ulong PlayerId) {
+		GameParentObject.Dispatch(
+			new TradingAcceptedEvent() { playerId = PlayerId });
+	}
+
+	[Broadcast]
+	public void EmitTradingDeniedEvent(ulong PlayerId) {
+		GameParentObject.Dispatch(
+			new TradingDeniedEvent() { playerId = PlayerId });
 	}
 }

@@ -5,7 +5,8 @@ using Sandbox.Events.TurnEvents;
 public sealed class IngameStateManager : Component, IGameEventHandler<AuctionBidEvent> {
 	public object Data = null;
 
-	[Property, HostSync] public NetDictionary<string, ulong> OwnedFields { get; set; } = new() {
+	[Property, HostSync]
+	public NetDictionary<string, ulong> OwnedFields { get; set; } = new() {
 		{ "brown1", 0 },
 		{ "brown2", 0 },
 		{ "lightBlue1", 0 },
@@ -38,12 +39,23 @@ public sealed class IngameStateManager : Component, IGameEventHandler<AuctionBid
 		{ "communityJailFree", 0 }
 	};
 
-	[Property] public TurnManager TurnManager { get; set; }
-	[Property] public GameObject LocationContainer { get; set; }
-	[Property, HostSync] public IngameUI.IngameUiStates State { get; set; } = IngameUI.IngameUiStates.None;
-	[Property, HostSync] public NetDictionary<ulong, int> AuctionBiddings { get; set; } = new();
-	[Property] public readonly int AuctionTime = 8;
-	[Property, HostSync] public float AuctionTimer { get; set; }
+	[Property]
+	public TurnManager TurnManager { get; set; }
+
+	[Property]
+	public GameObject LocationContainer { get; set; }
+
+	[Property, HostSync]
+	public IngameUI.IngameUiStates State { get; set; } = IngameUI.IngameUiStates.None;
+
+	[Property, HostSync]
+	public NetDictionary<ulong, int> AuctionBiddings { get; set; } = new();
+
+	[Property]
+	public readonly int AuctionTime = 8;
+
+	[Property, HostSync]
+	public float AuctionTimer { get; set; }
 
 	public void OnGameEvent(AuctionBidEvent eventArgs) {
 		var currentMax = GetSortedBiddings()[0].Value;
@@ -59,10 +71,10 @@ public sealed class IngameStateManager : Component, IGameEventHandler<AuctionBid
 
 		if (AuctionTimer < 0) {
 			AuctionTimer = 0;
-			
+
 			var location = Data as GameLocation;
 			var biddingList = GetSortedBiddings();
-			
+
 			TurnManager.EmitAuctionFinishedEvent(location.PropertyIndex, biddingList[0].Key, biddingList[0].Value);
 		}
 	}
@@ -70,7 +82,7 @@ public sealed class IngameStateManager : Component, IGameEventHandler<AuctionBid
 	public List<KeyValuePair<ulong, int>> GetSortedBiddings() {
 		var list = AuctionBiddings.ToList();
 		list.Sort((left, right) => left.Value > right.Value ? -1 : 1);
-		
+
 		return list;
 	}
 }

@@ -1,0 +1,48 @@
+﻿@using System
+@using Sandbox.UI
+@inherits Sandbox.UI.Panel
+@namespace Monopoly.UI.Screens.GameLoop
+
+
+<root>
+	<div class="container" style="width: 500px; flex-direction: column">
+		<div class="row">
+			<img src=@($"avatar:{Player.SteamId}") style="height: 130px; width: 130px; border-radius: 8px"/>
+			<div style="flex-direction: column">
+				@if (Player.SteamId == (ulong)Game.SteamId) {
+					<h3> Your </h3>
+				}
+				else {
+					<h3> @(Player.Name)'s </h3>
+				}
+				<h3> Inventory </h3>
+			</div>
+		</div>
+		<TradingPanel Player=@Player Owned=@Owned TradeFields=@TradeFields/>
+		<div class="row">
+			<h3 style="width: 35px; justify-content: center">$</h3>
+			<TextEntry OnTextEdited=@OnTextEdit style="width:100%; font-size:22px; background-color: #2b303c; color: #ffffff; border-radius: 4px" MaxValue=@(Player.Money) MinValue=@(0) Numeric=@(true)></TextEntry>
+			<h3 style="min-width: 120px"> / @(Player.Money)</h3>
+		</div>
+	</div>
+</root>
+
+@code {
+
+	[Property]
+	public Player Player { get; set; }
+
+	[Property]
+	public NetDictionary<string, ulong> Owned { get; set; }
+
+	[Property]
+	public NetDictionary<string, bool> TradeFields { get; set; }
+
+	[Property]
+	public Action<string> OnTextEdit { get; set; }
+
+	protected override int BuildHash() {
+		return HashCode.Combine(Player.Money, Owned, TradeFields);
+	}
+
+}

@@ -2136,6 +2136,88 @@
                   }
                 }
               ]
+            },
+            {
+              "__guid": "9105d415-3d43-42f3-894f-df2f4a99ec6f",
+              "Flags": 0,
+              "Name": "Trade",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "NetworkMode": 1,
+              "NetworkOrphaned": 1,
+              "OwnerTransfer": 0,
+              "Components": [
+                {
+                  "__type": "TradeState",
+                  "__guid": "4f9bd597-d11a-4e3a-bbbb-50a633eebdeb",
+                  "OfferTradeFields": {
+                    "brown1": false,
+                    "brown2": false,
+                    "lightBlue1": false,
+                    "lightBlue2": false,
+                    "lightBlue3": false,
+                    "pink1": false,
+                    "pink2": false,
+                    "pink3": false,
+                    "orange1": false,
+                    "orange2": false,
+                    "orange3": false,
+                    "red1": false,
+                    "red2": false,
+                    "red3": false,
+                    "yellow1": false,
+                    "yellow2": false,
+                    "yellow3": false,
+                    "green1": false,
+                    "green2": false,
+                    "green3": false,
+                    "blue1": false,
+                    "blue2": false,
+                    "railroad1": false,
+                    "railroad2": false,
+                    "railroad3": false,
+                    "railroad4": false,
+                    "electricCompany": false,
+                    "waterCompany": false,
+                    "chanceJailFree": false,
+                    "communityJailFree": false
+                  },
+                  "RequestTradeFields": {
+                    "brown1": false,
+                    "brown2": false,
+                    "lightBlue1": false,
+                    "lightBlue2": false,
+                    "lightBlue3": false,
+                    "pink1": false,
+                    "pink2": false,
+                    "pink3": false,
+                    "orange1": false,
+                    "orange2": false,
+                    "orange3": false,
+                    "red1": false,
+                    "red2": false,
+                    "red3": false,
+                    "yellow1": false,
+                    "yellow2": false,
+                    "yellow3": false,
+                    "green1": false,
+                    "green2": false,
+                    "green3": false,
+                    "blue1": false,
+                    "blue2": false,
+                    "railroad1": false,
+                    "railroad2": false,
+                    "railroad3": false,
+                    "railroad4": false,
+                    "electricCompany": false,
+                    "waterCompany": false,
+                    "chanceJailFree": false,
+                    "communityJailFree": false
+                  },
+                  "TradingOfferAmount": 0,
+                  "TradingRequestAmount": 0
+                }
+              ]
             }
           ]
         },
@@ -2207,6 +2289,12 @@
                     "go": "dd179206-68ac-4c6b-9019-f033562ff797",
                     "component_type": "MovementManager"
                   },
+                  "TradeState": {
+                    "_type": "component",
+                    "component_id": "4f9bd597-d11a-4e3a-bbbb-50a633eebdeb",
+                    "go": "9105d415-3d43-42f3-894f-df2f4a99ec6f",
+                    "component_type": "TradeState"
+                  },
                   "TurnManager": {
                     "_type": "component",
                     "component_id": "3a3de850-0708-4654-ac37-0751891b2abc",
@@ -2251,13 +2339,13 @@
                   "BlockedCards": {},
                   "ChanceCards": [
                     {
-                      "ActionId": 12,
-                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
+                      "ActionId": 2,
+                      "Text": "Advance to Go (Collect $200)",
                       "Action": null
                     },
                     {
-                      "ActionId": 16,
-                      "Text": "Your building loan matures. Collect $150",
+                      "ActionId": 1,
+                      "Text": "Advance to Boardwalk",
                       "Action": null
                     },
                     {
@@ -2266,8 +2354,8 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 15,
-                      "Text": "You have been elected Chairman of the Board. Pay each player $50",
+                      "ActionId": 9,
+                      "Text": "Get Out of Jail Free",
                       "Action": null
                     },
                     {
@@ -2276,13 +2364,8 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 5,
-                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 9,
-                      "Text": "Get Out of Jail Free",
+                      "ActionId": 16,
+                      "Text": "Your building loan matures. Collect $150",
                       "Action": null
                     },
                     {
@@ -2291,13 +2374,33 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 14,
-                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
+                      "ActionId": 12,
+                      "Text": "Make general repairs on all your property. For each house pay $25. For each hotel pay $100",
                       "Action": null
                     },
                     {
-                      "ActionId": 1,
-                      "Text": "Advance to Boardwalk",
+                      "ActionId": 10,
+                      "Text": "Go Back 3 Spaces",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 4,
+                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 15,
+                      "Text": "You have been elected Chairman of the Board. Pay each player $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 3,
+                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 14,
+                      "Text": "Take a trip to Reading Railroad. If you pass Go, collect $200",
                       "Action": null
                     },
                     {
@@ -2307,35 +2410,20 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 10,
-                      "Text": "Go Back 3 Spaces",
-                      "Action": null
-                    },
-                    {
                       "ActionId": 8,
                       "Text": "Bank pays you dividend of $50",
                       "Action": null
                     },
                     {
-                      "ActionId": 4,
-                      "Text": "Advance to St. Charles Place. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 3,
-                      "Text": "Advance to Illinois Avenue. If you pass Go, collect $200",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 2,
-                      "Text": "Advance to Go (Collect $200)",
+                      "ActionId": 5,
+                      "Text": "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled",
                       "Action": null
                     }
                   ],
                   "CommunityCards": [
                     {
-                      "ActionId": 4,
-                      "Text": "From sale of stock you get $50",
+                      "ActionId": 1,
+                      "Text": "Advance to Go (Collect $200)",
                       "Action": null
                     },
                     {
@@ -2344,33 +2432,8 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 13,
-                      "Text": "Receive $25 consultancy fee",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 12,
-                      "Text": "Pay school fees of $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 1,
-                      "Text": "Advance to Go (Collect $200)",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 15,
-                      "Text": "You have won second prize in a beauty contest. Collect $10",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 3,
-                      "Text": "Doctor\u2019s fee. Pay $50",
-                      "Action": null
-                    },
-                    {
-                      "ActionId": 9,
-                      "Text": "It is your birthday. Collect $10 from every player",
+                      "ActionId": 11,
+                      "Text": "Pay hospital fees of $100",
                       "Action": null
                     },
                     {
@@ -2379,8 +2442,18 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 7,
-                      "Text": "Holiday fund matures. Receive $100",
+                      "ActionId": 4,
+                      "Text": "From sale of stock you get $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 3,
+                      "Text": "Doctor\u2019s fee. Pay $50",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 13,
+                      "Text": "Receive $25 consultancy fee",
                       "Action": null
                     },
                     {
@@ -2389,18 +2462,28 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 11,
-                      "Text": "Pay hospital fees of $100",
-                      "Action": null
-                    },
-                    {
                       "ActionId": 8,
                       "Text": "Income tax refund. Collect $20",
                       "Action": null
                     },
                     {
-                      "ActionId": 14,
-                      "Text": "You are assessed for street repair. $40 per house. $115 per hotel",
+                      "ActionId": 9,
+                      "Text": "It is your birthday. Collect $10 from every player",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 7,
+                      "Text": "Holiday fund matures. Receive $100",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 15,
+                      "Text": "You have won second prize in a beauty contest. Collect $10",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 10,
+                      "Text": "Life insurance matures. Collect $100",
                       "Action": null
                     },
                     {
@@ -2409,8 +2492,13 @@
                       "Action": null
                     },
                     {
-                      "ActionId": 10,
-                      "Text": "Life insurance matures. Collect $100",
+                      "ActionId": 14,
+                      "Text": "You are assessed for street repair. $40 per house. $115 per hotel",
+                      "Action": null
+                    },
+                    {
+                      "ActionId": 12,
+                      "Text": "Pay school fees of $50",
                       "Action": null
                     }
                   ],
@@ -2463,7 +2551,7 @@
                   "MaxPlayers": 5,
                   "PlayerPrefabs": [
                     {
-                      "Id": 26,
+                      "Id": 1,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/car.prefab"
@@ -2473,7 +2561,7 @@
                       "Height": 288
                     },
                     {
-                      "Id": 27,
+                      "Id": 2,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/ship.prefab"
@@ -2483,7 +2571,7 @@
                       "Height": 320
                     },
                     {
-                      "Id": 28,
+                      "Id": 3,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/timble.prefab"
@@ -2493,7 +2581,7 @@
                       "Height": 512
                     },
                     {
-                      "Id": 29,
+                      "Id": 4,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/tophat.prefab"
@@ -2503,7 +2591,7 @@
                       "Height": 384
                     },
                     {
-                      "Id": 30,
+                      "Id": 5,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/wheelbarrow.prefab"
@@ -2537,7 +2625,7 @@
           "__guid": "1f95d53c-7c65-43bf-b431-535da1a96e04",
           "MusicDuration": 238.21062,
           "MusicStart": {
-            "Relative": 5855.1665
+            "Relative": 687.0044
           },
           "DistanceAttenuation": false,
           "DistanceAttenuationOverride": false,
