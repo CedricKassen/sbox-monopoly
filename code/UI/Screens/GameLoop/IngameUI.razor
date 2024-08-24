@@ -18,7 +18,7 @@
 	<div id="mainPanel">
 		<div class="autogrow"></div>
 		<button class="secondaryButton" onclick="@(() => _player.localUiState = LocalUIStates.Bank)"> 🏦 </button>
-		<button class="secondaryButton" onclick="@(() => { _player.localUiState = LocalUIStates.Trade; _waitingForTrading = false; })"> 💸 </button>
+		<button class="secondaryButton" onclick="@(() => { if (_tradeState.TradingPartner == null) _player.localUiState = LocalUIStates.Trade; _waitingForTrading = false; })"> 💸 </button>
 		<button class="mainButton @(Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll">
 			GO
 		</button>
