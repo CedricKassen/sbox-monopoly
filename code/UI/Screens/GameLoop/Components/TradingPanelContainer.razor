@@ -21,7 +21,15 @@
 		<TradingPanel Player=@Player Owned=@Owned TradeFields=@TradeFields/>
 		<div class="row">
 			<h3 style="width: 35px; justify-content: center">$</h3>
-			<TextEntry OnTextEdited=@OnTextEdit style="width:100%; font-size:22px; background-color: #2b303c; color: #ffffff; border-radius: 4px" MaxValue=@(Player.Money) MinValue=@(0) Numeric=@(true)></TextEntry>
+			<TextEntry
+				Value=@(Money.ToString())
+				Disabled=@ReadOnly
+				OnTextEdited=@OnTextEdit
+				style="width:100%; font-size:22px; background-color: #2b303c; color: #ffffff; border-radius: 4px"
+				MaxValue=@(Player.Money)
+				MinValue=@(0)
+				Numeric=@(true)>
+			</TextEntry>
 			<h3 style="min-width: 120px"> / @(Player.Money)</h3>
 		</div>
 	</div>
@@ -40,6 +48,12 @@
 
 	[Property]
 	public Action<string> OnTextEdit { get; set; }
+
+	[Property]
+	public bool ReadOnly { get; set; } = false;
+
+	[Property]
+	public int Money { get; set; } = 0;
 
 	protected override int BuildHash() {
 		return HashCode.Combine(Player.Money, Owned, TradeFields);

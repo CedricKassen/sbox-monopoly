@@ -105,7 +105,9 @@
 									Player=@_tradeState.TradingCreator
 									Owned=@_stateManager.OwnedFields
 									TradeFields=@_tradeState.OfferTradeFields
-									OnTextEdit=@(delegate(string v) { _tradeState.TradingOfferAmount = Convert.ToInt32(v); })>
+									OnTextEdit=@(delegate(string v) { _tradeState.TradingOfferAmount = Convert.ToInt32(v); })
+									ReadOnly=@true
+									Money=@_tradeState.TradingOfferAmount>
 								</TradingPanelContainer>
 								<div class="column">
 									<div class="container summaryPanel">
@@ -127,7 +129,9 @@
 									Player=@_tradeState.TradingPartner
 									Owned=@_stateManager.OwnedFields
 									TradeFields=@_tradeState.RequestTradeFields
-									OnTextEdit=@(delegate(string v) { _tradeState.TradingRequestAmount = Convert.ToInt32(v); })>
+									OnTextEdit=@(delegate(string v) { _tradeState.TradingRequestAmount = Convert.ToInt32(v); })
+									ReadOnly=@true
+									Money=@_tradeState.TradingRequestAmount>
 								</TradingPanelContainer>
 							</div>
 						</div>

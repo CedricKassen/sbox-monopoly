@@ -275,10 +275,18 @@ TradingPanel {
 
       &:nth-child(1) {
         background-color: $red300;
+
+        &:hover {
+          background-color: $red200;
+        }
       }
 
       &:nth-child(2) {
         background-color: $green300;
+
+        &:hover {
+          background-color: $green100;
+        }
       }
     }
   }
@@ -287,11 +295,22 @@ TradingPanel {
     padding: 32px;
     flex-direction: column;
     align-items: center;
+    cursor: default;
 
     img {
       height: 200px;
       width: 200px;
       border-radius: 8px;
+    }
+
+    &:hover {
+      background-color: $blue500;
+      cursor: pointer;
+      sound-in: 'ui.button.over';
+    }
+
+    &:active {
+      sound-in: 'ui.button.press';
     }
   }
 
