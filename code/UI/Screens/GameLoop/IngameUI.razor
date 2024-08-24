@@ -207,10 +207,89 @@
                 </Content>
             </Modal>
             break;
+	    case LocalUIStates.Trade:
+			<Modal OnClose=@CloseGlobalModal Name="Trading">
+				<CustomModalBody>
+					<div class="trading">
+						@if (_tradeState.TradingPartner == null) {
+							<div class="container">
+								<h3>
+									Choose your trading partner
+								</h3>
+							</div>
+							<div style="gap: 32px">
+								@foreach (var player in Lobby.Players) {
+									<div onclick=@(() => { _tradeState.Network.TakeOwnership(); _tradeState.TradingPartner = player; }) class="container playerCard">
+										<img src=@($"avatar:{player.SteamId}")/>
+										<h3> @player.Name </h3>
+									</div>
+								}
+							</div>
+							<button onclick=@CloseTradingModal> Abort </button>
+						}
+
+						@if (_tradeState.TradingPartner != null && !_waitingForTrading) {
+							var offerAmount = ComputeAmountFromDictionary(_tradeState.OfferTradeFields) + _tradeState.TradingOfferAmount;
+							var requestAmount = ComputeAmountFromDictionary(_tradeState.RequestTradeFields) + _tradeState.TradingRequestAmount;
+
+							<div style="gap: 32px; align-items: center">
+								<TradingPanelContainer
+									Player=@_player
+									Owned=@_stateManager.OwnedFields
+									TradeFields=@_tradeState.OfferTradeFields
+									OnTextEdit=@(delegate(string v) { _tradeState.TradingOfferAmount = Convert.ToInt32(v); })>
+								</TradingPanelContainer>
+								<div class="column">
+									<div class="container summaryPanel">
+										<h2> Offer </h2>
+										<h3> $@offerAmount </h3>
+									</div>
+									<div class="container summaryPanel">
+										<h2> Request </h2>
+										<h3> $@requestAmount </h3>
+									</div>
+									<div class="submissionContainer">
+										<button onclick=@CloseTradingModal> Cancel </button>
+										<button onclick=@SubmitTrading> Submit </button>
+									</div>
+								</div>
+								<TradingPanelContainer
+									Player=@_tradeState.TradingPartner
+									Owned=@_stateManager.OwnedFields
+									TradeFields=@_tradeState.RequestTradeFields
+									OnTextEdit=@(delegate(string v) { _tradeState.TradingRequestAmount = Convert.ToInt32(v); })>
+								</TradingPanelContainer>
+							</div>
+						}
+
+						@if (_waitingForTrading) {
+							<div class="column" style="gap: 64px">
+								<h3> Waiting for other player... </h3>
+								<button onclick=@CloseTradingModal style="width: auto; justify-content: center"> Abort </button>
+							</div>
+						}
+					</div>
+				</CustomModalBody>
+			</Modal>
+			break;
     }
 
 
-    @if (IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.PlayerAction) {
+    @if (IsCurrentPlayer() && _turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
+	    <div class="jailDecision">
+		    @if (_player.JailTurnCounter <= 3) {
+			    <button class="active" onclick=@JailRoll> Roll dice (@(_player.JailTurnCounter - 1)/3) </button>
+		    }
+		    <button class="active" onclick=@PayFine> Pay $50 </button>
+		    <button class=@(OwnsJailCard() ? "active" : "") onclick=@UseJailCard> Use Card </button>
+	    </div>
+    }
+    
+    @if (!IsCurrentPlayer() && _turnManager.CurrentPhase.Equals(TurnManager.Phase.PlayerAction)) {
+	    <h1>Waiting for @(GetCurrentPlayer().Name)...</h1>
+    }
+
+	@if (IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.PlayerAction) {
         <div class="endTurn">
             <button onclick=@EndTurn> End Turn </button>
         </div>
@@ -277,19 +356,7 @@
 			// Disabled sound
 			return;
 		}
-
-		if (newState.Equals(IngameUiStates.Trade)) {
-			_waitingForTrading = false;
-		}
 		
-		if (_tradeState.TradingPartner == null) {
-			_player.localUiState = LocalUIStates.Trade;
-		}
-		else {
-			// Disabled sound
-			return;
-		}
-
 	// Btn click sound
 		_stateManager.State = newState;
 	}
@@ -300,8 +367,27 @@
 			return;
 		}
 
+		if (newState.Equals(LocalUIStates.Trade) && !SetLocalTradeState()) {
+			// Disabled sound
+			return;
+		}
+
+
 		// Btn click sound
 		_player.localUiState = newState;
+	}
+
+	private bool SetLocalTradeState() {
+
+		_waitingForTrading = false;
+		if (_tradeState.TradingPartner == null) {
+			_player.localUiState = LocalUIStates.Trade;
+		}
+		else {
+			// Disabled sound
+			return false;
+		}
+		return true;
 	}
 	
 	private void LeaveLobby() {
