@@ -435,10 +435,13 @@
         if (!IsCurrentPlayer() || _turnManager.CurrentPhase != TurnManager.Phase.Rolling) {
             return;
         }
-
+	    
         foreach (var dice in _dice) {
             dice.Roll();
         }
+	    
+	    _turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InAction);
+
 
         while (_dice.Any(dice => dice.IsRolling)) {
             await Task.DelayRealtimeSeconds(0.5f);

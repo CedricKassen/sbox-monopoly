@@ -58,10 +58,8 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 	private void FillChanceCards() {
 		ChanceCards = new();
 		foreach (var index in ChanceCardsOrder) {
-			Log.Info("\n");
-			Log.Info(index);
 			Card card = Cards.Chance_Standard[index];
-			Log.Info(card.Text);
+
 			if (BlockedCards.ContainsKey(card.ActionId)) {
 				continue;
 			}
