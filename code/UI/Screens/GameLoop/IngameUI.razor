@@ -276,16 +276,7 @@
 		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
 			return;
 		}
-
 		_turnManager.EmitPayJailFineEvent(_player.SteamId);
-		
-		if (Networking.IsHost) {
-			_player.Money -= 50;
-			_player.JailTurnCounter = 0;
-		}
-		
-		_turnManager.ChangePhase(_player.SteamId, TurnManager.Phase.Rolling);
-		
 	}
 	
 	private void UseJailCard() {

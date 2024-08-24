@@ -184,6 +184,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PayJailFineEvent eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.playerId);
+
+
+		if (Networking.IsHost) {
+			player.Money -= 50;
+			player.JailTurnCounter = 0;
+		}
+
+		TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Rolling);
 	}
 
 	public void OnGameEvent(UseJailCardEvent eventArgs) {
