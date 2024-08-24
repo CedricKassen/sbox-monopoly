@@ -200,6 +200,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		string ownedJailFreeCard = IngameStateManager.OwnedFields.First(pair => pair.Key.Contains("JailFree")).Key;
 
 		if (Networking.IsHost) {
+			player.JailTurnCounter = 0;
 			IngameStateManager.OwnedFields[ownedJailFreeCard] = 0;
 		}
 
