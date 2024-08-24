@@ -11,14 +11,30 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>,
                                 IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<PlayerPaymentEvent>,
                                 IGameEventHandler<TurnFinishedEvent>, IGameEventHandler<PropertyMortgagedEvent>,
+                                IGameEventHandler<TradingRequestedEvent>, IGameEventHandler<TradingAcceptedEvent>,
+                                IGameEventHandler<TradingDeniedEvent>,
                                 IGameEventHandler<PropertyMortgagePayedEvent>, IGameEventHandler<BuildHouseEvent>,
                                 IGameEventHandler<DestroyHouseEvent> {
-	[Property] public GameObject LocationContainer { get; set; }
-	[Property] public Lobby Lobby { get; set; }
-	[Property] public MovementManager MovementManager { get; set; }
-	[Property] public CardActionManager CardActionManager { get; set; }
-	[Property] public IngameStateManager IngameStateManager { get; set; }
-	[Property] public TurnManager TurnManager { get; set; }
+	[Property]
+	public GameObject LocationContainer { get; set; }
+
+	[Property]
+	public Lobby Lobby { get; set; }
+
+	[Property]
+	public MovementManager MovementManager { get; set; }
+
+	[Property]
+	public CardActionManager CardActionManager { get; set; }
+
+	[Property]
+	public IngameStateManager IngameStateManager { get; set; }
+
+	[Property]
+	public TurnManager TurnManager { get; set; }
+
+	[Property]
+	public TradeState TradeState { get; set; }
 
 	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
 		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex, true);
@@ -256,6 +272,62 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				dice.Network.AssignOwnership(
 					TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
 			}
+		}
+	}
+
+	public void OnGameEvent(TradingRequestedEvent eventArgs) {
+		IngameStateManager.State = IngameUI.IngameUiStates.Trade;
+	}
+
+	public void OnGameEvent(TradingDeniedEvent eventArgs) {
+		IngameStateManager.State = IngameUI.IngameUiStates.None;
+
+		ResetTrading();
+		CloseLocalUIForEveryPlayer();
+	}
+
+	public void OnGameEvent(TradingAcceptedEvent eventArgs) {
+		IngameStateManager.State = IngameUI.IngameUiStates.None;
+
+		foreach (var (key, value) in TradeState.OfferTradeFields) {
+			if (value) {
+				IngameStateManager.OwnedFields[key] = TradeState.TradingPartner.SteamId;
+			}
+		}
+
+		foreach (var (key, value) in TradeState.RequestTradeFields) {
+			if (value) {
+				IngameStateManager.OwnedFields[key] = TradeState.TradingCreator.SteamId;
+			}
+		}
+
+		if (Networking.IsHost) {
+			TradeState.TradingCreator.Money -= TradeState.TradingOfferAmount;
+			TradeState.TradingCreator.Money += TradeState.TradingRequestAmount;
+
+			TradeState.TradingPartner.Money += TradeState.TradingOfferAmount;
+			TradeState.TradingPartner.Money -= TradeState.TradingRequestAmount;
+		}
+
+		ResetTrading();
+		CloseLocalUIForEveryPlayer();
+	}
+
+	private void CloseLocalUIForEveryPlayer() {
+		foreach (var player in Lobby.Players) {
+			player.localUiState = IngameUI.LocalUIStates.None;
+		}
+	}
+
+	private void ResetTrading() {
+		TradeState.TradingCreator = null;
+		TradeState.TradingPartner = null;
+		TradeState.TradingOfferAmount = 0;
+		TradeState.TradingRequestAmount = 0;
+
+		foreach (var key in TradeState.OfferTradeFields.Keys) {
+			TradeState.OfferTradeFields[key] = false;
+			TradeState.RequestTradeFields[key] = false;
 		}
 	}
 }

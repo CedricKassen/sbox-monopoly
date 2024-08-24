@@ -39,12 +39,23 @@ public sealed class IngameStateManager : Component, IGameEventHandler<AuctionBid
 		{ "communityJailFree", 0 }
 	};
 
-	[Property] public TurnManager TurnManager { get; set; }
-	[Property] public GameObject LocationContainer { get; set; }
-	[Property, HostSync] public IngameUI.IngameUiStates State { get; set; } = IngameUI.IngameUiStates.None;
-	[Property, HostSync] public NetDictionary<ulong, int> AuctionBiddings { get; set; } = new();
-	[Property] public readonly int AuctionTime = 8;
-	[Property, HostSync] public float AuctionTimer { get; set; }
+	[Property]
+	public TurnManager TurnManager { get; set; }
+
+	[Property]
+	public GameObject LocationContainer { get; set; }
+
+	[Property, HostSync]
+	public IngameUI.IngameUiStates State { get; set; } = IngameUI.IngameUiStates.None;
+
+	[Property, HostSync]
+	public NetDictionary<ulong, int> AuctionBiddings { get; set; } = new();
+
+	[Property]
+	public readonly int AuctionTime = 8;
+
+	[Property, HostSync]
+	public float AuctionTimer { get; set; }
 
 	public void OnGameEvent(AuctionBidEvent eventArgs) {
 		var currentMax = GetSortedBiddings()[0].Value;

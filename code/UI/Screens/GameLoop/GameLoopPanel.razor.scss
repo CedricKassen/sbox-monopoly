@@ -136,50 +136,6 @@ PlayerCard {
     position: relative;
   }
 
-  .red {
-    background-color: $red300;
-  }
-
-  .brown {
-    background-color: $brown300;
-  }
-
-  .lightBlue {
-    background-color: $cyan300;
-  }
-
-  .pink {
-    background-color: $pink300;
-  }
-
-  .orange {
-    background-color: $orange300;
-  }
-
-  .yellow {
-    background-color: $yellow300;
-  }
-
-  .green {
-    background-color: $green300;
-  }
-
-  .blue {
-    background-color: $blue300;
-  }
-
-  .policeBlue {
-    background-color: $blue200;
-  }
-
-  .black {
-    background-color: $black;
-  }
-
-  .gray {
-    background-color: $gray300;
-  }
-
   .ownership-dot-disabled {
     height: 100%;
     width: 100%;
@@ -235,6 +191,131 @@ PlayerCard {
       width: 75%;
       justify-content: space-between;
     }
+  }
+}
+
+TradingPanel {
+  flex-direction: column;
+  gap: 32px;
+
+  .ownership-dot {
+    height: 40px;
+    width: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .ownership-dot-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+    height: auto;
+  }
+
+  .ownership-dot-disabled {
+    height: 100%;
+    width: 100%;
+    background-color: #666666cc;
+  }
+
+  .ownership-dot-selected {
+    border: 4px solid #ffffff;
+
+    .ownership-dot-mortgage {
+      transform: rotate(45deg) translate(10px, -10px);
+    }
+  }
+
+  .ownership-dot-mortgage {
+    height: 100%;
+    width: 5px;
+    transform: rotate(45deg) translate(12px, -12px);
+    background-color: $red300;
+    border: 1px solid $black;
+  }
+}
+
+.trading {
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+
+  .container {
+    background-color: $primary-background-color;
+    padding: 16px;
+    border-radius: 8px;
+    gap: 32px;
+  }
+
+  .row {
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .column {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .summaryPanel {
+    justify-content: space-between;
+    align-items: center;
+    width: 450px;
+  }
+
+  .submissionContainer {
+    justify-content: space-evenly;
+    width: 100%;
+
+    button {
+      font-size: 42px;
+
+      &:nth-child(1) {
+        background-color: $red300;
+
+        &:hover {
+          background-color: $red200;
+        }
+      }
+
+      &:nth-child(2) {
+        background-color: $green300;
+
+        &:hover {
+          background-color: $green100;
+        }
+      }
+    }
+  }
+
+  .playerCard {
+    padding: 32px;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+
+    img {
+      height: 200px;
+      width: 200px;
+      border-radius: 8px;
+    }
+
+    &:hover {
+      background-color: $blue500;
+      cursor: pointer;
+      sound-in: 'ui.button.over';
+    }
+
+    &:active {
+      sound-in: 'ui.button.press';
+    }
+  }
+
+  button {
+    padding: 8px 32px;
   }
 }
 
@@ -422,4 +503,48 @@ PlayerCard {
   100% {
     border: 8px solid #0081ea;
   }
+}
+
+.red {
+  background-color: $red300;
+}
+
+.brown {
+  background-color: $brown300;
+}
+
+.lightBlue {
+  background-color: $cyan300;
+}
+
+.pink {
+  background-color: $pink300;
+}
+
+.orange {
+  background-color: $orange300;
+}
+
+.yellow {
+  background-color: $yellow300;
+}
+
+.green {
+  background-color: $green300;
+}
+
+.blue {
+  background-color: $blue300;
+}
+
+.policeBlue {
+  background-color: $blue200;
+}
+
+.black {
+  background-color: $black;
+}
+
+.gray {
+  background-color: $gray300;
 }
