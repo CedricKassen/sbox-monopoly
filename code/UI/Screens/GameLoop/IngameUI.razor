@@ -41,7 +41,7 @@
 			    var offerAmount = ComputeAmountFromDictionary(_tradeState.OfferTradeFields) + _tradeState.TradingOfferAmount;
 			    var requestAmount = ComputeAmountFromDictionary(_tradeState.RequestTradeFields) + _tradeState.TradingRequestAmount;
 
-			    <Modal OnClose=@CloseGlobalModal Name="Trading">
+			    <Modal OnClose=@(() => CloseGlobalModal()) Name="Trading">
 				    <CustomModalBody>
 					    <div class="trading">
 						    <div style="gap: 32px; align-items: center">
@@ -128,14 +128,14 @@
             break;
         case IngameUiStates.Chance:
             var card = _stateManager.Data as Card;
-            <Modal OnClose=@CloseGlobalModal Name="Options">
+            <Modal OnClose=@(() => CloseGlobalModal(_stateManager.State)) Name="Options">
                 <Content>
                     <ChanceCard Text=@card.Text ImageUrl=@card.ImageUrl></ChanceCard>
                 </Content>
             </Modal>
             break;
         case IngameUiStates.Community_Chest:
-            <Modal OnClose=@CloseGlobalModal Name="Options">
+            <Modal OnClose=@(() => CloseGlobalModal(_stateManager.State)) Name="Options">
                 <Content>
                     <p> Community Chest </p>
                 </Content>
@@ -211,7 +211,7 @@
             </Modal>
             break;
 	    case LocalUIStates.Trade:
-			<Modal OnClose=@CloseGlobalModal Name="Trading">
+			<Modal OnClose=@(() => CloseGlobalModal()) Name="Trading">
 				<CustomModalBody>
 					<div class="trading">
 						@if (_tradeState.TradingPartner == null) {
@@ -456,7 +456,7 @@
 
     private void Buy() {
         _turnManager.EmitPropertyAquiredEvent((ulong)Game.SteamId, Lobby.Players[_turnManager.CurrentPlayerIndex].CurrentField, false);
-        CloseLocalModal();
+	    CloseLocalModal();
     }
     
     private void Auction() {
@@ -472,11 +472,17 @@
 
     private void CloseLocalModal() {
         _player.localUiState = LocalUIStates.None;
+	    _turnManager.ChangePhase(_player.SteamId, TurnManager.Phase.PlayerAction);
     }
     
-    private void CloseGlobalModal() {
+    private void CloseGlobalModal(IngameUiStates state = IngameUiStates.None) {
+	    if (!state.Equals(IngameUiStates.None) && IsCurrentPlayer()) {
+		    var card = _stateManager.Data as Card;
+		    _turnManager.EmitEventCardClosedEvent(card.ActionId, (ulong) Game.SteamId, state.Equals(IngameUiStates.Chance));
+	    }
         _stateManager.State = IngameUiStates.None;
     }
+	
 
     private void BidAmount(int amount) {
         if (_player.Money >= _stateManager.AuctionBiddings[_player.SteamId] + amount)

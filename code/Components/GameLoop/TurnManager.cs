@@ -1,6 +1,7 @@
 ﻿using Sandbox.Constants;
 using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
+using Sandbox.ModelEditor;
 
 public class TurnManager : Component {
 	public enum Phase {
@@ -31,6 +32,7 @@ public class TurnManager : Component {
 	[Property, HostSync] public Phase CurrentPhase { get; set; }
 
 	[Property] public Lobby CurrentLobby { get; set; }
+	[Property] public CardActionManager CardActionManager { get; set; }
 
 	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
 
@@ -129,6 +131,14 @@ public class TurnManager : Component {
 		GameParentObject.Dispatch(new PropertyMortgagePayedEvent {
 			PropertyIndex = propertyIndex, playerId = playerId
 		});
+	}
+
+	[Broadcast]
+	public void EmitEventCardClosedEvent(int cardId, ulong playerId, bool isChance) {
+		Card card = isChance
+			? CardActionManager.GetChanceCardFromActionId(cardId)
+			: CardActionManager.GetCommunityCardFromActionId(cardId);
+		GameParentObject.Dispatch(new EventCardClosedEvent(card, playerId));
 	}
 
 	[Broadcast]

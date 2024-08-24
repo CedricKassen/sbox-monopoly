@@ -58,7 +58,7 @@ public sealed class MovementManager : Component {
 		// If movement is backwards, first iteration is used to rotate player so the starting field is the current field not the next one
 		CurrentField = Math.Mod(player.CurrentField + (Backwards ? 0 : 1), 40);
 
-		Log.Info(Player.Name + " move " + ToTravel + " Fields from " + CurrentField);
+		Log.Info(Player.Name + " move " + ToTravel + " Fields from " + (CurrentField - 1));
 	}
 
 
@@ -97,8 +97,6 @@ public sealed class MovementManager : Component {
 
 		if (ToTravel == Travelled || ToTravel == -Travelled) {
 			CurrentField = Math.Mod(CurrentField + (Backwards ? 1 : -1), 40);
-
-			Log.Info(Player.Name + " landed on " + CurrentField);
 
 			Player.CurrentField = CurrentField;
 			var steamId = Player.SteamId;

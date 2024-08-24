@@ -7,7 +7,7 @@ using Sandbox.Events;
 using Sandbox.Events.GameStateEvents;
 
 public sealed class CardActionManager : Component, IGameEventHandler<GameStartEvent> {
-	[Property] private readonly Dictionary<int, bool> BlockedCards = new();
+	[Property] public readonly Dictionary<int, bool> BlockedCards = new();
 
 	[HostSync] private NetList<int> ChanceCardsOrder { get; set; }
 
@@ -25,6 +25,14 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 
 	public void RemoveBlockedCard(int actionId) {
 		BlockedCards.Remove(actionId);
+	}
+
+	public Card GetChanceCardFromActionId(int actionId) {
+		return Cards.Chance_Standard.FirstOrDefault(c => c.ActionId == actionId, null);
+	}
+
+	public Card GetCommunityCardFromActionId(int actionId) {
+		return Cards.CommunityChest_Standard.FirstOrDefault(c => c.ActionId == actionId, null);
 	}
 
 	private void RefillChangeCards() {
@@ -128,21 +136,10 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 		ChanceCards.Remove(card);
 
 		Log.Info("Drew " + card.Text);
-		Log.Info(player);
-		Log.Info(card.Action);
 
 		IngameStateManager.Data = card;
 		IngameStateManager.State = IngameUI.IngameUiStates.Chance;
 
-
-		Log.Info("before action");
-		card.Action(player,
-			MovementManager,
-			TurnManager,
-			BlockedCards,
-			IngameStateManager,
-			card);
-		Log.Info("after action");
 
 		if (ChanceCards.Count == 0) {
 			RefillChangeCards();
@@ -155,11 +152,8 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 
 		Log.Info("Drew " + card.Text);
 
-
 		IngameStateManager.Data = card;
 		IngameStateManager.State = IngameUI.IngameUiStates.Community_Chest;
-
-		card.Action(player, MovementManager, TurnManager, BlockedCards, IngameStateManager, card);
 
 		if (CommunityCards.Count == 0) {
 			RefillCommunityCards();
