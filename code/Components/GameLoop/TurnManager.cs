@@ -88,7 +88,6 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void EmitTurnFinishedEvent(ulong playerId) {
-		ChangePhase(playerId, Phase.Rolling);
 		GameParentObject.Dispatch(new TurnFinishedEvent());
 	}
 

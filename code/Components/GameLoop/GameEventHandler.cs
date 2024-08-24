@@ -219,11 +219,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(LandOnJailEvent eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.playerId);
 
-		Log.Info("Land on Jail with JailCounter " + player.JailTurnCounter);
+		Log.Info(player.Name + " land on jail with JailCounter " + player.JailTurnCounter);
 
 		// If player lands on the jail field with > 0 it means he was sent to jail so we end the turn immediately 
 		if (player.JailTurnCounter >= 1) {
-			TurnManager.EmitTurnFinishedEvent(eventArgs.playerId);
+			// We need to box this if because this event is broadcast end every player should go in the first if if its true
+			if (!player.IsProxy) {
+				TurnManager.EmitTurnFinishedEvent(eventArgs.playerId);
+			}
 		}
 		else {
 			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
@@ -351,8 +354,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		return LocationContainer.Children[propertyIndex].Components.Get<GameLocation>();
 	}
 
+	[Broadcast]
 	private void SetCurrentPlayersJailState() {
 		Player currentPlayer = TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex];
+		Log.Info("Set jail status for " + currentPlayer.Name + " (" + currentPlayer.JailTurnCounter + ")");
+
 		if (currentPlayer.JailTurnCounter > 0) {
 			TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.Jail);
 		}
