@@ -103,7 +103,6 @@ public static class CardActionHelper {
 	public static void GoToJail(Player player, MovementManager movementManager) {
 		var currentPos = player.CurrentField;
 
-		var fieldsToTravel = 0;
 		if (currentPos < 10) {
 			movementManager.StartMovement(player, CalculateFieldsToTravel(player, 10));
 		}

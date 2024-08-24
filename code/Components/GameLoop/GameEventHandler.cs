@@ -223,8 +223,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(RolledEvent eventArgs) {
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 
-		Log.Info(eventArgs.Doubles);
-		Log.Info(eventArgs.Number);
 
 		if (eventArgs.Doubles) {
 			player.DoublesCount++;
@@ -262,11 +260,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 
-	protected override void OnStart() {
-		ChangeDiceOwnershipToCurrentPlayer();
-	}
-
-
 	private Player GetPlayerFromEvent(ulong playerId) {
 		return Lobby.Players.Find(player => player.SteamId == playerId);
 	}
@@ -283,13 +276,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	private void ChangeDiceOwnershipToCurrentPlayer() {
-		var diceList = new List<Dice>(Game.ActiveScene.GetAllComponents<Dice>());
-
-		if (Networking.IsHost && diceList.Count > 0) {
-			foreach (var dice in diceList) {
-				dice.Network.AssignOwnership(
-					TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
-			}
+		if (!Networking.IsHost || _dice.Count == 0) {
+			return;
 		}
+
+		Player currentPlayer = TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex];
+		_dice.ForEach(dice => dice.GameObject.Network.AssignOwnership(currentPlayer.Connection));
 	}
 }
