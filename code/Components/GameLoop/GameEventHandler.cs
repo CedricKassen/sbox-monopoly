@@ -195,7 +195,15 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	public void OnGameEvent(UseJailCardEvent eventArgs) {
-		Player player = GetPlayerFromEvent(eventArgs.playerId);
+		var player = GetPlayerFromEvent(eventArgs.playerId);
+
+		string ownedJailFreeCard = IngameStateManager.OwnedFields.First(pair => pair.Key.Contains("JailFree")).Key;
+
+		if (Networking.IsHost) {
+			IngameStateManager.OwnedFields[ownedJailFreeCard] = 0;
+		}
+
+		TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Rolling);
 	}
 
 	public void OnGameEvent(LandOnJailEvent eventArgs) {
