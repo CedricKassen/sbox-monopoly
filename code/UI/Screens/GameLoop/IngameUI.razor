@@ -17,8 +17,8 @@
     <div id="mainPanel">
         <div class="autogrow"></div>
         <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Bank))"> 🏦 </button>
-        <button class="secondaryButton" onclick="@(() => ChangeGameUIState(IngameUiStates.Trade))"> 💸 </button>
-        <button class="mainButton @(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll">
+	    <button class="secondaryButton" onclick="@(() => ChangeGameUIState(IngameUiStates.Trade))"> 💸 </button>
+	    <button class="mainButton @(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll">
             GO
         </button>
         <button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Building))"> 🏠 </button>
@@ -168,19 +168,6 @@
             break;
     }
 
-    @if (IsCurrentPlayer() && _turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
-	    <div class="jailDecision">
-		    @if (_player.JailTurnCounter <= 3) {
-			    <button class="active" onclick=@JailRoll> Roll dice (@(_player.JailTurnCounter - 1)/3) </button>
-		    }
-		    <button class="active" onclick=@PayFine> Pay $50 </button>
-		    <button class=@(OwnsJailCard() ? "active" : "") onclick=@UseJailCard> Use Card </button>
-	    </div>
-    }
-    
-    @if (!IsCurrentPlayer() && _turnManager.CurrentPhase.Equals(TurnManager.Phase.PlayerAction)) {
-	    <h1>Waiting for @(GetCurrentPlayer().Name)...</h1>
-    }
 
     @if (IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.PlayerAction) {
         <div class="endTurn">
@@ -213,11 +200,15 @@
     [Property]
     private TurnManager _turnManager { get; } = Game.ActiveScene.GetAllComponents<TurnManager>().First();
 
-    private List<GameLocation> _locations { get; } = new(Game.ActiveScene.GetAllComponents<GameLocation>());
+	[Property]
+	private TradeState _tradeState { get; } = Game.ActiveScene.GetAllComponents<TradeState>().First();
 
-    private readonly List<Dice> _dice = new(Game.ActiveScene.GetAllComponents<Dice>());
-    private readonly IngameStateManager _stateManager = Game.ActiveScene.GetAllComponents<IngameStateManager>().First();
-    private Player _player { get; set; } = null;
+	private readonly List<Dice> _dice = new(Game.ActiveScene.GetAllComponents<Dice>());
+	private readonly IngameStateManager _stateManager = Game.ActiveScene.GetAllComponents<IngameStateManager>().First();
+	private Player _player { get; set; }
+	private List<GameLocation> _locations { get; } = new(Game.ActiveScene.GetAllComponents<GameLocation>());
+
+	private bool _waitingForTrading;
 
     private bool _showRoll;
 
@@ -229,13 +220,13 @@
             _player = Game.ActiveScene.GetAllComponents<Player>().First(player => player.SteamId == (ulong)Game.SteamId);
         }
 
-        return HashCode.Combine(_showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data, _stateManager.OwnedFields, _player.localUiState, _stateManager.AuctionTimer);
-    }
-	
+		return HashCode.Combine(_showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data, _stateManager.OwnedFields, _player.localUiState, _stateManager.AuctionTimer);
+	}
+
 	private bool IsCurrentPlayer() {
 		return GetCurrentPlayer().SteamId == (ulong)Game.SteamId;
 	}
-
+	
 	private Player GetCurrentPlayer() {
 		return Lobby.Players[_turnManager.CurrentPlayerIndex];
 	}
@@ -246,7 +237,19 @@
 			return;
 		}
 
-		// Btn click sound
+		if (newState.Equals(IngameUiStates.Trade)) {
+			_waitingForTrading = false;
+		}
+		
+		if (_tradeState.TradingPartner == null) {
+			_player.localUiState = LocalUIStates.Trade;
+		}
+		else {
+			// Disabled sound
+			return;
+		}
+
+	// Btn click sound
 		_stateManager.State = newState;
 	}
 	
@@ -260,11 +263,12 @@
 		_player.localUiState = newState;
 	}
 	
-    private void LeaveLobby() {
-        _stateManager.State = IngameUiStates.None;
-        GameNetworkSystem.Disconnect();
-    }
+	private void LeaveLobby() {
+		_stateManager.State = IngameUiStates.None;
+		GameNetworkSystem.Disconnect();
+	}
 
+	
 	private void JailRoll() {
 		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
 			return;
@@ -346,22 +350,73 @@
     private void BuildHouse(int propertyIndex) {
         _turnManager.EmitBuildHouseEvent(propertyIndex, (ulong)Game.SteamId);
     }
-
-    private bool OwnsAllFrom(GameLocation location, ulong playerId) {
-        if (!location.Type.Equals(GameLocation.PropertyType.Normal)) {
-            return false;
-        }
-	    
-	    return location.GroupMembers
-            .All(member => _stateManager.OwnedFields[location.GameObject.Parent.Children[member].Name] == playerId);
-    }
-    
-    private void DestroyHouse(int propertyIndex) {
-        _turnManager.EmitDestroyHouseEvent(propertyIndex, (ulong)Game.SteamId);
-    }
-
+	
 	private bool OwnsJailCard() {
 		return _stateManager.OwnedFields["chanceJailFree"] == _player.SteamId || _stateManager.OwnedFields["communityJailFree"] == _player.SteamId;
+	}
+
+	private bool OwnsAllFrom(GameLocation location, ulong playerId) {
+		if (!location.Type.Equals(GameLocation.PropertyType.Normal)) {
+			return false;
+		}
+
+		return location.GroupMembers
+		               .All(member => _stateManager.OwnedFields[location.GameObject.Parent.Children[member].Name] == playerId);
+	}
+
+	private void DestroyHouse(int propertyIndex) {
+		_turnManager.EmitDestroyHouseEvent(propertyIndex, (ulong)Game.SteamId);
+	}
+
+	private void CloseTradingModal() {
+		_player.localUiState = LocalUIStates.None;
+		_tradeState.TradingCreator = null;
+		_tradeState.TradingPartner = null;
+		_tradeState.TradingOfferAmount = 0;
+		_tradeState.TradingRequestAmount = 0;
+		_waitingForTrading = false;
+
+		foreach (var key in _tradeState.OfferTradeFields.Keys) {
+			_tradeState.OfferTradeFields[key] = false;
+			_tradeState.RequestTradeFields[key] = false;
+		}
+	}
+
+	private void SubmitTrading() {
+		_waitingForTrading = true;
+		_tradeState.TradingCreator = _player;
+		_turnManager.EmitTradingRequestedEvent((ulong)Game.SteamId, _tradeState.TradingPartner.SteamId);
+	}
+
+	private void AcceptTrade() {
+		_turnManager.EmitTradingAcceptedEvent((ulong)Game.SteamId);
+	}
+
+	private void DenyTrade() {
+		_turnManager.EmitTradingDeniedEvent((ulong)Game.SteamId);
+	}
+
+	private int ComputeAmountFromDictionary(NetDictionary<string, bool> dictionary) {
+		var locationObjects = _stateManager.LocationContainer.Children;
+		int amount = 0;
+
+		foreach (var (key, value) in dictionary.ToList()) {
+			if (!key.Contains("JailFree")) {
+				var location = locationObjects.First(o => o.Name == key).Components.Get<GameLocation>();
+				if (value) {
+					if (location.Mortgaged) {
+						amount += Convert.ToInt32(Math.Floor((location.Price / 2) * 1.1));
+					}
+
+					amount += location.Price;
+				}
+			}
+			else {
+				amount += 50;
+			}
+		}
+
+		return amount;
 	}
 
 }

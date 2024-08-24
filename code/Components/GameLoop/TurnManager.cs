@@ -28,11 +28,11 @@ public class TurnManager : Component {
 
 	[Property] public GameObject GameParentObject { get; set; }
 
-	[Property] [HostSync] public Phase CurrentPhase { get; set; }
+	[Property, HostSync] public Phase CurrentPhase { get; set; }
 
 	[Property] public Lobby CurrentLobby { get; set; }
 
-	[Property] [HostSync] public int CurrentPlayerIndex { get; set; }
+	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
 
 	public void EmitStartRollEvent() {
 		GameParentObject.Dispatch(new StartRollEvent());
@@ -156,5 +156,23 @@ public class TurnManager : Component {
 	[Broadcast]
 	public void EmitUseJailCardEvent(ulong playerId) {
 		GameParentObject.Dispatch(new UseJailCardEvent(playerId));
+	}
+
+	[Broadcast]
+	public void EmitTradingRequestedEvent(ulong PlayerId, ulong TradingRecipient) {
+		GameParentObject.Dispatch(
+			new TradingRequestedEvent { TradingRecipient = TradingRecipient, playerId = PlayerId });
+	}
+
+	[Broadcast]
+	public void EmitTradingAcceptedEvent(ulong PlayerId) {
+		GameParentObject.Dispatch(
+			new TradingAcceptedEvent() { playerId = PlayerId });
+	}
+
+	[Broadcast]
+	public void EmitTradingDeniedEvent(ulong PlayerId) {
+		GameParentObject.Dispatch(
+			new TradingDeniedEvent() { playerId = PlayerId });
 	}
 }
