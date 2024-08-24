@@ -13,7 +13,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<TurnFinishedEvent>, IGameEventHandler<PropertyMortgagedEvent>,
                                 IGameEventHandler<PropertyMortgagePayedEvent>, IGameEventHandler<BuildHouseEvent>,
                                 IGameEventHandler<DestroyHouseEvent>, IGameEventHandler<GoToJailEvent>,
-                                IGameEventHandler<LandOnJailEvent>, IGameEventHandler<StartRollEvent> {
+                                IGameEventHandler<LandOnJailEvent>, IGameEventHandler<StartRollEvent>,
+                                IGameEventHandler<PayJailFineEvent>, IGameEventHandler<UseJailCardEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
 	[Property] public Lobby Lobby { get; set; }
 	[Property] public MovementManager MovementManager { get; set; }
@@ -179,6 +180,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		CardActionHelper.GoToJail(player, MovementManager);
 		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InAction);
+	}
+
+	public void OnGameEvent(PayJailFineEvent eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.playerId);
+	}
+
+	public void OnGameEvent(UseJailCardEvent eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.playerId);
 	}
 
 	public void OnGameEvent(LandOnJailEvent eventArgs) {
