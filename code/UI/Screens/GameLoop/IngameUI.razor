@@ -33,13 +33,54 @@
     </div>
 
     @switch (_stateManager.State) {
-        case IngameUiStates.Trade:
-            <Modal OnClose=@CloseGlobalModal Name="Trading">
-                <Content>
-                    <p> Hello :3 </p>
-                </Content>
-            </Modal>
-            break;
+	    case IngameUiStates.Trade:
+		    if (_tradeState.TradingCreator.SteamId != (ulong)Game.SteamId) {
+			    var offerAmount = ComputeAmountFromDictionary(_tradeState.OfferTradeFields) + _tradeState.TradingOfferAmount;
+			    var requestAmount = ComputeAmountFromDictionary(_tradeState.RequestTradeFields) + _tradeState.TradingRequestAmount;
+
+			    <Modal OnClose=@CloseGlobalModal Name="Trading">
+				    <CustomModalBody>
+					    <div class="trading">
+						    <div style="gap: 32px; align-items: center">
+							    <TradingPanelContainer
+								    Player=@_tradeState.TradingCreator
+								    Owned=@_stateManager.OwnedFields
+								    TradeFields=@_tradeState.OfferTradeFields
+								    OnTextEdit=@(delegate(string v) { _tradeState.TradingOfferAmount = Convert.ToInt32(v); })
+								    ReadOnly=@true
+								    Money=@_tradeState.TradingOfferAmount>
+							    </TradingPanelContainer>
+							    <div class="column">
+								    <div class="container summaryPanel">
+									    <h2> Offer </h2>
+									    <h3> $@offerAmount </h3>
+								    </div>
+								    <div class="container summaryPanel">
+									    <h2> Request </h2>
+									    <h3> $@requestAmount </h3>
+								    </div>
+								    @if (_tradeState.TradingPartner.SteamId == (ulong)Game.SteamId) {
+									    <div class="submissionContainer">
+										    <button onclick=@DenyTrade> Deny </button>
+										    <button onclick=@AcceptTrade> Accept </button>
+									    </div>
+								    }
+							    </div>
+							    <TradingPanelContainer
+								    Player=@_tradeState.TradingPartner
+								    Owned=@_stateManager.OwnedFields
+								    TradeFields=@_tradeState.RequestTradeFields
+								    OnTextEdit=@(delegate(string v) { _tradeState.TradingRequestAmount = Convert.ToInt32(v); })
+								    ReadOnly=@true
+								    Money=@_tradeState.TradingRequestAmount>
+							    </TradingPanelContainer>
+						    </div>
+					    </div>
+				    </CustomModalBody>
+			    </Modal>
+		    }
+
+		    break;
         case IngameUiStates.Auction:
             var location = _stateManager.Data as GameLocation;
             var biddings = _stateManager.GetSortedBiddings();
