@@ -173,8 +173,8 @@
 		    @if (_player.JailTurnCounter <= 3) {
 			    <button class="active" onclick=@JailRoll> Roll dice (@(_player.JailTurnCounter - 1)/3) </button>
 		    }
-		    <button class="active" onclick=@EndTurn> Pay $50 </button>
-		    <button class=@(OwnsJailCard() ? "active" : "") onclick=@EndTurn> Use Card </button>
+		    <button class="active" onclick=@PayFine> Pay $50 </button>
+		    <button class=@(OwnsJailCard() ? "active" : "") onclick=@UseJailCard> Use Card </button>
 	    </div>
     }
     
@@ -270,6 +270,29 @@
 			return;
 		}
 		_turnManager.EmitStartRollEvent();
+	}
+	
+	private void PayFine() {
+		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
+			return;
+		}
+
+		_turnManager.EmitPayJailFineEvent(_player.SteamId);
+		
+		if (Networking.IsHost) {
+			_player.Money -= 50;
+			_player.JailTurnCounter = 0;
+		}
+		
+		_turnManager.ChangePhase(_player.SteamId, TurnManager.Phase.Rolling);
+		
+	}
+	
+	private void UseJailCard() {
+		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
+			return;
+		}
+		_turnManager.EmitUseJailCardEvent(_player.SteamId);
 	}
 	
     private async void Roll() {
