@@ -243,21 +243,43 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 
 
-		if (eventArgs.Doubles) {
-			player.DoublesCount++;
-		}
-		else {
-			player.DoublesCount = 0;
-		}
+		player.DoublesCount = eventArgs.Doubles ? player.DoublesCount + 1 : 0;
 
-		if (player.DoublesCount < 3) {
-			MovementManager.StartMovement(player, eventArgs.Number);
-		}
-		else {
-			TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Police, player.SteamId);
+		// Player should not be in jail!
+		if (player.JailTurnCounter <= 0) {
+			if (player.DoublesCount < 3) {
+				MovementManager.StartMovement(player, eventArgs.Number);
+			}
+			else {
+				TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Police,
+					player.SteamId);
+			}
+
+			return;
 		}
 
 		player.LastDiceCount = eventArgs.Number;
+
+		// Release player if he rolls double
+		if (player.DoublesCount > 0) {
+			player.DoublesCount = 0;
+			player.JailTurnCounter = 0;
+			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Rolling);
+		}
+		else {
+			// Change to Action Phase so player can handle its properties etc.
+			if (Networking.IsHost) {
+				player.JailTurnCounter++;
+			}
+
+			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
+		}
+
+		// 4 means the next turn would be the fourth turn in jail
+		if (player.JailTurnCounter == 4) {
+			// Force player to use card or pay caution
+			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Jail);
+		}
 	}
 
 
