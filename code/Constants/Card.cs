@@ -3,7 +3,7 @@ using System;
 namespace Sandbox.Constants;
 
 public delegate void CardAction(Player player, MovementManager movementManager = null, TurnManager turnManager = null,
-                                Dictionary<Card, bool> blockedCards = null,
+                                Dictionary<int, bool> blockedCards = null,
                                 IngameStateManager ingameStateManager = null, Card card = null);
 
 [Serializable]

@@ -203,8 +203,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				                                             pair.Key.Contains("JailFree") &&
 				                                             pair.Value == player.SteamId).Key;
 			player.JailTurnCounter = 0;
+
 			IngameStateManager.OwnedFields[ownedJailFreeCard] = 0;
-			CardActionManager.RemoveBlockedCard(null);
+			CardActionManager.RemoveBlockedCard(ownedJailFreeCard.Contains("chance") ? 9 : 5);
 		}
 
 		TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Rolling);
@@ -331,7 +332,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 
 	private Player GetPlayerFromEvent(ulong playerId) {
-		return Lobby.Players.Find(player => player.SteamId == playerId);
+		Log.Info(playerId);
+		Log.Info(Lobby.Players.Count);
+		var player = Lobby.Players.Find(player => player.SteamId == playerId);
+		Log.Info(player);
+		return player;
 	}
 
 	private GameLocation GetLocationFromPropertyIndex(int propertyIndex) {

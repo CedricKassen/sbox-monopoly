@@ -71,37 +71,37 @@ public static class Cards {
 	};
 
 	private static void AdvanceToGo(Player player, MovementManager move, TurnManager turnManager,
-	                                Dictionary<Card, bool> blocked = null,
+	                                Dictionary<int, bool> blocked = null,
 	                                IngameStateManager stateManager = null, Card card = null) {
 		CardActionHelper.MoveTo(40, player, move);
 	}
 
 	private static void AdvanceToBoardwalk(Player player, MovementManager move, TurnManager turnManager,
-	                                       Dictionary<Card, bool> blocked = null,
+	                                       Dictionary<int, bool> blocked = null,
 	                                       IngameStateManager stateManager = null, Card card = null) {
 		CardActionHelper.MoveTo(39, player, move);
 	}
 
 	private static void AdvanceToReadingRailroad(Player player, MovementManager move, TurnManager turnManager,
-	                                             Dictionary<Card, bool> blocked = null,
+	                                             Dictionary<int, bool> blocked = null,
 	                                             IngameStateManager stateManager = null, Card card = null) {
 		CardActionHelper.MoveTo(5, player, move);
 	}
 
 	private static void AdvanceToIllinoisAvenue(Player player, MovementManager move, TurnManager turnManager,
-	                                            Dictionary<Card, bool> blocked = null,
+	                                            Dictionary<int, bool> blocked = null,
 	                                            IngameStateManager stateManager = null, Card card = null) {
 		CardActionHelper.MoveTo(24, player, move);
 	}
 
 	private static void AdvanceToStCharlesPlace(Player player, MovementManager move, TurnManager turnManager,
-	                                            Dictionary<Card, bool> blocked = null,
+	                                            Dictionary<int, bool> blocked = null,
 	                                            IngameStateManager stateManager = null, Card card = null) {
 		CardActionHelper.MoveTo(11, player, move);
 	}
 
 	private static void MoveToNextLine(Player player, MovementManager move, TurnManager turnManager,
-	                                   Dictionary<Card, bool> blocked = null,
+	                                   Dictionary<int, bool> blocked = null,
 	                                   IngameStateManager stateManager = null, Card card = null) {
 		var targetLocation = CardActionHelper.FindNearestLine(player.CurrentField);
 		CardActionHelper.MoveTo(targetLocation, player, move);
@@ -109,7 +109,7 @@ public static class Cards {
 	}
 
 	private static void MoveToNextUtility(Player player, MovementManager move, TurnManager turnManager,
-	                                      Dictionary<Card, bool> blocked = null,
+	                                      Dictionary<int, bool> blocked = null,
 	                                      IngameStateManager stateManager = null, Card card = null) {
 		var targetLocation = player.CurrentField is < 12 or > 28 ? 12 : 28;
 		CardActionHelper.MoveTo(targetLocation, player, move);
@@ -117,114 +117,115 @@ public static class Cards {
 	}
 
 	private static void DoctorsFee(Player player, MovementManager move, TurnManager turnManager,
-	                               Dictionary<Card, bool> blocked = null,
+	                               Dictionary<int, bool> blocked = null,
 	                               IngameStateManager stateManager = null, Card card = null) {
 		player.Money -= 50;
 	}
 
 	private static void BankError(Player player, MovementManager move, TurnManager turnManager,
-	                              Dictionary<Card, bool> blocked = null,
+	                              Dictionary<int, bool> blocked = null,
 	                              IngameStateManager stateManager = null, Card card = null) {
 		player.Money += 200;
 	}
 
 	private static void GetFifty(Player player, MovementManager move, TurnManager turnManager,
-	                             Dictionary<Card, bool> blocked = null,
+	                             Dictionary<int, bool> blocked = null,
 	                             IngameStateManager stateManager = null, Card card = null) {
 		player.Money += 50;
 	}
 
 	private static void GetOneHundred(Player player, MovementManager move, TurnManager turnManager,
-	                                  Dictionary<Card, bool> blocked = null,
+	                                  Dictionary<int, bool> blocked = null,
 	                                  IngameStateManager stateManager = null, Card card = null) {
 		player.Money += 100;
 	}
 
 	private static void SpeedFine(Player player, MovementManager move, TurnManager turnManager,
-	                              Dictionary<Card, bool> blocked = null,
+	                              Dictionary<int, bool> blocked = null,
 	                              IngameStateManager stateManager = null, Card card = null) {
 		player.Money -= 15;
 	}
 
 	private static void Birthday(Player player, MovementManager move, TurnManager turnManager,
-	                             Dictionary<Card, bool> blocked = null,
+	                             Dictionary<int, bool> blocked = null,
 	                             IngameStateManager stateManager = null, Card card = null) {
 		CardActionHelper.CollectFromAll(player, 10);
 	}
 
 	private static void LoanMatures(Player player, MovementManager move, TurnManager turnManager,
-	                                Dictionary<Card, bool> blocked = null,
+	                                Dictionary<int, bool> blocked = null,
 	                                IngameStateManager stateManager = null, Card card = null) {
 		player.Money += 150;
 	}
 
 	private static void HospitalFee(Player player, MovementManager move, TurnManager turnManager,
-	                                Dictionary<Card, bool> blocked = null,
+	                                Dictionary<int, bool> blocked = null,
 	                                IngameStateManager stateManager = null, Card card = null) {
 		player.Money -= 100;
 	}
 
 	private static void GetConsultancyFee(Player player, MovementManager move, TurnManager turnManager,
-	                                      Dictionary<Card, bool> blocked = null,
+	                                      Dictionary<int, bool> blocked = null,
 	                                      IngameStateManager stateManager = null, Card card = null) {
 		player.Money += 25;
 	}
 
 	private static void Beauty(Player player, MovementManager move, TurnManager turnManager,
-	                           Dictionary<Card, bool> blocked = null,
+	                           Dictionary<int, bool> blocked = null,
 	                           IngameStateManager stateManager = null, Card card = null) {
 		player.Money += 10;
 	}
 
 	private static void IncomingTax(Player player, MovementManager move, TurnManager turnManager,
-	                                Dictionary<Card, bool> blocked = null,
+	                                Dictionary<int, bool> blocked = null,
 	                                IngameStateManager stateManager = null, Card card = null) {
 		player.Money += 20;
 	}
 
 	private static void Chairman(Player player, MovementManager move, TurnManager turnManager,
-	                             Dictionary<Card, bool> blocked = null,
+	                             Dictionary<int, bool> blocked = null,
 	                             IngameStateManager stateManager = null, Card card = null) {
 		CardActionHelper.CollectFromAll(player, 50);
 	}
 
 	private static void RenovateHouses(Player player, MovementManager move, TurnManager turnManager,
-	                                   Dictionary<Card, bool> blocked = null,
+	                                   Dictionary<int, bool> blocked = null,
 	                                   IngameStateManager stateManager = null, Card card = null) {
 		CardActionHelper.PayForHouses(player, 25, 100, move, stateManager);
 	}
 
 	private static void RenovateStreet(Player player, MovementManager move, TurnManager turnManager,
-	                                   Dictionary<Card, bool> blocked = null,
+	                                   Dictionary<int, bool> blocked = null,
 	                                   IngameStateManager stateManager = null, Card card = null) {
 		CardActionHelper.PayForHouses(player, 40, 115, move, stateManager);
 	}
 
 
 	private static void BackwardsThree(Player player, MovementManager move, TurnManager turnManager,
-	                                   Dictionary<Card, bool> blocked = null,
+	                                   Dictionary<int, bool> blocked = null,
 	                                   IngameStateManager stateManager = null, Card card = null) {
 		move.StartMovement(player, -3);
 	}
 
 	private static void GoToJail(Player player, MovementManager move, TurnManager turnManager,
-	                             Dictionary<Card, bool> blocked = null,
+	                             Dictionary<int, bool> blocked = null,
 	                             IngameStateManager stateManager = null, Card card = null) {
 		turnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Police, player.SteamId);
 	}
 
 
 	private static void GetOutOfJailCardChance(Player player, MovementManager move, TurnManager turnManager,
-	                                           Dictionary<Card, bool> blocked = null,
+	                                           Dictionary<int, bool> blocked = null,
 	                                           IngameStateManager stateManager = null, Card card = null) {
-		blocked.Add(card, true);
+		Log.Info(card.ActionId);
+		blocked.Add(card.ActionId, true);
 		stateManager.OwnedFields["chanceJailFree"] = player.SteamId;
 	}
 
 	private static void GetOutOfJailCardCommunity(Player player, MovementManager move, TurnManager turnManager,
-	                                              Dictionary<Card, bool> blocked = null,
+	                                              Dictionary<int, bool> blocked = null,
 	                                              IngameStateManager stateManager = null, Card card = null) {
-		blocked.Add(card, true);
+		blocked.Add(card.ActionId, true);
 		stateManager.OwnedFields["communityJailFree"] = player.SteamId;
 	}
 }

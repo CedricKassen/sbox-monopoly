@@ -1,10 +1,11 @@
 using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
 
 public sealed class CardActionManager : Component {
-	[Property] private readonly Dictionary<Card, bool> BlockedCards = new();
+	[Property] private readonly Dictionary<int, bool> BlockedCards = new();
 
 	[HostSync] private NetList<int> ChanceCardsOrder { get; set; }
 
@@ -19,6 +20,10 @@ public sealed class CardActionManager : Component {
 	[Property] public IngameStateManager IngameStateManager { get; set; }
 
 	[Property] public TurnManager TurnManager { get; set; }
+
+	public void RemoveBlockedCard(int actionId) {
+		BlockedCards.Remove(actionId);
+	}
 
 	protected override Task OnLoad() {
 		RefillChangeCards();
@@ -44,10 +49,9 @@ public sealed class CardActionManager : Component {
 	[Broadcast]
 	private void FillCommunityCards() {
 		CommunityCards = new();
-		Log.Info("Test");
 		foreach (var index in CommunityCardsOrder) {
 			Card card = Cards.CommunityChest_Standard[index];
-			if (BlockedCards.ContainsKey(card)) {
+			if (BlockedCards.ContainsKey(card.ActionId)) {
 				continue;
 			}
 
@@ -60,7 +64,7 @@ public sealed class CardActionManager : Component {
 		ChanceCards = new();
 		foreach (var index in ChanceCardsOrder) {
 			Card card = Cards.Chance_Standard[index];
-			if (BlockedCards.ContainsKey(card)) {
+			if (BlockedCards.ContainsKey(card.ActionId)) {
 				continue;
 			}
 
@@ -133,8 +137,14 @@ public sealed class CardActionManager : Component {
 
 		IngameStateManager.Data = card;
 		IngameStateManager.State = IngameUI.IngameUiStates.Chance;
-		
-		card.Action(player, MovementManager, TurnManager, BlockedCards, IngameStateManager, card);
+
+
+		card.Action(player,
+			MovementManager,
+			TurnManager,
+			BlockedCards,
+			IngameStateManager,
+			card);
 
 		if (ChanceCards.Count == 0) {
 			RefillChangeCards();
@@ -147,8 +157,8 @@ public sealed class CardActionManager : Component {
 
 		Log.Info("Drew " + card.Text);
 
+
 		IngameStateManager.Data = card;
-		Log.Info(IngameStateManager.State);
 		IngameStateManager.State = IngameUI.IngameUiStates.Community_Chest;
 
 		card.Action(player, MovementManager, TurnManager, BlockedCards, IngameStateManager, card);
@@ -161,9 +171,7 @@ public sealed class CardActionManager : Component {
 
 	private void DisplayPropertyCard(Player player, GameLocation location) {
 		// IngameStateManager.State = IngameUI.IngameUiStates.Buying;
-		Log.Info("UIState : " + player.localUiState);
 		player.localUiState = IngameUI.LocalUIStates.Buying;
-		Log.Info("UIState : " + player.localUiState);
 		IngameStateManager.Data = location;
 	}
 }
