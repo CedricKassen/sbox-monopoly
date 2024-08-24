@@ -5,6 +5,19 @@
   pointer-events: all;
 }
 
+.ownership-dot {
+  &.big {
+    height: 40px;
+    width: 40px;
+  }
+
+  height: 25px;
+  width: 25px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: $white;
+}
+
 
 .overview {
   display: flex;

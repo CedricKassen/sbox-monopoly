@@ -20,5 +20,3 @@ code/Properties/*
 *.vpk
 *launchSettings.json
 *.sln
-
-*idea

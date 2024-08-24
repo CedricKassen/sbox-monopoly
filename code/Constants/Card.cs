@@ -6,6 +6,7 @@ public delegate void CardAction(Player player, MovementManager movementManager =
                                 Dictionary<Card, bool> blockedCards = null,
                                 IngameStateManager ingameStateManager = null, Card card = null);
 
+[Serializable]
 public class Card {
 	public Card(int actionId, CardAction action, string text, string imageUrl = null) {
 		ActionId = actionId;
@@ -29,12 +30,53 @@ public class Card {
 public static class CardActionHelper {
 	public static void Shuffle<T>(IList<T> list) {
 		var rng = new Random();
-		var n = list.Count;
+		var n = list.Count();
 		while (n > 1) {
 			n--;
 			var k = rng.Next(n + 1);
 			(list[k], list[n]) = (list[n], list[k]);
 		}
+	}
+
+	/*
+	 * Creates an new NetList from normal list that are not matching the predicate
+	 */
+	public static NetList<T> CreateNetList<T>(List<T> list) {
+		NetList<T> newList = new();
+		foreach (var obj in list) {
+			newList.Add(obj);
+		}
+
+		return newList;
+	}
+
+	public static void PayForHouses(Player player, int housePrice, int hotelPrice, MovementManager move,
+	                                IngameStateManager stateManager) {
+		var amount = 0;
+
+		foreach (var locationObj in move.LocationContainer.Children) {
+			var location = locationObj.Components.Get<GameLocation>();
+
+
+			// Check if location can be owned and is owned by player 
+			if (location.Name == null) {
+				continue;
+			}
+
+			var ownerId = stateManager.OwnedFields[locationObj.Name];
+			Log.Info(ownerId);
+			if (ownerId != player.SteamId) {
+				continue;
+			}
+
+			Log.Info(location.Houses);
+			Log.Info(amount);
+			amount += location.Houses != 5 ? location.Houses * housePrice : hotelPrice;
+		}
+
+		player.Money -= amount;
+
+		Log.Info(player.Name + " payed " + amount + " for houses and hotels!");
 	}
 
 	public static int CalculateFieldsToTravel(Player player, int targetField) {

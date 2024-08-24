@@ -1,0 +1,49 @@
+@namespace Monopoly.UI.Screens.GameMenu
+@inherits Sandbox.UI.Panel
+@using Sandbox.UI
+@using System
+@using EnumExtensions.Settings
+@implements Sandbox.UI.INavigatorPage
+
+
+<root class="menu">
+	<h1 class="title"> MY_POOL_NO </h1>
+	<h2 class="title"> Settings </h2>
+	
+	<div class="settingsContainer">
+		<div class="row">
+        <label>Master Volume:</label>
+            <SliderControl Value:bind="@UserSettingsSystem.Current.MasterVolume" Min=@(0) Max=@(100) Step=@(1) />
+        </div>
+        <div class="row">
+            <label>Music Volume:</label>
+            <SliderControl Value:bind="@UserSettingsSystem.Current.MusicVolume" Min=@(0) Max=@(100) Step=@(1) />
+        </div>
+        <div class="row">
+            <label>SFX Volume:</label>
+            <SliderControl Value:bind="@UserSettingsSystem.Current.SFXVolume" Min=@(0) Max=@(100) Step=@(1) />
+        </div>
+        <div class="row">
+            <label>UI Volume:</label>
+            <SliderControl Value:bind="@UserSettingsSystem.Current.UIVolume" Min=@(0) Max=@(100) Step=@(1) />
+        </div>
+	</div>
+
+	<div class="hub-buttons">
+		<a href="/">
+			<button class="back icon">
+				keyboard_return
+			</button>
+		</a>
+		
+		<button class="refetch icon" onclick="@UserSettingsSystem.Save">
+			save
+        </button>
+	</div>
+
+	<div></div>
+</root>
+
+@code
+{
+}
