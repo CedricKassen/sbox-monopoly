@@ -272,7 +272,7 @@
 						@if (_waitingForTrading) {
 							<div class="column" style="gap: 64px">
 								<h3> Waiting for other player... </h3>
-								<button onclick=@CloseTradingModal style="width: auto; justify-content: center"> Abort </button>
+								<button onclick=@AbortTrading style="width: auto; justify-content: center"> Abort </button>
 							</div>
 						}
 					</div>
@@ -337,6 +337,7 @@
 	private List<GameLocation> _locations { get; } = new(Game.ActiveScene.GetAllComponents<GameLocation>());
 
 	private bool _waitingForTrading;
+	private LocalUIStates _localUiStateCache = LocalUIStates.None;
 
 	private bool _showRoll;
 
@@ -380,7 +381,9 @@
 	}
 
 	private void ChangeLocalUIState(LocalUIStates newState) {
-		if (!_turnManager.CurrentPhase.Equals(TurnManager.Phase.PlayerAction)) {
+		var AllowedPhases = new List<TurnManager.Phase>() { TurnManager.Phase.PlayerAction, TurnManager.Phase.InAction };
+
+		if (!AllowedPhases.Contains(_turnManager.CurrentPhase)) {
 			// Disabled sound
 			return;
 		}
@@ -392,12 +395,17 @@
 
 
 		// Btn click sound
+		if (_player.localUiState != LocalUIStates.Trade) {
+			_localUiStateCache = _player.localUiState;
+		}
+
 		_player.localUiState = newState;
 	}
 
 	private bool SetLocalTradeState() {
 		_waitingForTrading = false;
 		if (_tradeState.TradingPartner == null) {
+			_localUiStateCache = _player.localUiState;
 			_player.localUiState = LocalUIStates.Trade;
 		}
 		else {
@@ -478,8 +486,8 @@
 	}
 
 	private void CloseLocalModal() {
-		_player.localUiState = LocalUIStates.None;
-		_turnManager.ChangePhase(_player.SteamId, TurnManager.Phase.PlayerAction);
+		_player.localUiState = _localUiStateCache;
+		_localUiStateCache = LocalUIStates.None;
 	}
 
 	private void CloseGlobalModal(IngameUiStates state = IngameUiStates.None) {
@@ -527,9 +535,8 @@
 	}
 
 	private void CloseTradingModal() {
-		_turnManager.EmitTradingDeniedEvent((ulong)Game.SteamId);
+		CloseLocalModal();
 
-		_player.localUiState = LocalUIStates.None;
 		_tradeState.TradingCreator = null;
 		_tradeState.TradingPartner = null;
 		_tradeState.TradingOfferAmount = 0;
@@ -540,6 +547,11 @@
 			_tradeState.OfferTradeFields[key] = false;
 			_tradeState.RequestTradeFields[key] = false;
 		}
+	}
+
+	private void AbortTrading() {
+		_turnManager.EmitTradingDeniedEvent((ulong)Game.SteamId);
+		CloseTradingModal();
 	}
 
 	private void SubmitTrading() {
