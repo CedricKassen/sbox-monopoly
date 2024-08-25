@@ -524,6 +524,8 @@
 	}
 
 	private void CloseTradingModal() {
+		_turnManager.EmitTradingDeniedEvent((ulong)Game.SteamId);
+
 		_player.localUiState = LocalUIStates.None;
 		_tradeState.TradingCreator = null;
 		_tradeState.TradingPartner = null;
@@ -567,7 +569,9 @@
 				}
 			}
 			else {
-				amount += 50;
+				if (value) {
+					amount += 50;
+				}
 			}
 		}
 

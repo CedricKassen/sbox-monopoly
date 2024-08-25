@@ -148,10 +148,17 @@
 	}
 
 	private void ToggleField(string fieldName) {
-		var currentLocation = _gameLocations.First(o => o.Name == fieldName).Components.Get<GameLocation>();
+		if (!fieldName.Contains("JailFree")) {
+			var currentLocation = _gameLocations.First(o => o.Name == fieldName).Components.Get<GameLocation>();
 
-		if (Owned[fieldName] == SteamId && currentLocation.Houses == 0) {
-			TradeFields[fieldName] = !TradeFields[fieldName];
+			if (Owned[fieldName] == SteamId && currentLocation.Houses == 0) {
+				TradeFields[fieldName] = !TradeFields[fieldName];
+			}
+		}
+		else {
+			if (Owned[fieldName] == SteamId) {
+				TradeFields[fieldName] = !TradeFields[fieldName];
+			}
 		}
 	}
 
