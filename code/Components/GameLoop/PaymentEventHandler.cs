@@ -1,4 +1,5 @@
-﻿using Sandbox.Events;
+﻿using System;
+using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 
 namespace Sandbox.Components.GameLoop;
@@ -43,10 +44,18 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 			return;
 		}
 
+		if (eventArgs.PlayerId == 0) {
+			throw new Exception("PlayerPaymentEvent was thrown without a PlayerId");
+		}
+
+		if (eventArgs.Recipient == 0) {
+			throw new Exception("PlayerPaymentEvent was thrown without a Recipient");
+		}
+
 		Player sender = GetPlayerFromId(eventArgs.PlayerId);
 		Player recipient = GetPlayerFromId(eventArgs.Recipient);
 
-		bool senderIsBank = sender == null;
+		bool senderIsBank = eventArgs.PlayerId == 2;
 		bool recipientIsBank = recipient == null;
 		bool recipientIsFreeParking = eventArgs.PlayerId == 1;
 
