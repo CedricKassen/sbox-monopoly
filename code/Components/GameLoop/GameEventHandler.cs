@@ -9,35 +9,21 @@ namespace Sandbox.Components.GameLoop;
 
 public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGameEventHandler<MovementDoneEvent>,
                                 IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>,
-                                IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<PlayerPaymentEvent>,
+                                IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<EventCardClosedEvent>,
                                 IGameEventHandler<TurnFinishedEvent>, IGameEventHandler<PropertyMortgagedEvent>,
                                 IGameEventHandler<TradingRequestedEvent>, IGameEventHandler<TradingAcceptedEvent>,
                                 IGameEventHandler<TradingDeniedEvent>, IGameEventHandler<PropertyMortgagePayedEvent>,
                                 IGameEventHandler<BuildHouseEvent>, IGameEventHandler<DestroyHouseEvent>,
                                 IGameEventHandler<GoToJailEvent>, IGameEventHandler<LandOnJailEvent>,
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
-                                IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
-                                IGameEventHandler<EventCardClosedEvent> {
-	[Property]
-	public GameObject LocationContainer { get; set; }
-
-	[Property]
-	public Lobby Lobby { get; set; }
-
-	[Property]
-	public MovementManager MovementManager { get; set; }
-
-	[Property]
-	public CardActionManager CardActionManager { get; set; }
-
-	[Property]
-	public IngameStateManager IngameStateManager { get; set; }
-
-	[Property]
-	public TurnManager TurnManager { get; set; }
-
-	[Property]
-	public TradeState TradeState { get; set; }
+                                IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent> {
+	[Property] public GameObject LocationContainer { get; set; }
+	[Property] public Lobby Lobby { get; set; }
+	[Property] public MovementManager MovementManager { get; set; }
+	[Property] public CardActionManager CardActionManager { get; set; }
+	[Property] public IngameStateManager IngameStateManager { get; set; }
+	[Property] public TurnManager TurnManager { get; set; }
+	[Property] public TradeState TradeState { get; set; }
 
 	private List<Dice> _dice = new();
 
@@ -187,7 +173,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
 		if (Networking.IsHost) {
-			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+			GetPlayerFromEvent(eventArgs.PlayerId).Money -= eventArgs.Amount;
 			GetPlayerFromEvent(eventArgs.Recipient).Money += eventArgs.Amount;
 		}
 	}
@@ -276,7 +262,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		IngameStateManager.State = IngameUI.IngameUiStates.Auction;
 
 		foreach (var player in Lobby.Players) {
-			IngameStateManager.AuctionBiddings[player.SteamId] = 10;
+			IngameStateManager.AuctionBiddings[player.SteamId] = 0;
 		}
 	}
 
@@ -296,13 +282,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
 		var price = (int)Math.Ceiling(property.Price / 2 * 1.1);
 
-		if (player.Money > price && property.Mortgaged) {
-			if (Networking.IsHost) {
-				player.Money -= price;
-			}
-
-			property.Mortgaged = false;
+		if (Networking.IsHost && player.Money > price && property.Mortgaged) {
+			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, price));
 		}
+
+		property.Mortgaged = false;
 	}
 
 	public void OnGameEvent(RolledEvent eventArgs) {

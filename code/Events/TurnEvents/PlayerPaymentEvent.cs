@@ -1,6 +1,5 @@
-﻿namespace Sandbox.Events.TurnEvents;
+﻿using System.Net.Mail;
 
-public record PlayerPaymentEvent : BaseEvent {
-    public int Amount { get; init; }
-    public ulong Recipient { get; init; }
-};
+namespace Sandbox.Events.TurnEvents;
+
+public record PlayerPaymentEvent(ulong PlayerId, ulong Recipient, int Amount) : IGameEvent;

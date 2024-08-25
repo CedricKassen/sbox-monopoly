@@ -1,4 +1,6 @@
 using System;
+using Sandbox.Events;
+using Sandbox.Events.TurnEvents;
 
 namespace Sandbox.Constants;
 
@@ -70,7 +72,7 @@ public static class CardActionHelper {
 			amount += location.Houses != 5 ? location.Houses * housePrice : hotelPrice;
 		}
 
-		player.Money -= amount;
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, 1, amount));
 
 		Log.Info(player.Name + " payed " + amount + " for houses and hotels!");
 	}
@@ -87,8 +89,14 @@ public static class CardActionHelper {
 
 	public static void CollectFromAll(Player player, int amount) {
 		List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>());
-		player.Money -= amount * allPlayers.Count;
-		allPlayers.ForEach(otherPlayer => otherPlayer.Money += amount);
+		allPlayers.ForEach(otherPlayer =>
+			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(otherPlayer.SteamId, player.SteamId, amount)));
+	}
+
+	public static void PayToAll(Player player, int amount) {
+		List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>());
+		allPlayers.ForEach(otherPlayer =>
+			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, otherPlayer.SteamId, amount)));
 	}
 
 	public static int FindNearestLine(int playerCurrentField) {
