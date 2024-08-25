@@ -5,7 +5,7 @@
   "Ident": "monopoly",
   "Schema": 1,
   "IncludeSourceFiles": false,
-  "Resources": "\nui/game_pieces/*",
+  "Resources": "\nui/game_pieces/*\nui/*",
   "PackageReferences": [],
   "EditorReferences": null,
   "IsWhitelistDisabled": false,

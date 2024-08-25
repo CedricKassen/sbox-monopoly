@@ -74,6 +74,8 @@ public sealed class MovementManager : Component {
 		// If movement is backwards, first iteration is used to rotate player so the starting field is the current field not the next one
 		CurrentField = Math.Mod(player.CurrentField + (Backwards ? 0 : 1), 40);
 
+
+		// -1 because the logic adds 1 to the current field to work
 		Log.Info(Player.Name + " move " + ToTravel + " Fields from " + (CurrentField - 1));
 	}
 
@@ -111,6 +113,8 @@ public sealed class MovementManager : Component {
 			}
 		}
 
+		Log.Info("Step complete. " + Player.Name + " now travelled " + Travelled + " from " + ToTravel);
+
 		if (ToTravel == Travelled || ToTravel == -Travelled) {
 			CurrentField = Math.Mod(CurrentField + (Backwards ? 1 : -1), 40);
 
@@ -123,15 +127,15 @@ public sealed class MovementManager : Component {
 			Player = null;
 			PlayerBody = null;
 
-			if (Networking.IsHost) {
-				EmitMovementDoneEvent(steamId);
-			}
+
+			EmitMovementDoneEvent(steamId);
 		}
 	}
 
-	[Broadcast]
+	[Broadcast(NetPermission.HostOnly)]
 	private void EmitMovementDoneEvent(ulong playerId) {
 		var currentLocation = LocationContainer.Children[CurrentField].Components.Get<GameLocation>();
+		Log.Info(playerId + " landed on " + currentLocation.Name);
 		Game.ActiveScene.Dispatch(new MovementDoneEvent { playerId = playerId, Location = currentLocation });
 	}
 }
