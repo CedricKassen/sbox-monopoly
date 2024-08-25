@@ -150,8 +150,7 @@
 			<Modal OnClose=@CloseLocalModal Name="Bank">
 				<Content>
 					<div class="table">
-						@foreach (var property in _stateManager.OwnedFields.ToArray().Where(pair => pair.Value == (ulong)Game.SteamId)) {
-							var curLocation = Game.ActiveScene.GetAllObjects(true).First(o => o.Name == property.Key).Components.Get<GameLocation>();
+						@foreach (var curLocation in _locations.FindAll(loc => CanMortgage(loc, (ulong) Game.SteamId))) {
 							<div class="row">
 								<div class="ownership-dot @(curLocation.Color.ToClass())"></div>
 								<p> @curLocation.Name </p>
@@ -532,6 +531,26 @@
 			               GameLocation gameLocation = parentChild.Components.Get<GameLocation>();
 			               return _stateManager.OwnedFields[parentChild.Name] == playerId && !gameLocation.Mortgaged;
 		               });
+	}
+	
+	private bool CanMortgage(GameLocation location, ulong playerId) {
+		GameLocation.PropertyType[] mortgageable = { GameLocation.PropertyType.Normal, GameLocation.PropertyType.Railroad, GameLocation.PropertyType.Utility };
+		
+		if (!mortgageable.Contains(location.Type) || _stateManager.OwnedFields[location.GameObject.Name] != playerId) {
+			return false;
+		}
+		//Log.Info("Owner " + _stateManager.OwnedFields[location.GameObject.Name]);
+
+		if (location.Type.Equals(GameLocation.PropertyType.Normal)) {
+			return location.GroupMembers
+			               .All(member => {
+				               var parentChild = location.GameObject.Parent.Children[member];
+				               GameLocation gameLocation = parentChild.Components.Get<GameLocation>();
+				               return gameLocation.Houses <= 0;
+			               });
+		}
+
+		return true;
 	}
 
 	private void DestroyHouse(int propertyIndex) {
