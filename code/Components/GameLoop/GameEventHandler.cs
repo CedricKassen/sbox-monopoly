@@ -31,9 +31,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.PlayerAction);
 		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex, true);
 
-		if (Networking.IsHost) {
-			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
-		}
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, eventArgs.Amount));
 
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
 	}
@@ -78,9 +76,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			}
 		}
 
-		if (Networking.IsHost) {
-			player.Money -= property.House_Cost;
-		}
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, 2, property.House_Cost));
 
 		property.Houses++;
 	}
@@ -196,7 +192,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 
 		if (Networking.IsHost) {
-			player.Money -= 50;
+			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, 50));
 			player.JailTurnCounter = 0;
 		}
 
@@ -245,7 +241,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var costs = eventArgs.FromAuction ? 0 : gameLocation.Price;
 
 		if (costs <= player.Money && Networking.IsHost) {
-			player.Money -= costs;
+			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, costs));
 			IngameStateManager.OwnedFields[location.Name] = eventArgs.playerId;
 		}
 	}
@@ -276,7 +272,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var price = (int)Math.Ceiling(property.Price / 2 * 1.1);
 
 		if (Networking.IsHost && player.Money > price && property.Mortgaged) {
-			player.Money -= price;
+			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, price));
 		}
 
 		property.Mortgaged = false;
@@ -411,13 +407,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			}
 		}
 
-		if (Networking.IsHost) {
-			TradeState.TradingCreator.Money -= TradeState.TradingOfferAmount;
-			TradeState.TradingCreator.Money += TradeState.TradingRequestAmount;
-
-			TradeState.TradingPartner.Money += TradeState.TradingOfferAmount;
-			TradeState.TradingPartner.Money -= TradeState.TradingRequestAmount;
-		}
+		
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(TradeState.TradingCreator.SteamId, TradeState.TradingPartner.SteamId, TradeState.TradingOfferAmount));
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(TradeState.TradingPartner.SteamId, TradeState.TradingCreator.SteamId, TradeState.TradingRequestAmount));
+		
 
 		ResetTrading();
 		CloseLocalUIForEveryPlayer();

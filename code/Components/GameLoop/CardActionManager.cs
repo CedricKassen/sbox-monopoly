@@ -5,6 +5,7 @@ using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
 using Sandbox.Events;
 using Sandbox.Events.GameStateEvents;
+using Sandbox.Events.TurnEvents;
 using Sandbox.VR;
 
 public sealed class CardActionManager : Component, IGameEventHandler<GameStartEvent> {
@@ -104,14 +105,11 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 				}
 				else if (location.EventId == "income_tax") {
 					var percentageTax = (int)Math.Ceiling(player.Money * 0.1);
-					player.Money -= percentageTax < 200 ? percentageTax : 200;
-					TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Tax,
-						player.SteamId);
+					var tax = percentageTax < 200 ? percentageTax : 200;
+					Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, 1, tax));
 				}
 				else if (location.EventId == "luxury_tax") {
-					player.Money -= 100;
-					TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Tax,
-						player.SteamId);
+					Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, 1, 100));
 				}
 				else if (location.EventId == "police") {
 					TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Police,
