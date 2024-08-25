@@ -54,12 +54,16 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 			BankBalance += eventArgs.Amount;
 		}
 		else {
-			payingPlayer.Money -= eventArgs.Amount;
+			// Paying player can be bank (id 1)
+			if (payingPlayer != null) {
+				payingPlayer.Money -= eventArgs.Amount;
+			}
+
 			recipient.Money += eventArgs.Amount;
 		}
 	}
 
 	private Player GetPlayerFromId(ulong playerId) {
-		return playerId == 0 ? null : Lobby.Players.Find(player => player.SteamId == playerId);
+		return playerId == 1 ? null : Lobby.Players.Find(player => player.SteamId == playerId);
 	}
 }
