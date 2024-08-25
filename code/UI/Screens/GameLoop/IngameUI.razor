@@ -174,7 +174,7 @@
 			<Modal OnClose=@CloseLocalModal Name="Building">
 				<Content>
 					<div class="table">
-						@foreach (var curLocation in _locations.FindAll(loc => OwnsAllFrom(loc, (ulong)Game.SteamId))) {
+						@foreach (var curLocation in _locations.FindAll(loc => CanBuildOn(loc, (ulong)Game.SteamId))) {
 							if (curLocation.Type.Equals(GameLocation.PropertyType.Normal)) {
 								<div class="row">
 									<div class="ownership-dot @(curLocation.Color.ToClass())"></div>
@@ -521,13 +521,17 @@
 		return _stateManager.OwnedFields["chanceJailFree"] == _player.SteamId || _stateManager.OwnedFields["communityJailFree"] == _player.SteamId;
 	}
 
-	private bool OwnsAllFrom(GameLocation location, ulong playerId) {
+	private bool CanBuildOn(GameLocation location, ulong playerId) {
 		if (!location.Type.Equals(GameLocation.PropertyType.Normal)) {
 			return false;
 		}
 
 		return location.GroupMembers
-		               .All(member => _stateManager.OwnedFields[location.GameObject.Parent.Children[member].Name] == playerId);
+		               .All(member => {
+			               var parentChild = location.GameObject.Parent.Children[member];
+			               GameLocation gameLocation = parentChild.Components.Get<GameLocation>();
+			               return _stateManager.OwnedFields[parentChild.Name] == playerId && !gameLocation.Mortgaged;
+		               });
 	}
 
 	private void DestroyHouse(int propertyIndex) {
