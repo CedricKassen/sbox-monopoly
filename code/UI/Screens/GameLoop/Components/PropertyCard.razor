@@ -2,36 +2,77 @@
 
 <root>
 	<div class="propertyCard">
-		<div>
-			<div class="title" style="background-color: @Color ">
-				<p style="font-size: 16px; font-weight: bolder; letter-spacing: 4px;"> TITLE DEED </p>
-				<p style="font-size: 22px; font-weight: bold; text-transform: uppercase"> @Name </p>
-			</div>
-			<p style="margin-top: 8px"> RENT $@Rent[0].</p>
-			<div>
-				<p>With 1 House</p>
-				<p>$@Rent[1].</p>
-			</div>
-			<div>
-				<p>With 2 Houses</p>
-				<p>$@Rent[2].</p>
-			</div>
-			<div>
-				<p>With 3 Houses</p>
-				<p>$@Rent[3].</p>
-			</div>
-			<div>
-				<p>With 4 Houses</p>
-				<p>$@Rent[4].</p>
-			</div>
-			<p> With HOTEL $@Rent[5].</p>
-			<p style="margin-top: 8px"> Mortgage Value $@(Rent[5] / 2).</p>
-			<p> Houses cost $@HousePrice. each</p>
-			<p> Hotels, $@HousePrice. plus 4 houses</p>
-			<p style="font-size: 14px; margin-top: 8px; padding: 0 5px">
-				If a players owns All the lots of any Color Group, the rent is Doubled on Unimproved lots in that group
-			</p>
-		</div>
+		@switch (Location.Type) {
+			case GameLocation.PropertyType.Normal:
+				<div>
+					<div class="title" style="background-color: @Color ">
+						<p style="font-size: 16px; font-weight: bolder; letter-spacing: 4px;"> TITLE DEED </p>
+						<p style="font-size: 22px; font-weight: bold; text-transform: uppercase"> @Location.Name </p>
+					</div>
+					<p style="margin-top: 8px"> RENT $@Location.Normal_Rent[0].</p>
+					<div>
+						<p>With 1 House</p>
+						<p>$@Location.Normal_Rent[1].</p>
+					</div>
+					<div>
+						<p>With 2 Houses</p>
+						<p>$@Location.Normal_Rent[2].</p>
+					</div>
+					<div>
+						<p>With 3 Houses</p>
+						<p>$@Location.Normal_Rent[3].</p>
+					</div>
+					<div>
+						<p>With 4 Houses</p>
+						<p>$@Location.Normal_Rent[4].</p>
+					</div>
+					<p> With HOTEL $@Location.Normal_Rent[5].</p>
+					<p style="margin-top: 8px"> Mortgage Value $@(Location.Price / 2).</p>
+					<p> Houses cost $@Location.House_Cost. each</p>
+					<p> Hotels, $@Location.House_Cost. plus 4 houses</p>
+					<p style="font-size: 14px; margin-top: 8px; padding: 0 5px">
+						If a players owns All the lots of any Color Group, the rent is Doubled on Unimproved lots in that group
+					</p>
+				</div>
+				break;
+			case GameLocation.PropertyType.Utility:
+				<div>
+					@if (Location.Name == "Water Works") {
+						<img src="https://clipart-library.com/data_images/260425.gif" style="width: 60%; aspect-ratio: 317 / 243; margin-top: 25px;"/>
+					}
+					else {
+						<img src="https://clipart-library.com/image_gallery/193843.gif" style="width: 35%; aspect-ratio: 235 / 293; margin-top: 25px;"/>
+					}
+					<p style="font-size: 22px; font-weight: bold; text-transform: uppercase; margin-top: 10px"> @Location.Name </p>
+					<p style="font-size: 20px; max-width: 85%; margin-top: 10px"> If one Utility is owned, rent is 4 times amount shown on dice. </p>
+					<p style="font-size: 20px; max-width: 85%; margin-top: 10px"> If both Utilities are owned, rent is 10 times amount shown on dice. </p>
+				</div>
+				break;
+
+			case GameLocation.PropertyType.Railroad:
+				<div>
+					<img src="https://www.sl-web.site/resources/objects/iconRailroad.png" style="width: 45%; aspect-ratio: 440 / 315; margin-top: 25px;"/>
+					<p style="font-size: 22px; font-weight: bold; text-transform: uppercase; margin-top: 20px"> @Location.Name </p>
+					<div class="railroad" style="margin-top: 25px">
+						<p>Rent</p>
+						<p style="font-weight: bold">$@Location.Railroad_Rent[0].</p>
+					</div>
+					<div class="railroad">
+						<p>If 2 railroads are owned</p>
+						<p style="font-weight: bold">$@Location.Railroad_Rent[1].</p>
+					</div>
+					<div class="railroad">
+						<p>If 3 railroads are owned</p>
+						<p style="font-weight: bold">$@Location.Railroad_Rent[2].</p>
+					</div>
+					<div class="railroad">
+						<p>If 4 railroads are owned</p>
+						<p style="font-weight: bold">$@Location.Railroad_Rent[3].</p>
+					</div>
+					<p style="margin-top: 30px; font-weight: bold"> Mortgage Value $@(Location.Price / 2).</p>
+				</div>
+				break;
+		}
 	</div>
 </root>
 
@@ -39,13 +80,7 @@
 	private string _color;
 
 	[Property]
-	public string Name { get; set; }
-
-	[Property]
-	public int[] Rent { get; set; }
-
-	[Property]
-	public int HousePrice { get; set; }
+	public GameLocation Location { get; set; }
 
 	[Property]
 	public string Color {
