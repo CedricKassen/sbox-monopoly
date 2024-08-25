@@ -5,6 +5,7 @@ using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
 using Sandbox.Events;
 using Sandbox.Events.GameStateEvents;
+using Sandbox.VR;
 
 public sealed class CardActionManager : Component, IGameEventHandler<GameStartEvent> {
 	[Property] public readonly Dictionary<int, bool> BlockedCards = new();
@@ -67,6 +68,10 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 		ChanceCards = new();
 		foreach (var index in ChanceCardsOrder) {
 			Card card = Cards.Chance_Standard[index];
+
+			Log.Info("\n");
+			Log.Info(card);
+			Log.Info(card.Action);
 
 			if (BlockedCards.ContainsKey(card.ActionId)) {
 				continue;
