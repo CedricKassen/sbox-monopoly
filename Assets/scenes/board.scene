@@ -382,7 +382,7 @@
                 8,
                 9
               ],
-              "House_Cost": 0,
+              "House_Cost": 50,
               "Houses": 0,
               "Mortgaged": false,
               "Name": "Vermont Ave.",
