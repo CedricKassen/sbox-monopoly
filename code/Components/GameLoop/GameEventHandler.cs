@@ -191,7 +191,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 
 		if (Networking.IsHost) {
-			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, 50));
+			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 1, 50));
 			player.JailTurnCounter = 0;
 		}
 
