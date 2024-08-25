@@ -1,10 +1,8 @@
 @namespace Monopoly.UI.Screens.GameLoop
 @inherits Sandbox.UI.Panel
 @using System
-@using System.Runtime.CompilerServices
 @using EnumExtensions
 @using Sandbox.Constants
-@using Sandbox.Events
 @using Sandbox.Events.TurnEvents
 @using Sandbox.Network
 @implements Sandbox.UI.INavigatorPage
@@ -280,6 +278,39 @@
 			</CustomModalBody>
 		</Modal>
 		break;
+	case LocalUIStates.NotEnoughFunds:
+		var data = _stateManager.Data as NotEnoughFundsEvent;
+		var recipient = GetPlayer(data.Recipient);
+
+		<Modal OnClose=@(() => CloseGlobalModal()) Name="Trading">
+			<CustomModalBody>
+				<div class="column notenoughfounds">
+					<h3 class="container"> You ran out of money! </h3>
+					<div class="container column" style="width: 600px">
+						<div style="width: 100%">
+							<img src=@($"avatar:{data.Recipient}") style="width: 120px; aspect-ratio: 1/1; border-radius: 8px"/>
+							<div style="flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; height: 120px;">
+								<h3> You owe @recipient.Name: </h3>
+								<h3 style="font-weight: bolder;"> $@(data.Debts). </h3>
+							</div>
+						</div>
+
+						<h3 style="width: 55%; white-space: pre-line; text-overflow: clip; text-align: center; margin-bottom: 32px">
+							Gather funds by trading, mortgaging or selling to the bank!
+						</h3>
+					</div>
+					<div style="width: 100%; gap: 16px">
+						<button style="flex-grow: 1; justify-content: center; align-items: center" class="giveup"> Give Up </button>
+
+						@if (_player.Money >= data.Debts) {
+							<button style="flex-grow: 1; justify-content: center; align-items: center" class="pay"> Pay </button>
+						}
+					</div>
+				</div>
+
+			</CustomModalBody>
+		</Modal>
+		break;
 }
 
 
@@ -328,6 +359,7 @@
 		Options,
 		Building,
 		Buying,
+		NotEnoughFunds,
 		None
 	}
 
@@ -377,6 +409,10 @@
 
 	private Player GetCurrentPlayer() {
 		return Lobby.Players[_turnManager.CurrentPlayerIndex];
+	}
+
+	private Player GetPlayer(ulong playerId) {
+		return Lobby.Players.First(p => p.SteamId == playerId);
 	}
 
 	private void ChangeGameUIState(IngameUiStates newState) {

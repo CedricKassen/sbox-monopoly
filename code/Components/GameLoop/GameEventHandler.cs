@@ -17,7 +17,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<GoToJailEvent>, IGameEventHandler<LandOnJailEvent>,
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
                                 IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
-                                IGameEventHandler<TurnActionDoneEvent> {
+                                IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
 	[Property] public Lobby Lobby { get; set; }
 	[Property] public MovementManager MovementManager { get; set; }
@@ -456,5 +456,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			TradeState.OfferTradeFields[key] = false;
 			TradeState.RequestTradeFields[key] = false;
 		}
+	}
+
+	public void OnGameEvent(NotEnoughFundsEvent eventArgs) {
+		GetPlayerFromEvent(eventArgs.PlayerId).localUiState = IngameUI.LocalUIStates.NotEnoughFunds;
+		IngameStateManager.Data = eventArgs;
 	}
 }

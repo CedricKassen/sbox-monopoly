@@ -101,6 +101,26 @@
   }
 }
 
+.notenoughfounds {
+  button {
+    &:nth-child(1) {
+      background-color: $red300;
+
+      &:hover {
+        background-color: $red200;
+      }
+    }
+
+    &:nth-child(2) {
+      background-color: $green300;
+
+      &:hover {
+        background-color: $green100;
+      }
+    }
+  }
+}
+
 PlayerCard {
   position: relative;
   background-color: $primary-background-color;
