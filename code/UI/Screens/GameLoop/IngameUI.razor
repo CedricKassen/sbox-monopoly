@@ -153,6 +153,7 @@
 						@foreach (var property in _stateManager.OwnedFields.ToArray().Where(pair => pair.Value == (ulong)Game.SteamId)) {
 							var curLocation = Game.ActiveScene.GetAllObjects(true).First(o => o.Name == property.Key).Components.Get<GameLocation>();
 							<div class="row">
+								<div class="ownership-dot @(curLocation.Color.ToClass())"></div>
 								<p> @curLocation.Name </p>
 								<p> Mortgage: $@(curLocation.Price / 2)</p>
 								<div>
@@ -174,7 +175,7 @@
 				<Content>
 					<div class="table">
 						@foreach (var curLocation in _locations.FindAll(loc => OwnsAllFrom(loc, (ulong)Game.SteamId))) {
-							@if (curLocation.Type.Equals(GameLocation.PropertyType.Normal)) {
+							if (curLocation.Type.Equals(GameLocation.PropertyType.Normal)) {
 								<div class="row">
 									<div class="ownership-dot @(curLocation.Color.ToClass())"></div>
 									<p> @curLocation.Name </p>
