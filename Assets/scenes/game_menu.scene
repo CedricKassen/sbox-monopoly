@@ -92,7 +92,7 @@
           "Reflections": false,
           "Repeat": true,
           "Scale": "50,50,50",
-          "SoundEvent": "sounds/menu_music.sound",
+          "SoundEvent": "sounds/main_menu.sound",
           "SoundOverride": true,
           "StopOnNew": false,
           "TargetMixer": {
