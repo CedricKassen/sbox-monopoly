@@ -197,7 +197,9 @@
 					<div style="flex-direction: column; gap: 16px; align-items: center">
 						<PropertyCard Location=@location Color=@location.Color.ToString()></PropertyCard>
 						<div style="gap: 12px">
-							<button onclick=@Buy style="padding: 2px 8px"> Buy </button>
+							@if (_player.Money >= location.Price) {
+								<button onclick=@Buy style="padding: 2px 8px"> Buy </button>
+							}
 							<button onclick=@Auction style="padding: 2px 8px"> Auction </button>
 						</div>
 					</div>
