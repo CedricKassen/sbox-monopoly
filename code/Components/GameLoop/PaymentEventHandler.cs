@@ -6,9 +6,14 @@ namespace Sandbox.Components.GameLoop;
 public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEvent>,
                                    IGameEventHandler<PayoutFreeParkingEvent>,
                                    IGameEventHandler<NotEnoughFundsEvent> {
-	[Property, HostSync] public int BankBalance { get; private set; }
-	[Property] public Lobby Lobby { get; set; }
-	[Property] public TurnManager TurnManager { get; set; }
+	[Property, HostSync]
+	public int BankBalance { get; private set; }
+
+	[Property]
+	public Lobby Lobby { get; set; }
+
+	[Property]
+	public TurnManager TurnManager { get; set; }
 
 	public void OnGameEvent(PayoutFreeParkingEvent eventArgs) {
 		Player recipient = GetPlayerFromId(eventArgs.Recipient);
@@ -38,28 +43,29 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 			return;
 		}
 
-		Player payingPlayer = GetPlayerFromId(eventArgs.PlayerId);
+		Player sender = GetPlayerFromId(eventArgs.PlayerId);
 		Player recipient = GetPlayerFromId(eventArgs.Recipient);
 
+		bool senderIsBank = sender == null;
+		bool recipientIsBank = recipient == null;
+		bool recipientIsFreeParking = eventArgs.PlayerId == 1;
 
-		if (payingPlayer.Money - eventArgs.Amount < 0) {
-			Game.ActiveScene.Dispatch(
-				new NotEnoughFundsEvent(payingPlayer.SteamId, recipient.SteamId, eventArgs.Amount));
-			return;
-		}
-
-
-		// Payment to band
-		if (recipient == null) {
-			BankBalance += eventArgs.Amount;
-		}
-		else {
-			// Paying player can be bank (id 1)
-			if (payingPlayer != null) {
-				payingPlayer.Money -= eventArgs.Amount;
+		if (!senderIsBank) {
+			if (sender.Money - eventArgs.Amount < 0) {
+				Game.ActiveScene.Dispatch(
+					new NotEnoughFundsEvent(sender.SteamId, eventArgs.Recipient, eventArgs.Amount));
+				return;
 			}
 
-			recipient.Money += eventArgs.Amount;
+			sender.Money -= eventArgs.Amount;
+		}
+
+		if (!recipientIsBank && !recipientIsFreeParking) {
+			recipient.Money += 1;
+		}
+
+		if (recipientIsFreeParking) {
+			BankBalance += eventArgs.Amount;
 		}
 	}
 
