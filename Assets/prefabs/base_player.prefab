@@ -9,13 +9,40 @@
         "__type": "Player",
         "__guid": "320bb37f-1eae-4cdd-b08b-d865230c02a1",
         "CurrentField": 0,
+        "DoublesCount": 0,
+        "JailTurnCounter": 0,
         "LastDiceCount": 0,
         "localUiState": "None",
         "Money": 1500,
         "SteamId": 0
       }
     ],
-    "Children": [],
+    "Children": [
+      {
+        "__guid": "7895f428-51e9-4296-9f6c-c6ec9e2973ff",
+        "Flags": 0,
+        "Name": "World",
+        "Position": "0,0,21.70095",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.WorldPanel",
+            "__guid": "fde9b2e3-2711-4bae-b73a-1baca88457e7",
+            "HorizontalAlign": "Center",
+            "InteractionRange": 1000,
+            "LookAtCamera": true,
+            "PanelSize": "256,256",
+            "RenderScale": 1,
+            "VerticalAlign": "Center"
+          },
+          {
+            "__type": "PlayerWorldIcon",
+            "__guid": "1f98c608-c523-42a8-82bc-960e4f574c54",
+            "MyStringValue": "Hello World!"
+          }
+        ]
+      }
+    ],
     "__variables": []
   },
   "ShowInMenu": false,
