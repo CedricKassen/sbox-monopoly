@@ -90,6 +90,15 @@
       transform: rotate(-45deg) translate(-6px, 54px);
     }
   }
+
+  .disabled {
+    filter: saturate(40%) brightness(40%);
+    background-color: #00000000;
+
+    &:hover {
+      background-color: #00000000;
+    }
+  }
 }
 
 PlayerCard {

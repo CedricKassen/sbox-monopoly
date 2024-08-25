@@ -19,12 +19,12 @@
 
 <div id="mainPanel">
 	<div class="autogrow"></div>
-	<button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Bank))"> 🏦 </button>
-	<button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Trade))"> 💸 </button>
+	<button class="secondaryButton @(!CanOpenUI() ? "disabled" : "")" onclick="@(() => ChangeLocalUIState(LocalUIStates.Bank))"> 🏦 </button>
+	<button class="secondaryButton @(!CanOpenUI() ? "disabled" : "")" onclick="@(() => ChangeLocalUIState(LocalUIStates.Trade))"> 💸 </button>
 	<button class="mainButton @(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll">
 		GO
 	</button>
-	<button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Building))"> 🏠 </button>
+	<button class="secondaryButton @(!CanOpenUI() ? "disabled" : "")" onclick="@(() => ChangeLocalUIState(LocalUIStates.Building))"> 🏠 </button>
 	<div class="autogrow"></div>
 	<button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Options))"> ⚙️ </button>
 </div>
@@ -390,10 +390,7 @@
 	}
 
 	private void ChangeLocalUIState(LocalUIStates newState) {
-		var AllowedPhases = new List<TurnManager.Phase>() { TurnManager.Phase.PlayerAction, TurnManager.Phase.InAction };
-
-		if (!AllowedPhases.Contains(_turnManager.CurrentPhase)) {
-			// Disabled sound
+		if (!CanOpenUI()) {
 			return;
 		}
 
@@ -600,6 +597,15 @@
 
 	private void DenyTrade() {
 		_turnManager.EmitTradingDeniedEvent((ulong)Game.SteamId);
+	}
+
+	private bool CanOpenUI(LocalUIStates? state = null) {
+		var allowedPhases = new List<TurnManager.Phase>() { TurnManager.Phase.PlayerAction, TurnManager.Phase.InAction };
+
+		var isCurrentPlayer = Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId;
+		var isAllowedPhase = allowedPhases.Contains(_turnManager.CurrentPhase);
+
+		return isCurrentPlayer && isAllowedPhase || state == LocalUIStates.Options;
 	}
 
 	private int ComputeAmountFromDictionary(NetDictionary<string, bool> dictionary) {
