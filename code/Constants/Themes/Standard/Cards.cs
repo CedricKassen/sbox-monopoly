@@ -1,4 +1,7 @@
-﻿namespace Sandbox.Constants;
+﻿using Sandbox.Events;
+using Sandbox.Events.TurnEvents;
+
+namespace Sandbox.Constants;
 
 public static class Cards {
 	public static readonly List<Card> Chance_Standard = new() {
@@ -119,7 +122,7 @@ public static class Cards {
 	private static void DoctorsFee(Player player, MovementManager move, TurnManager turnManager,
 	                               Dictionary<int, bool> blocked = null,
 	                               IngameStateManager stateManager = null, Card card = null) {
-		player.Money -= 50;
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, 1, 50));
 	}
 
 	private static void BankError(Player player, MovementManager move, TurnManager turnManager,
@@ -143,7 +146,7 @@ public static class Cards {
 	private static void SpeedFine(Player player, MovementManager move, TurnManager turnManager,
 	                              Dictionary<int, bool> blocked = null,
 	                              IngameStateManager stateManager = null, Card card = null) {
-		player.Money -= 15;
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, 1, 15));
 	}
 
 	private static void Birthday(Player player, MovementManager move, TurnManager turnManager,
@@ -161,7 +164,7 @@ public static class Cards {
 	private static void HospitalFee(Player player, MovementManager move, TurnManager turnManager,
 	                                Dictionary<int, bool> blocked = null,
 	                                IngameStateManager stateManager = null, Card card = null) {
-		player.Money -= 100;
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, 1, 100));
 	}
 
 	private static void GetConsultancyFee(Player player, MovementManager move, TurnManager turnManager,
