@@ -1,12 +1,16 @@
-﻿using Sandbox.Events;
+﻿using Sandbox.Constants;
+using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
+using Sandbox.ModelEditor;
 
 public class TurnManager : Component {
 	public enum Phase {
 		Rolling,
 		RoundAction,
 		Auction,
-		PlayerAction
+		PlayerAction,
+		InAction,
+		Jail
 	}
 
 	public enum PlayerActionType {
@@ -17,22 +21,24 @@ public class TurnManager : Component {
 	public enum SpecialPropertyActionType {
 		CommunityChest,
 		Chance,
+		Police,
 		Jail,
 		Tax,
 		None
 	}
 
-	[Property]
-	public GameObject GameParentObject { get; set; }
+	[Property] public GameObject GameParentObject { get; set; }
 
-	[Property, HostSync]
-	public Phase CurrentPhase { get; set; }
+	[Property, HostSync] public Phase CurrentPhase { get; set; }
 
-	[Property]
-	public Lobby CurrentLobby { get; set; }
+	[Property] public Lobby CurrentLobby { get; set; }
+	[Property] public CardActionManager CardActionManager { get; set; }
 
-	[Property, HostSync]
-	public int CurrentPlayerIndex { get; set; }
+	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
+
+	public void EmitStartRollEvent() {
+		GameParentObject.Dispatch(new StartRollEvent());
+	}
 
 	[Broadcast]
 	public void EmitRolledEvent(ulong playerId, int dice1, int dice2) {
@@ -62,16 +68,19 @@ public class TurnManager : Component {
 		ChangePhase(playerId, Phase.PlayerAction);
 	}
 
-	[Broadcast]
+	[Broadcast(NetPermission.HostOnly)]
 	public void EmitSpecialPropertyActionEvent(SpecialPropertyActionType type, ulong playerId) {
 		GameParentObject.Dispatch(new SpecialPropertyActionEvent());
 
 		if (type == SpecialPropertyActionType.Jail) {
-			GameParentObject.Dispatch(new TurnFinishedEvent());
-			ChangePhase(playerId, Phase.Rolling);
+			GameParentObject.Dispatch(new LandOnJailEvent(playerId));
 		}
-
-		ChangePhase(playerId, Phase.PlayerAction);
+		else if (type == SpecialPropertyActionType.Police) {
+			GameParentObject.Dispatch(new GoToJailEvent(playerId));
+		}
+		else {
+			ChangePhase(playerId, Phase.PlayerAction);
+		}
 	}
 
 	[Broadcast]
@@ -81,7 +90,6 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void EmitTurnFinishedEvent(ulong playerId) {
-		ChangePhase(playerId, Phase.Rolling);
 		GameParentObject.Dispatch(new TurnFinishedEvent());
 	}
 
@@ -126,6 +134,14 @@ public class TurnManager : Component {
 	}
 
 	[Broadcast]
+	public void EmitEventCardClosedEvent(int cardId, ulong playerId, bool isChance) {
+		Card card = isChance
+			? CardActionManager.GetChanceCardFromActionId(cardId)
+			: CardActionManager.GetCommunityCardFromActionId(cardId);
+		GameParentObject.Dispatch(new EventCardClosedEvent(card, playerId));
+	}
+
+	[Broadcast]
 	public void ChangePhase(ulong playerId, Phase phase) {
 		var player = CurrentLobby.Players.Find(player => player.SteamId == playerId);
 
@@ -139,6 +155,16 @@ public class TurnManager : Component {
 		}
 
 		CurrentPhase = phase;
+	}
+
+	[Broadcast]
+	public void EmitPayJailFineEvent(ulong playerId) {
+		GameParentObject.Dispatch(new PayJailFineEvent(playerId));
+	}
+
+	[Broadcast]
+	public void EmitUseJailCardEvent(ulong playerId) {
+		GameParentObject.Dispatch(new UseJailCardEvent(playerId));
 	}
 
 	[Broadcast]
@@ -157,5 +183,10 @@ public class TurnManager : Component {
 	public void EmitTradingDeniedEvent(ulong PlayerId) {
 		GameParentObject.Dispatch(
 			new TradingDeniedEvent() { playerId = PlayerId });
+	}
+
+	[Broadcast]
+	public void EmitDebugEvent(int id) {
+		Game.ActiveScene.Dispatch(new DebugEvent(id));
 	}
 }

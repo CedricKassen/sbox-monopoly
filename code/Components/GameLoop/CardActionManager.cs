@@ -1,10 +1,13 @@
 using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
+using Sandbox.Events;
+using Sandbox.Events.GameStateEvents;
 
-public sealed class CardActionManager : Component {
-	[Property] private readonly Dictionary<Card, bool> BlockedCards = new();
+public sealed class CardActionManager : Component, IGameEventHandler<GameStartEvent> {
+	[Property] public readonly Dictionary<int, bool> BlockedCards = new();
 
 	[HostSync] private NetList<int> ChanceCardsOrder { get; set; }
 
@@ -20,12 +23,17 @@ public sealed class CardActionManager : Component {
 
 	[Property] public TurnManager TurnManager { get; set; }
 
-	protected override Task OnLoad() {
-		RefillChangeCards();
-		RefillCommunityCards();
-		return base.OnLoad();
+	public void RemoveBlockedCard(int actionId) {
+		BlockedCards.Remove(actionId);
 	}
 
+	public Card GetChanceCardFromActionId(int actionId) {
+		return Cards.Chance_Standard.FirstOrDefault(c => c.ActionId == actionId, null);
+	}
+
+	public Card GetCommunityCardFromActionId(int actionId) {
+		return Cards.CommunityChest_Standard.FirstOrDefault(c => c.ActionId == actionId, null);
+	}
 
 	private void RefillChangeCards() {
 		if (Networking.IsHost) {
@@ -44,10 +52,9 @@ public sealed class CardActionManager : Component {
 	[Broadcast]
 	private void FillCommunityCards() {
 		CommunityCards = new();
-		Log.Info("Test");
 		foreach (var index in CommunityCardsOrder) {
 			Card card = Cards.CommunityChest_Standard[index];
-			if (BlockedCards.ContainsKey(card)) {
+			if (BlockedCards.ContainsKey(card.ActionId)) {
 				continue;
 			}
 
@@ -60,7 +67,8 @@ public sealed class CardActionManager : Component {
 		ChanceCards = new();
 		foreach (var index in ChanceCardsOrder) {
 			Card card = Cards.Chance_Standard[index];
-			if (BlockedCards.ContainsKey(card)) {
+
+			if (BlockedCards.ContainsKey(card.ActionId)) {
 				continue;
 			}
 
@@ -80,8 +88,6 @@ public sealed class CardActionManager : Component {
 
 
 	public void DisplayCardFor(Player player, GameLocation location) {
-		Log.Info("Show " + location.EventId);
-
 		switch (location.Type) {
 			case GameLocation.PropertyType.Event:
 				if (location.EventId == "chance") {
@@ -105,8 +111,11 @@ public sealed class CardActionManager : Component {
 					TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Tax,
 						player.SteamId);
 				}
+				else if (location.EventId == "police") {
+					TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Police,
+						player.SteamId);
+				}
 				else if (location.EventId == "jail") {
-					CardActionHelper.GoToJail(player, MovementManager);
 					TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Jail,
 						player.SteamId);
 				}
@@ -131,7 +140,6 @@ public sealed class CardActionManager : Component {
 		IngameStateManager.Data = card;
 		IngameStateManager.State = IngameUI.IngameUiStates.Chance;
 
-		card.Action(player, MovementManager, BlockedCards, IngameStateManager, card);
 
 		if (ChanceCards.Count == 0) {
 			RefillChangeCards();
@@ -145,10 +153,7 @@ public sealed class CardActionManager : Component {
 		Log.Info("Drew " + card.Text);
 
 		IngameStateManager.Data = card;
-		Log.Info(IngameStateManager.State);
 		IngameStateManager.State = IngameUI.IngameUiStates.Community_Chest;
-
-		card.Action(player, MovementManager, BlockedCards, IngameStateManager, card);
 
 		if (CommunityCards.Count == 0) {
 			RefillCommunityCards();
@@ -158,9 +163,12 @@ public sealed class CardActionManager : Component {
 
 	private void DisplayPropertyCard(Player player, GameLocation location) {
 		// IngameStateManager.State = IngameUI.IngameUiStates.Buying;
-		Log.Info("UIState : " + player.localUiState);
 		player.localUiState = IngameUI.LocalUIStates.Buying;
-		Log.Info("UIState : " + player.localUiState);
 		IngameStateManager.Data = location;
+	}
+
+	public void OnGameEvent(GameStartEvent eventArgs) {
+		RefillChangeCards();
+		RefillCommunityCards();
 	}
 }

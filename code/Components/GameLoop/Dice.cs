@@ -7,6 +7,8 @@ public sealed class Dice : Component {
 
 	[Property] public TurnManager TurnManager { get; set; }
 
+	private TurnManager.Phase[] RollPhases = new[] { TurnManager.Phase.Rolling, TurnManager.Phase.Jail };
+
 	protected override void OnUpdate() {
 		if (Rigidbody.Velocity == 0) {
 			IsRolling = false;
@@ -14,10 +16,9 @@ public sealed class Dice : Component {
 	}
 
 	public void Roll() {
-		if (IsRolling || TurnManager.CurrentPhase != TurnManager.Phase.Rolling) {
+		if (IsRolling || !RollPhases.Any(phase => phase.Equals(TurnManager.CurrentPhase))) {
 			return;
 		}
-
 
 		IsRolling = true;
 		Rigidbody.Velocity += Vector3.Up * new Random().Next(400, 700);

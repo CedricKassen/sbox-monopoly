@@ -2,11 +2,10 @@ using System;
 
 namespace Sandbox.Constants;
 
-public delegate void CardAction(Player player, MovementManager movementManager = null,
-                                Dictionary<Card, bool> blockedCards = null,
+public delegate void CardAction(Player player, MovementManager movementManager = null, TurnManager turnManager = null,
+                                Dictionary<int, bool> blockedCards = null,
                                 IngameStateManager ingameStateManager = null, Card card = null);
 
-[Serializable]
 public class Card {
 	public Card(int actionId, CardAction action, string text, string imageUrl = null) {
 		ActionId = actionId;
@@ -23,7 +22,7 @@ public class Card {
 
 
 	public override string ToString() {
-		return Text;
+		return Text + "(" + ActionId + ")";
 	}
 }
 
@@ -64,13 +63,10 @@ public static class CardActionHelper {
 			}
 
 			var ownerId = stateManager.OwnedFields[locationObj.Name];
-			Log.Info(ownerId);
 			if (ownerId != player.SteamId) {
 				continue;
 			}
 
-			Log.Info(location.Houses);
-			Log.Info(amount);
 			amount += location.Houses != 5 ? location.Houses * housePrice : hotelPrice;
 		}
 
@@ -103,7 +99,6 @@ public static class CardActionHelper {
 	public static void GoToJail(Player player, MovementManager movementManager) {
 		var currentPos = player.CurrentField;
 
-		var fieldsToTravel = 0;
 		if (currentPos < 10) {
 			movementManager.StartMovement(player, CalculateFieldsToTravel(player, 10));
 		}

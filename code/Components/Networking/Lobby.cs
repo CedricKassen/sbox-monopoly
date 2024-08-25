@@ -1,5 +1,8 @@
+using System;
 using System.Threading.Tasks;
+using Sandbox.Components.GameLoop;
 using Sandbox.Events;
+using Sandbox.Events.GameStateEvents;
 using Sandbox.Events.LobbyEvents;
 using Sandbox.Network;
 using Sandbox.UI;
@@ -41,6 +44,8 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 
 	[Property] public Panel LobbyPanel { get; set; }
 
+	[Property] public GameObject DicePrefab { get; set; }
+
 	public void OnGameEvent(ChangePawnSelectionEvent eventArgs) {
 		// Only host should change this stuff
 		if (!Networking.IsHost) {
@@ -71,7 +76,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 
 		// If we own another pawn deselect the other pawn
 		var firstOrDefault = lobbySelectedPawns.FirstOrDefault(pair => pair.Value == callerSteamId);
-		if (!firstOrDefault.Equals(new KeyValuePair<PawnWrapper, ulong>())) {
+		if (!firstOrDefault.Equals(new KeyValuePair<int, ulong>())) {
 			lobbySelectedPawns[firstOrDefault.Key] = 0;
 		}
 
@@ -80,12 +85,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 
 
 	public void OnActive(Connection conn) {
-		if (Networking.IsHost) {
-			Log.Info($"Lobby created!");
-		}
-		else {
-			Log.Info($"Player '{conn.DisplayName}' joined!");
-		}
+		Log.Info(Networking.IsHost ? "Lobby created!" : $"Player '{conn.DisplayName}' joined!");
 
 
 		var playerObj = LobbyPlayer
@@ -136,6 +136,9 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 		if (Networking.IsHost) {
 			Players.ForEach(ply => ply.GameObject.Destroy());
 
+
+			var diceSpawned = false;
+
 			foreach (var pair in SelectedPawns) {
 				if (pair.Value == 0) {
 					continue;
@@ -155,7 +158,30 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 				player.Connection = conn;
 
 				playerObj.NetworkSpawn(conn);
+
+				if (!diceSpawned) {
+					GameObject parent = Game.ActiveScene.Children[1];
+
+					var dice1 = DicePrefab.Clone();
+					dice1.BreakFromPrefab();
+					dice1.NetworkSpawn(conn);
+					parent.Children[0].AddSibling(dice1, true);
+
+					var dice2 = DicePrefab.Clone();
+					dice2.BreakFromPrefab();
+					dice2.NetworkSpawn(conn);
+					parent.Children[0].AddSibling(dice2, true);
+
+					diceSpawned = true;
+				}
 			}
+
+			EmitStartGame();
 		}
+	}
+
+
+	public void EmitStartGame() {
+		Game.ActiveScene.Dispatch(new GameStartEvent());
 	}
 }

@@ -12,31 +12,24 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<PlayerPaymentEvent>,
                                 IGameEventHandler<TurnFinishedEvent>, IGameEventHandler<PropertyMortgagedEvent>,
                                 IGameEventHandler<TradingRequestedEvent>, IGameEventHandler<TradingAcceptedEvent>,
-                                IGameEventHandler<TradingDeniedEvent>,
-                                IGameEventHandler<PropertyMortgagePayedEvent>, IGameEventHandler<BuildHouseEvent>,
-                                IGameEventHandler<DestroyHouseEvent> {
-	[Property]
-	public GameObject LocationContainer { get; set; }
+                                IGameEventHandler<TradingDeniedEvent>, IGameEventHandler<PropertyMortgagePayedEvent>,
+                                IGameEventHandler<BuildHouseEvent>, IGameEventHandler<DestroyHouseEvent>,
+                                IGameEventHandler<GoToJailEvent>, IGameEventHandler<LandOnJailEvent>,
+                                IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
+                                IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
+                                IGameEventHandler<EventCardClosedEvent> {
+	[Property] public GameObject LocationContainer { get; set; }
+	[Property] public Lobby Lobby { get; set; }
+	[Property] public MovementManager MovementManager { get; set; }
+	[Property] public CardActionManager CardActionManager { get; set; }
+	[Property] public IngameStateManager IngameStateManager { get; set; }
+	[Property] public TurnManager TurnManager { get; set; }
+	[Property] public TradeState TradeState { get; set; }
 
-	[Property]
-	public Lobby Lobby { get; set; }
-
-	[Property]
-	public MovementManager MovementManager { get; set; }
-
-	[Property]
-	public CardActionManager CardActionManager { get; set; }
-
-	[Property]
-	public IngameStateManager IngameStateManager { get; set; }
-
-	[Property]
-	public TurnManager TurnManager { get; set; }
-
-	[Property]
-	public TradeState TradeState { get; set; }
+	private List<Dice> _dice = new();
 
 	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
+		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.PlayerAction);
 		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex, true);
 
 		if (Networking.IsHost) {
@@ -44,6 +37,23 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
+	}
+
+	public async void OnGameEvent(StartRollEvent eventArgs) {
+		if (_dice.Count == 0) {
+			_dice = new(Game.ActiveScene.GetAllComponents<Dice>());
+		}
+
+
+		foreach (var dice in _dice) {
+			dice.Roll();
+		}
+
+		while (_dice.Any(dice => dice.IsRolling)) {
+			await Task.DelayRealtimeSeconds(0.5f);
+		}
+
+		TurnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRollValue(), _dice[1].GetRollValue());
 	}
 
 	public void OnGameEvent(BuildHouseEvent eventArgs) {
@@ -105,8 +115,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		IngameStateManager.OwnedFields.TryGetValue(location.GameObject.Name, out var fieldOwner);
 		var currentPlayer = GetPlayerFromEvent(eventArgs.playerId);
 
-		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.PlayerAction);
-
 		if (fieldOwner == 0 || location.Type == GameLocation.PropertyType.Event) {
 			if (location.EventId == "start") {
 				if (Networking.IsHost) {
@@ -165,6 +173,71 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 	}
 
+	public void OnGameEvent(EventCardClosedEvent eventArgs) {
+		Card card = eventArgs.card;
+		card.Action(GetPlayerFromEvent(eventArgs.playerId), MovementManager, TurnManager,
+			CardActionManager.BlockedCards, IngameStateManager, card);
+		IngameStateManager.State = IngameUI.IngameUiStates.None;
+	}
+
+	public void OnGameEvent(GoToJailEvent eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.playerId);
+
+
+		if (Networking.IsHost) {
+			// Set Jail Status here
+			player.JailTurnCounter++;
+		}
+
+		CardActionHelper.GoToJail(player, MovementManager);
+		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InAction);
+	}
+
+	public void OnGameEvent(PayJailFineEvent eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.playerId);
+
+
+		if (Networking.IsHost) {
+			player.Money -= 50;
+			player.JailTurnCounter = 0;
+		}
+
+		TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Rolling);
+	}
+
+	public void OnGameEvent(UseJailCardEvent eventArgs) {
+		var player = GetPlayerFromEvent(eventArgs.playerId);
+
+		if (Networking.IsHost) {
+			string ownedJailFreeCard = IngameStateManager.OwnedFields
+			                                             .First(pair =>
+				                                             pair.Key.Contains("JailFree") &&
+				                                             pair.Value == player.SteamId).Key;
+			player.JailTurnCounter = 0;
+
+			IngameStateManager.OwnedFields[ownedJailFreeCard] = 0;
+			CardActionManager.RemoveBlockedCard(ownedJailFreeCard.Contains("chance") ? 9 : 5);
+		}
+
+		TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Rolling);
+	}
+
+	public void OnGameEvent(LandOnJailEvent eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.playerId);
+
+
+		// If player lands on the jail field with > 0 it means he was sent to jail so we end the turn immediately 
+		if (player.JailTurnCounter >= 1) {
+			// We need to box this if because this event is broadcast end every player should go in the first if if its true
+			if (!player.IsProxy) {
+				TurnManager.EmitTurnFinishedEvent(eventArgs.playerId);
+			}
+		}
+		else {
+			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
+		}
+	}
+
 	public void OnGameEvent(PropertyAquiredEvent eventArgs) {
 		var location = LocationContainer.Children[eventArgs.PropertyIndex];
 		var gameLocation = location.Components.Get<GameLocation>();
@@ -214,29 +287,55 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(RolledEvent eventArgs) {
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 
-		Log.Info(eventArgs.Doubles);
-		Log.Info(eventArgs.Number);
 
-		if (eventArgs.Doubles) {
-			player.DoublesCount++;
-		}
-		else {
-			player.DoublesCount = 0;
-		}
+		player.DoublesCount = eventArgs.Doubles ? player.DoublesCount + 1 : 0;
 
-		if (player.DoublesCount < 3) {
-			MovementManager.StartMovement(player, eventArgs.Number);
-		}
-		else {
-			CardActionHelper.GoToJail(player, MovementManager);
+		// Player should not be in jail!
+		if (player.JailTurnCounter <= 0) {
+			if (player.DoublesCount < 3) {
+				MovementManager.StartMovement(player, eventArgs.Number);
+			}
+			else {
+				TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Police,
+					player.SteamId);
+			}
+
+			return;
 		}
 
 		player.LastDiceCount = eventArgs.Number;
+
+		// Release player if he rolls double
+		if (player.DoublesCount > 0) {
+			player.DoublesCount = 0;
+			player.JailTurnCounter = 0;
+			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Rolling);
+		}
+		else {
+			// Change to Action Phase so player can handle its properties etc.
+			if (Networking.IsHost) {
+				player.JailTurnCounter++;
+			}
+
+			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
+		}
+
+		// 4 means the next turn would be the fourth turn in jail
+		if (player.JailTurnCounter == 4) {
+			// Force player to use card or pay caution
+			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Jail);
+		}
+	}
+
+	public void OnGameEvent(DebugEvent eventArgs) {
+		var player = Game.ActiveScene.GetAllComponents<Player>().First(player1 => player1.Name.Contains("Fresh"));
+		MovementManager.StartMovement(player, CardActionHelper.CalculateFieldsToTravel(player, 30));
 	}
 
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
 		TurnManager.CurrentPlayerIndex = (TurnManager.CurrentPlayerIndex + 1) % TurnManager.CurrentLobby.Players.Count;
+		SetCurrentPlayersJailState();
 		ChangeDiceOwnershipToCurrentPlayer();
 	}
 
@@ -251,10 +350,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			               playerId);
 	}
 
-	protected override Task OnLoad() {
-		ChangeDiceOwnershipToCurrentPlayer();
-		return base.OnLoad();
-	}
 
 	private Player GetPlayerFromEvent(ulong playerId) {
 		return Lobby.Players.Find(player => player.SteamId == playerId);
@@ -264,15 +359,30 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		return LocationContainer.Children[propertyIndex].Components.Get<GameLocation>();
 	}
 
-	private void ChangeDiceOwnershipToCurrentPlayer() {
-		var diceList = new List<Dice>(Game.ActiveScene.GetAllComponents<Dice>());
+	[Broadcast]
+	private void SetCurrentPlayersJailState() {
+		Player currentPlayer = TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex];
 
-		if (Networking.IsHost && diceList.Count > 0) {
-			foreach (var dice in diceList) {
-				dice.Network.AssignOwnership(
-					TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex].Connection);
-			}
+
+		if (currentPlayer.JailTurnCounter > 0) {
+			TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.Jail);
 		}
+		else {
+			TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.Rolling);
+		}
+	}
+
+	private void ChangeDiceOwnershipToCurrentPlayer() {
+		if (!Networking.IsHost) {
+			return;
+		}
+
+		if (_dice.Count == 0) {
+			_dice = new(Game.ActiveScene.GetAllComponents<Dice>());
+		}
+
+		Player currentPlayer = Lobby.Players[TurnManager.CurrentPlayerIndex];
+		_dice.ForEach(dice => dice.GameObject.Network.AssignOwnership(currentPlayer.Connection));
 	}
 
 	public void OnGameEvent(TradingRequestedEvent eventArgs) {

@@ -15,12 +15,10 @@ public sealed class GameStateManager : Component, IGameEventHandler<GameEndEvent
 
 
 	public void OnGameEvent(GameEndEvent eventArgs) {
-		Log.Info("Event: " + "GameEndEvent");
 		//CurrentState = UiManager.ChangeState(GameState.END_GAME);
 	}
 
 	public void OnGameEvent(GameStartEvent eventArgs) {
-		Log.Info("Event: " + "GameStartEvent");
 		//CurrentState = UiManager.ChangeState(GameState.INGAME);
 	}
 }
