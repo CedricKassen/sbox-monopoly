@@ -18,13 +18,26 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
                                 IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
                                 IGameEventHandler<EventCardClosedEvent> {
-	[Property] public GameObject LocationContainer { get; set; }
-	[Property] public Lobby Lobby { get; set; }
-	[Property] public MovementManager MovementManager { get; set; }
-	[Property] public CardActionManager CardActionManager { get; set; }
-	[Property] public IngameStateManager IngameStateManager { get; set; }
-	[Property] public TurnManager TurnManager { get; set; }
-	[Property] public TradeState TradeState { get; set; }
+	[Property]
+	public GameObject LocationContainer { get; set; }
+
+	[Property]
+	public Lobby Lobby { get; set; }
+
+	[Property]
+	public MovementManager MovementManager { get; set; }
+
+	[Property]
+	public CardActionManager CardActionManager { get; set; }
+
+	[Property]
+	public IngameStateManager IngameStateManager { get; set; }
+
+	[Property]
+	public TurnManager TurnManager { get; set; }
+
+	[Property]
+	public TradeState TradeState { get; set; }
 
 	private List<Dice> _dice = new();
 
@@ -263,7 +276,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		IngameStateManager.State = IngameUI.IngameUiStates.Auction;
 
 		foreach (var player in Lobby.Players) {
-			IngameStateManager.AuctionBiddings[player.SteamId] = 0;
+			IngameStateManager.AuctionBiddings[player.SteamId] = 10;
 		}
 	}
 
