@@ -8,14 +8,30 @@ public sealed class MovementManager : Component {
 	private readonly TaskCompletionSource<bool> tcs = new();
 
 	private float _timer;
-	[Property] private bool Backwards;
-	[Property] private int CurrentField;
-	[Property] private Player Player;
-	[Property] private Rigidbody PlayerBody;
-	[Property] private int ToTravel;
-	[Property] private int Travelled;
-	[Property] public GameObject LocationContainer { get; set; }
-	[Property] public float SpeedMultiplier { get; set; }
+
+	[Property]
+	private bool Backwards;
+
+	[Property]
+	private int CurrentField;
+
+	[Property]
+	private Player Player;
+
+	[Property]
+	private Rigidbody PlayerBody;
+
+	[Property]
+	private int ToTravel;
+
+	[Property]
+	private int Travelled;
+
+	[Property]
+	public GameObject LocationContainer { get; set; }
+
+	[Property]
+	public float SpeedMultiplier { get; set; }
 
 
 	[Button("Go to next chance field")]
@@ -91,7 +107,7 @@ public sealed class MovementManager : Component {
 		Travelled++;
 		_timer = 0;
 
-		if (CurrentField == 0) {
+		if (CurrentField == 1) {
 			if (Networking.IsHost) {
 				Player.Money += 200;
 			}

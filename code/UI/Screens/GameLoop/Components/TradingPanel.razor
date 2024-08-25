@@ -104,11 +104,11 @@
 			<div onclick=@(() => ToggleField("railroad4")) id="railroad4" class="ownership-dot black @(TradeFields["railroad4"] ? "ownership-dot-selected" : "")">
 				<div id="railroad4-disabled" class="@(GetMortagedStatus("railroad4") ? "ownership-dot-mortgage" : "") @(Owned["railroad4"] == SteamId ? "" : "ownership-dot-disabled")"></div>
 			</div>
-			<div onclick=@(() => ToggleField("waterCompany")) id="waterCompany" class="ownership-dot gray @(TradeFields["waterCompany"] ? "ownership-dot-selected" : "")">
-				<div id="waterCompany-disabled" class="@(GetMortagedStatus("waterCompany") ? "ownership-dot-mortgage" : "") @(Owned["waterCompany"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
 			<div onclick=@(() => ToggleField("electricCompany")) id="electricCompany" class="ownership-dot gray @(TradeFields["electricCompany"] ? "ownership-dot-selected" : "")">
 				<div id="electricCompany-disabled" class="@(GetMortagedStatus("electricCompany") ? "ownership-dot-mortgage" : "") @(Owned["electricCompany"] == SteamId ? "" : "ownership-dot-disabled")"></div>
+			</div>
+			<div onclick=@(() => ToggleField("waterCompany")) id="waterCompany" class="ownership-dot gray @(TradeFields["waterCompany"] ? "ownership-dot-selected" : "")">
+				<div id="waterCompany-disabled" class="@(GetMortagedStatus("waterCompany") ? "ownership-dot-mortgage" : "") @(Owned["waterCompany"] == SteamId ? "" : "ownership-dot-disabled")"></div>
 			</div>
 			<div onclick=@(() => ToggleField("chanceJailFree")) id="chanceJailFree" class="ownership-dot policeBlue @(TradeFields["chanceJailFree"] ? "ownership-dot-selected" : "")">
 				<div id="chanceJailFree-disabled" class=" @(Owned["chanceJailFree"] == SteamId ? "" : "ownership-dot-disabled")"></div>
