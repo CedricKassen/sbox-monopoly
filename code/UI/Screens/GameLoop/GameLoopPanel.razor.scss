@@ -107,6 +107,7 @@ PlayerCard {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  pointer-events: all;
 
   &:hover {
     z-index: 2;
