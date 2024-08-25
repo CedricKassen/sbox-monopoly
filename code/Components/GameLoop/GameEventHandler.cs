@@ -31,7 +31,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.PlayerAction);
 		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex, true);
 
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, eventArgs.Amount));
+		if (Networking.IsHost) {
+			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+		}
 
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
 	}
@@ -76,7 +78,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			}
 		}
 
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, 2, property.House_Cost));
+		if (Networking.IsHost) {
+			player.Money -= property.House_Cost;
+		}
 
 		property.Houses++;
 	}
@@ -98,9 +102,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 
 		var player = GetPlayerFromEvent(eventArgs.PlayerId);
-
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, player.SteamId, property.House_Cost / 2));
-
+		if (Networking.IsHost) {
+			player.Money += property.House_Cost / 2;
+		}
 
 		property.Houses--;
 	}
@@ -112,8 +116,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		if (fieldOwner == 0 || location.Type == GameLocation.PropertyType.Event) {
 			if (location.EventId == "start") {
-				Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, currentPlayer.SteamId, 200));
-
+				if (Networking.IsHost) {
+					currentPlayer.Money += 200;
+				}
 
 				TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
 				return;
@@ -166,6 +171,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 	}
 
+	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
+		if (Networking.IsHost) {
+			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+			GetPlayerFromEvent(eventArgs.Recipient).Money += eventArgs.Amount;
+		}
+	}
+
 	public void OnGameEvent(EventCardClosedEvent eventArgs) {
 		Card card = eventArgs.card;
 		card.Action(GetPlayerFromEvent(eventArgs.playerId), MovementManager, TurnManager,
@@ -191,7 +203,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 
 		if (Networking.IsHost) {
-			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 1, 50));
+			player.Money -= 50;
 			player.JailTurnCounter = 0;
 		}
 
@@ -240,7 +252,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var costs = eventArgs.FromAuction ? 0 : gameLocation.Price;
 
 		if (costs <= player.Money && Networking.IsHost) {
-			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, costs));
+			player.Money -= costs;
 			IngameStateManager.OwnedFields[location.Name] = eventArgs.playerId;
 		}
 	}
@@ -258,7 +270,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
 
 		if (Networking.IsHost && !property.Mortgaged) {
-			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, eventArgs.playerId, property.Price / 2));
+			GetPlayerFromEvent(eventArgs.playerId).Money += property.Price / 2;
 		}
 
 		property.Mortgaged = true;
@@ -406,12 +418,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			}
 		}
 
+		if (Networking.IsHost) {
+			TradeState.TradingCreator.Money -= TradeState.TradingOfferAmount;
+			TradeState.TradingCreator.Money += TradeState.TradingRequestAmount;
 
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(TradeState.TradingCreator.SteamId,
-			TradeState.TradingPartner.SteamId, TradeState.TradingOfferAmount));
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(TradeState.TradingPartner.SteamId,
-			TradeState.TradingCreator.SteamId, TradeState.TradingRequestAmount));
-
+			TradeState.TradingPartner.Money += TradeState.TradingOfferAmount;
+			TradeState.TradingPartner.Money -= TradeState.TradingRequestAmount;
+		}
 
 		ResetTrading();
 		CloseLocalUIForEveryPlayer();

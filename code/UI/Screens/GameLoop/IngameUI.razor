@@ -293,8 +293,10 @@
 	</div>
 }
 
-@if (!IsCurrentPlayer() && _turnManager.CurrentPhase.Equals(TurnManager.Phase.PlayerAction)) {
-	<h1>Waiting for @(GetCurrentPlayer().Name)...</h1>
+@if (!IsCurrentPlayer()) {
+	<div style="position: absolute; width: 100%; justify-content: center; pointer-events: none; margin-top: 32px;">
+		<h3 class="container">It's @(GetCurrentPlayer().Name)s turn</h3>
+	</div>
 }
 
 @if (IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.PlayerAction) {
@@ -508,7 +510,8 @@
 
 
 	private void BidAmount(int amount) {
-		if (_player.Money >= _stateManager.AuctionBiddings[_player.SteamId] + amount)
+		var currentMax = _stateManager.GetSortedBiddings()[0].Value;
+		if (_player.Money >= currentMax + amount)
 			_turnManager.EmitAuctionBidEvent(_player.SteamId, amount);
 	}
 
@@ -608,10 +611,11 @@
 				var location = locationObjects.First(o => o.Name == key).Components.Get<GameLocation>();
 				if (value) {
 					if (location.Mortgaged) {
-						amount += Convert.ToInt32(Math.Floor((location.Price / 2) * 1.1));
+						amount += location.Price - Convert.ToInt32(Math.Floor((location.Price / 2) * 1.1));
 					}
-
-					amount += location.Price;
+					else {
+						amount += location.Price;
+					}
 				}
 			}
 			else {
