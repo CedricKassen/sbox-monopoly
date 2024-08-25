@@ -27,6 +27,10 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 		 * debts to player -> give everything to the player
 		 * debts to bank -> remaining money to bank and auction for every property
 		 */
+
+		// Dispatch PaymentDone Event to continue with normal gameloop after a cards starts the payment process. 
+		// Maybe action have to dispatchs an event to say that action is done, so we can do the same after a payment? 
+		// Trading should not use the Payment Event stuff!
 	}
 
 	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
