@@ -109,11 +109,11 @@
 			<div id="railroad4" class="ownership-dot black">
 				<div id="railroad4-disabled" class="@(GetMortagedStatus("railroad4") ? "ownership-dot-mortgage" : "") @(Owned["railroad4"] == SteamId ? "" : "ownership-dot-disabled")"></div>
 			</div>
-			<div id="waterCompany" class="ownership-dot gray">
-				<div id="waterCompany-disabled" class="@(GetMortagedStatus("waterCompany") ? "ownership-dot-mortgage" : "") @(Owned["waterCompany"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
 			<div id="electricCompany" class="ownership-dot gray">
 				<div id="electricCompany-disabled" class="@(GetMortagedStatus("electricCompany") ? "ownership-dot-mortgage" : "") @(Owned["electricCompany"] == SteamId ? "" : "ownership-dot-disabled")"></div>
+			</div>
+			<div id="waterCompany" class="ownership-dot gray">
+				<div id="waterCompany-disabled" class="@(GetMortagedStatus("waterCompany") ? "ownership-dot-mortgage" : "") @(Owned["waterCompany"] == SteamId ? "" : "ownership-dot-disabled")"></div>
 			</div>
 			<div id="chanceJailFree" class="ownership-dot policeBlue">
 				<div id="chanceJailFree-disabled" class="@(Owned["chanceJailFree"] == SteamId ? "" : "ownership-dot-disabled")"></div>
@@ -147,4 +147,5 @@
 	protected override int BuildHash() {
 		return HashCode.Combine(Player.Money);
 	}
+
 }
