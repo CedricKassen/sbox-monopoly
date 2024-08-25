@@ -296,11 +296,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
 		var price = (int)Math.Ceiling(property.Price / 2 * 1.1);
 
-		if (Networking.IsHost && player.Money > price && property.Mortgaged) {
-			player.Money -= price;
-		}
+		if (player.Money > price && property.Mortgaged) {
+			if (Networking.IsHost) {
+				player.Money -= price;
+			}
 
-		property.Mortgaged = false;
+			property.Mortgaged = false;
+		}
 	}
 
 	public void OnGameEvent(RolledEvent eventArgs) {
