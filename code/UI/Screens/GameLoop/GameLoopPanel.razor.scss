@@ -236,6 +236,11 @@ TradingPanel {
   }
 }
 
+Modal {
+  position: absolute;
+  z-index: 30;
+}
+
 .trading {
   flex-direction: column;
   gap: 32px;
