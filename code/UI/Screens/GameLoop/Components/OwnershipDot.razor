@@ -3,13 +3,20 @@
 @inherits Sandbox.UI.Panel
 
 <root>
-	<div onclick=@(() => OnSelect(FieldName)) id=@FieldName class="ownership-dot @ColorClass @(GetSelected(FieldName) ? "ownership-dot-selected" : "")">
+	<div onclick=@(() => OnSelect(FieldName))
+	     id=@FieldName
+	     class="ownership-dot @ColorClass @(GetSelected(FieldName) ? "ownership-dot-selected" : "")"
+	     onmouseover=@(() => SetCurrentHoverLocation(FieldName))
+	     onmouseout=@(() => _player.CurrentHoverLocation = null)>
 		<div id="@(FieldName)-mortgaged" class="@(GetMortgaged(FieldName) ? "ownership-dot-mortgage" : "")"></div>
 		<div id="@(FieldName)-disabled" class=" @(GetOwned(FieldName) ? "" : "ownership-dot-disabled")"></div>
 	</div>
 </root>
 
 @code {
+
+	private Player _player = Game.ActiveScene.GetAllComponents<Player>().First(p => p.SteamId == (ulong)Game.SteamId);
+	private GameObject _locationContainer = Game.ActiveScene.Children[0];
 
 	[Property]
 	public string FieldName { get; set; }
@@ -29,8 +36,23 @@
 	[Property]
 	public Func<string, bool> GetOwned { get; set; } = (string _) => { return false; };
 
+	[Property]
+	public int DataHash { get; set; }
+
 	protected override int BuildHash() {
-		return HashCode.Combine(FieldName);
+		return HashCode.Combine(FieldName, DataHash);
+	}
+
+	private void SetCurrentHoverLocation(string FieldName) {
+		if (FieldName.Contains("Jail")) {
+			Log.Warning("JailFree Cards are currently not supported by hover UI");
+			return;
+		}
+
+		var locationGameObject = _locationContainer.Children.First(o => o.Name == FieldName);
+		var location = locationGameObject.Components.Get<GameLocation>();
+
+		_player.CurrentHoverLocation = location;
 	}
 
 }
