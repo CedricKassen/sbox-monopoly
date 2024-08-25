@@ -7,14 +7,11 @@ namespace Sandbox.Components.GameLoop;
 public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEvent>,
                                    IGameEventHandler<PayoutFreeParkingEvent>,
                                    IGameEventHandler<NotEnoughFundsEvent> {
-	[Property, HostSync]
-	public int BankBalance { get; private set; }
+	[Property, HostSync] public int BankBalance { get; private set; }
 
-	[Property]
-	public Lobby Lobby { get; set; }
+	[Property] public Lobby Lobby { get; set; }
 
-	[Property]
-	public TurnManager TurnManager { get; set; }
+	[Property] public TurnManager TurnManager { get; set; }
 
 	public void OnGameEvent(PayoutFreeParkingEvent eventArgs) {
 		Player recipient = GetPlayerFromId(eventArgs.Recipient);
@@ -70,7 +67,7 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 		}
 
 		if (!recipientIsBank && !recipientIsFreeParking) {
-			recipient.Money += 1;
+			recipient.Money += eventArgs.Amount;
 		}
 
 		if (recipientIsFreeParking) {
