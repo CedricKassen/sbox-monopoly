@@ -53,8 +53,9 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 		Player recipient = GetPlayerFromId(eventArgs.Recipient);
 
 		bool senderIsBank = eventArgs.PlayerId == 2;
-		bool recipientIsBank = recipient == null;
+		bool recipientIsBank = eventArgs.Recipient == 2;
 		bool recipientIsFreeParking = eventArgs.Recipient == 1;
+
 
 		if (!senderIsBank) {
 			if (sender.Money - eventArgs.Amount < 0) {
@@ -73,6 +74,10 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 		if (recipientIsFreeParking) {
 			BankBalance += eventArgs.Amount;
 		}
+
+		Log.Info((senderIsBank ? "Bank" : recipient.Name) + " paid " + eventArgs.Amount + " to " +
+		         (recipient != null ? recipient.Name : recipientIsBank ? "Bank" : "FreeParking"));
+		TurnManager.EmitTurnActionDoneEvent(senderIsBank, eventArgs.Recipient, eventArgs.PlayerId);
 	}
 
 	private Player GetPlayerFromId(ulong playerId) {

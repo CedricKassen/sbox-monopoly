@@ -128,19 +128,19 @@ public static class Cards {
 	private static void BankError(Player player, MovementManager move, TurnManager turnManager,
 	                              Dictionary<int, bool> blocked = null,
 	                              IngameStateManager stateManager = null, Card card = null) {
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(1, player.SteamId, 200));
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, player.SteamId, 200));
 	}
 
 	private static void GetFifty(Player player, MovementManager move, TurnManager turnManager,
 	                             Dictionary<int, bool> blocked = null,
 	                             IngameStateManager stateManager = null, Card card = null) {
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(1, player.SteamId, 50));
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, player.SteamId, 50));
 	}
 
 	private static void GetOneHundred(Player player, MovementManager move, TurnManager turnManager,
 	                                  Dictionary<int, bool> blocked = null,
 	                                  IngameStateManager stateManager = null, Card card = null) {
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(1, player.SteamId, 100));
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, player.SteamId, 100));
 	}
 
 	private static void SpeedFine(Player player, MovementManager move, TurnManager turnManager,
@@ -158,7 +158,7 @@ public static class Cards {
 	private static void LoanMatures(Player player, MovementManager move, TurnManager turnManager,
 	                                Dictionary<int, bool> blocked = null,
 	                                IngameStateManager stateManager = null, Card card = null) {
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(1, player.SteamId, 150));
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, player.SteamId, 150));
 	}
 
 	private static void HospitalFee(Player player, MovementManager move, TurnManager turnManager,
@@ -170,25 +170,25 @@ public static class Cards {
 	private static void GetConsultancyFee(Player player, MovementManager move, TurnManager turnManager,
 	                                      Dictionary<int, bool> blocked = null,
 	                                      IngameStateManager stateManager = null, Card card = null) {
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(1, player.SteamId, 25));
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, player.SteamId, 25));
 	}
 
 	private static void Beauty(Player player, MovementManager move, TurnManager turnManager,
 	                           Dictionary<int, bool> blocked = null,
 	                           IngameStateManager stateManager = null, Card card = null) {
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(1, player.SteamId, 10));
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, player.SteamId, 10));
 	}
 
 	private static void IncomingTax(Player player, MovementManager move, TurnManager turnManager,
 	                                Dictionary<int, bool> blocked = null,
 	                                IngameStateManager stateManager = null, Card card = null) {
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(1, player.SteamId, 20));
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, player.SteamId, 20));
 	}
 
 	private static void Chairman(Player player, MovementManager move, TurnManager turnManager,
 	                             Dictionary<int, bool> blocked = null,
 	                             IngameStateManager stateManager = null, Card card = null) {
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(1, player.SteamId, 50));
+		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, player.SteamId, 50));
 	}
 
 	private static void RenovateHouses(Player player, MovementManager move, TurnManager turnManager,
@@ -222,6 +222,7 @@ public static class Cards {
 	                                           IngameStateManager stateManager = null, Card card = null) {
 		blocked.Add(card.ActionId, true);
 		stateManager.OwnedFields["chanceJailFree"] = player.SteamId;
+		Game.ActiveScene.Dispatch(new TurnActionDoneEvent(player.SteamId));
 	}
 
 	private static void GetOutOfJailCardCommunity(Player player, MovementManager move, TurnManager turnManager,
@@ -229,5 +230,6 @@ public static class Cards {
 	                                              IngameStateManager stateManager = null, Card card = null) {
 		blocked.Add(card.ActionId, true);
 		stateManager.OwnedFields["communityJailFree"] = player.SteamId;
+		Game.ActiveScene.Dispatch(new TurnActionDoneEvent(player.SteamId));
 	}
 }

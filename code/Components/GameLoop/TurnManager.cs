@@ -76,9 +76,6 @@ public class TurnManager : Component {
 		else if (type == SpecialPropertyActionType.Police) {
 			GameParentObject.Dispatch(new GoToJailEvent(playerId));
 		}
-		else {
-			ChangePhase(playerId, Phase.PlayerAction);
-		}
 	}
 
 	[Broadcast]
@@ -137,6 +134,12 @@ public class TurnManager : Component {
 			? CardActionManager.GetChanceCardFromActionId(cardId)
 			: CardActionManager.GetCommunityCardFromActionId(cardId);
 		GameParentObject.Dispatch(new EventCardClosedEvent(card, playerId));
+	}
+
+	public void EmitTurnActionDoneEvent(bool senderIsBank, ulong recipient, ulong sender) {
+		GameParentObject.Dispatch(senderIsBank
+			? new TurnActionDoneEvent(recipient)
+			: new TurnActionDoneEvent(sender));
 	}
 
 	[Broadcast]
