@@ -609,10 +609,11 @@
 				var location = locationObjects.First(o => o.Name == key).Components.Get<GameLocation>();
 				if (value) {
 					if (location.Mortgaged) {
-						amount += Convert.ToInt32(Math.Floor((location.Price / 2) * 1.1));
+						amount += location.Price - Convert.ToInt32(Math.Floor((location.Price / 2) * 1.1));
 					}
-
-					amount += location.Price;
+					else {
+						amount += location.Price;
+					}
 				}
 			}
 			else {
