@@ -36,8 +36,11 @@
 	[Property]
 	public Func<string, bool> GetOwned { get; set; } = (string _) => { return false; };
 
+	[Property]
+	public int DataHash { get; set; }
+
 	protected override int BuildHash() {
-		return HashCode.Combine(FieldName);
+		return HashCode.Combine(FieldName, DataHash);
 	}
 
 	private void SetCurrentHoverLocation(string FieldName) {
