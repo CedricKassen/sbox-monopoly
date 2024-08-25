@@ -9,15 +9,14 @@ namespace Sandbox.Components.GameLoop;
 
 public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGameEventHandler<MovementDoneEvent>,
                                 IGameEventHandler<PropertyAquiredEvent>, IGameEventHandler<PropertyAuctionEvent>,
-                                IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<PlayerPaymentEvent>,
+                                IGameEventHandler<AuctionFinishedEvent>, IGameEventHandler<EventCardClosedEvent>,
                                 IGameEventHandler<TurnFinishedEvent>, IGameEventHandler<PropertyMortgagedEvent>,
                                 IGameEventHandler<TradingRequestedEvent>, IGameEventHandler<TradingAcceptedEvent>,
                                 IGameEventHandler<TradingDeniedEvent>, IGameEventHandler<PropertyMortgagePayedEvent>,
                                 IGameEventHandler<BuildHouseEvent>, IGameEventHandler<DestroyHouseEvent>,
                                 IGameEventHandler<GoToJailEvent>, IGameEventHandler<LandOnJailEvent>,
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
-                                IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
-                                IGameEventHandler<EventCardClosedEvent> {
+                                IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
 	[Property] public Lobby Lobby { get; set; }
 	[Property] public MovementManager MovementManager { get; set; }
@@ -169,13 +168,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
 					location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount);
 			}
-		}
-	}
-
-	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
-		if (Networking.IsHost) {
-			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
-			GetPlayerFromEvent(eventArgs.Recipient).Money += eventArgs.Amount;
 		}
 	}
 
