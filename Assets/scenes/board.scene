@@ -1968,8 +1968,7 @@
           "Flags": 0,
           "Name": "Wall (3)",
           "Position": "0,-175,0",
-          "Rotation": "0.258819,0,0,0.9659259",
-          "Scale": "7,0.1,2.685019",
+          "Scale": "7,0.1,10",
           "Enabled": true,
           "Components": [
             {
@@ -1987,8 +1986,7 @@
           "Flags": 0,
           "Name": "Wall (2)",
           "Position": "0,175,0",
-          "Rotation": "-0.2588191,0,0,0.9659259",
-          "Scale": "7,0.1,4.845508",
+          "Scale": "7,0.1,10",
           "Enabled": true,
           "Components": [
             {
@@ -2006,8 +2004,7 @@
           "Flags": 0,
           "Name": "Wall (1)",
           "Position": "175,0,0",
-          "Rotation": "0,0.258819,0,0.9659259",
-          "Scale": "0.1,7,4.341838",
+          "Scale": "0.1,7,10",
           "Enabled": true,
           "Components": [
             {
@@ -2025,8 +2022,7 @@
           "Flags": 0,
           "Name": "Wall",
           "Position": "-175,0,0",
-          "Rotation": "0,-0.3826833,0,0.9238797",
-          "Scale": "0.1,7,7.60733",
+          "Scale": "0.1,7,10",
           "Enabled": true,
           "Components": [
             {

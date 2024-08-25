@@ -1,13 +1,20 @@
 using System;
 
-public sealed class Dice : Component {
+public sealed class Dice : Component, Component.ICollisionListener {
 	public bool IsRolling { get; private set; }
 
 	[Property] public Rigidbody Rigidbody { get; set; }
 
-	[Property] public TurnManager TurnManager { get; set; }
+	[Property] public TurnManager TurnManager { get; set; } = Game.ActiveScene.GetAllComponents<TurnManager>().First();
 
 	private TurnManager.Phase[] RollPhases = new[] { TurnManager.Phase.Rolling, TurnManager.Phase.Jail };
+
+	public void OnCollisionStart(Collision collision) {
+		if (collision.Other.GameObject.Tags.Contains("dicecontainer")) {
+			var velocity = Vector3.Reflect(Vector3.Forward * 100, collision.Contact.Normal) * 30;
+			Rigidbody.ApplyForce(velocity);
+		}
+	}
 
 	protected override void OnUpdate() {
 		if (Rigidbody.Velocity == 0) {
