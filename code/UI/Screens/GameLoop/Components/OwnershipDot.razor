@@ -1,0 +1,31 @@
+﻿@using System
+@namespace Monopoly.UI.Screens.GameLoop
+
+<root>
+	<div onclick=@(() => OnSelect(FieldName)) id=@FieldName class="ownership-dot @ColorClass @(Selected ? "ownership-dot-selected" : "")">
+		<div id="@(FieldName)-mortgaged" class="@(Mortgaged ? "ownership-dot-mortgage" : "")"></div>
+		<div id="@(FieldName)-disabled" class=" @(Owned ? "" : "ownership-dot-disabled")"></div>
+	</div>
+</root>
+
+@code {
+
+	[Property]
+	public string FieldName { get; set; }
+
+	[Property]
+	public Action<string> OnSelect { get; set; } = (string _) => { };
+
+	[Property]
+	public string ColorClass { get; set; }
+
+	[Property]
+	public bool Selected { get; set; } = false;
+
+	[Property]
+	public bool Mortgaged { get; set; } = false;
+
+	[Property]
+	public bool Owned { get; set; } = false;
+
+}

@@ -6,118 +6,266 @@
 @* magical regex to match all parent ids in match group 1: id="(?!.*-disabled)([^"]*)" *@
 
 <root>
-	<div style="display: flex; flex-direction: row; width: 100%; justify-content: space-evenly">
-		<div class="ownership-dot-column">
-			<div onclick=@(() => ToggleField("brown1")) id="brown1" class="ownership-dot brown @(TradeFields["brown1"] ? "ownership-dot-selected" : "")">
-				<div id="brown1-disabled" class="@(GetMortagedStatus("brown1") ? "ownership-dot-mortgage" : "") @(Owned["brown1"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("brown2")) id="brown2" class="ownership-dot brown @(TradeFields["brown2"] ? "ownership-dot-selected" : "")">
-				<div id="brown2-disabled" class="@(GetMortagedStatus("brown2") ? "ownership-dot-mortgage" : "") @(Owned["brown2"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-		</div>
-		<div class="ownership-dot-column">
-			<div onclick=@(() => ToggleField("lightBlue1")) id="lightBlue1" class="ownership-dot lightBlue @(TradeFields["lightBlue1"] ? "ownership-dot-selected" : "")">
-				<div id="lightBlue1-disabled" class="@(GetMortagedStatus("lightBlue1") ? "ownership-dot-mortgage" : "") @(Owned["lightBlue1"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("lightBlue2")) id="lightBlue2" class="ownership-dot lightBlue @(TradeFields["lightBlue2"] ? "ownership-dot-selected" : "")">
-				<div id="lightBlue2-disabled" class="@(GetMortagedStatus("lightBlue2") ? "ownership-dot-mortgage" : "") @(Owned["lightBlue2"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("lightBlue3")) id="lightBlue3" class="ownership-dot lightBlue @(TradeFields["lightBlue3"] ? "ownership-dot-selected" : "")">
-				<div id="lightBlue3-disabled" class="@(GetMortagedStatus("lightBlue3") ? "ownership-dot-mortgage" : "") @(Owned["lightBlue3"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-		</div>
-		<div class="ownership-dot-column">
-			<div onclick=@(() => ToggleField("pink1")) id="pink1" class="ownership-dot pink @(TradeFields["pink1"] ? "ownership-dot-selected" : "")">
-				<div id="pink1-disabled" class="@(GetMortagedStatus("pink1") ? "ownership-dot-mortgage" : "") @(Owned["pink1"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("pink2")) id="pink2" class="ownership-dot pink @(TradeFields["pink2"] ? "ownership-dot-selected" : "")">
-				<div id="pink2-disabled" class="@(GetMortagedStatus("pink2") ? "ownership-dot-mortgage" : "") @(Owned["pink2"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("pink3")) id="pink3" class="ownership-dot pink @(TradeFields["pink3"] ? "ownership-dot-selected" : "")">
-				<div id="pink3-disabled" class="@(GetMortagedStatus("pink3") ? "ownership-dot-mortgage" : "") @(Owned["pink3"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-		</div>
-		<div class="ownership-dot-column">
-			<div onclick=@(() => ToggleField("orange1")) id="orange1" class="ownership-dot orange @(TradeFields["orange1"] ? "ownership-dot-selected" : "")">
-				<div id="orange1-disabled" class="@(GetMortagedStatus("orange1") ? "ownership-dot-mortgage" : "") @(Owned["orange1"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("orange2")) id="orange2" class="ownership-dot orange @(TradeFields["orange2"] ? "ownership-dot-selected" : "")">
-				<div id="orange2-disabled" class="@(GetMortagedStatus("orange2") ? "ownership-dot-mortgage" : "") @(Owned["orange2"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("orange3")) id="orange3" class="ownership-dot orange @(TradeFields["orange3"] ? "ownership-dot-selected" : "")">
-				<div id="orange3-disabled" class="@(GetMortagedStatus("orange3") ? "ownership-dot-mortgage" : "") @(Owned["orange3"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-		</div>
-		<div class="ownership-dot-column">
-			<div onclick=@(() => ToggleField("red1")) id="red1" class="ownership-dot red @(TradeFields["red1"] ? "ownership-dot-selected" : "")">
-				<div id="red1-disabled" class="@(GetMortagedStatus("red1") ? "ownership-dot-mortgage" : "") @(Owned["red1"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("red2")) id="red2" class="ownership-dot red @(TradeFields["red2"] ? "ownership-dot-selected" : "")">
-				<div id="red2-disabled" class="@(GetMortagedStatus("red2") ? "ownership-dot-mortgage" : "") @(Owned["red2"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("red3")) id="red3" class="ownership-dot red @(TradeFields["red3"] ? "ownership-dot-selected" : "")">
-				<div id="red3-disabled" class="@(GetMortagedStatus("red3") ? "ownership-dot-mortgage" : "") @(Owned["red3"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-		</div>
-		<div class="ownership-dot-column">
-			<div onclick=@(() => ToggleField("yellow1")) id="yellow1" class="ownership-dot yellow @(TradeFields["yellow1"] ? "ownership-dot-selected" : "")">
-				<div id="yellow1-disabled" class="@(GetMortagedStatus("yellow1") ? "ownership-dot-mortgage" : "") @(Owned["yellow1"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("yellow2")) id="yellow2" class="ownership-dot yellow @(TradeFields["yellow2"] ? "ownership-dot-selected" : "")">
-				<div id="yellow2-disabled" class="@(GetMortagedStatus("yellow2") ? "ownership-dot-mortgage" : "") @(Owned["yellow2"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("yellow3")) id="yellow3" class="ownership-dot yellow @(TradeFields["yellow3"] ? "ownership-dot-selected" : "")">
-				<div id="yellow3-disabled" class="@(GetMortagedStatus("yellow3") ? "ownership-dot-mortgage" : "") @(Owned["yellow3"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-		</div>
-		<div class="ownership-dot-column">
-			<div onclick=@(() => ToggleField("green1")) id="green1" class="ownership-dot green @(TradeFields["green1"] ? "ownership-dot-selected" : "")">
-				<div id="green1-disabled" class="@(GetMortagedStatus("green1") ? "ownership-dot-mortgage" : "") @(Owned["green1"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("green2")) id="green2" class="ownership-dot green @(TradeFields["green2"] ? "ownership-dot-selected" : "")">
-				<div id="green2-disabled" class="@(GetMortagedStatus("green2") ? "ownership-dot-mortgage" : "") @(Owned["green2"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("green3")) id="green3" class="ownership-dot green @(TradeFields["green3"] ? "ownership-dot-selected" : "")">
-				<div id="green3-disabled" class="@(GetMortagedStatus("green3") ? "ownership-dot-mortgage" : "") @(Owned["green3"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-		</div>
-		<div class="ownership-dot-column">
-			<div onclick=@(() => ToggleField("blue1")) id="blue1" class="ownership-dot blue @(TradeFields["blue1"] ? "ownership-dot-selected" : "")">
-				<div id="blue1-disabled" class="@(GetMortagedStatus("blue1") ? "ownership-dot-mortgage" : "") @(Owned["blue1"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("blue2")) id="blue2" class="ownership-dot blue @(TradeFields["blue2"] ? "ownership-dot-selected" : "")">
-				<div id="blue2-disabled" class="@(GetMortagedStatus("blue2") ? "ownership-dot-mortgage" : "") @(Owned["blue2"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-		</div>
+<div style="display: flex; flex-direction: row; width: 100%; justify-content: space-evenly">
+	<div class="ownership-dot-column">
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="brown1"
+			Selected=@TradeFields["brown1"]
+			ColorClass="brown"
+			Mortgaged=@GetMortagedStatus("brown1")
+			Owned=@(Owned["brown1"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="brown2"
+			Selected=@TradeFields["brown2"]
+			ColorClass="brown"
+			Mortgaged=@GetMortagedStatus("brown2")
+			Owned=@(Owned["brown2"] == SteamId)>
+		</OwnershipDot>
 	</div>
-	<div>
-		<div style="display: flex; flex-direction: row; justify-content: space-evenly; width: 100%">
-			<div onclick=@(() => ToggleField("railroad1")) id="railroad1" class="ownership-dot black @(TradeFields["railroad1"] ? "ownership-dot-selected" : "")">
-				<div id="railroad1-disabled" class="@(GetMortagedStatus("railroad1") ? "ownership-dot-mortgage" : "") @(Owned["railroad1"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("railroad2")) id="railroad2" class="ownership-dot black @(TradeFields["railroad2"] ? "ownership-dot-selected" : "")">
-				<div id="railroad2-disabled" class="@(GetMortagedStatus("railroad2") ? "ownership-dot-mortgage" : "") @(Owned["railroad2"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("railroad3")) id="railroad3" class="ownership-dot black @(TradeFields["railroad3"] ? "ownership-dot-selected" : "")">
-				<div id="railroad3-disabled" class="@(GetMortagedStatus("railroad3") ? "ownership-dot-mortgage" : "") @(Owned["railroad3"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("railroad4")) id="railroad4" class="ownership-dot black @(TradeFields["railroad4"] ? "ownership-dot-selected" : "")">
-				<div id="railroad4-disabled" class="@(GetMortagedStatus("railroad4") ? "ownership-dot-mortgage" : "") @(Owned["railroad4"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("electricCompany")) id="electricCompany" class="ownership-dot gray @(TradeFields["electricCompany"] ? "ownership-dot-selected" : "")">
-				<div id="electricCompany-disabled" class="@(GetMortagedStatus("electricCompany") ? "ownership-dot-mortgage" : "") @(Owned["electricCompany"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("waterCompany")) id="waterCompany" class="ownership-dot gray @(TradeFields["waterCompany"] ? "ownership-dot-selected" : "")">
-				<div id="waterCompany-disabled" class="@(GetMortagedStatus("waterCompany") ? "ownership-dot-mortgage" : "") @(Owned["waterCompany"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("chanceJailFree")) id="chanceJailFree" class="ownership-dot policeBlue @(TradeFields["chanceJailFree"] ? "ownership-dot-selected" : "")">
-				<div id="chanceJailFree-disabled" class=" @(Owned["chanceJailFree"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-			<div onclick=@(() => ToggleField("communityJailFree")) id="communityJailFree" class="ownership-dot policeBlue @(TradeFields["communityJailFree"] ? "ownership-dot-selected" : "")">
-				<div id="communityJailFree-disabled" class="@(Owned["communityJailFree"] == SteamId ? "" : "ownership-dot-disabled")"></div>
-			</div>
-		</div>
+	<div class="ownership-dot-column">
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="lightBlue1"
+			Selected=@TradeFields["lightBlue1"]
+			ColorClass="lightBlue"
+			Mortgaged=@GetMortagedStatus("lightBlue1")
+			Owned=@(Owned["lightBlue1"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="lightBlue2"
+			Selected=@TradeFields["lightBlue2"]
+			ColorClass="lightBlue"
+			Mortgaged=@GetMortagedStatus("lightBlue2")
+			Owned=@(Owned["lightBlue2"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="lightBlue3"
+			Selected=@TradeFields["lightBlue3"]
+			ColorClass="lightBlue"
+			Mortgaged=@GetMortagedStatus("lightBlue3")
+			Owned=@(Owned["lightBlue3"] == SteamId)>
+		</OwnershipDot>
 	</div>
+	<div class="ownership-dot-column">
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="pink1"
+			Selected=@TradeFields["pink1"]
+			ColorClass="pink"
+			Mortgaged=@GetMortagedStatus("pink1")
+			Owned=@(Owned["pink1"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="pink2"
+			Selected=@TradeFields["pink2"]
+			ColorClass="pink"
+			Mortgaged=@GetMortagedStatus("pink2")
+			Owned=@(Owned["pink2"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="pink3"
+			Selected=@TradeFields["pink3"]
+			ColorClass="pink"
+			Mortgaged=@GetMortagedStatus("pink3")
+			Owned=@(Owned["pink3"] == SteamId)>
+		</OwnershipDot>
+	</div>
+	<div class="ownership-dot-column">
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="orange1"
+			Selected=@TradeFields["orange1"]
+			ColorClass="orange"
+			Mortgaged=@GetMortagedStatus("orange1")
+			Owned=@(Owned["orange1"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="orange2"
+			Selected=@TradeFields["orange2"]
+			ColorClass="orange"
+			Mortgaged=@GetMortagedStatus("orange2")
+			Owned=@(Owned["orange2"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="orange3"
+			Selected=@TradeFields["orange3"]
+			ColorClass="orange"
+			Mortgaged=@GetMortagedStatus("orange3")
+			Owned=@(Owned["orange3"] == SteamId)>
+		</OwnershipDot>
+	</div>
+	<div class="ownership-dot-column">
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="red1"
+			Selected=@TradeFields["red1"]
+			ColorClass="red"
+			Mortgaged=@GetMortagedStatus("red1")
+			Owned=@(Owned["red1"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="red2"
+			Selected=@TradeFields["red2"]
+			ColorClass="red"
+			Mortgaged=@GetMortagedStatus("red2")
+			Owned=@(Owned["red2"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="red3"
+			Selected=@TradeFields["red3"]
+			ColorClass="red"
+			Mortgaged=@GetMortagedStatus("red3")
+			Owned=@(Owned["red3"] == SteamId)>
+		</OwnershipDot>
+	</div>
+	<div class="ownership-dot-column">
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="yellow1"
+			Selected=@TradeFields["yellow1"]
+			ColorClass="yellow"
+			Mortgaged=@GetMortagedStatus("yellow1")
+			Owned=@(Owned["yellow1"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="yellow2"
+			Selected=@TradeFields["yellow2"]
+			ColorClass="yellow"
+			Mortgaged=@GetMortagedStatus("yellow2")
+			Owned=@(Owned["yellow2"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="yellow3"
+			Selected=@TradeFields["yellow3"]
+			ColorClass="yellow"
+			Mortgaged=@GetMortagedStatus("yellow3")
+			Owned=@(Owned["yellow3"] == SteamId)>
+		</OwnershipDot>
+	</div>
+	<div class="ownership-dot-column">
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="green1"
+			Selected=@TradeFields["green1"]
+			ColorClass="green"
+			Mortgaged=@GetMortagedStatus("green1")
+			Owned=@(Owned["green1"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="green2"
+			Selected=@TradeFields["green2"]
+			ColorClass="green"
+			Mortgaged=@GetMortagedStatus("green2")
+			Owned=@(Owned["green2"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="green3"
+			Selected=@TradeFields["green3"]
+			ColorClass="green"
+			Mortgaged=@GetMortagedStatus("green3")
+			Owned=@(Owned["green3"] == SteamId)>
+		</OwnershipDot>
+	</div>
+	<div class="ownership-dot-column">
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="blue1"
+			Selected=@TradeFields["blue1"]
+			ColorClass="blue"
+			Mortgaged=@GetMortagedStatus("blue1")
+			Owned=@(Owned["blue1"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="blue2"
+			Selected=@TradeFields["blue2"]
+			ColorClass="blue"
+			Mortgaged=@GetMortagedStatus("blue2")
+			Owned=@(Owned["blue2"] == SteamId)>
+		</OwnershipDot>
+	</div>
+</div>
+<div>
+	<div style="display: flex; flex-direction: row; justify-content: space-evenly; width: 100%">
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="railroad1"
+			Selected=@TradeFields["railroad1"]
+			ColorClass="black"
+			Mortgaged=@GetMortagedStatus("railroad1")
+			Owned=@(Owned["railroad1"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="railroad2"
+			Selected=@TradeFields["railroad2"]
+			ColorClass="black"
+			Mortgaged=@GetMortagedStatus("railroad2")
+			Owned=@(Owned["railroad2"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="railroad3"
+			Selected=@TradeFields["railroad3"]
+			ColorClass="black"
+			Mortgaged=@GetMortagedStatus("railroad3")
+			Owned=@(Owned["railroad3"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="railroad4"
+			Selected=@TradeFields["railroad4"]
+			ColorClass="black"
+			Mortgaged=@GetMortagedStatus("railroad4")
+			Owned=@(Owned["railroad4"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="electricCompany"
+			Selected=@TradeFields["electricCompany"]
+			ColorClass="gray"
+			Mortgaged=@GetMortagedStatus("electricCompany")
+			Owned=@(Owned["electricCompany"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="waterCompany"
+			Selected=@TradeFields["waterCompany"]
+			ColorClass="gray"
+			Mortgaged=@GetMortagedStatus("waterCompany")
+			Owned=@(Owned["waterCompany"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="chanceJailFree"
+			Selected=@TradeFields["chanceJailFree"]
+			ColorClass="policeBlue"
+			Owned=@(Owned["chanceJailFree"] == SteamId)>
+		</OwnershipDot>
+		<OwnershipDot
+			OnSelect=@OwnershipDotClick
+			FieldName="communityJailFree"
+			Selected=@TradeFields["communityJailFree"]
+			ColorClass="policeBlue"
+			Owned=@(Owned["communityJailFree"] == SteamId)>
+		</OwnershipDot>
+	</div>
+</div>
 </root>
 
 @code {
@@ -145,6 +293,10 @@
 	/// </summary>
 	protected override int BuildHash() {
 		return HashCode.Combine(Player.Money);
+	}
+
+	private void OwnershipDotClick(string field) {
+		ToggleField(field);
 	}
 
 	private void ToggleField(string fieldName) {
