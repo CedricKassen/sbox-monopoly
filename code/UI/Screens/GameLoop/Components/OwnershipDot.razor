@@ -1,10 +1,11 @@
 ﻿@using System
 @namespace Monopoly.UI.Screens.GameLoop
+@inherits Sandbox.UI.Panel
 
 <root>
-	<div onclick=@(() => OnSelect(FieldName)) id=@FieldName class="ownership-dot @ColorClass @(Selected ? "ownership-dot-selected" : "")">
-		<div id="@(FieldName)-mortgaged" class="@(Mortgaged ? "ownership-dot-mortgage" : "")"></div>
-		<div id="@(FieldName)-disabled" class=" @(Owned ? "" : "ownership-dot-disabled")"></div>
+	<div onclick=@(() => OnSelect(FieldName)) id=@FieldName class="ownership-dot @ColorClass @(GetSelected(FieldName) ? "ownership-dot-selected" : "")">
+		<div id="@(FieldName)-mortgaged" class="@(GetMortgaged(FieldName) ? "ownership-dot-mortgage" : "")"></div>
+		<div id="@(FieldName)-disabled" class=" @(GetOwned(FieldName) ? "" : "ownership-dot-disabled")"></div>
 	</div>
 </root>
 
@@ -20,12 +21,16 @@
 	public string ColorClass { get; set; }
 
 	[Property]
-	public bool Selected { get; set; } = false;
+	public Func<string, bool> GetSelected { get; set; } = (string _) => { return false; };
 
 	[Property]
-	public bool Mortgaged { get; set; } = false;
+	public Func<string, bool> GetMortgaged { get; set; } = (string _) => { return false; };
 
 	[Property]
-	public bool Owned { get; set; } = false;
+	public Func<string, bool> GetOwned { get; set; } = (string _) => { return false; };
+
+	protected override int BuildHash() {
+		return HashCode.Combine(FieldName);
+	}
 
 }
