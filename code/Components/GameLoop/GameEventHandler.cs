@@ -173,7 +173,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
 		if (Networking.IsHost) {
-			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+			GetPlayerFromEvent(eventArgs.PlayerId).Money -= eventArgs.Amount;
 			GetPlayerFromEvent(eventArgs.Recipient).Money += eventArgs.Amount;
 		}
 	}
