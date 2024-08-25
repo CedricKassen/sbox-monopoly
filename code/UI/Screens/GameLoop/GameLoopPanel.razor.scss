@@ -87,7 +87,7 @@
     animation: bluePulse 2s infinite;
 
     * {
-      transform: rotate(-45deg) translate(-8px, 52px);
+      transform: rotate(-45deg) translate(-6px, 54px);
     }
   }
 }
@@ -253,13 +253,6 @@ Modal {
   gap: 32px;
   align-items: center;
 
-  .container {
-    background-color: $primary-background-color;
-    padding: 16px;
-    border-radius: 8px;
-    gap: 32px;
-  }
-
   .row {
     flex-direction: row;
     align-items: center;
@@ -381,6 +374,12 @@ Modal {
   }
 }
 
+.container {
+  background-color: $primary-background-color;
+  padding: 12px;
+  border-radius: 8px;
+  gap: 32px;
+}
 
 .chanceCard {
   width: 480px;
@@ -565,13 +564,13 @@ Modal {
 
 @keyframes bluePulse {
   0% {
-    border: 8px solid #0081ea;
+    border: 12px solid #0081ea;
   }
   50% {
-    border: 8px solid #96b6e1;
+    border: 12px solid #96b6e1;
   }
   100% {
-    border: 8px solid #0081ea;
+    border: 12px solid #0081ea;
   }
 }
 
