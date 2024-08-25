@@ -340,6 +340,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
+		Log.Info("Turn over!");
+		Log.Info("");
 		TurnManager.CurrentPlayerIndex = (TurnManager.CurrentPlayerIndex + 1) % TurnManager.CurrentLobby.Players.Count;
 		SetCurrentPlayersJailState();
 		ChangeDiceOwnershipToCurrentPlayer();
