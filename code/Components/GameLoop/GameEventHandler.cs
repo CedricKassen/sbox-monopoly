@@ -17,27 +17,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<GoToJailEvent>, IGameEventHandler<LandOnJailEvent>,
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
                                 IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
-                                IGameEventHandler<NotEnoughFundsEvent> {
-	[Property]
-	public GameObject LocationContainer { get; set; }
-
-	[Property]
-	public Lobby Lobby { get; set; }
-
-	[Property]
-	public MovementManager MovementManager { get; set; }
-
-	[Property]
-	public CardActionManager CardActionManager { get; set; }
-
-	[Property]
-	public IngameStateManager IngameStateManager { get; set; }
-
-	[Property]
-	public TurnManager TurnManager { get; set; }
-
-	[Property]
-	public TradeState TradeState { get; set; }
+                                IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent> {
+	[Property] public GameObject LocationContainer { get; set; }
+	[Property] public Lobby Lobby { get; set; }
+	[Property] public MovementManager MovementManager { get; set; }
+	[Property] public CardActionManager CardActionManager { get; set; }
+	[Property] public IngameStateManager IngameStateManager { get; set; }
+	[Property] public TurnManager TurnManager { get; set; }
+	[Property] public TradeState TradeState { get; set; }
 
 	private List<Dice> _dice = new();
 
@@ -67,6 +54,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		TurnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRollValue(), _dice[1].GetRollValue());
+	}
+
+	public void OnGameEvent(TurnActionDoneEvent eventArgs) {
+		TurnManager.ChangePhase(eventArgs.PlayerId, eventArgs.NewPhase);
 	}
 
 	public void OnGameEvent(BuildHouseEvent eventArgs) {
@@ -128,6 +119,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		IngameStateManager.OwnedFields.TryGetValue(location.GameObject.Name, out var fieldOwner);
 		var currentPlayer = GetPlayerFromEvent(eventArgs.playerId);
 
+		TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.InAction);
+
 		if (fieldOwner == 0 || location.Type == GameLocation.PropertyType.Event) {
 			if (location.EventId == "start") {
 				if (Networking.IsHost) {
@@ -146,9 +139,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			CardActionManager.DisplayCardFor(currentPlayer, location);
 			return;
 		}
-
-		// TODO if field action event is done!
-		TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
 
 		if (fieldOwner != eventArgs.playerId && !location.Mortgaged) {
 			if (location.Type == GameLocation.PropertyType.Normal) {
@@ -183,6 +173,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 					location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount);
 			}
 		}
+
+		TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
 	}
 
 	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
@@ -276,18 +268,22 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		IngameStateManager.State = IngameUI.IngameUiStates.Auction;
 
 		foreach (var player in Lobby.Players) {
-			IngameStateManager.AuctionBiddings[player.SteamId] = 0;
+			IngameStateManager.AuctionBiddings[player.SteamId] = 10;
 		}
 	}
 
 	public void OnGameEvent(PropertyMortgagedEvent eventArgs) {
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
+		var player = GetPlayerFromEvent(eventArgs.playerId);
+		var price = (int)Math.Ceiling(property.Price / 2 * 1.1);
 
-		if (Networking.IsHost && !property.Mortgaged) {
-			GetPlayerFromEvent(eventArgs.playerId).Money += property.Price / 2;
+		if (Networking.IsHost && player.Money > price && property.Mortgaged) {
+			property.Mortgaged = false;
+
+			if (Networking.IsHost) {
+				Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, price));
+			}
 		}
-
-		property.Mortgaged = true;
 	}
 
 
