@@ -121,6 +121,12 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 					currentPlayer.Money += 200;
 				}
 
+				TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
+				return;
+			}
+
+			if (location.EventId == "parking") {
+				TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
 				return;
 			}
 

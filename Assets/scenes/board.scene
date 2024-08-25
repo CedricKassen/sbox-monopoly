@@ -985,6 +985,7 @@
               "__type": "GameLocation",
               "__guid": "2130dfb3-63c9-4047-9660-2a19623b6eb5",
               "Color": "Brown",
+              "EventId": "parking",
               "GroupMembers": [],
               "House_Cost": 0,
               "Houses": 0,
@@ -2675,7 +2676,7 @@
                   "MaxPlayers": 5,
                   "PlayerPrefabs": [
                     {
-                      "Id": 1,
+                      "Id": 6,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/car.prefab"
@@ -2685,7 +2686,7 @@
                       "Height": 288
                     },
                     {
-                      "Id": 2,
+                      "Id": 7,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/ship.prefab"
@@ -2695,7 +2696,7 @@
                       "Height": 320
                     },
                     {
-                      "Id": 3,
+                      "Id": 8,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/timble.prefab"
@@ -2705,7 +2706,7 @@
                       "Height": 512
                     },
                     {
-                      "Id": 4,
+                      "Id": 9,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/tophat.prefab"
@@ -2715,7 +2716,7 @@
                       "Height": 384
                     },
                     {
-                      "Id": 5,
+                      "Id": 10,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/wheelbarrow.prefab"
