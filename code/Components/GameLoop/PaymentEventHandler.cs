@@ -54,7 +54,7 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 
 		bool senderIsBank = eventArgs.PlayerId == 2;
 		bool recipientIsBank = recipient == null;
-		bool recipientIsFreeParking = eventArgs.PlayerId == 1;
+		bool recipientIsFreeParking = eventArgs.Recipient == 1;
 
 		if (!senderIsBank) {
 			if (sender.Money - eventArgs.Amount < 0) {
