@@ -87,6 +87,12 @@ public static class CardActionHelper {
 
 	public static void CollectFromAll(Player player, int amount) {
 		List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>());
+		player.Money += amount * allPlayers.Count;
+		allPlayers.ForEach(otherPlayer => otherPlayer.Money -= amount);
+	}
+
+	public static void PayToAll(Player player, int amount) {
+		List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>());
 		player.Money -= amount * allPlayers.Count;
 		allPlayers.ForEach(otherPlayer => otherPlayer.Money += amount);
 	}
