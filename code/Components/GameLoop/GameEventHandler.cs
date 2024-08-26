@@ -364,10 +364,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
-		Log.Info("Turn over!");
-		Log.Info("");
-
-
 		var currentLobbyPlayers = TurnManager.CurrentLobby.Players;
 
 		if (currentLobbyPlayers.Count > 1 &&
@@ -378,7 +374,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		do {
 			TurnManager.CurrentPlayerIndex = (TurnManager.CurrentPlayerIndex + 1) % currentLobbyPlayers.Count;
-		} while (!(currentLobbyPlayers[TurnManager.CurrentPlayerIndex].EliminatedPosition > 0));
+		} while (currentLobbyPlayers[TurnManager.CurrentPlayerIndex].EliminatedPosition > 0);
 
 		SetCurrentPlayersJailState();
 		ChangeDiceOwnershipToCurrentPlayer();
