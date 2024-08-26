@@ -11,8 +11,7 @@ public class TurnManager : Component {
 		PlayerAction,
 		InAction,
 		Jail,
-		InMovement,
-		DiceRoll
+		InMovement
 	}
 
 	public enum PlayerActionType {
