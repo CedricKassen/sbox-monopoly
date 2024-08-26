@@ -7,8 +7,20 @@ public sealed class MusicManager : BaseSoundComponent {
 	[Property] [Group("Sound")] public float RepeatOffset { get; set; }
 
 
+	protected override void OnDestroy() {
+		Log.Info("DESTROY");
+		SoundHandle.Stop();
+		base.OnDestroy();
+	}
+
 	[Broadcast]
 	public override void StopSound() {
+		Log.Info("Stop");
+		if (TempSoundHandle != null) {
+			Log.Info("Stop Temp");
+			TempSoundHandle.Stop();
+		}
+
 		SoundHandle.Stop();
 	}
 
