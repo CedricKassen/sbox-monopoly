@@ -46,6 +46,10 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 
 	[Property] public GameObject DicePrefab { get; set; }
 
+	public override int GetHashCode() {
+		return HashCode.Combine(Players, SelectedPawns.Values);
+	}
+
 	public void OnGameEvent(ChangePawnSelectionEvent eventArgs) {
 		// Only host should change this stuff
 		if (!Networking.IsHost) {
