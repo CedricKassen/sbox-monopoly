@@ -9,6 +9,74 @@
 
 
 <root>
+@if (_stateManager.State.Equals(IngameUiStates.EndScreen)) {
+	var playerCount = Lobby.Players.Count();
+	var first = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == 0);
+	var second = Lobby.Players.FirstOrDefault(player => playerCount > 1 && player.EliminatedPosition == playerCount - 1);
+	var third = Lobby.Players.FirstOrDefault(player => playerCount > 2 && player.EliminatedPosition == playerCount - 2);
+	var forth = Lobby.Players.FirstOrDefault(player => playerCount > 3 && player.EliminatedPosition == playerCount - 3);
+	var fifth = Lobby.Players.FirstOrDefault(player => playerCount > 4 && player.EliminatedPosition == playerCount - 4);
+
+
+	<section class="menu">
+		@if (playerCount > 1) {
+			<div class="column">
+				<div class="pedestal">
+					<div class="pillar">
+						<img src=@($"avatar:{second?.SteamId}")>
+						<p>@second?.Name</p>
+						<div></div>
+					</div>
+					<div class="pillar">
+						<img src=@($"avatar:{first?.SteamId}")>
+						<p>@first?.Name</p>
+						<div></div>
+					</div>
+					<div class="pillar">
+						<img src=@($"avatar:{third?.SteamId}")>
+						<p>@third?.Name</p>
+						<div></div>
+					</div>
+				</div>
+				<div class="endButtons">
+					<button onclick=@Quit> Leave </button>
+					<button onclick=@StartNewGame> Rematch </button>
+				</div>
+			</div>
+			<div class="restOfThePlayers">
+				@if (forth != null) {
+					<div class="player">
+						<p> 4 </p>
+						<img src=@($"avatar:{forth.SteamId}")>
+						<p>@forth.Name</p>
+					</div>
+				}
+
+				@if (fifth != null) {
+					<div class="player">
+						<p> 5 </p>
+						<img src=@($"avatar:{fifth.SteamId}")>
+						<p>@fifth.Name</p>
+					</div>
+				}
+			</div>
+		}
+		else {
+			<div class="column">
+				<h1> It's only you and you still lost ... </h1>
+				<h1> Well done! </h1>
+				<div class="endButtons">
+					<button onclick=@Quit> Leave </button>
+					<button onclick=@StartNewGame> Rematch </button>
+				</div>
+			</div>
+		}
+	</section>
+
+	return;
+}
+
+
 <div style="position: absolute; top: 50%; left: 50%">
 	@if (_showRoll) {
 		<h1> @_dice.Aggregate(0, (accumulator, dice) => dice.GetRollValue() + accumulator) </h1>
@@ -19,9 +87,12 @@
 	<div class="autogrow"></div>
 	<button class="secondaryButton @(!CanOpenUI() ? "disabled" : "")" onclick="@(() => ChangeLocalUIState(LocalUIStates.Bank))"> 🏦 </button>
 	<button class="secondaryButton @(!CanOpenUI() ? "disabled" : "")" onclick="@(() => ChangeLocalUIState(LocalUIStates.Trade))"> 💸 </button>
-	<button class="mainButton @(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll">
-		GO
-	</button>
+	<div class="mainButton">
+		<div class="@(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")"></div>
+		<button class="" onclick="@Roll">
+			GO
+		</button>
+	</div>
 	<button class="secondaryButton @(!CanOpenUI() ? "disabled" : "")" onclick="@(() => ChangeLocalUIState(LocalUIStates.Building))"> 🏠 </button>
 	<div class="autogrow"></div>
 	<button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Options))"> ⚙️ </button>
@@ -224,7 +295,7 @@
 							</h3>
 						</div>
 						<div style="gap: 32px">
-							@foreach (var player in Lobby.Players.Where(pl => Lobby.Players.Count == 1 || pl.SteamId != (ulong) Game.SteamId)) {
+							@foreach (var player in Lobby.Players.Where(pl => Lobby.Players.Count == 1 || pl.SteamId != (ulong)Game.SteamId)) {
 								<div onclick=@(() => { _tradeState.Network.TakeOwnership(); _tradeState.TradingPartner = player; }) class="container playerCard">
 									<img src=@($"avatar:{player.SteamId}")/>
 									<h3> @player.Name </h3>
@@ -290,7 +361,7 @@
 						<div style="width: 100%">
 							@if (recipient != null) {
 								<img src=@($"avatar:{data.Recipient}") style="width: 120px; aspect-ratio: 1/1; border-radius: 8px"/>
-							} 
+							}
 							<div style="flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; height: 120px;">
 								<h3> You owe @(recipient != null ? recipient.Name : "Bank"): </h3>
 								<h3 style="font-weight: bolder;"> $@(data.Debts). </h3>
@@ -352,6 +423,7 @@
 		Chance,
 		Community_Chest,
 		Auction,
+		EndScreen,
 		None
 	}
 
@@ -383,6 +455,7 @@
 	private LocalUIStates _localUiStateCache = LocalUIStates.None;
 
 	private bool _showRoll;
+	private bool _localUiIsOpen;
 
 	public override void Tick() {
 		if (Input.Down("Jump")) {
@@ -443,6 +516,7 @@
 			_localUiStateCache = _player.localUiState;
 		}
 
+		_localUiIsOpen = true;
 		_player.localUiState = newState;
 	}
 
@@ -457,6 +531,7 @@
 			return false;
 		}
 
+		_localUiIsOpen = true;
 		return true;
 	}
 
@@ -470,6 +545,7 @@
 		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
 			return;
 		}
+
 		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.Rolling);
 		_turnManager.EmitStartRollEvent();
 	}
@@ -500,9 +576,9 @@
 			Log.Info(dice.GameObject.Network.OwnerConnection.DisplayName);
 			dice.Roll();
 		}
-		
+
 		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InMovement);
-		
+
 
 		while (_dice.Any(dice => dice.IsRolling)) {
 			await Task.DelayRealtimeSeconds(0.5f);
@@ -528,10 +604,11 @@
 	}
 
 	private void EndTurn() {
-		_turnManager.EmitTurnFinishedEvent((ulong)Game.SteamId);
+		_turnManager.EmitTurnFinishedEvent();
 	}
 
 	private void CloseLocalModal() {
+		_localUiIsOpen = false;
 		_player.localUiState = _localUiStateCache;
 		_localUiStateCache = LocalUIStates.None;
 	}
@@ -644,7 +721,7 @@
 		var isCurrentPlayer = Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId;
 		var isAllowedPhase = allowedPhases.Contains(_turnManager.CurrentPhase);
 
-		return isCurrentPlayer && isAllowedPhase || state == LocalUIStates.Options;
+		return (isCurrentPlayer && isAllowedPhase || state == LocalUIStates.Options) && !_localUiIsOpen;
 	}
 
 	private int ComputeAmountFromDictionary(NetDictionary<string, bool> dictionary) {
@@ -677,5 +754,20 @@
 		_turnManager.EmitPlayerPaymentEvent(sender, recipient, amount);
 		_player.localUiState = LocalUIStates.None;
 	}
+
+	private void GoBankrupt(ulong player, ulong recipient) {
+		_turnManager.EmitPlayerBankruptEvent(player, recipient);
+	}
+
+	private void StartNewGame() {
+		MusicManager musicManager = Game.ActiveScene.GetAllComponents<MusicManager>().First();
+		musicManager.StopSound();
+		Game.ActiveScene.LoadFromFile("scenes/board.scene");
+	}
+
+	private void Quit() {
+		Game.Disconnect();
+	}
+
 
 }

@@ -114,9 +114,11 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 				else if (location.EventId == "income_tax") {
 					var percentageTax = (int)Math.Ceiling(player.Money * 0.1);
 					var tax = percentageTax < 200 ? percentageTax : 200;
+					Log.Info("Income Tax");
 					Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, 1, tax));
 				}
 				else if (location.EventId == "luxury_tax") {
+					Log.Info("Income Tax");
 					Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, 1, 100));
 				}
 				else if (location.EventId == "police") {

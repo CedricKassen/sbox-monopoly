@@ -5,6 +5,7 @@ using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
 using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
+using Sandbox.UI;
 
 namespace Sandbox.Components.GameLoop;
 
@@ -18,29 +19,19 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<GoToJailEvent>, IGameEventHandler<LandOnJailEvent>,
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
                                 IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
-                                IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent> {
-	[Property]
-	public GameObject LocationContainer { get; set; }
-
-	[Property]
-	public Lobby Lobby { get; set; }
-
-	[Property]
-	public MovementManager MovementManager { get; set; }
-
-	[Property]
-	public CardActionManager CardActionManager { get; set; }
-
-	[Property]
-	public IngameStateManager IngameStateManager { get; set; }
-
-	[Property]
-	public TurnManager TurnManager { get; set; }
-
-	[Property]
-	public TradeState TradeState { get; set; }
+                                IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent>,
+                                IGameEventHandler<PlayerBankruptEvent> {
+	[Property] public GameObject LocationContainer { get; set; }
+	[Property] public Lobby Lobby { get; set; }
+	[Property] public MovementManager MovementManager { get; set; }
+	[Property] public CardActionManager CardActionManager { get; set; }
+	[Property] public IngameStateManager IngameStateManager { get; set; }
+	[Property] public TurnManager TurnManager { get; set; }
+	[Property] public TradeState TradeState { get; set; }
 
 	private List<Dice> _dice = new();
+
+	private Stack<int> _auctionLocations = new();
 
 	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
 		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.PlayerAction);
@@ -48,6 +39,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		if (Networking.IsHost) {
 			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+		}
+
+		if (_auctionLocations.Any()) {
+			TurnManager.EmitPropertyAuctionEvent(_auctionLocations.Pop(), eventArgs.playerId);
+			return;
 		}
 
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
@@ -186,6 +182,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				                                                             (f.Key == "electricCompany" ||
 				                                                              f.Key == "waterCompany"));
 
+				Log.Info("Utilities owned: " + utilityCount);
+				Log.Info("Last throw: " + currentPlayer.LastDiceCount);
+
 				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
 					location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount);
 			}
@@ -251,7 +250,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		if (player.JailTurnCounter >= 1) {
 			// We need to box this if because this event is broadcast end every player should go in the first if if its true
 			if (!player.IsProxy) {
-				TurnManager.EmitTurnFinishedEvent(eventArgs.playerId);
+				TurnManager.EmitTurnFinishedEvent();
 			}
 		}
 		else {
@@ -276,6 +275,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(PropertyAuctionEvent eventArgs) {
 		IngameStateManager.AuctionBiddings = new NetDictionary<ulong, int>();
 		IngameStateManager.State = IngameUI.IngameUiStates.Auction;
+		IngameStateManager.Data = LocationContainer.Children[eventArgs.PropertyIndex].Components.Get<GameLocation>();
 
 		foreach (var player in Lobby.Players) {
 			IngameStateManager.AuctionBiddings[player.SteamId] = 10;
@@ -286,7 +286,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
 		var price = property.Price / 2;
 
-		if (Networking.IsHost && !property.Mortgaged) {
+		if (!property.Mortgaged) {
 			property.Mortgaged = true;
 
 			if (Networking.IsHost) {
@@ -312,12 +312,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 
 
-		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InMovement);
-
 		player.DoublesCount = eventArgs.Doubles ? player.DoublesCount + 1 : 0;
 
 		// Player should not be in jail!
 		if (player.JailTurnCounter <= 0) {
+			TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InMovement);
 			if (player.DoublesCount < 3) {
 				MovementManager.StartMovement(player, eventArgs.Number);
 			}
@@ -354,15 +353,26 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	public void OnGameEvent(DebugEvent eventArgs) {
-		var player = Game.ActiveScene.GetAllComponents<Player>().First(player1 => player1.Name.Contains("Fresh"));
-		MovementManager.StartMovement(player, CardActionHelper.CalculateFieldsToTravel(player, 30));
+		IngameStateManager.State = IngameUI.IngameUiStates.EndScreen;
 	}
 
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
-		Log.Info("Turn over!");
+		var currentLobbyPlayers = TurnManager.CurrentLobby.Players;
+
+		Log.Info("Turn finished");
 		Log.Info("");
-		TurnManager.CurrentPlayerIndex = (TurnManager.CurrentPlayerIndex + 1) % TurnManager.CurrentLobby.Players.Count;
+
+		if (currentLobbyPlayers.Count > 1 &&
+		    currentLobbyPlayers.Count(player => !(player.EliminatedPosition > 0)) == 1) {
+			IngameStateManager.State = IngameUI.IngameUiStates.EndScreen;
+			return;
+		}
+
+		do {
+			TurnManager.CurrentPlayerIndex = (TurnManager.CurrentPlayerIndex + 1) % currentLobbyPlayers.Count;
+		} while (currentLobbyPlayers[TurnManager.CurrentPlayerIndex].EliminatedPosition > 0);
+
 		SetCurrentPlayersJailState();
 		ChangeDiceOwnershipToCurrentPlayer();
 	}
@@ -472,5 +482,46 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(NotEnoughFundsEvent eventArgs) {
 		GetPlayerFromEvent(eventArgs.PlayerId).localUiState = IngameUI.LocalUIStates.NotEnoughFunds;
 		IngameStateManager.Data = eventArgs;
+	}
+
+	public void OnGameEvent(PlayerBankruptEvent eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.PlayerId);
+
+		var locations = Game.ActiveScene.Children[0];
+
+		if (eventArgs.Recipient is 1 or 2) {
+			// auction for every street in players possession
+			// refactor auction event so its gets an array/list of properties to handle
+
+			foreach (var (key, value) in IngameStateManager.OwnedFields) {
+				if (key.Contains("Jail") && value == eventArgs.PlayerId) {
+					continue;
+				}
+
+				var gameLocation = locations.Children.First(go => go.Name.Equals(key)).Components.Get<GameLocation>();
+				gameLocation.Houses = 0;
+				_auctionLocations.Push(gameLocation.PropertyIndex);
+			}
+
+			if (_auctionLocations.Any()) {
+				TurnManager.EmitPropertyAuctionEvent(_auctionLocations.Pop(), player.SteamId);
+			}
+
+			return;
+		}
+
+
+		Player recipient = GetPlayerFromEvent(eventArgs.Recipient);
+
+		TurnManager.EmitPlayerPaymentEvent(eventArgs.PlayerId, eventArgs.Recipient, player.Money);
+
+		foreach (var key in IngameStateManager.OwnedFields.Keys) {
+			IngameStateManager.OwnedFields[key] = recipient.SteamId;
+		}
+
+		player.EliminatedPosition = ++Player.EliminatedCount;
+		player.GameObject.Enabled = false;
+
+		TurnManager.EmitTurnFinishedEvent();
 	}
 }

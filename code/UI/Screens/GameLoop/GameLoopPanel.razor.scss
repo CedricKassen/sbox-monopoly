@@ -5,6 +5,84 @@
   pointer-events: all;
 }
 
+section.menu {
+  .pedestal {
+    gap: 30px;
+    align-items: flex-end;
+
+    .pillar {
+      flex-direction: column;
+      gap: 24px;
+      width: 200px;
+      align-items: center;
+
+      p {
+        font-size: 28px;
+      }
+
+      img {
+        aspect-ratio: 1 / 1;
+        width: 70%;
+        height: auto;
+      }
+
+      &:nth-child(2) {
+        & > div {
+          background-color: #daa520;
+          width: 200px;
+          height: 420px;
+        }
+      }
+
+      &:nth-child(1) {
+        & > div {
+          background-color: #91908e;
+          width: 200px;
+          height: 300px;
+        }
+      }
+
+      &:nth-child(3) {
+        & > div {
+          background-color: #674011;
+          width: 200px;
+          height: 180px;
+        }
+      }
+    }
+  }
+
+  .restOfThePlayers {
+    position: absolute;
+    right: 32px;
+    top: 0;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    p {
+      font-size: 28px;
+    }
+
+    .player {
+      flex-direction: column;
+      gap: 22px;
+      background-color: $button-background-color;
+      padding: 16px 32px;
+      border-radius: 8px;
+    }
+  }
+
+  .endButtons {
+    gap: 32px;
+
+    button {
+      padding: 8px 32px;
+    }
+  }
+}
+
+
 .ownership-dot {
   &.big {
     height: 40px;
@@ -70,16 +148,37 @@
   }
 
   .mainButton {
+    position: relative;
     height: 150px;
     width: 150px;
-    transform: rotate(45deg);
     margin-right: 120px;
     transition: color 200ms;
     border-radius: 0 16px;
     font-size: 55px;
 
-    * {
-      transform: rotate(-45deg) translate(-10px, 75px);
+    &:hover {
+      & > div {
+        background-color: $button-hover-background-color;
+      }
+    }
+
+    & > div {
+      position: absolute;
+      transform: rotate(45deg);
+      height: 150px;
+      width: 150px;
+      background-color: $button-background-color;
+    }
+
+    button {
+      position: absolute;
+      background-color: #00000000;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      overflow: visible;
+      white-space: pre-line;
+      width: 80px;
     }
   }
 
