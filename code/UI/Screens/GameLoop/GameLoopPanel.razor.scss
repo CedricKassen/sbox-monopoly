@@ -148,16 +148,37 @@ section.menu {
   }
 
   .mainButton {
+    position: relative;
     height: 150px;
     width: 150px;
-    transform: rotate(45deg);
     margin-right: 120px;
     transition: color 200ms;
     border-radius: 0 16px;
     font-size: 55px;
 
-    * {
-      transform: rotate(-45deg) translate(-10px, 75px);
+    &:hover {
+      & > div {
+        background-color: $button-hover-background-color;
+      }
+    }
+
+    & > div {
+      position: absolute;
+      transform: rotate(45deg);
+      height: 150px;
+      width: 150px;
+      background-color: $button-background-color;
+    }
+
+    button {
+      position: absolute;
+      background-color: #00000000;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      overflow: visible;
+      white-space: pre-line;
+      width: 80px;
     }
   }
 

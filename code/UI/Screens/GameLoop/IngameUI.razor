@@ -87,9 +87,12 @@
 	<div class="autogrow"></div>
 	<button class="secondaryButton @(!CanOpenUI() ? "disabled" : "")" onclick="@(() => ChangeLocalUIState(LocalUIStates.Bank))"> 🏦 </button>
 	<button class="secondaryButton @(!CanOpenUI() ? "disabled" : "")" onclick="@(() => ChangeLocalUIState(LocalUIStates.Trade))"> 💸 </button>
-	<button class="mainButton @(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll">
-		GO
-	</button>
+	<div class="mainButton">
+		<div class="@(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")"></div>
+		<button class="" onclick="@Roll">
+			GO
+		</button>
+	</div>
 	<button class="secondaryButton @(!CanOpenUI() ? "disabled" : "")" onclick="@(() => ChangeLocalUIState(LocalUIStates.Building))"> 🏠 </button>
 	<div class="autogrow"></div>
 	<button class="secondaryButton" onclick="@(() => ChangeLocalUIState(LocalUIStates.Options))"> ⚙️ </button>
@@ -452,6 +455,7 @@
 	private LocalUIStates _localUiStateCache = LocalUIStates.None;
 
 	private bool _showRoll;
+	private bool _localUiIsOpen;
 
 	public override void Tick() {
 		if (Input.Down("Jump")) {
@@ -512,6 +516,7 @@
 			_localUiStateCache = _player.localUiState;
 		}
 
+		_localUiIsOpen = true;
 		_player.localUiState = newState;
 	}
 
@@ -526,6 +531,7 @@
 			return false;
 		}
 
+		_localUiIsOpen = true;
 		return true;
 	}
 
@@ -602,6 +608,7 @@
 	}
 
 	private void CloseLocalModal() {
+		_localUiIsOpen = false;
 		_player.localUiState = _localUiStateCache;
 		_localUiStateCache = LocalUIStates.None;
 	}
@@ -714,7 +721,7 @@
 		var isCurrentPlayer = Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId;
 		var isAllowedPhase = allowedPhases.Contains(_turnManager.CurrentPhase);
 
-		return isCurrentPlayer && isAllowedPhase || state == LocalUIStates.Options;
+		return (isCurrentPlayer && isAllowedPhase || state == LocalUIStates.Options) && !_localUiIsOpen;
 	}
 
 	private int ComputeAmountFromDictionary(NetDictionary<string, bool> dictionary) {
