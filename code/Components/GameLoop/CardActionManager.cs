@@ -9,21 +9,29 @@ using Sandbox.Events.TurnEvents;
 using Sandbox.VR;
 
 public sealed class CardActionManager : Component, IGameEventHandler<GameStartEvent> {
-	[Property] public readonly Dictionary<int, bool> BlockedCards = new();
+	[Property]
+	public readonly Dictionary<int, bool> BlockedCards = new();
 
-	[HostSync] private NetList<int> ChanceCardsOrder { get; set; }
+	[HostSync]
+	private NetList<int> ChanceCardsOrder { get; set; }
 
-	[HostSync] private NetList<int> CommunityCardsOrder { get; set; }
+	[HostSync]
+	private NetList<int> CommunityCardsOrder { get; set; }
 
-	[Property] private List<Card> ChanceCards;
+	[Property]
+	private List<Card> ChanceCards;
 
-	[Property] private List<Card> CommunityCards;
+	[Property]
+	private List<Card> CommunityCards;
 
-	[Property] public MovementManager MovementManager { get; set; }
+	[Property]
+	public MovementManager MovementManager { get; set; }
 
-	[Property] public IngameStateManager IngameStateManager { get; set; }
+	[Property]
+	public IngameStateManager IngameStateManager { get; set; }
 
-	[Property] public TurnManager TurnManager { get; set; }
+	[Property]
+	public TurnManager TurnManager { get; set; }
 
 	public void RemoveBlockedCard(int actionId) {
 		BlockedCards.Remove(actionId);
@@ -162,7 +170,11 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 
 
 	private void DisplayPropertyCard(Player player, GameLocation location) {
-		// IngameStateManager.State = IngameUI.IngameUiStates.Buying;
+		if (!TurnManager.CurrentLobby.Players.Any(p => p.Money >= 20)) {
+			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
+			return;
+		}
+
 		player.localUiState = IngameUI.LocalUIStates.Buying;
 		IngameStateManager.Data = location;
 	}
