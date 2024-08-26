@@ -9,9 +9,6 @@
 
 
 <root>
-@IngameUiStates.EndScreen
-@_stateManager.State
-
 @if (_stateManager.State.Equals(IngameUiStates.EndScreen)) {
 	var playerCount = Lobby.Players.Count();
 	var first = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == 0);
