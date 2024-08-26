@@ -370,7 +370,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		var currentLobbyPlayers = TurnManager.CurrentLobby.Players;
 
-		if (currentLobbyPlayers.Count(player => !(player.EliminatedPosition > 0)) == 1) {
+		if (currentLobbyPlayers.Count > 1 &&
+		    currentLobbyPlayers.Count(player => !(player.EliminatedPosition > 0)) == 1) {
 			IngameStateManager.State = IngameUI.IngameUiStates.EndScreen;
 			return;
 		}
