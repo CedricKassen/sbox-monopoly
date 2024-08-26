@@ -182,6 +182,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				                                                             (f.Key == "electricCompany" ||
 				                                                              f.Key == "waterCompany"));
 
+				Log.Info("Utilities owned: " + utilityCount);
+				Log.Info("Last throw: " + currentPlayer.LastDiceCount);
+
 				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
 					location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount);
 			}
@@ -357,6 +360,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
 		var currentLobbyPlayers = TurnManager.CurrentLobby.Players;
+
+		Log.Info("Turn finished");
+		Log.Info("");
 
 		if (currentLobbyPlayers.Count > 1 &&
 		    currentLobbyPlayers.Count(player => !(player.EliminatedPosition > 0)) == 1) {
