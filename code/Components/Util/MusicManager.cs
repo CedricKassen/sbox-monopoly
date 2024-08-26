@@ -34,8 +34,6 @@ public sealed class MusicManager : BaseSoundComponent {
 
 
 	protected override void OnUpdate() {
-		Log.Info("Duration: " + (Duration + RepeatOffset) + " SoundLength: " +
-		         SoundLength);
 		if (SoundHandle is not null) ApplyOverrides(SoundHandle);
 
 		if (TempSoundHandle is not null) ApplyOverrides(TempSoundHandle);
