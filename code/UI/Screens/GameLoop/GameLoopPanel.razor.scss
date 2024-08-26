@@ -5,6 +5,36 @@
   pointer-events: all;
 }
 
+section.menu {
+  .pedestal {
+    gap: 30px;
+
+    .pillar {
+      flex-direction: column;
+
+      &:nth-child(2) {
+        background-color: #daa520;
+        width: 150px;
+        height: 300px;
+      }
+
+      &:nth-child(1) {
+        background-color: #91908e;
+        width: 120px;
+        height: 240px;
+      }
+
+      &:nth-child(3) {
+        background-color: #674011;
+        width: 100px;
+        height: 200px;
+      }
+    }
+
+  }
+}
+
+
 .ownership-dot {
   &.big {
     height: 40px;

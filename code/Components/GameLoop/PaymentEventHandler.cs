@@ -61,7 +61,7 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 			BankBalance += eventArgs.Amount;
 		}
 
-		Log.Info((senderIsBank ? "Bank" : recipient.Name) + " paid " + eventArgs.Amount + " to " +
+		Log.Info((senderIsBank ? "Bank" : sender.Name) + " paid " + eventArgs.Amount + " to " +
 		         (recipient != null ? recipient.Name : recipientIsBank ? "Bank" : "FreeParking"));
 		TurnManager.EmitTurnActionDoneEvent(senderIsBank, eventArgs.Recipient, eventArgs.PlayerId);
 	}

@@ -85,7 +85,7 @@ public class TurnManager : Component {
 	}
 
 	[Broadcast]
-	public void EmitTurnFinishedEvent(ulong playerId) {
+	public void EmitTurnFinishedEvent() {
 		GameParentObject.Dispatch(new TurnFinishedEvent());
 	}
 
@@ -195,5 +195,10 @@ public class TurnManager : Component {
 	[Broadcast]
 	public void EmitPayoutFreeParkingEvent(ulong playerId) {
 		GameParentObject.Dispatch(new PayoutFreeParkingEvent(playerId));
+	}
+
+	[Broadcast]
+	public void EmitPlayerBankruptEvent(ulong player, ulong recipient) {
+		GameParentObject.Dispatch(new PlayerBankruptEvent(player, recipient));
 	}
 }

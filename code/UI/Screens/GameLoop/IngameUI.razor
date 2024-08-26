@@ -9,6 +9,47 @@
 
 
 <root>
+@IngameUiStates.EndScreen 
+@_stateManager.State
+
+@if (_stateManager.State.Equals(IngameUiStates.EndScreen)) {
+
+	
+	
+	var playerCount = Lobby.Players.Count();
+	// Player first = Lobby.Players.First(player => player.EliminatedPosition == playerCount - 1);
+	// Player second = Lobby.Players.First(player => player.EliminatedPosition == playerCount - 1);
+	// Player third = Lobby.Players.First(player => player.EliminatedPosition == playerCount - 2);
+	// Player forth = Lobby.Players.First(player => player.EliminatedPosition == playerCount - 3);
+	// Player fifth = Lobby.Players.First(player => player.EliminatedPosition == playerCount - 4);
+
+
+	<section class="menu">
+		<div class="pedestal">
+			@for (var i = 0; i < (playerCount > 3 ? 3: playerCount); i++) {
+				Player player;
+				if (i == 0) {
+					player = Lobby.Players.First(ply => ply.EliminatedPosition == 0);
+				}
+				else {
+					player = Lobby.Players.First(ply => ply.EliminatedPosition == playerCount - i);
+				}
+
+				<div class="pillar">
+					<img src=@($"avatar:{player.SteamId}")>
+					<p>@player.Name</p>
+				</div>
+			}
+		</div>
+
+		<div></div>
+
+		<div></div>
+	</section>
+	
+	return;
+}
+
 <div style="position: absolute; top: 50%; left: 50%">
 	@if (_showRoll) {
 		<h1> @_dice.Aggregate(0, (accumulator, dice) => dice.GetRollValue() + accumulator) </h1>
@@ -352,6 +393,7 @@
 		Chance,
 		Community_Chest,
 		Auction,
+		EndScreen,
 		None
 	}
 
@@ -528,7 +570,7 @@
 	}
 
 	private void EndTurn() {
-		_turnManager.EmitTurnFinishedEvent((ulong)Game.SteamId);
+		_turnManager.EmitTurnFinishedEvent();
 	}
 
 	private void CloseLocalModal() {
@@ -676,6 +718,10 @@
 	private void PayDebts(ulong sender, ulong recipient, int amount) {
 		_turnManager.EmitPlayerPaymentEvent(sender, recipient, amount);
 		_player.localUiState = LocalUIStates.None;
+	}
+
+	private void GoBankrupt(ulong player, ulong recipient) {
+		_turnManager.EmitPlayerBankruptEvent(player, recipient);
 	}
 
 }
