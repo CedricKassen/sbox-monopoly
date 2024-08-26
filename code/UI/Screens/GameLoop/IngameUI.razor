@@ -14,15 +14,15 @@
 
 @if (_stateManager.State.Equals(IngameUiStates.EndScreen)) {
 	var playerCount = Lobby.Players.Count();
-	var first = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 1);
-	var second = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 2);
-	var third = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 3);
-	var forth = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 4);
-	var fifth = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 5);
+	var first = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == 0);
+	var second = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 1);
+	var third = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 2);
+	var forth = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 3);
+	var fifth = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 4);
 
 
 	<section class="menu">
-		@if (playerCount > 1 || playerCount == 1) {
+		@if (playerCount > 1) {
 			<div class="column">
 				<div class="pedestal">
 					<div class="pillar">
@@ -31,7 +31,7 @@
 						<div></div>
 					</div>
 					<div class="pillar">
-						<img src=@($"avatar:{first.SteamId}")>
+						<img src=@($"avatar:{first?.SteamId}")>
 						<p>@first?.Name</p>
 						<div></div>
 					</div>
@@ -65,8 +65,14 @@
 			</div>
 		}
 		else {
-			<h1> It's only you and you still lost ... </h1>
-			<h1> Well done! </h1>
+			<div class="column">
+				<h1> It's only you and you still lost ... </h1>
+				<h1> Well done! </h1>
+				<div class="endButtons">
+					<button> Leave </button>
+					<button> Rematch </button>
+				</div>
+			</div>
 		}
 	</section>
 
