@@ -224,7 +224,7 @@
 							</h3>
 						</div>
 						<div style="gap: 32px">
-							@foreach (var player in Lobby.Players) {
+							@foreach (var player in Lobby.Players.Where(pl => Lobby.Players.Count == 1 || pl.SteamId != (ulong) Game.SteamId)) {
 								<div onclick=@(() => { _tradeState.Network.TakeOwnership(); _tradeState.TradingPartner = player; }) class="container playerCard">
 									<img src=@($"avatar:{player.SteamId}")/>
 									<h3> @player.Name </h3>
