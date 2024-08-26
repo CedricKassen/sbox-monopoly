@@ -1,23 +1,21 @@
 using System.Threading.Tasks;
 
 public sealed class MusicManager : BaseSoundComponent {
-	[Property] public float MusicDuration = 238.21062f;
+	[Property] public float SoundLength = 238.21062f;
+	public RealTimeSince Duration;
 	private SoundHandle TempSoundHandle;
 
 	[Property] [Group("Sound")] public float RepeatOffset { get; set; }
 
 
 	protected override void OnDestroy() {
-		Log.Info("DESTROY");
 		SoundHandle.Stop();
 		base.OnDestroy();
 	}
 
 	[Broadcast]
 	public override void StopSound() {
-		Log.Info("Stop");
 		if (TempSoundHandle != null) {
-			Log.Info("Stop Temp");
 			TempSoundHandle.Stop();
 		}
 
@@ -30,21 +28,26 @@ public sealed class MusicManager : BaseSoundComponent {
 		return base.OnLoad();
 	}
 
+
 	protected override void OnUpdate() {
 		if (SoundHandle is not null) ApplyOverrides(SoundHandle);
 
 		if (TempSoundHandle is not null) ApplyOverrides(TempSoundHandle);
 
-		if (SoundHandle.IsValid() && MusicDuration <= SoundHandle.ElapsedTime + RepeatOffset) {
+		if (SoundHandle.IsValid() && SoundLength <= Duration.Relative + RepeatOffset) {
 			SoundEvent.Volume = Volume;
+			Duration = 0;
 			TempSoundHandle = Sound.Play(SoundEvent);
 		}
 
-		if (SoundHandle.IsValid() && SoundHandle.IsPlaying) return;
+		if (SoundHandle.IsValid() && SoundHandle.IsPlaying) {
+			return;
+		}
 
 
 		if (!SoundHandle.IsValid() && !TempSoundHandle.IsValid()) {
 			SoundEvent.Volume = Volume;
+			Duration = 0;
 			SoundHandle = Sound.Play(SoundEvent);
 		}
 
