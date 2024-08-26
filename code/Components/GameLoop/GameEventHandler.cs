@@ -21,13 +21,26 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
                                 IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent>,
                                 IGameEventHandler<PlayerBankruptEvent> {
-	[Property] public GameObject LocationContainer { get; set; }
-	[Property] public Lobby Lobby { get; set; }
-	[Property] public MovementManager MovementManager { get; set; }
-	[Property] public CardActionManager CardActionManager { get; set; }
-	[Property] public IngameStateManager IngameStateManager { get; set; }
-	[Property] public TurnManager TurnManager { get; set; }
-	[Property] public TradeState TradeState { get; set; }
+	[Property]
+	public GameObject LocationContainer { get; set; }
+
+	[Property]
+	public Lobby Lobby { get; set; }
+
+	[Property]
+	public MovementManager MovementManager { get; set; }
+
+	[Property]
+	public CardActionManager CardActionManager { get; set; }
+
+	[Property]
+	public IngameStateManager IngameStateManager { get; set; }
+
+	[Property]
+	public TurnManager TurnManager { get; set; }
+
+	[Property]
+	public TradeState TradeState { get; set; }
 
 	private List<Dice> _dice = new();
 
@@ -463,6 +476,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	private void CloseLocalUIForEveryPlayer() {
 		foreach (var player in Lobby.Players) {
+			player.LocalUiOpen = false;
 			player.localUiState = IngameUI.LocalUIStates.None;
 		}
 	}

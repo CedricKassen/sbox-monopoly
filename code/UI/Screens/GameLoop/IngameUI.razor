@@ -455,7 +455,6 @@
 	private LocalUIStates _localUiStateCache = LocalUIStates.None;
 
 	private bool _showRoll;
-	private bool _localUiIsOpen;
 
 	public override void Tick() {
 		if (Input.Down("Jump")) {
@@ -516,7 +515,7 @@
 			_localUiStateCache = _player.localUiState;
 		}
 
-		_localUiIsOpen = true;
+		_player.LocalUiOpen = true;
 		_player.localUiState = newState;
 	}
 
@@ -531,7 +530,7 @@
 			return false;
 		}
 
-		_localUiIsOpen = true;
+		_player.LocalUiOpen = true;
 		return true;
 	}
 
@@ -608,7 +607,7 @@
 	}
 
 	private void CloseLocalModal() {
-		_localUiIsOpen = false;
+		_player.LocalUiOpen = false;
 		_player.localUiState = _localUiStateCache;
 		_localUiStateCache = LocalUIStates.None;
 	}
@@ -721,7 +720,7 @@
 		var isCurrentPlayer = Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId;
 		var isAllowedPhase = allowedPhases.Contains(_turnManager.CurrentPhase);
 
-		return (isCurrentPlayer && isAllowedPhase || state == LocalUIStates.Options) && !_localUiIsOpen;
+		return (isCurrentPlayer && isAllowedPhase || state == LocalUIStates.Options) && !_player.LocalUiOpen;
 	}
 
 	private int ComputeAmountFromDictionary(NetDictionary<string, bool> dictionary) {
