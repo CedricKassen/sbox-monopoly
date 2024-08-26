@@ -273,7 +273,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var costs = eventArgs.FromAuction ? 0 : gameLocation.Price;
 
 		if (costs <= player.Money && Networking.IsHost) {
-			player.Money -= costs;
+			TurnManager.EmitPlayerPaymentEvent(player.SteamId, 2, costs, TurnManager.CurrentPhase);
 			IngameStateManager.OwnedFields[location.Name] = eventArgs.playerId;
 		}
 	}
