@@ -28,14 +28,20 @@ public class TurnManager : Component {
 		None
 	}
 
-	[Property] public GameObject GameParentObject { get; set; }
+	[Property]
+	public GameObject GameParentObject { get; set; }
 
-	[Property, HostSync] public Phase CurrentPhase { get; set; }
+	[Property, HostSync]
+	public Phase CurrentPhase { get; set; }
 
-	[Property] public Lobby CurrentLobby { get; set; }
-	[Property] public CardActionManager CardActionManager { get; set; }
+	[Property]
+	public Lobby CurrentLobby { get; set; }
 
-	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
+	[Property]
+	public CardActionManager CardActionManager { get; set; }
+
+	[Property, HostSync]
+	public int CurrentPlayerIndex { get; set; }
 
 	public void EmitStartRollEvent() {
 		GameParentObject.Dispatch(new StartRollEvent());
@@ -62,9 +68,12 @@ public class TurnManager : Component {
 	}
 
 	[Broadcast(NetPermission.HostOnly)]
-	public void EmitPlayerPaymentEvent(ulong playerId, ulong recipientId, int amount) {
+	public void EmitPlayerPaymentEvent(ulong playerId, ulong recipientId, int amount, bool changePhase = true) {
 		GameParentObject.Dispatch(new PlayerPaymentEvent(playerId, recipientId, amount));
-		ChangePhase(playerId, Phase.PlayerAction);
+
+		if (changePhase) {
+			ChangePhase(playerId, Phase.PlayerAction);
+		}
 	}
 
 	[Broadcast(NetPermission.HostOnly)]
@@ -104,25 +113,21 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void EmitPropertyMortgagedEvent(int propertyIndex, ulong playerId) {
-		ChangePhase(playerId, Phase.PlayerAction);
 		GameParentObject.Dispatch(new PropertyMortgagedEvent { PropertyIndex = propertyIndex, playerId = playerId });
 	}
 
 	[Broadcast]
 	public void EmitBuildHouseEvent(int propertyIndex, ulong playerId) {
-		ChangePhase(playerId, Phase.PlayerAction);
 		GameParentObject.Dispatch(new BuildHouseEvent(propertyIndex, playerId));
 	}
 
 	[Broadcast]
 	public void EmitDestroyHouseEvent(int propertyIndex, ulong playerId) {
-		ChangePhase(playerId, Phase.PlayerAction);
 		GameParentObject.Dispatch(new DestroyHouseEvent(propertyIndex, playerId));
 	}
 
 	[Broadcast]
 	public void EmitPropertyMortgagePayedEvent(int propertyIndex, ulong playerId) {
-		ChangePhase(playerId, Phase.PlayerAction);
 		CurrentPhase = Phase.PlayerAction;
 		GameParentObject.Dispatch(new PropertyMortgagePayedEvent {
 			PropertyIndex = propertyIndex, playerId = playerId
@@ -137,10 +142,10 @@ public class TurnManager : Component {
 		GameParentObject.Dispatch(new EventCardClosedEvent(card, playerId));
 	}
 
-	public void EmitTurnActionDoneEvent(bool senderIsBank, ulong recipient, ulong sender) {
+	public void EmitTurnActionDoneEvent(bool senderIsBank, ulong recipient, ulong sender, Phase phase = Phase.PlayerAction) {
 		GameParentObject.Dispatch(senderIsBank
-			? new TurnActionDoneEvent(recipient)
-			: new TurnActionDoneEvent(sender));
+			? new TurnActionDoneEvent(recipient, phase)
+			: new TurnActionDoneEvent(sender, phase));
 	}
 
 	[Broadcast]
