@@ -359,8 +359,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	public void OnGameEvent(DebugEvent eventArgs) {
-		var player = Game.ActiveScene.GetAllComponents<Player>().First(player1 => player1.Name.Contains("Fresh"));
-		MovementManager.StartMovement(player, CardActionHelper.CalculateFieldsToTravel(player, 30));
+		IngameStateManager.State = IngameUI.IngameUiStates.EndScreen;
 	}
 
 
