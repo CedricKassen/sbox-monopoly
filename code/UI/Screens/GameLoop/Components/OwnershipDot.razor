@@ -3,7 +3,7 @@
 @inherits Sandbox.UI.Panel
 
 <root>
-	<div onclick=@(() => OnSelect(FieldName))
+	<div class="ownership-dot-container" onclick=@(() => OnSelect(FieldName))
 	     id=@FieldName
 	     class="ownership-dot @ColorClass @(GetSelected(FieldName) ? "ownership-dot-selected" : "")"
 	     onmouseover=@(() => SetCurrentHoverLocation(FieldName))
