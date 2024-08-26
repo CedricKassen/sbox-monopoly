@@ -20,17 +20,17 @@
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 6px;
-
-    .checked {
-      color: #0d151d00;
-    }
     
+    .checked {
+      color: #fff;
+    }
+
     Checkbox {
       width: 32px;
       height: 32px;
       font-size: 32px;
       background-color: #2b303c;
-      color: #ffffff;
+      color: #0dc64f00;
       border-radius: 4px;
       margin-right: 6px;
     }

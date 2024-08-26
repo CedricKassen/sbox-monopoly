@@ -58,6 +58,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			dice.Roll();
 		}
 
+		TurnManager.ChangePhase((ulong)Game.SteamId, TurnManager.Phase.InAction);
+
 		while (_dice.Any(dice => dice.IsRolling)) {
 			await Task.DelayRealtimeSeconds(0.5f);
 		}
@@ -132,8 +134,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		if (fieldOwner == 0 || location.Type == GameLocation.PropertyType.Event) {
 			if (location.EventId == "start") {
+				Log.Info(LobbySettingsSystem.Current.DoublePayment);
 				if (LobbySettingsSystem.Current.DoublePayment && Networking.IsHost) {
-					currentPlayer.Money += 200;
+					TurnManager.EmitPlayerPaymentEvent(2, currentPlayer.SteamId, 200, TurnManager.CurrentPhase);
 				}
 
 				TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
