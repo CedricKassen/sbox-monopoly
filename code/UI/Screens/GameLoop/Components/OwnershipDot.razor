@@ -8,7 +8,7 @@
 	     class="ownership-dot @ColorClass @(GetSelected(FieldName) ? "ownership-dot-selected" : "")"
 	     onmouseover=@(() => SetCurrentHoverLocation(FieldName))
 	     onmouseout=@(() => _player.CurrentHoverLocation = null)>
-		<div id="@(FieldName)-mortgaged" class="@(GetMortgaged(FieldName) ? "ownership-dot-mortgage" : "")"></div>
+		<div id="@(FieldName)-mortgaged" class="@(GetOwned(FieldName) && GetMortgaged(FieldName) ? "ownership-dot-mortgage" : "")"></div>
 		<div id="@(FieldName)-disabled" class=" @(GetOwned(FieldName) ? "" : "ownership-dot-disabled")"></div>
 	</div>
 </root>
