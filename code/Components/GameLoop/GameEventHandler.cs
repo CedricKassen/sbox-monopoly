@@ -303,6 +303,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 
 
+		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InMovement);
+
 		player.DoublesCount = eventArgs.Doubles ? player.DoublesCount + 1 : 0;
 
 		// Player should not be in jail!

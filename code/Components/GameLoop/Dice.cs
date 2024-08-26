@@ -7,7 +7,7 @@ public sealed class Dice : Component, Component.ICollisionListener {
 
 	[Property] public TurnManager TurnManager { get; set; } = Game.ActiveScene.GetAllComponents<TurnManager>().First();
 
-	private TurnManager.Phase[] RollPhases = new[] { TurnManager.Phase.Rolling, TurnManager.Phase.Jail };
+	private readonly TurnManager.Phase[] _rollPhases = { TurnManager.Phase.DiceRoll };
 
 	public void OnCollisionStart(Collision collision) {
 		if (collision.Other.GameObject.Tags.Contains("dicecontainer")) {
@@ -23,7 +23,7 @@ public sealed class Dice : Component, Component.ICollisionListener {
 	}
 
 	public void Roll() {
-		if (IsRolling || !RollPhases.Any(phase => phase.Equals(TurnManager.CurrentPhase))) {
+		if (IsRolling || !_rollPhases.Any(phase => phase.Equals(TurnManager.CurrentPhase))) {
 			return;
 		}
 

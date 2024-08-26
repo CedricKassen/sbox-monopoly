@@ -468,7 +468,7 @@
 		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
 			return;
 		}
-
+		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.DiceRoll);
 		_turnManager.EmitStartRollEvent();
 	}
 
@@ -492,13 +492,14 @@
 		if (!IsCurrentPlayer() || _turnManager.CurrentPhase != TurnManager.Phase.Rolling) {
 			return;
 		}
-
+		
+		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.DiceRoll);
+		
 		foreach (var dice in _dice) {
 			dice.Roll();
 		}
 
-		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InMovement);
-
+		
 
 		while (_dice.Any(dice => dice.IsRolling)) {
 			await Task.DelayRealtimeSeconds(0.5f);
