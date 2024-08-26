@@ -140,7 +140,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			if (location.EventId == "start") {
 				Log.Info(LobbySettingsSystem.Current.DoublePayment);
 				if (LobbySettingsSystem.Current.DoublePayment && Networking.IsHost) {
-					TurnManager.EmitPlayerPaymentEvent(2, currentPlayer.SteamId, 200, TurnManager.CurrentPhase);
+					TurnManager.EmitPlayerPaymentEvent(2, currentPlayer.SteamId, 200);
 				}
 
 				TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
@@ -273,7 +273,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var costs = eventArgs.FromAuction ? 0 : gameLocation.Price;
 
 		if (costs <= player.Money && Networking.IsHost) {
-			TurnManager.EmitPlayerPaymentEvent(player.SteamId, 2, costs, TurnManager.CurrentPhase);
+			TurnManager.EmitPlayerPaymentEvent(player.SteamId, 2, costs);
 			IngameStateManager.OwnedFields[location.Name] = eventArgs.playerId;
 		}
 	}
