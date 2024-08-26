@@ -44,7 +44,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex, true);
 
 		if (Networking.IsHost) {
-			GetPlayerFromEvent(eventArgs.playerId).Money -= eventArgs.Amount;
+			TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, 2, eventArgs.Amount);
 		}
 
 		if (_auctionLocations.Any()) {
@@ -225,14 +225,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PayJailFineEvent eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.playerId);
-
-
-		if (Networking.IsHost) {
-			player.Money -= 50;
-			player.JailTurnCounter = 0;
-		}
-
-		TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Rolling);
+		
+		TurnManager.EmitPlayerPaymentEvent(player.SteamId, 1, 50, TurnManager.Phase.Rolling);
+		player.JailTurnCounter = 0;
+		
 	}
 
 	public void OnGameEvent(UseJailCardEvent eventArgs) {
@@ -461,14 +457,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			}
 		}
 
-		if (Networking.IsHost) {
-			TradeState.TradingCreator.Money -= TradeState.TradingOfferAmount;
-			TradeState.TradingCreator.Money += TradeState.TradingRequestAmount;
-
-			TradeState.TradingPartner.Money += TradeState.TradingOfferAmount;
-			TradeState.TradingPartner.Money -= TradeState.TradingRequestAmount;
-		}
-
+		TurnManager.EmitPlayerPaymentEvent(TradeState.TradingCreator.SteamId, TradeState.TradingPartner.SteamId, TradeState.TradingOfferAmount);
+		TurnManager.EmitPlayerPaymentEvent(TradeState.TradingPartner.SteamId, TradeState.TradingCreator.SteamId, TradeState.TradingRequestAmount);
+		
 		ResetTrading();
 		CloseLocalUIForEveryPlayer();
 	}
