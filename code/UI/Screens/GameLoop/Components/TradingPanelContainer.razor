@@ -56,7 +56,7 @@
 	public int Money { get; set; } = 0;
 
 	protected override int BuildHash() {
-		return HashCode.Combine(Player.Money, Owned, TradeFields);
+		return HashCode.Combine(Player.Money, Owned.GetHashCode(), TradeFields.GetHashCode());
 	}
 
 }

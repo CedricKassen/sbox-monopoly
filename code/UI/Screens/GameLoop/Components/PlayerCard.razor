@@ -253,6 +253,8 @@
 	[Property]
 	public NetDictionary<string, ulong> Owned { get; set; }
 
+	private TradeState _tradeState = Game.ActiveScene.GetAllComponents<TradeState>().First();
+
 	private int _hash;
 
 	private bool GetMortagedStatus(string propertyName) {
@@ -272,7 +274,7 @@
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
 	protected override int BuildHash() {
-		_hash = HashCode.Combine(Player.Money, Owned);
+		_hash = HashCode.Combine(Player.Money, _tradeState.TradingCreator, _tradeState.TradingPartner, Owned.GetHashCode());
 		return _hash;
 	}
 
