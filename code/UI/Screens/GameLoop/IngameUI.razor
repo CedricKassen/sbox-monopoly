@@ -12,10 +12,10 @@
 @if (_stateManager.State.Equals(IngameUiStates.EndScreen)) {
 	var playerCount = Lobby.Players.Count();
 	var first = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == 0);
-	var second = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 1);
-	var third = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 2);
-	var forth = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 3);
-	var fifth = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 4);
+	var second = Lobby.Players.FirstOrDefault(player => playerCount > 1 && player.EliminatedPosition == playerCount - 1);
+	var third = Lobby.Players.FirstOrDefault(player => playerCount > 2 && player.EliminatedPosition == playerCount - 2);
+	var forth = Lobby.Players.FirstOrDefault(player => playerCount > 3 && player.EliminatedPosition == playerCount - 3);
+	var fifth = Lobby.Players.FirstOrDefault(player => playerCount > 4 && player.EliminatedPosition == playerCount - 4);
 
 
 	<section class="menu">
@@ -40,7 +40,7 @@
 				</div>
 				<div class="endButtons">
 					<button onclick=@Quit> Leave </button>
-    				<button onclick=@StartNewGame> Rematch </button>
+					<button onclick=@StartNewGame> Rematch </button>
 				</div>
 			</div>
 			<div class="restOfThePlayers">
@@ -751,11 +751,11 @@
 	private void GoBankrupt(ulong player, ulong recipient) {
 		_turnManager.EmitPlayerBankruptEvent(player, recipient);
 	}
-	
+
 	private void StartNewGame() {
 		Game.ActiveScene.LoadFromFile("scenes/board.scene");
 	}
-	
+
 	private void Quit() {
 		Game.Disconnect();
 	}
