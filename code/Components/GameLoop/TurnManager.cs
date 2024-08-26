@@ -137,6 +137,7 @@ public class TurnManager : Component {
 		GameParentObject.Dispatch(new EventCardClosedEvent(card, playerId));
 	}
 
+	[Broadcast]
 	public void EmitTurnActionDoneEvent(bool senderIsBank, ulong recipient, ulong sender) {
 		GameParentObject.Dispatch(senderIsBank
 			? new TurnActionDoneEvent(recipient)
