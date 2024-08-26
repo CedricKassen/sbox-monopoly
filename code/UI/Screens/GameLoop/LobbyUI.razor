@@ -95,6 +95,7 @@
 
 	void PressBack() {
 		GameNetworkSystem.Disconnect();
+		Game.ActiveScene.GetAllComponents<MusicManager>().First().StopSound();
 		Game.ActiveScene.LoadFromFile("scenes/game_menu.scene");
 	}
 
