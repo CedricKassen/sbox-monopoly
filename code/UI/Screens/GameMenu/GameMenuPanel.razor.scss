@@ -7,6 +7,44 @@
   align-items: center;
 }
 
+.settingsCol {
+  flex-direction: column;
+  padding: 0 16px;
+  width: 45%;
+
+  p {
+    white-space: pre-line;
+  }
+
+  .row {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 6px;
+
+    .checked {
+      background-color: #0dc64f;
+    }
+
+
+    Checkbox {
+      width: 32px;
+      height: 32px;
+      font-size: 32px;
+      background-color: #2b303c;
+      color: #ffffff;
+      border-radius: 4px;
+      margin-right: 6px;
+
+      .checked {
+        background-color: #1a7f87;
+      }
+
+    }
+
+
+  }
+}
+
 .lobbies {
   margin-bottom: 10vh;
   margin-top: 15vh;

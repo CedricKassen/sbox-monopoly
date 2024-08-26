@@ -1,5 +1,3 @@
 ﻿namespace Sandbox.Events.TurnEvents;
 
-public record PayoutFreeParkingEvent : BaseEvent {
-	public ulong Recipient { get; init; }
-};
+public record PayoutFreeParkingEvent(ulong PlayerId) : IGameEvent { };
