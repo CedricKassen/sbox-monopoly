@@ -39,8 +39,8 @@
 					</div>
 				</div>
 				<div class="endButtons">
-					<button> Leave </button>
-					<button> Rematch </button>
+					<button onclick=@Quit> Leave </button>
+    				<button onclick=@StartNewGame> Rematch </button>
 				</div>
 			</div>
 			<div class="restOfThePlayers">
@@ -66,8 +66,8 @@
 				<h1> It's only you and you still lost ... </h1>
 				<h1> Well done! </h1>
 				<div class="endButtons">
-					<button> Leave </button>
-					<button> Rematch </button>
+					<button onclick=@Quit> Leave </button>
+					<button onclick=@StartNewGame> Rematch </button>
 				</div>
 			</div>
 		}
@@ -75,6 +75,7 @@
 
 	return;
 }
+
 
 <div style="position: absolute; top: 50%; left: 50%">
 	@if (_showRoll) {
@@ -750,5 +751,14 @@
 	private void GoBankrupt(ulong player, ulong recipient) {
 		_turnManager.EmitPlayerBankruptEvent(player, recipient);
 	}
+	
+	private void StartNewGame() {
+		Game.ActiveScene.LoadFromFile("scenes/board.scene");
+	}
+	
+	private void Quit() {
+		Game.Disconnect();
+	}
+
 
 }
