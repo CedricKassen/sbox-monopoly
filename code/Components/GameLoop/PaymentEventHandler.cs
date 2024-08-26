@@ -13,10 +13,14 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 	[Property] public TurnManager TurnManager { get; set; }
 
 	public void OnGameEvent(PayoutFreeParkingEvent eventArgs) {
-		Player recipient = GetPlayerFromId(eventArgs.Recipient);
-		recipient.Money += BankBalance;
-		BankBalance = 0;
+		Player recipient = GetPlayerFromId(eventArgs.PlayerId);
+		Log.Info("Payout " + BankBalance + " to " + recipient.Name);
+		if (Networking.IsHost) {
+			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, recipient.SteamId, BankBalance));
+			BankBalance = 0;
+		}
 	}
+
 
 	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
 		if (!Networking.IsHost) {

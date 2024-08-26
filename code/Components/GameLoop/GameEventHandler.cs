@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EnumExtensions.Settings;
 using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
 using Sandbox.Events;
@@ -123,7 +124,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		if (fieldOwner == 0 || location.Type == GameLocation.PropertyType.Event) {
 			if (location.EventId == "start") {
-				if (Networking.IsHost) {
+				if (LobbySettingsSystem.Current.DoublePayment && Networking.IsHost) {
 					currentPlayer.Money += 200;
 				}
 
@@ -133,6 +134,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 			if (location.EventId == "parking") {
 				TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
+				if (LobbySettingsSystem.Current.CollectFreeParking) {
+					TurnManager.EmitPayoutFreeParkingEvent(currentPlayer.SteamId);
+				}
+
 				return;
 			}
 

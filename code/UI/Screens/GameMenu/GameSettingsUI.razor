@@ -1,0 +1,65 @@
+@namespace Monopoly.UI.Screens.GameMenu
+@inherits Sandbox.UI.Panel
+@using Sandbox.UI
+@using System
+@using EnumExtensions.Settings
+@implements Sandbox.UI.INavigatorPage
+
+
+<root class="menu">
+	<div style="flex-direction: column; align-items: center">
+			<h1 class="title"> Estate Emperor </h1>
+        	<h2 class="title"> Game Settings </h2>
+	</div>
+	
+	<div class="settingsCol">
+		<div class="row">
+			<div class="settingControl">
+				<Checkbox
+					Value:bind="@LobbySettingsSystem.Current.DoublePayment">
+
+				</Checkbox>
+				<p>Double money on Go</p>
+			</div>
+
+			<p class="settingDesc">Landing on Go payouts double the money!</p>
+		</div>
+		<div class="row">
+			<div class="settingControl">
+				<Checkbox
+					Value:bind="@LobbySettingsSystem.Current.CollectFreeParking">
+
+				</Checkbox>
+				<p>Free parking</p>
+			</div>
+
+        	<p class="settingDesc">Collect money payed to bank on free parking!</p>
+        </div>
+
+	</div>
+
+
+	<div class="hub-buttons">
+		<a href="/">
+			<button class="back icon">
+				keyboard_return
+			</button>
+		</a>
+
+		<button onclick="@CreateLobby">
+			Create lobby
+		</button>
+	</div>
+
+	<div></div>
+</root>
+
+@code
+{
+
+	public void CreateLobby() {
+		LobbySettingsSystem.Save();
+		Game.ActiveScene.LoadFromFile("scenes/board.scene");
+	}
+	
+}
