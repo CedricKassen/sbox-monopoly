@@ -188,7 +188,7 @@ public static class Cards {
 	private static void Chairman(Player player, MovementManager move, TurnManager turnManager,
 	                             Dictionary<int, bool> blocked = null,
 	                             IngameStateManager stateManager = null, Card card = null) {
-		Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, player.SteamId, 50));
+		CardActionHelper.PayToAll(player, 50);
 	}
 
 	private static void RenovateHouses(Player player, MovementManager move, TurnManager turnManager,
