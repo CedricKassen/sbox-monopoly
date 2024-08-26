@@ -11,19 +11,19 @@
 	<h2 class="title"> Settings </h2>
 	
 	<div class="settingsContainer">
-		<div class="row">
-        <label>Master Volume:</label>
-            <SliderControl Value:bind="@UserSettingsSystem.Current.MasterVolume" Min=@(0) Max=@(100) Step=@(1) />
-        </div>
-        <div class="row">
+		<div class="col">
+	        <label>Master Volume:</label>
+	        <SliderControl Value:bind="@UserSettingsSystem.Current.MasterVolume" Min=@(0) Max=@(100) Step=@(1) />
+	    </div>
+        <div class="col">
             <label>Music Volume:</label>
             <SliderControl Value:bind="@UserSettingsSystem.Current.MusicVolume" Min=@(0) Max=@(100) Step=@(1) />
         </div>
-        <div class="row">
+        <div class="col">
             <label>SFX Volume:</label>
             <SliderControl Value:bind="@UserSettingsSystem.Current.SFXVolume" Min=@(0) Max=@(100) Step=@(1) />
         </div>
-        <div class="row">
+        <div class="col">
             <label>UI Volume:</label>
             <SliderControl Value:bind="@UserSettingsSystem.Current.UIVolume" Min=@(0) Max=@(100) Step=@(1) />
         </div>
