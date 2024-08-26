@@ -54,7 +54,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			_dice = new(Game.ActiveScene.GetAllComponents<Dice>());
 		}
 
-
 		foreach (var dice in _dice) {
 			dice.Roll();
 		}
@@ -189,13 +188,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
-	}
-
-	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
-		if (Networking.IsHost) {
-			GetPlayerFromEvent(eventArgs.PlayerId).Money -= eventArgs.Amount;
-			GetPlayerFromEvent(eventArgs.Recipient).Money += eventArgs.Amount;
-		}
 	}
 
 	public void OnGameEvent(EventCardClosedEvent eventArgs) {

@@ -63,7 +63,7 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 
 		Log.Info((senderIsBank ? "Bank" : sender.Name) + " paid " + eventArgs.Amount + " to " +
 		         (recipient != null ? recipient.Name : recipientIsBank ? "Bank" : "FreeParking"));
-		TurnManager.EmitTurnActionDoneEvent(senderIsBank, eventArgs.Recipient, eventArgs.PlayerId);
+		TurnManager.EmitTurnActionDoneEvent(senderIsBank, eventArgs.Recipient, eventArgs.PlayerId, eventArgs.Phase);
 	}
 
 	private Player GetPlayerFromId(ulong playerId) {
