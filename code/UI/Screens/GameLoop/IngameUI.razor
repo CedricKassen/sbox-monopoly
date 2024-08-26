@@ -9,44 +9,67 @@
 
 
 <root>
-@IngameUiStates.EndScreen 
+@IngameUiStates.EndScreen
 @_stateManager.State
 
 @if (_stateManager.State.Equals(IngameUiStates.EndScreen)) {
-
-	
-	
 	var playerCount = Lobby.Players.Count();
-	// Player first = Lobby.Players.First(player => player.EliminatedPosition == playerCount - 1);
-	// Player second = Lobby.Players.First(player => player.EliminatedPosition == playerCount - 1);
-	// Player third = Lobby.Players.First(player => player.EliminatedPosition == playerCount - 2);
-	// Player forth = Lobby.Players.First(player => player.EliminatedPosition == playerCount - 3);
-	// Player fifth = Lobby.Players.First(player => player.EliminatedPosition == playerCount - 4);
+	var first = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 1);
+	var second = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 2);
+	var third = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 3);
+	var forth = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 4);
+	var fifth = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == playerCount - 5);
 
 
 	<section class="menu">
-		<div class="pedestal">
-			@for (var i = 0; i < (playerCount > 3 ? 3: playerCount); i++) {
-				Player player;
-				if (i == 0) {
-					player = Lobby.Players.First(ply => ply.EliminatedPosition == 0);
-				}
-				else {
-					player = Lobby.Players.First(ply => ply.EliminatedPosition == playerCount - i);
-				}
-
-				<div class="pillar">
-					<img src=@($"avatar:{player.SteamId}")>
-					<p>@player.Name</p>
+		@if (playerCount > 1 || playerCount == 1) {
+			<div class="column">
+				<div class="pedestal">
+					<div class="pillar">
+						<img src=@($"avatar:{second?.SteamId}")>
+						<p>@second?.Name</p>
+						<div></div>
+					</div>
+					<div class="pillar">
+						<img src=@($"avatar:{first.SteamId}")>
+						<p>@first?.Name</p>
+						<div></div>
+					</div>
+					<div class="pillar">
+						<img src=@($"avatar:{third?.SteamId}")>
+						<p>@third?.Name</p>
+						<div></div>
+					</div>
 				</div>
-			}
-		</div>
+				<div class="endButtons">
+					<button> Leave </button>
+					<button> Rematch </button>
+				</div>
+			</div>
+			<div class="restOfThePlayers">
+				@if (forth != null) {
+					<div class="player">
+						<p> 4 </p>
+						<img src=@($"avatar:{forth.SteamId}")>
+						<p>@forth.Name</p>
+					</div>
+				}
 
-		<div></div>
-
-		<div></div>
+				@if (fifth != null) {
+					<div class="player">
+						<p> 5 </p>
+						<img src=@($"avatar:{fifth.SteamId}")>
+						<p>@fifth.Name</p>
+					</div>
+				}
+			</div>
+		}
+		else {
+			<h1> It's only you and you still lost ... </h1>
+			<h1> Well done! </h1>
+		}
 	</section>
-	
+
 	return;
 }
 
@@ -265,7 +288,7 @@
 							</h3>
 						</div>
 						<div style="gap: 32px">
-							@foreach (var player in Lobby.Players.Where(pl => Lobby.Players.Count == 1 || pl.SteamId != (ulong) Game.SteamId)) {
+							@foreach (var player in Lobby.Players.Where(pl => Lobby.Players.Count == 1 || pl.SteamId != (ulong)Game.SteamId)) {
 								<div onclick=@(() => { _tradeState.Network.TakeOwnership(); _tradeState.TradingPartner = player; }) class="container playerCard">
 									<img src=@($"avatar:{player.SteamId}")/>
 									<h3> @player.Name </h3>
@@ -331,7 +354,7 @@
 						<div style="width: 100%">
 							@if (recipient != null) {
 								<img src=@($"avatar:{data.Recipient}") style="width: 120px; aspect-ratio: 1/1; border-radius: 8px"/>
-							} 
+							}
 							<div style="flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; height: 120px;">
 								<h3> You owe @(recipient != null ? recipient.Name : "Bank"): </h3>
 								<h3 style="font-weight: bolder;"> $@(data.Debts). </h3>
@@ -512,6 +535,7 @@
 		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
 			return;
 		}
+
 		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.Rolling);
 		_turnManager.EmitStartRollEvent();
 	}
@@ -542,9 +566,9 @@
 			Log.Info(dice.GameObject.Network.OwnerConnection.DisplayName);
 			dice.Roll();
 		}
-		
+
 		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InMovement);
-		
+
 
 		while (_dice.Any(dice => dice.IsRolling)) {
 			await Task.DelayRealtimeSeconds(0.5f);

@@ -8,29 +8,79 @@
 section.menu {
   .pedestal {
     gap: 30px;
+    align-items: flex-end;
 
     .pillar {
       flex-direction: column;
+      gap: 24px;
+      width: 200px;
+      align-items: center;
+
+      p {
+        font-size: 28px;
+      }
+
+      img {
+        aspect-ratio: 1 / 1;
+        width: 70%;
+        height: auto;
+      }
 
       &:nth-child(2) {
-        background-color: #daa520;
-        width: 150px;
-        height: 300px;
+        & > div {
+          background-color: #daa520;
+          width: 200px;
+          height: 420px;
+        }
       }
 
       &:nth-child(1) {
-        background-color: #91908e;
-        width: 120px;
-        height: 240px;
+        & > div {
+          background-color: #91908e;
+          width: 200px;
+          height: 300px;
+        }
       }
 
       &:nth-child(3) {
-        background-color: #674011;
-        width: 100px;
-        height: 200px;
+        & > div {
+          background-color: #674011;
+          width: 200px;
+          height: 180px;
+        }
       }
     }
+  }
 
+  .restOfThePlayers {
+    position: absolute;
+    right: 32px;
+    top: 0;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    p {
+      font-size: 28px;
+    }
+
+    .player {
+      flex-direction: column;
+      gap: 22px;
+      background-color: $button-background-color;
+      padding: 16px 32px;
+      border-radius: 8px;
+    }
+  }
+
+  .endButtons {
+    flex-grow: 1;
+    gap: 32px;
+
+    button {
+      flex-grow: 1;
+      padding: 8px 32px;
+    }
   }
 }
 
