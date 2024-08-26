@@ -46,6 +46,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 
 	[Property] public GameObject DicePrefab { get; set; }
 
+
 	public override int GetHashCode() {
 		return HashCode.Combine(Players, SelectedPawns.Values);
 	}
@@ -106,7 +107,10 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 	public void OnDisconnected(Connection conn) {
 		var currentPlayers = Scene.GetAllComponents<Player>();
 		var player = currentPlayers.First(player => player.SteamId == conn.SteamId);
+		var name = player.Name;
 		player.GameObject.Destroy();
+
+		Log.Info(name + " left and was destroyed!");
 	}
 
 	[Broadcast]

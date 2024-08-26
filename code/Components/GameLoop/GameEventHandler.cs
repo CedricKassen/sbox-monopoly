@@ -172,8 +172,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 					price = location.Normal_Rent[location.Houses];
 				}
 
+				Log.Info("Price " + price);
 
 				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, price);
+				return;
 			}
 
 			if (location.Type == GameLocation.PropertyType.Railroad) {
@@ -181,6 +183,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				                                      .Count(f => f.Value == fieldOwner && f.Key.Contains("railroad"));
 				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
 					location.Railroad_Rent[railroadCount - 1]);
+				return;
 			}
 
 			if (location.Type == GameLocation.PropertyType.Utility) {
@@ -193,6 +196,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
 					location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount);
+				return;
 			}
 		}
 
@@ -353,6 +357,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		// 4 means the next turn would be the fourth turn in jail
+		Log.Info("Check if player beeing foreced out of jail " + player.JailTurnCounter);
 		if (player.JailTurnCounter == 4) {
 			// Force player to use card or pay caution
 			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Jail);
