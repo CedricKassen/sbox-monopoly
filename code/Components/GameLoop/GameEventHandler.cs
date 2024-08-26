@@ -19,13 +19,26 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
                                 IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
                                 IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent> {
-	[Property] public GameObject LocationContainer { get; set; }
-	[Property] public Lobby Lobby { get; set; }
-	[Property] public MovementManager MovementManager { get; set; }
-	[Property] public CardActionManager CardActionManager { get; set; }
-	[Property] public IngameStateManager IngameStateManager { get; set; }
-	[Property] public TurnManager TurnManager { get; set; }
-	[Property] public TradeState TradeState { get; set; }
+	[Property]
+	public GameObject LocationContainer { get; set; }
+
+	[Property]
+	public Lobby Lobby { get; set; }
+
+	[Property]
+	public MovementManager MovementManager { get; set; }
+
+	[Property]
+	public CardActionManager CardActionManager { get; set; }
+
+	[Property]
+	public IngameStateManager IngameStateManager { get; set; }
+
+	[Property]
+	public TurnManager TurnManager { get; set; }
+
+	[Property]
+	public TradeState TradeState { get; set; }
 
 	private List<Dice> _dice = new();
 
@@ -44,7 +57,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		if (_dice.Count == 0) {
 			_dice = new(Game.ActiveScene.GetAllComponents<Dice>());
 		}
-
 
 		foreach (var dice in _dice) {
 			dice.Roll();
@@ -180,13 +192,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
-	}
-
-	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
-		if (Networking.IsHost) {
-			GetPlayerFromEvent(eventArgs.PlayerId).Money -= eventArgs.Amount;
-			GetPlayerFromEvent(eventArgs.Recipient).Money += eventArgs.Amount;
-		}
 	}
 
 	public void OnGameEvent(EventCardClosedEvent eventArgs) {

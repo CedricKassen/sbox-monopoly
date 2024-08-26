@@ -9,21 +9,29 @@ public sealed class MovementManager : Component {
 
 	private float _timer;
 
-	[Property] private bool Backwards;
+	[Property]
+	private bool Backwards;
 
-	[Property] private int CurrentField;
+	[Property]
+	private int CurrentField;
 
-	[Property] private Player Player;
+	[Property]
+	private Player Player;
 
-	[Property] private Rigidbody PlayerBody;
+	[Property]
+	private Rigidbody PlayerBody;
 
-	[Property] private int ToTravel;
+	[Property]
+	private int ToTravel;
 
-	[Property] private int Travelled;
+	[Property]
+	private int Travelled;
 
-	[Property] public GameObject LocationContainer { get; set; }
+	[Property]
+	public GameObject LocationContainer { get; set; }
 
-	[Property] public float SpeedMultiplier { get; set; }
+	[Property]
+	public float SpeedMultiplier { get; set; }
 
 
 	[Button("Go to next chance field")]
@@ -101,7 +109,7 @@ public sealed class MovementManager : Component {
 
 		if (CurrentField == 1) {
 			if (Networking.IsHost) {
-				Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, Player.SteamId, 200));
+				Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, Player.SteamId, 200, TurnManager.Phase.InMovement));
 			}
 		}
 
@@ -118,7 +126,6 @@ public sealed class MovementManager : Component {
 			Backwards = false;
 			Player = null;
 			PlayerBody = null;
-
 
 			EmitMovementDoneEvent(steamId);
 		}
