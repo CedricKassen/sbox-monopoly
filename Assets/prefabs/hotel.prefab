@@ -3,6 +3,7 @@
     "__guid": "b74cdc6b-90b3-4893-8d2c-62b452bb0d9e",
     "Flags": 0,
     "Name": "hotel",
+    "Rotation": "0,0,0.7071068,0.7071068",
     "Enabled": true,
     "Components": [
       {

@@ -1,0 +1,21 @@
+LocationName {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 20px;
+  text-align: center;
+
+  .title {
+    font-size: 60px;
+    font-family: "Segoe UI", sans-serif;
+    color: #000;
+  }
+
+  .top {
+    align-items: flex-end;
+  }
+}
