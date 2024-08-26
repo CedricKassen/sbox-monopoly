@@ -1,0 +1,66 @@
+{
+  "RootObject": {
+    "__guid": "822791bd-beaa-46c0-8d6b-e0a730b625a1",
+    "Flags": 0,
+    "Name": "WorldUI",
+    "Position": "0,0,0",
+    "Enabled": true,
+    "Children": [
+      {
+        "__guid": "9096d1fa-09b8-4dda-9729-cbf27ff19d30",
+        "Flags": 0,
+        "Name": "Price",
+        "Position": "-18,0.00003202243,0.4999731",
+        "Rotation": "0.7071068,0.00000003090862,0.7071068,-0.00000003090862",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.WorldPanel",
+            "__guid": "8d41323f-af89-41a4-b2d6-2a5a5fbf82e0",
+            "HorizontalAlign": "Center",
+            "InteractionRange": 1000,
+            "LookAtCamera": false,
+            "PanelSize": "512,160",
+            "RenderScale": 1,
+            "VerticalAlign": "Center"
+          },
+          {
+            "__type": "LocationPrice",
+            "__guid": "e5bc2d22-0768-48c2-a607-c1579901e78c"
+          }
+        ]
+      },
+      {
+        "__guid": "f5711a4c-bc7a-410f-bf6a-000e505ba7e4",
+        "Flags": 0,
+        "Name": "Name",
+        "Position": "6.5,0.00001467367,0.5",
+        "Rotation": "0.7071068,0.00000003090862,0.7071068,-0.00000003090862",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.WorldPanel",
+            "__guid": "13dfc905-c1ca-4dbd-ab08-0e0cbc7c191b",
+            "HorizontalAlign": "Center",
+            "InteractionRange": 1000,
+            "LookAtCamera": false,
+            "PanelSize": "650,448",
+            "RenderScale": 1,
+            "VerticalAlign": "Center"
+          },
+          {
+            "__type": "LocationName",
+            "__guid": "5e7327c8-a392-4798-8516-1852215d8cde",
+            "Top": false
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

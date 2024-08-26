@@ -1,0 +1,31 @@
+@using System.Threading.Tasks
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	<div class="title">@_price</div>
+</root>
+
+@code
+{
+
+	private string _price;
+
+	protected override void OnStart() {
+		var gameLocation = GameObject.Parent.Parent.Components.Get<GameLocation>();
+		if (gameLocation.Type == GameLocation.PropertyType.Event) {
+			_price = gameLocation.EventId switch {
+				         "income_tax" => "$200 or 10%",
+				         "luxury_tax" => "$100",
+				         _ => _price
+			};
+		}
+		else {
+			_price = "$" + gameLocation.Price;
+		}
+
+	}
+
+
+}

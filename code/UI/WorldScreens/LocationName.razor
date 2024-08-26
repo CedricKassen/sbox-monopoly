@@ -1,0 +1,20 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	<div class="title @(Top ? "top" : "")">@_name</div>
+</root>
+
+@code
+{
+
+	[Property] public bool Top { get; set; }= false;
+	private string _name;
+
+	protected override void OnStart() {
+		_name = GameObject.Parent.Parent.Components.Get<GameLocation>().Name;
+	}
+
+
+}

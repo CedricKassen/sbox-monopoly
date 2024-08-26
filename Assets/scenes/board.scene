@@ -1,5 +1,5 @@
 {
-  "__guid": "6e43ec9e-5270-4903-92ad-a85ee5686fd2",
+  "__guid": "f11e91fa-6d72-4d77-8086-03a6e5791c38",
   "GameObjects": [
     {
       "__guid": "024eb414-bc10-4ad9-885d-eae5e42de48d",
@@ -20,6 +20,7 @@
               "__guid": "142d1981-c34d-4f1e-b57a-3205b9da1018",
               "Color": "Brown",
               "EventId": "start",
+              "GroupMembers": [],
               "House_Cost": 0,
               "Houses": 0,
               "Mortgaged": false,
@@ -98,6 +99,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "af23ba66-1c09-4151-9ece-a9a1cc6a2788",
+              "Flags": 0,
+              "Name": "WorldUI (19)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -113,6 +123,7 @@
               "__guid": "f874d392-91d1-4da4-820f-d33c42ee13d6",
               "Color": "Brown",
               "EventId": "community",
+              "GroupMembers": [],
               "House_Cost": 0,
               "Houses": 0,
               "Mortgaged": false,
@@ -191,6 +202,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "753b89e5-2b70-417c-a20b-86776cb52a8c",
+              "Flags": 0,
+              "Name": "WorldUI (20)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -231,6 +251,17 @@
                 4,
                 10
               ]
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "e4d5cf40-f5ec-4c66-8862-d625650b4df1",
+              "Flags": 0,
+              "Name": "WorldUI (21)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -326,6 +357,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "f21e0e27-6df2-4ea7-a3c9-0f3474753b04",
+              "Flags": 0,
+              "Name": "WorldUI (22)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -420,6 +460,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "ea9ce9db-fa35-4354-adea-4f855930e584",
+              "Flags": 0,
+              "Name": "WorldUI (23)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -474,6 +523,15 @@
               "Position": "33.16655,0,0",
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            },
+            {
+              "__guid": "bdab49e9-48ba-451a-bc76-7dccb021325c",
+              "Flags": 0,
+              "Name": "WorldUI (24)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
               "__PrefabVariables": {}
             }
           ]
@@ -572,6 +630,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "06ffc161-31c9-4f0a-9b13-6e624cb6a992",
+              "Flags": 0,
+              "Name": "WorldUI (13)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -613,6 +680,17 @@
                 4,
                 10
               ]
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "2d406471-d844-487a-ab0e-d1351e244c81",
+              "Flags": 0,
+              "Name": "WorldUI (12)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -669,6 +747,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "148b6d8c-8ee0-473b-b02a-8c9315875d58",
+              "Flags": 0,
+              "Name": "WorldUI (11)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -724,6 +811,15 @@
               "Position": "33.16655,0,0",
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            },
+            {
+              "__guid": "e9719dd7-ce3a-4bfd-836d-5a6a4fd8da1c",
+              "Flags": 0,
+              "Name": "WorldUI (10)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
               "__PrefabVariables": {}
             }
           ]
@@ -822,6 +918,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "b22e72c1-645c-44c5-ad86-a55079832208",
+              "Flags": 0,
+              "Name": "WorldUI (9)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -918,6 +1023,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "3ed154a3-e667-464f-a3d3-97024997a0f3",
+              "Flags": 0,
+              "Name": "WorldUI (7)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -973,6 +1087,15 @@
               "Position": "33.16655,0,0",
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            },
+            {
+              "__guid": "13d9f1ac-349f-4794-819a-87fe72311a9c",
+              "Flags": 0,
+              "Name": "WorldUI (6)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
               "__PrefabVariables": {}
             }
           ]
@@ -1070,6 +1193,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "b1053d60-0e7b-43ea-b059-96f976aa0589",
+              "Flags": 0,
+              "Name": "WorldUI (5)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -1166,6 +1298,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "c3173e4f-bc48-4b20-bc8c-7e3c5727c16f",
+              "Flags": 0,
+              "Name": "WorldUI (4)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -1221,6 +1362,15 @@
               "Position": "33.16655,0,0",
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            },
+            {
+              "__guid": "14185435-baa9-4d0e-bee5-d5b2b7f689f0",
+              "Flags": 0,
+              "Name": "WorldUI (3)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
               "__PrefabVariables": {}
             }
           ]
@@ -1319,6 +1469,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "25cb732a-c7fa-4252-9bc7-b1a06c7ab59f",
+              "Flags": 0,
+              "Name": "WorldUI (2)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -1375,6 +1534,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "7a206d05-2379-42eb-ab90-dac7e2362427",
+              "Flags": 0,
+              "Name": "WorldUI (1)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -1416,6 +1584,17 @@
                 4,
                 10
               ]
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "6d3374b1-9597-464a-9c4e-26df4d89775b",
+              "Flags": 0,
+              "Name": "WorldUI (8)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -1471,6 +1650,15 @@
               "Position": "33.16655,0,0",
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            },
+            {
+              "__guid": "3c7cf13a-1d2b-4efb-9fec-34f6ca2648ae",
+              "Flags": 0,
+              "Name": "WorldUI",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_top.prefab",
               "__PrefabVariables": {}
             }
           ]
@@ -1568,6 +1756,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "822791bd-beaa-46c0-8d6b-e0a730b625a1",
+              "Flags": 0,
+              "Name": "WorldUI",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -1623,6 +1820,15 @@
               "Position": "33.16655,0,0",
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            },
+            {
+              "__guid": "264ec7e7-cb4c-45b5-8397-521f6781d55e",
+              "Flags": 0,
+              "Name": "WorldUI (14)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
               "__PrefabVariables": {}
             }
           ]
@@ -1719,6 +1925,15 @@
               "Position": "33.16655,0,0",
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            },
+            {
+              "__guid": "e4881154-0421-4feb-9a2c-12c7f78b0ff5",
+              "Flags": 0,
+              "Name": "WorldUI (15)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
               "__PrefabVariables": {}
             }
           ]
@@ -1856,6 +2071,15 @@
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
               "__PrefabVariables": {}
+            },
+            {
+              "__guid": "c033aad7-74dc-4460-8ef0-f33ecb0f44e4",
+              "Flags": 0,
+              "Name": "WorldUI (16)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -1872,6 +2096,7 @@
               "__guid": "59775a2a-fd06-424e-8023-0414a93dcd70",
               "Color": "Brown",
               "EventId": "luxury_tax",
+              "GroupMembers": [],
               "House_Cost": 0,
               "Houses": 0,
               "Mortgaged": false,
@@ -1896,6 +2121,17 @@
                 4,
                 10
               ]
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "90b9a562-0a68-4545-9050-2c66a26d8b7d",
+              "Flags": 0,
+              "Name": "WorldUI (17)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
+              "__PrefabVariables": {}
             }
           ]
         },
@@ -1950,6 +2186,15 @@
               "Position": "33.16655,0,0",
               "Enabled": true,
               "__Prefab": "prefabs/buildings.prefab",
+              "__PrefabVariables": {}
+            },
+            {
+              "__guid": "40120bca-35d7-4bae-a519-a45e17a34394",
+              "Flags": 0,
+              "Name": "WorldUI (18)",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "__Prefab": "prefabs/card_informations_bottom.prefab",
               "__PrefabVariables": {}
             }
           ]
@@ -2564,7 +2809,7 @@
                   "MaxPlayers": 5,
                   "PlayerPrefabs": [
                     {
-                      "Id": 1,
+                      "Id": 6,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/car.prefab"
@@ -2574,7 +2819,7 @@
                       "Height": 288
                     },
                     {
-                      "Id": 2,
+                      "Id": 7,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/ship.prefab"
@@ -2584,7 +2829,7 @@
                       "Height": 320
                     },
                     {
-                      "Id": 3,
+                      "Id": 8,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/timble.prefab"
@@ -2594,7 +2839,7 @@
                       "Height": 512
                     },
                     {
-                      "Id": 4,
+                      "Id": 9,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/tophat.prefab"
@@ -2604,7 +2849,7 @@
                       "Height": 384
                     },
                     {
-                      "Id": 5,
+                      "Id": 10,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/wheelbarrow.prefab"
