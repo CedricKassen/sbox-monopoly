@@ -286,7 +286,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
 		var price = property.Price / 2;
 
-		if (Networking.IsHost && !property.Mortgaged) {
+		if (!property.Mortgaged) {
 			property.Mortgaged = true;
 
 			if (Networking.IsHost) {
