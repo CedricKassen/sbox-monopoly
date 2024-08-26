@@ -3,13 +3,15 @@
 @inherits Sandbox.UI.Panel
 
 <root>
-	<div class="ownership-dot-container" onclick=@(() => OnSelect(FieldName))
-	     id=@FieldName
-	     class="ownership-dot @ColorClass @(GetSelected(FieldName) ? "ownership-dot-selected" : "")"
-	     onmouseover=@(() => SetCurrentHoverLocation(FieldName))
-	     onmouseout=@(() => _player.CurrentHoverLocation = null)>
-		<div id="@(FieldName)-mortgaged" class="@(GetOwned(FieldName) && GetMortgaged(FieldName) ? "ownership-dot-mortgage" : "")"></div>
-		<div id="@(FieldName)-disabled" class=" @(GetOwned(FieldName) ? "" : "ownership-dot-disabled")"></div>
+	<div class="ownership-dot-container" onclick=@(() => OnSelect(FieldName))>
+		<div
+			id=@FieldName
+			class="ownership-dot @ColorClass @(GetSelected(FieldName) ? "ownership-dot-selected" : "")"
+			onmouseover=@(() => SetCurrentHoverLocation(FieldName))
+			onmouseout=@(() => _player.CurrentHoverLocation = null)>
+			<div id="@(FieldName)-mortgaged" class="@(GetMortgaged(FieldName) ? "ownership-dot-mortgage" : "")"></div>
+			<div id="@(FieldName)-disabled" class=" @(GetOwned(FieldName) ? "" : "ownership-dot-disabled")"></div>
+		</div>
 	</div>
 </root>
 
