@@ -324,7 +324,7 @@
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
 	protected override int BuildHash() {
-		_hash = HashCode.Combine(Player.Money, Owned, TradeFields);
+		_hash = HashCode.Combine(Player.Money, Owned.GetHashCode(), TradeFields.GetHashCode());
 		return _hash;
 	}
 

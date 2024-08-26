@@ -40,7 +40,8 @@
 	public int DataHash { get; set; }
 
 	protected override int BuildHash() {
-		return HashCode.Combine(FieldName, DataHash);
+		var _hash = HashCode.Combine(FieldName, DataHash);
+		return _hash;
 	}
 
 	private void SetCurrentHoverLocation(string FieldName) {
