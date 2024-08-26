@@ -2809,7 +2809,7 @@
                   "MaxPlayers": 5,
                   "PlayerPrefabs": [
                     {
-                      "Id": 6,
+                      "Id": 1,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/car.prefab"
@@ -2819,7 +2819,7 @@
                       "Height": 288
                     },
                     {
-                      "Id": 7,
+                      "Id": 2,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/ship.prefab"
@@ -2829,7 +2829,7 @@
                       "Height": 320
                     },
                     {
-                      "Id": 8,
+                      "Id": 3,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/timble.prefab"
@@ -2839,7 +2839,7 @@
                       "Height": 512
                     },
                     {
-                      "Id": 9,
+                      "Id": 4,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/tophat.prefab"
@@ -2849,7 +2849,7 @@
                       "Height": 384
                     },
                     {
-                      "Id": 10,
+                      "Id": 5,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/wheelbarrow.prefab"
@@ -2881,7 +2881,7 @@
         {
           "__type": "MusicManager",
           "__guid": "a3288d41-e7b9-4ea3-811e-936576727563",
-          "MusicDuration": 238.21062,
+          "SoundLength": 238.21062,
           "DistanceAttenuation": false,
           "DistanceAttenuationOverride": false,
           "Force2d": true,
@@ -2896,7 +2896,7 @@
           "Reflections": false,
           "Repeat": false,
           "RepeatOffset": 7.835,
-          "SoundEvent": "sounds/music.sound",
+          "SoundEvent": "sounds/ingame_music.sound",
           "SoundOverride": true,
           "StopOnNew": false,
           "TargetMixer": {
