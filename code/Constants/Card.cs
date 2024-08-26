@@ -94,7 +94,7 @@ public static class CardActionHelper {
 	}
 
 	public static void PayToAll(Player player, int amount) {
-		List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>());
+		List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>().Where(ply => ply.SteamId != player.SteamId));
 		allPlayers.ForEach(otherPlayer =>
 			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, otherPlayer.SteamId, amount)));
 	}
