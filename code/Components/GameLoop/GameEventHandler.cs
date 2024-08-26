@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EnumExtensions.Settings;
 using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
 using Sandbox.Events;
@@ -123,7 +124,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		if (fieldOwner == 0 || location.Type == GameLocation.PropertyType.Event) {
 			if (location.EventId == "start") {
-				if (Networking.IsHost) {
+				if (LobbySettingsSystem.Current.DoublePayment && Networking.IsHost) {
 					currentPlayer.Money += 200;
 				}
 
@@ -133,6 +134,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 			if (location.EventId == "parking") {
 				TurnManager.ChangePhase(currentPlayer.SteamId, TurnManager.Phase.PlayerAction);
+				if (LobbySettingsSystem.Current.CollectFreeParking) {
+					TurnManager.EmitPayoutFreeParkingEvent(currentPlayer.SteamId);
+				}
+
 				return;
 			}
 
@@ -274,14 +279,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PropertyMortgagedEvent eventArgs) {
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
-		var player = GetPlayerFromEvent(eventArgs.playerId);
-		var price = (int)Math.Ceiling(property.Price / 2 * 1.1);
+		var price = property.Price / 2;
 
-		if (Networking.IsHost && player.Money > price && property.Mortgaged) {
-			property.Mortgaged = false;
+		if (Networking.IsHost && !property.Mortgaged) {
+			property.Mortgaged = true;
 
 			if (Networking.IsHost) {
-				Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, price));
+				Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, eventArgs.playerId, price));
 			}
 		}
 	}

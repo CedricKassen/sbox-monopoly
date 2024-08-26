@@ -7,7 +7,7 @@ public sealed class Dice : Component, Component.ICollisionListener {
 
 	[Property] public TurnManager TurnManager { get; set; } = Game.ActiveScene.GetAllComponents<TurnManager>().First();
 
-	private readonly TurnManager.Phase[] _rollPhases = { TurnManager.Phase.DiceRoll };
+	private readonly TurnManager.Phase[] _rollPhases = { TurnManager.Phase.Rolling, TurnManager.Phase.Jail };
 
 	public void OnCollisionStart(Collision collision) {
 		if (collision.Other.GameObject.Tags.Contains("dicecontainer")) {

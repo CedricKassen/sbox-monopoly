@@ -11,8 +11,7 @@ public class TurnManager : Component {
 		PlayerAction,
 		InAction,
 		Jail,
-		InMovement,
-		DiceRoll
+		InMovement
 	}
 
 	public enum PlayerActionType {
@@ -191,5 +190,10 @@ public class TurnManager : Component {
 	[Broadcast]
 	public void EmitDebugEvent(int id) {
 		Game.ActiveScene.Dispatch(new DebugEvent(id));
+	}
+
+	[Broadcast]
+	public void EmitPayoutFreeParkingEvent(ulong playerId) {
+		GameParentObject.Dispatch(new PayoutFreeParkingEvent(playerId));
 	}
 }

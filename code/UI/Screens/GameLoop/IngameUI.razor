@@ -288,9 +288,11 @@
 					<h3 class="container"> You ran out of money! </h3>
 					<div class="container column" style="width: 600px">
 						<div style="width: 100%">
-							<img src=@($"avatar:{data.Recipient}") style="width: 120px; aspect-ratio: 1/1; border-radius: 8px"/>
+							@if (recipient != null) {
+								<img src=@($"avatar:{data.Recipient}") style="width: 120px; aspect-ratio: 1/1; border-radius: 8px"/>
+							} 
 							<div style="flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; height: 120px;">
-								<h3> You owe @recipient.Name: </h3>
+								<h3> You owe @(recipient != null ? recipient.Name : "Bank"): </h3>
 								<h3 style="font-weight: bolder;"> $@(data.Debts). </h3>
 							</div>
 						</div>
@@ -303,7 +305,7 @@
 						<button style="flex-grow: 1; justify-content: center; align-items: center" class="giveup"> Give Up </button>
 
 						@if (_player.Money >= data.Debts) {
-							<button style="flex-grow: 1; justify-content: center; align-items: center" class="pay"> Pay </button>
+							<button style="flex-grow: 1; justify-content: center; align-items: center" class="pay" onclick=@(() => PayDebts(data.PlayerId, data.Recipient, data.Debts))> Pay </button>
 						}
 					</div>
 				</div>
@@ -412,7 +414,7 @@
 	}
 
 	private Player GetPlayer(ulong playerId) {
-		return Lobby.Players.First(p => p.SteamId == playerId);
+		return playerId is 1 or 2 ? null : Lobby.Players.First(p => p.SteamId == playerId);
 	}
 
 	private void ChangeGameUIState(IngameUiStates newState) {
@@ -468,7 +470,7 @@
 		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
 			return;
 		}
-		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.DiceRoll);
+		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.Rolling);
 		_turnManager.EmitStartRollEvent();
 	}
 
@@ -492,13 +494,14 @@
 		if (!IsCurrentPlayer() || _turnManager.CurrentPhase != TurnManager.Phase.Rolling) {
 			return;
 		}
-		
-		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.DiceRoll);
-		
+
+
 		foreach (var dice in _dice) {
+			Log.Info(dice.GameObject.Network.OwnerConnection.DisplayName);
 			dice.Roll();
 		}
-
+		
+		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InMovement);
 		
 
 		while (_dice.Any(dice => dice.IsRolling)) {
@@ -537,9 +540,8 @@
 		if (!state.Equals(IngameUiStates.None) && IsCurrentPlayer()) {
 			var card = _stateManager.Data as Card;
 			_turnManager.EmitEventCardClosedEvent(card.ActionId, (ulong)Game.SteamId, state.Equals(IngameUiStates.Chance));
+			_stateManager.State = IngameUiStates.None;
 		}
-
-		_stateManager.State = IngameUiStates.None;
 	}
 
 
@@ -669,6 +671,11 @@
 		}
 
 		return amount;
+	}
+
+	private void PayDebts(ulong sender, ulong recipient, int amount) {
+		_turnManager.EmitPlayerPaymentEvent(sender, recipient, amount);
+		_player.localUiState = LocalUIStates.None;
 	}
 
 }
