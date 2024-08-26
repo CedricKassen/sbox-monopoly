@@ -11,7 +11,7 @@ public sealed class Dice : Component, Component.ICollisionListener {
 
 	public void OnCollisionStart(Collision collision) {
 		if (collision.Other.GameObject.Tags.Contains("dicecontainer")) {
-			var velocity = Vector3.Reflect(Vector3.Forward * 100, collision.Contact.Normal) * 30;
+			var velocity = Vector3.Reflect(Vector3.Forward * 1000, collision.Contact.Normal) * 300;
 			Rigidbody.ApplyForce(velocity);
 		}
 	}

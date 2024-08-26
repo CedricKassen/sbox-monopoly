@@ -107,6 +107,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			}
 		}
 
+		TurnManager.EmitPlayerPaymentEvent(player.SteamId, 2, property.House_Cost, TurnManager.CurrentPhase);
+
 		if (Networking.IsHost) {
 			player.Money -= property.House_Cost;
 		}
@@ -131,9 +133,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 
 		var player = GetPlayerFromEvent(eventArgs.PlayerId);
-		if (Networking.IsHost) {
-			player.Money += property.House_Cost / 2;
-		}
+
+		TurnManager.EmitPlayerPaymentEvent(2, player.SteamId, property.House_Cost, TurnManager.CurrentPhase);
 
 		property.Houses--;
 	}
@@ -306,7 +307,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			property.Mortgaged = true;
 
 			if (Networking.IsHost) {
-				Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, eventArgs.playerId, price));
+				Game.ActiveScene.Dispatch(
+					new PlayerPaymentEvent(2, eventArgs.playerId, price, TurnManager.CurrentPhase));
 			}
 		}
 	}
@@ -318,7 +320,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var price = (int)Math.Ceiling(property.Price / 2 * 1.1);
 
 		if (Networking.IsHost && player.Money > price && property.Mortgaged) {
-			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, price));
+			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, price, TurnManager.CurrentPhase));
 		}
 
 		property.Mortgaged = false;
