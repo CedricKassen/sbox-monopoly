@@ -468,7 +468,7 @@
 		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
 			return;
 		}
-
+		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.DiceRoll);
 		_turnManager.EmitStartRollEvent();
 	}
 
@@ -492,13 +492,14 @@
 		if (!IsCurrentPlayer() || _turnManager.CurrentPhase != TurnManager.Phase.Rolling) {
 			return;
 		}
-
+		
+		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.DiceRoll);
+		
 		foreach (var dice in _dice) {
 			dice.Roll();
 		}
 
-		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InAction);
-
+		
 
 		while (_dice.Any(dice => dice.IsRolling)) {
 			await Task.DelayRealtimeSeconds(0.5f);
@@ -636,7 +637,7 @@
 	}
 
 	private bool CanOpenUI(LocalUIStates? state = null) {
-		var allowedPhases = new List<TurnManager.Phase>() { TurnManager.Phase.PlayerAction, TurnManager.Phase.InAction };
+		var allowedPhases = new List<TurnManager.Phase>() { TurnManager.Phase.PlayerAction, TurnManager.Phase.InAction, TurnManager.Phase.Rolling };
 
 		var isCurrentPlayer = Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId;
 		var isAllowedPhase = allowedPhases.Contains(_turnManager.CurrentPhase);

@@ -201,7 +201,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		CardActionHelper.GoToJail(player, MovementManager);
-		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InAction);
+		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InMovement);
 	}
 
 	public void OnGameEvent(PayJailFineEvent eventArgs) {
@@ -302,6 +302,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(RolledEvent eventArgs) {
 		var player = GetPlayerFromEvent(eventArgs.playerId);
 
+
+		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InMovement);
 
 		player.DoublesCount = eventArgs.Doubles ? player.DoublesCount + 1 : 0;
 
