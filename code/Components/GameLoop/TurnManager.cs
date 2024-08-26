@@ -64,10 +64,8 @@ public class TurnManager : Component {
 
 	[Broadcast(NetPermission.HostOnly)]
 	public void EmitPlayerPaymentEvent(ulong playerId, ulong recipientId, int amount,
-	                                   TurnManager.Phase newPhase = Phase.PlayerAction) {
-		GameParentObject.Dispatch(new PlayerPaymentEvent(playerId, recipientId, amount));
-
-		ChangePhase(playerId, newPhase);
+	                                   Phase newPhase = Phase.PlayerAction) {
+		GameParentObject.Dispatch(new PlayerPaymentEvent(playerId, recipientId, amount, newPhase));
 	}
 
 	[Broadcast(NetPermission.HostOnly)]

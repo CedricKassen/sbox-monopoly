@@ -92,6 +92,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			return;
 		}
 
+
 		// Check if player builds evenly
 		foreach (var member in property.GroupMembers) {
 			// If one street of the group got more houses then current street prevent destroying we cant go from 2 1 1 -> 3 1 1
@@ -225,10 +226,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PayJailFineEvent eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.playerId);
-		
+
 		TurnManager.EmitPlayerPaymentEvent(player.SteamId, 1, 50, TurnManager.Phase.Rolling);
 		player.JailTurnCounter = 0;
-		
 	}
 
 	public void OnGameEvent(UseJailCardEvent eventArgs) {
@@ -457,9 +457,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			}
 		}
 
-		TurnManager.EmitPlayerPaymentEvent(TradeState.TradingCreator.SteamId, TradeState.TradingPartner.SteamId, TradeState.TradingOfferAmount);
-		TurnManager.EmitPlayerPaymentEvent(TradeState.TradingPartner.SteamId, TradeState.TradingCreator.SteamId, TradeState.TradingRequestAmount);
-		
+		TurnManager.EmitPlayerPaymentEvent(TradeState.TradingCreator.SteamId, TradeState.TradingPartner.SteamId,
+			TradeState.TradingOfferAmount);
+		TurnManager.EmitPlayerPaymentEvent(TradeState.TradingPartner.SteamId, TradeState.TradingCreator.SteamId,
+			TradeState.TradingRequestAmount);
+
 		ResetTrading();
 		CloseLocalUIForEveryPlayer();
 	}
