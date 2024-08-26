@@ -201,7 +201,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		CardActionHelper.GoToJail(player, MovementManager);
-		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InAction);
+		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InMovement);
 	}
 
 	public void OnGameEvent(PayJailFineEvent eventArgs) {
