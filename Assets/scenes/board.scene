@@ -1790,8 +1790,8 @@
               "Mortgaged": false,
               "Name": "No. Carolina Ave.",
               "Normal_Rent": [
+                26,
                 130,
-                1,
                 390,
                 900,
                 1100,
