@@ -16,6 +16,10 @@ a, button {
   &:hover {
     sound-in: 'ui.button.over';
   }
+
+  &:active {
+    sound-in: 'ui.button.press';
+  }
 }
 
 h1 {

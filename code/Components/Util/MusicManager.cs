@@ -38,10 +38,6 @@ public sealed class MusicManager : BaseSoundComponent {
 			return;
 		}
 
-		if (SoundHandle is not null) ApplyOverrides(SoundHandle);
-
-		if (TempSoundHandle is not null) ApplyOverrides(TempSoundHandle);
-
 		if (SoundHandle.IsValid() && SoundLength <= Duration.Relative + RepeatOffset) {
 			//SoundEvent.Volume = Volume;
 			Duration = 0;
