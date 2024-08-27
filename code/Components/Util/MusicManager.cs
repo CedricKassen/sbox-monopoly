@@ -34,6 +34,7 @@ public sealed class MusicManager : BaseSoundComponent {
 
 	protected override void OnUpdate() {
 		if (!UserSettingsSystem.Loaded) {
+			UserSettingsSystem.Load();
 			return;
 		}
 
