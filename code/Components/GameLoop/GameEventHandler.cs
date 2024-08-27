@@ -51,6 +51,15 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			TurnManager.EmitPropertyAuctionEvent(_auctionLocations.Pop(), eventArgs.playerId);
 			return;
 		}
+		else {
+			Player player = GetPlayerFromEvent(eventArgs.playerId);
+			if (player.EliminatedPosition <= 0) {
+				TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
+			}
+			else {
+				TurnManager.EmitTurnFinishedEvent();
+			}
+		}
 
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
 	}
@@ -280,13 +289,19 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	public void OnGameEvent(PropertyAuctionEvent eventArgs) {
+		bool everyPlayerHasEnoughFunds = true;
+		foreach (var player in Lobby.Players) {
+			everyPlayerHasEnoughFunds = everyPlayerHasEnoughFunds && player.Money >= 20;
+			IngameStateManager.AuctionBiddings[player.SteamId] = 10;
+		}
+
+		if (!everyPlayerHasEnoughFunds) {
+			return;
+		}
+
 		IngameStateManager.AuctionBiddings = new NetDictionary<ulong, int>();
 		IngameStateManager.State = IngameUI.IngameUiStates.Auction;
 		IngameStateManager.Data = LocationContainer.Children[eventArgs.PropertyIndex].Components.Get<GameLocation>();
-
-		foreach (var player in Lobby.Players) {
-			IngameStateManager.AuctionBiddings[player.SteamId] = 10;
-		}
 	}
 
 	public void OnGameEvent(PropertyMortgagedEvent eventArgs) {
@@ -496,6 +511,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PlayerBankruptEvent eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.PlayerId);
+		player.EliminatedPosition = ++Player.EliminatedCount;
+
 
 		var locations = Game.ActiveScene.Children[0];
 
@@ -508,18 +525,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 					continue;
 				}
 
+				IngameStateManager.OwnedFields[key] = 0;
+
 				if (key.Contains("Jail")) {
-					IngameStateManager.OwnedFields[key] = 0;
 					CardActionManager.RemoveBlockedCard(key.Contains("chance") ? 9 : 5);
 					continue;
 				}
 
-				var gameLocation = locations.Children.First(go => {
-					// more logging because somewhere here an exception came
-					var x = go.Name.Equals(key);
-					Log.Info(x);
-					return x;
-				}).Components.Get<GameLocation>();
+				var gameLocation = locations.Children.First(go => go.Name.Equals(key)).Components.Get<GameLocation>();
 				gameLocation.Houses = 0;
 				_auctionLocations.Push(gameLocation.PropertyIndex);
 			}
@@ -527,22 +540,33 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			if (_auctionLocations.Any()) {
 				TurnManager.EmitPropertyAuctionEvent(_auctionLocations.Pop(), player.SteamId);
 			}
+			else {
+				TurnManager.EmitTurnFinishedEvent();
+			}
+		}
+		else {
+			Player recipient = GetPlayerFromEvent(eventArgs.Recipient);
+			int playerWorth = player.Money;
+			foreach (var (key, value) in IngameStateManager.OwnedFields) {
+				if (value != eventArgs.PlayerId) {
+					continue;
+				}
 
-			return;
+				IngameStateManager.OwnedFields[key] = recipient.SteamId;
+
+				if (key.Contains("Jail")) {
+					continue;
+				}
+
+				var gameLocation = locations.Children.First(go => go.Name.Equals(key)).Components.Get<GameLocation>();
+				playerWorth += gameLocation.House_Cost * gameLocation.Houses;
+			}
+
+			TurnManager.EmitPlayerPaymentEvent(eventArgs.PlayerId, eventArgs.Recipient, playerWorth);
+			TurnManager.EmitTurnFinishedEvent();
 		}
 
-
-		Player recipient = GetPlayerFromEvent(eventArgs.Recipient);
-
-		TurnManager.EmitPlayerPaymentEvent(eventArgs.PlayerId, eventArgs.Recipient, player.Money);
-
-		foreach (var pair in IngameStateManager.OwnedFields.Where(pair => pair.Value == player.SteamId)) {
-			IngameStateManager.OwnedFields[pair.Key] = recipient.SteamId;
-		}
-
-		player.EliminatedPosition = ++Player.EliminatedCount;
+		player.localUiState = IngameUI.LocalUIStates.None;
 		player.GameObject.Enabled = false;
-
-		TurnManager.EmitTurnFinishedEvent();
 	}
 }
