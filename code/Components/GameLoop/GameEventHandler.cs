@@ -289,13 +289,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	public void OnGameEvent(PropertyAuctionEvent eventArgs) {
-		bool everyPlayerHasEnoughFunds = true;
+		bool anyPlayerHasEnoughFunds = false;
 		foreach (var player in Lobby.Players) {
-			everyPlayerHasEnoughFunds = everyPlayerHasEnoughFunds && player.Money >= 20;
+			anyPlayerHasEnoughFunds = anyPlayerHasEnoughFunds || player.Money >= 20;
 			IngameStateManager.AuctionBiddings[player.SteamId] = 10;
 		}
 
-		if (!everyPlayerHasEnoughFunds) {
+		if (!anyPlayerHasEnoughFunds) {
 			return;
 		}
 
