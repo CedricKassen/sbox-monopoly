@@ -151,18 +151,18 @@ section.menu {
     border-radius: 0 16px;
     font-size: 55px;
 
-    &:hover {
-      & > div {
-        background-color: $button-hover-background-color;
-      }
-    }
-
     & > div {
       position: absolute;
       transform: rotate(45deg);
       height: 150px;
       width: 150px;
+
       background-color: $button-background-color;
+
+      &.active:hover {
+        background-color: $button-hover-background-color;
+      }
+      
     }
 
     button {
@@ -174,11 +174,14 @@ section.menu {
       overflow: visible;
       white-space: pre-line;
       width: 80px;
+      pointer-events: none;
     }
   }
 
+
   .active {
     animation: bluePulse 2s infinite;
+    cursor: pointer;
 
     * {
       transform: rotate(-45deg) translate(-6px, 54px);
