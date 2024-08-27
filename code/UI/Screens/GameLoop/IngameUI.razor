@@ -10,12 +10,12 @@
 
 <root>
 @if (_stateManager.State.Equals(IngameUiStates.EndScreen)) {
-	var playerCount = Lobby.EndPlayers.Count();
-	var first = Lobby.EndPlayers.FirstOrDefault(player => player.EliminatedPosition == 0);
-	var second = Lobby.EndPlayers.FirstOrDefault(player => playerCount > 1 && player.EliminatedPosition == playerCount - 1);
-	var third = Lobby.EndPlayers.FirstOrDefault(player => playerCount > 2 && player.EliminatedPosition == playerCount - 2);
-	var forth = Lobby.EndPlayers.FirstOrDefault(player => playerCount > 3 && player.EliminatedPosition == playerCount - 3);
-	var fifth = Lobby.EndPlayers.FirstOrDefault(player => playerCount > 4 && player.EliminatedPosition == playerCount - 4);
+	var playerCount = Lobby.AllPlayers.Count();
+	var first = Lobby.AllPlayers.FirstOrDefault(player => player.EliminatedPosition == 0);
+	var second = Lobby.AllPlayers.FirstOrDefault(player => playerCount > 1 && player.EliminatedPosition == playerCount - 1);
+	var third = Lobby.AllPlayers.FirstOrDefault(player => playerCount > 2 && player.EliminatedPosition == playerCount - 2);
+	var forth = Lobby.AllPlayers.FirstOrDefault(player => playerCount > 3 && player.EliminatedPosition == playerCount - 3);
+	var fifth = Lobby.AllPlayers.FirstOrDefault(player => playerCount > 4 && player.EliminatedPosition == playerCount - 4);
 
 
 	<section class="menu">
