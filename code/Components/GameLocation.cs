@@ -31,11 +31,10 @@ public sealed class GameLocation : Component {
 		Railroad
 	}
 
-	[Property]
-	public PropertyType Type { get; set; } = PropertyType.Normal;
+	[Property] public PropertyType Type { get; set; } = PropertyType.Normal;
 
 	[Property]
-	[HideIf("Type", PropertyType.Event)]
+	[HideIf("Type", PropertyType.Event), ShowIf("EventId", "income_tax"), ShowIf("EventId", "luxury_tax")]
 	public string Name { get; set; }
 
 	[Property]
@@ -79,8 +78,7 @@ public sealed class GameLocation : Component {
 	[HideIf("Type", PropertyType.Event)]
 	public bool Mortgaged { get; set; } = false;
 
-	[Property]
-	public int PropertyIndex { get; set; }
+	[Property] public int PropertyIndex { get; set; }
 
 	protected override Task OnLoad() {
 		PropertyIndex = GameObject.Parent.Children.FindIndex(o => o.Id == GameObject.Id);

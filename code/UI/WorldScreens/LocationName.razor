@@ -3,17 +3,26 @@
 @inherits PanelComponent
 
 <root>
-	<div class="title @(Top ? "top" : "")">@_name</div>
+	@if (_location.Type.Equals(GameLocation.PropertyType.Utility)) {
+    	@if (_location.Name == "Water Works") {
+    		<img src="ui/waterworks.png" class="water"/>
+    	}
+    	else {
+    		<img src="ui/electriccompany.png" class="electricity"/> 
+    	}
+    }
+	
+	<div class="title @(Top ? "top" : "")">@_location.Name</div>
 </root>
 
 @code
 {
 
-	[Property] public bool Top { get; set; }= false;
-	private string _name;
+	[Property] public bool Top { get; set; } = false;
+	private GameLocation _location;
 
 	protected override void OnStart() {
-		_name = GameObject.Parent.Parent.Components.Get<GameLocation>().Name;
+		_location = GameObject.Parent.Parent.Components.Get<GameLocation>();
 	}
 
 
