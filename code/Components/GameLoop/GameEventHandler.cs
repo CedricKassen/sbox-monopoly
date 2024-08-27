@@ -504,7 +504,13 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			// refactor auction event so its gets an array/list of properties to handle
 
 			foreach (var (key, value) in IngameStateManager.OwnedFields) {
-				if (key.Contains("Jail") && value != eventArgs.PlayerId) {
+				if (value != eventArgs.PlayerId) {
+					continue;
+				}
+
+				if (key.Contains("Jail")) {
+					IngameStateManager.OwnedFields[key] = 0;
+					CardActionManager.RemoveBlockedCard(key.Contains("chance") ? 9 : 5);
 					continue;
 				}
 
