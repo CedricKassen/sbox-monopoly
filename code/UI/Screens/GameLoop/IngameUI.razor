@@ -10,12 +10,12 @@
 
 <root>
 @if (_stateManager.State.Equals(IngameUiStates.EndScreen)) {
-	var playerCount = Lobby.Players.Count();
-	var first = Lobby.Players.FirstOrDefault(player => player.EliminatedPosition == 0);
-	var second = Lobby.Players.FirstOrDefault(player => playerCount > 1 && player.EliminatedPosition == playerCount - 1);
-	var third = Lobby.Players.FirstOrDefault(player => playerCount > 2 && player.EliminatedPosition == playerCount - 2);
-	var forth = Lobby.Players.FirstOrDefault(player => playerCount > 3 && player.EliminatedPosition == playerCount - 3);
-	var fifth = Lobby.Players.FirstOrDefault(player => playerCount > 4 && player.EliminatedPosition == playerCount - 4);
+	var playerCount = Lobby.AllPlayers.Count();
+	var first = Lobby.AllPlayers.FirstOrDefault(player => player.EliminatedPosition == 0);
+	var second = Lobby.AllPlayers.FirstOrDefault(player => playerCount > 1 && player.EliminatedPosition == playerCount - 1);
+	var third = Lobby.AllPlayers.FirstOrDefault(player => playerCount > 2 && player.EliminatedPosition == playerCount - 2);
+	var forth = Lobby.AllPlayers.FirstOrDefault(player => playerCount > 3 && player.EliminatedPosition == playerCount - 3);
+	var fifth = Lobby.AllPlayers.FirstOrDefault(player => playerCount > 4 && player.EliminatedPosition == playerCount - 4);
 
 
 	<section class="menu">
@@ -476,7 +476,6 @@
 	private List<GameLocation> _locations { get; } = new(Game.ActiveScene.GetAllComponents<GameLocation>());
 
 	private bool _waitingForTrading;
-	private LocalUIStates _localUiStateCache = LocalUIStates.None;
 
 	private bool _showRoll;
 
@@ -526,7 +525,7 @@
 
 		// Btn click sound
 		if (_player.localUiState != LocalUIStates.Trade) {
-			_localUiStateCache = _player.localUiState;
+			_player.localUiStateCache = _player.localUiState;
 		}
 
 		_player.LocalUiOpen = true;
@@ -536,7 +535,7 @@
 	private bool SetLocalTradeState() {
 		_waitingForTrading = false;
 		if (_tradeState.TradingPartner == null) {
-			_localUiStateCache = _player.localUiState;
+			_player.localUiStateCache = _player.localUiState;
 			_player.localUiState = LocalUIStates.Trade;
 		}
 		else {
@@ -613,6 +612,7 @@
 		var player = Lobby.Players[_turnManager.CurrentPlayerIndex];
 		_turnManager.EmitPropertyAuctionEvent(player.CurrentField, player.SteamId);
 
+		player.localUiStateCache = LocalUIStates.Building;
 		player.localUiState = LocalUIStates.None;
 	}
 
@@ -622,8 +622,8 @@
 
 	private void CloseLocalModal() {
 		_player.LocalUiOpen = false;
-		_player.localUiState = _localUiStateCache;
-		_localUiStateCache = LocalUIStates.None;
+		_player.localUiState = _player.localUiStateCache;
+		_player.localUiStateCache = LocalUIStates.None;
 	}
 
 	private void CloseGlobalModal(IngameUiStates state = IngameUiStates.None) {

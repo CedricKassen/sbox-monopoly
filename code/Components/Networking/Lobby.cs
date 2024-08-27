@@ -38,7 +38,11 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 	[Property] private GameObject LobbyPlayer { get; set; }
 	[Property] public List<PawnWrapper> PlayerPrefabs { get; set; }
 
-	[Property] public List<Player> Players => new(Game.ActiveScene.GetAllComponents<Player>());
+	[Property]
+	public List<Player> Players =>
+		new(Game.ActiveScene.GetAllComponents<Player>().Where(player => player.EliminatedPosition <= 0));
+
+	[Property] public List<Player> AllPlayers => new(Game.ActiveScene.GetAllComponents<Player>());
 
 	[Property] public GameObject SpawnLocation { get; set; }
 
