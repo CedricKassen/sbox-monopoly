@@ -88,8 +88,8 @@
 	<button class="secondaryButton @(!CanOpenUI() ? "disabled" : "")" onclick="@(() => ChangeLocalUIState(LocalUIStates.Bank))"> 🏦 </button>
 	<button class="secondaryButton @(!CanOpenUI() ? "disabled" : "")" onclick="@(() => ChangeLocalUIState(LocalUIStates.Trade))"> 💸 </button>
 	<div class="mainButton">
-		<div class="@(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")"></div>
-		<button class="" onclick="@Roll">
+		<div class="@(IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.Rolling ? "active" : "")" onclick="@Roll"></div>
+		<button>
 			GO
 		</button>
 	</div>
