@@ -45,6 +45,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 	[Property] public Panel LobbyPanel { get; set; }
 
 	[Property] public GameObject DicePrefab { get; set; }
+	[Property, HostSync] private bool GameActive { get; set; } = false;
 
 
 	public override int GetHashCode() {
@@ -92,6 +93,9 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 	public void OnActive(Connection conn) {
 		Log.Info(Networking.IsHost ? "Lobby created!" : $"Player '{conn.DisplayName}' joined!");
 
+		if (GameActive) {
+			return;
+		}
 
 		var playerObj = LobbyPlayer
 			.Clone(SpawnLocation.Transform.World, name: conn.DisplayName + " - Lobby");
@@ -184,6 +188,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 				}
 			}
 
+			GameActive = true;
 			EmitStartGame();
 		}
 	}
