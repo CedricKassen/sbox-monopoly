@@ -10,9 +10,11 @@ public sealed class Dice : Component, Component.ICollisionListener {
 	private readonly TurnManager.Phase[] _rollPhases = { TurnManager.Phase.Rolling, TurnManager.Phase.Jail };
 
 	public void OnCollisionStart(Collision collision) {
-		if (collision.Other.GameObject.Tags.Contains("dicecontainer")) {
-			var velocity = Vector3.Reflect(Vector3.Forward * 1000, collision.Contact.Normal) * 300;
-			Rigidbody.ApplyForce(velocity);
+		if (collision.Other.GameObject.Tags.Contains("dice_wall")) {
+			Vector3 direction = new Vector3(0, 0, 0) - collision.Self.Body.Position;
+			direction = direction.Normal;
+
+			Rigidbody.Velocity = direction * 100f;
 		}
 	}
 
