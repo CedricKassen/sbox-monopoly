@@ -21,26 +21,19 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
                                 IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent>,
                                 IGameEventHandler<PlayerBankruptEvent> {
-	[Property]
-	public GameObject LocationContainer { get; set; }
+	[Property] public GameObject LocationContainer { get; set; }
 
-	[Property]
-	public Lobby Lobby { get; set; }
+	[Property] public Lobby Lobby { get; set; }
 
-	[Property]
-	public MovementManager MovementManager { get; set; }
+	[Property] public MovementManager MovementManager { get; set; }
 
-	[Property]
-	public CardActionManager CardActionManager { get; set; }
+	[Property] public CardActionManager CardActionManager { get; set; }
 
-	[Property]
-	public IngameStateManager IngameStateManager { get; set; }
+	[Property] public IngameStateManager IngameStateManager { get; set; }
 
-	[Property]
-	public TurnManager TurnManager { get; set; }
+	[Property] public TurnManager TurnManager { get; set; }
 
-	[Property]
-	public TradeState TradeState { get; set; }
+	[Property] public TradeState TradeState { get; set; }
 
 	private List<Dice> _dice = new();
 
@@ -234,6 +227,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(PayJailFineEvent eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.playerId);
 
+		TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.InAction);
 		TurnManager.EmitPlayerPaymentEvent(player.SteamId, 1, 50, TurnManager.Phase.Rolling);
 		player.JailTurnCounter = 0;
 	}
@@ -496,6 +490,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	public void OnGameEvent(NotEnoughFundsEvent eventArgs) {
+		if ((ulong)Game.SteamId != eventArgs.PlayerId) {
+			return;
+		}
+
 		GetPlayerFromEvent(eventArgs.PlayerId).localUiState = IngameUI.LocalUIStates.NotEnoughFunds;
 		IngameStateManager.Data = eventArgs;
 	}
@@ -531,8 +529,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		TurnManager.EmitPlayerPaymentEvent(eventArgs.PlayerId, eventArgs.Recipient, player.Money);
 
-		foreach (var key in IngameStateManager.OwnedFields.Keys) {
-			IngameStateManager.OwnedFields[key] = recipient.SteamId;
+		foreach (var pair in IngameStateManager.OwnedFields.Where(pair => pair.Value == player.SteamId)) {
+			IngameStateManager.OwnedFields[pair.Key] = recipient.SteamId;
 		}
 
 		player.EliminatedPosition = ++Player.EliminatedCount;

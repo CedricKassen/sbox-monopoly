@@ -28,20 +28,15 @@ public class TurnManager : Component {
 		None
 	}
 
-	[Property]
-	public GameObject GameParentObject { get; set; }
+	[Property] public GameObject GameParentObject { get; set; }
 
-	[Property, HostSync]
-	public Phase CurrentPhase { get; set; }
+	[Property, HostSync] public Phase CurrentPhase { get; set; }
 
-	[Property]
-	public Lobby CurrentLobby { get; set; }
+	[Property] public Lobby CurrentLobby { get; set; }
 
-	[Property]
-	public CardActionManager CardActionManager { get; set; }
+	[Property] public CardActionManager CardActionManager { get; set; }
 
-	[Property, HostSync]
-	public int CurrentPlayerIndex { get; set; }
+	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
 
 	public void EmitStartRollEvent() {
 		GameParentObject.Dispatch(new StartRollEvent());
@@ -149,6 +144,10 @@ public class TurnManager : Component {
 	[Broadcast]
 	public void ChangePhase(ulong playerId, Phase phase) {
 		var player = CurrentLobby.Players.Find(player => player.SteamId == playerId);
+
+		if (player.EliminatedPosition > 0) {
+			CurrentPhase = Phase.Rolling;
+		}
 
 		if (phase.Equals(Phase.PlayerAction)) {
 			CurrentPhase = player.DoublesCount is > 0 and < 3 ? Phase.Rolling : Phase.PlayerAction;
