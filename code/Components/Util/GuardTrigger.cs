@@ -1,24 +1,25 @@
 using Sandbox;
 
 public sealed class GuardTrigger : Component, Component.ITriggerListener {
-	[Property] private Collider _dice { get; set; }
+	[Property] private List<Collider> _dice { get; set; }
 
 	public void OnTriggerEnter(Collider other) {
 		if (other.Tags.Contains("dice")) {
-			_dice = other;
+			_dice.Add(other);
 		}
 	}
 
 	public void OnTriggerExit(Collider other) {
-		_dice = null;
+		_dice.Remove(other);
 	}
 
 	protected override void OnUpdate() {
-		if (_dice.IsValid()) {
-			Vector3 direction = new Vector3(0, 0, 0) - _dice.Transform.Position;
+		_dice.ForEach(dice => {
+			Vector3 direction = new Vector3(0, 0, 0) - dice.Transform.Position;
 			direction = direction.Normal;
 
-			_dice.Rigidbody.Velocity = direction * 100f;
-		}
+			dice.Rigidbody.Velocity = direction * 100f;
+		});
+		
 	}
 }
