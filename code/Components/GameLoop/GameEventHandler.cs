@@ -40,26 +40,23 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	private Stack<int> _auctionLocations = new();
 
 	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
-		TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.PlayerAction);
 		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex, true);
-
-		if (Networking.IsHost) {
-			TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, 2, eventArgs.Amount);
-		}
-
+		
+		TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, 2, eventArgs.Amount);
+		
 		if (_auctionLocations.Any()) {
 			TurnManager.EmitPropertyAuctionEvent(_auctionLocations.Pop(), eventArgs.playerId);
 			return;
 		}
-		else {
-			Player player = GetPlayerFromEvent(eventArgs.playerId);
-			if (player.EliminatedPosition <= 0) {
-				TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
-			}
-			else {
-				TurnManager.EmitTurnFinishedEvent();
-			}
+		
+		Player player = GetPlayerFromEvent(eventArgs.playerId);
+		if (player.EliminatedPosition <= 0) {
+			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
 		}
+		else {
+			TurnManager.EmitTurnFinishedEvent();
+		}
+		
 
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
 	}
@@ -296,6 +293,16 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		if (!anyPlayerHasEnoughFunds) {
+			Player player = GetPlayerFromEvent((ulong)Game.SteamId);
+
+			if (player.localUiStateCache.Equals(IngameUI.LocalUIStates.None)) {
+				_auctionLocations = new();
+				TurnManager.EmitTurnFinishedEvent();
+			}
+			
+			IngameStateManager.State = IngameUI.IngameUiStates.None;
+			player.localUiState = player.localUiStateCache;
+			player.localUiStateCache = IngameUI.LocalUIStates.None;
 			return;
 		}
 

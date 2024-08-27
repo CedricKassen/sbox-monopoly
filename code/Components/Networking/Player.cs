@@ -36,6 +36,7 @@ public sealed class Player : Component {
 	[Property] public Connection Connection { get; set; }
 
 	[Property] public IngameUI.LocalUIStates localUiState { get; set; } = IngameUI.LocalUIStates.None;
+	[Property] public IngameUI.LocalUIStates localUiStateCache { get; set; } = IngameUI.LocalUIStates.None;
 
 	[Property] public int LastDiceCount { get; set; } = 0;
 
