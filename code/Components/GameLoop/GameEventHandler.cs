@@ -504,11 +504,16 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			// refactor auction event so its gets an array/list of properties to handle
 
 			foreach (var (key, value) in IngameStateManager.OwnedFields) {
-				if (key.Contains("Jail") && value == eventArgs.PlayerId) {
+				if (key.Contains("Jail") && value != eventArgs.PlayerId) {
 					continue;
 				}
 
-				var gameLocation = locations.Children.First(go => go.Name.Equals(key)).Components.Get<GameLocation>();
+				var gameLocation = locations.Children.First(go => {
+					// more logging because somewhere here an exception came
+					var x = go.Name.Equals(key);
+					Log.Info(x);
+					return x;
+				}).Components.Get<GameLocation>();
 				gameLocation.Houses = 0;
 				_auctionLocations.Push(gameLocation.PropertyIndex);
 			}
