@@ -76,12 +76,13 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.SoundBoxComponent",
-          "__guid": "3ea2ab12-8bf3-4adc-9de0-bb16cfb853d7",
+          "__type": "MusicManager",
+          "__guid": "16aa1c5a-2f1d-4989-8af2-5e899ef4613e",
+          "SoundLength": 114.302086,
           "DistanceAttenuation": false,
           "DistanceAttenuationOverride": false,
-          "Force2d": true,
-          "MaxRepeatTime": 0,
+          "Force2d": false,
+          "MaxRepeatTime": 1,
           "MinRepeatTime": 1,
           "Occlusion": false,
           "OcclusionOverride": false,
@@ -90,16 +91,16 @@
           "PlayOnStart": true,
           "ReflectionOverride": false,
           "Reflections": false,
-          "Repeat": true,
-          "Scale": "50,50,50",
-          "SoundEvent": "sounds/main_menu.sound",
+          "Repeat": false,
+          "RepeatOffset": 18.31,
+          "SoundEvent": "sounds/menu_music.sound",
           "SoundOverride": true,
           "StopOnNew": false,
           "TargetMixer": {
             "Name": "music",
-            "Id": "f60323ac-d7a9-4b91-ba47-59f9a8f3132b"
+            "Id": "8cafd56f-3b16-471a-8dd9-0eca73282a16"
           },
-          "Volume": 0.31
+          "Volume": 1
         }
       ]
     }

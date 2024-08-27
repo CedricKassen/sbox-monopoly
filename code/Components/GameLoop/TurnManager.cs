@@ -28,15 +28,20 @@ public class TurnManager : Component {
 		None
 	}
 
-	[Property] public GameObject GameParentObject { get; set; }
+	[Property]
+	public GameObject GameParentObject { get; set; }
 
-	[Property, HostSync] public Phase CurrentPhase { get; set; }
+	[Property, HostSync]
+	public Phase CurrentPhase { get; set; }
 
-	[Property] public Lobby CurrentLobby { get; set; }
+	[Property]
+	public Lobby CurrentLobby { get; set; }
 
-	[Property] public CardActionManager CardActionManager { get; set; }
+	[Property]
+	public CardActionManager CardActionManager { get; set; }
 
-	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
+	[Property, HostSync]
+	public int CurrentPlayerIndex { get; set; }
 
 	public void EmitStartRollEvent() {
 		GameParentObject.Dispatch(new StartRollEvent());
@@ -120,7 +125,6 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void EmitPropertyMortgagePayedEvent(int propertyIndex, ulong playerId) {
-		CurrentPhase = Phase.PlayerAction;
 		GameParentObject.Dispatch(new PropertyMortgagePayedEvent {
 			PropertyIndex = propertyIndex, playerId = playerId
 		});

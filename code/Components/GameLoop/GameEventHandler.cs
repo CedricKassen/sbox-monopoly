@@ -21,19 +21,26 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
                                 IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent>,
                                 IGameEventHandler<PlayerBankruptEvent> {
-	[Property] public GameObject LocationContainer { get; set; }
+	[Property]
+	public GameObject LocationContainer { get; set; }
 
-	[Property] public Lobby Lobby { get; set; }
+	[Property]
+	public Lobby Lobby { get; set; }
 
-	[Property] public MovementManager MovementManager { get; set; }
+	[Property]
+	public MovementManager MovementManager { get; set; }
 
-	[Property] public CardActionManager CardActionManager { get; set; }
+	[Property]
+	public CardActionManager CardActionManager { get; set; }
 
-	[Property] public IngameStateManager IngameStateManager { get; set; }
+	[Property]
+	public IngameStateManager IngameStateManager { get; set; }
 
-	[Property] public TurnManager TurnManager { get; set; }
+	[Property]
+	public TurnManager TurnManager { get; set; }
 
-	[Property] public TradeState TradeState { get; set; }
+	[Property]
+	public TradeState TradeState { get; set; }
 
 	private List<Dice> _dice = new();
 
@@ -308,11 +315,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
 		var price = (int)Math.Ceiling(property.Price / 2 * 1.1);
 
-		if (Networking.IsHost && player.Money > price && property.Mortgaged) {
-			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(eventArgs.playerId, 2, price, TurnManager.CurrentPhase));
-		}
+		if (player.Money > price && property.Mortgaged) {
+			if (Networking.IsHost) {
+				Game.ActiveScene.Dispatch(
+					new PlayerPaymentEvent(eventArgs.playerId, 2, price, TurnManager.CurrentPhase));
+			}
 
-		property.Mortgaged = false;
+			property.Mortgaged = false;
+		}
 	}
 
 	public void OnGameEvent(RolledEvent eventArgs) {
