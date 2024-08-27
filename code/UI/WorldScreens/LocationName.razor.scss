@@ -5,9 +5,26 @@ LocationName {
   right: 0;
   bottom: 0;
   justify-content: center;
+  align-items: center;
   font-weight: bold;
   border-radius: 20px;
   text-align: center;
+  flex-direction: column;
+
+  img {
+    margin-top: -100px;
+    overflow: visible;
+
+    .water {
+      width: 60%;
+      aspect-ratio: 317 / 243;
+    }
+
+    .electricity {
+      width: 60%;
+      aspect-ratio: 235 / 293
+    }
+  }
 
   .title {
     font-size: 60px;
@@ -17,5 +34,9 @@ LocationName {
 
   .top {
     align-items: flex-end;
+  }
+
+  .property {
+    margin-top: 180px;
   }
 }

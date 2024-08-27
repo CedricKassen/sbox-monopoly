@@ -230,6 +230,7 @@
               "House_Cost": 0,
               "Houses": 0,
               "Mortgaged": false,
+              "Name": "Income Tax",
               "Normal_Rent": [
                 0,
                 1,
@@ -260,8 +261,57 @@
               "Name": "WorldUI (21)",
               "Position": "0,0,0",
               "Enabled": true,
-              "__Prefab": "prefabs/card_informations_bottom.prefab",
-              "__PrefabVariables": {}
+              "Children": [
+                {
+                  "__guid": "e75ff753-a14b-4066-a7a2-dad9fc19e31e",
+                  "Flags": 0,
+                  "Name": "Price",
+                  "Position": "-14.69286,0.00003231157,0.4999764",
+                  "Rotation": "0.7071068,0.00000003090862,0.7071068,-0.00000003090862",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.WorldPanel",
+                      "__guid": "94334a56-2604-4bd8-bd8a-f82e79bb2b99",
+                      "HorizontalAlign": "Center",
+                      "InteractionRange": 1000,
+                      "LookAtCamera": false,
+                      "PanelSize": "650,250",
+                      "RenderScale": 1,
+                      "VerticalAlign": "Center"
+                    },
+                    {
+                      "__type": "LocationPrice",
+                      "__guid": "0b9197fe-1354-4c58-8833-36e86b803473"
+                    }
+                  ]
+                },
+                {
+                  "__guid": "c04b6f70-c69e-4c80-a7c2-99dcd65eb1fc",
+                  "Flags": 0,
+                  "Name": "Name",
+                  "Position": "17.68183,0.00001565122,0.4999913",
+                  "Rotation": "0.7071068,0.00000003090862,0.7071068,-0.00000003090862",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.WorldPanel",
+                      "__guid": "de77e9be-8bde-43db-8265-545b0d1ec848",
+                      "HorizontalAlign": "Center",
+                      "InteractionRange": 1000,
+                      "LookAtCamera": false,
+                      "PanelSize": "650,800",
+                      "RenderScale": 1,
+                      "VerticalAlign": "Center"
+                    },
+                    {
+                      "__type": "LocationName",
+                      "__guid": "c4a32872-a20d-4192-a6ae-54d28713d48c",
+                      "Top": false
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -689,8 +739,57 @@
               "Name": "WorldUI (12)",
               "Position": "0,0,0",
               "Enabled": true,
-              "__Prefab": "prefabs/card_informations_top.prefab",
-              "__PrefabVariables": {}
+              "Children": [
+                {
+                  "__guid": "36b69bda-b7d8-4e64-9034-d5a901204bd2",
+                  "Flags": 0,
+                  "Name": "Price",
+                  "Position": "-14.693,0.00003202243,0.4999731",
+                  "Rotation": "-0,0.7071068,-0,-0.7071068",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.WorldPanel",
+                      "__guid": "bf7ac272-8188-4c29-aa1e-62da58b6dbc4",
+                      "HorizontalAlign": "Center",
+                      "InteractionRange": 1000,
+                      "LookAtCamera": false,
+                      "PanelSize": "650,250",
+                      "RenderScale": 1,
+                      "VerticalAlign": "Center"
+                    },
+                    {
+                      "__type": "LocationPrice",
+                      "__guid": "e0931998-6e34-4c81-ac6c-dd3ad28442e4"
+                    }
+                  ]
+                },
+                {
+                  "__guid": "20f99669-e224-4afd-9aa5-ce9a6aebffc6",
+                  "Flags": 0,
+                  "Name": "Name",
+                  "Position": "17.65887,0.0000599826,0.4999208",
+                  "Rotation": "-0,0.7071068,-0,-0.7071068",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.WorldPanel",
+                      "__guid": "64651725-961e-4e59-8665-bd8d44aad20d",
+                      "HorizontalAlign": "Center",
+                      "InteractionRange": 1000,
+                      "LookAtCamera": false,
+                      "PanelSize": "650,900",
+                      "RenderScale": 1,
+                      "VerticalAlign": "Center"
+                    },
+                    {
+                      "__type": "LocationName",
+                      "__guid": "7435fdaf-bbcb-48e0-9737-68f464a63291",
+                      "Top": true
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1593,8 +1692,57 @@
               "Name": "WorldUI (8)",
               "Position": "0,0,0",
               "Enabled": true,
-              "__Prefab": "prefabs/card_informations_top.prefab",
-              "__PrefabVariables": {}
+              "Children": [
+                {
+                  "__guid": "2083c0ab-7ec1-47dd-9bc0-1bcfcffc3dff",
+                  "Flags": 0,
+                  "Name": "Price",
+                  "Position": "-14.693,0.00003202243,0.4999731",
+                  "Rotation": "-0,0.7071068,-0,-0.7071068",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.WorldPanel",
+                      "__guid": "7401db7a-13d2-45a4-9395-03338499cc77",
+                      "HorizontalAlign": "Center",
+                      "InteractionRange": 1000,
+                      "LookAtCamera": false,
+                      "PanelSize": "650,250",
+                      "RenderScale": 1,
+                      "VerticalAlign": "Center"
+                    },
+                    {
+                      "__type": "LocationPrice",
+                      "__guid": "b00e4678-4e8f-42f9-8648-9c7a244d9cc8"
+                    }
+                  ]
+                },
+                {
+                  "__guid": "ba93cad1-1388-4f2d-9331-79aa7051073e",
+                  "Flags": 0,
+                  "Name": "Name",
+                  "Position": "17.57408,0.0000289812,0.4999869",
+                  "Rotation": "-0,0.7071068,-0,-0.7071068",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.WorldPanel",
+                      "__guid": "89afa402-327e-4543-add1-3d3d6e169f28",
+                      "HorizontalAlign": "Center",
+                      "InteractionRange": 1000,
+                      "LookAtCamera": false,
+                      "PanelSize": "650,900",
+                      "RenderScale": 1,
+                      "VerticalAlign": "Center"
+                    },
+                    {
+                      "__type": "LocationName",
+                      "__guid": "83d2ad11-a0d8-40df-83cb-9a503bec05ce",
+                      "Top": true
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -2100,6 +2248,7 @@
               "House_Cost": 0,
               "Houses": 0,
               "Mortgaged": false,
+              "Name": "Luxury Tax",
               "Normal_Rent": [
                 0,
                 1,
@@ -2130,8 +2279,57 @@
               "Name": "WorldUI (17)",
               "Position": "0,0,0",
               "Enabled": true,
-              "__Prefab": "prefabs/card_informations_bottom.prefab",
-              "__PrefabVariables": {}
+              "Children": [
+                {
+                  "__guid": "5b097a6d-d1eb-4296-9b39-5ea460097bf6",
+                  "Flags": 0,
+                  "Name": "Price",
+                  "Position": "-14.69286,0.00003231157,0.4999764",
+                  "Rotation": "0.7071068,0.00000003090862,0.7071068,-0.00000003090862",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.WorldPanel",
+                      "__guid": "224a6f63-dfab-43bf-b6ce-2825e82dc04d",
+                      "HorizontalAlign": "Center",
+                      "InteractionRange": 1000,
+                      "LookAtCamera": false,
+                      "PanelSize": "650,250",
+                      "RenderScale": 1,
+                      "VerticalAlign": "Center"
+                    },
+                    {
+                      "__type": "LocationPrice",
+                      "__guid": "b4a8bae2-a631-4fa2-9837-99e63615c8b2"
+                    }
+                  ]
+                },
+                {
+                  "__guid": "bef7ccb0-abae-4a79-ad1d-49b746267b43",
+                  "Flags": 0,
+                  "Name": "Name",
+                  "Position": "17.68183,0.00001565122,0.4999913",
+                  "Rotation": "0.7071068,0.00000003090862,0.7071068,-0.00000003090862",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.WorldPanel",
+                      "__guid": "89d1d881-a717-4130-a811-2a1597ea5c9f",
+                      "HorizontalAlign": "Center",
+                      "InteractionRange": 1000,
+                      "LookAtCamera": false,
+                      "PanelSize": "650,800",
+                      "RenderScale": 1,
+                      "VerticalAlign": "Center"
+                    },
+                    {
+                      "__type": "LocationName",
+                      "__guid": "87250b33-9d83-4007-bcf7-f8d254ef164a",
+                      "Top": false
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -2920,7 +3118,7 @@
                   "MaxPlayers": 5,
                   "PlayerPrefabs": [
                     {
-                      "Id": 16,
+                      "Id": 1,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/car.prefab"
@@ -2930,7 +3128,7 @@
                       "Height": 288
                     },
                     {
-                      "Id": 17,
+                      "Id": 2,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/ship.prefab"
@@ -2940,7 +3138,7 @@
                       "Height": 320
                     },
                     {
-                      "Id": 18,
+                      "Id": 3,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/timble.prefab"
@@ -2950,7 +3148,7 @@
                       "Height": 512
                     },
                     {
-                      "Id": 19,
+                      "Id": 4,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/tophat.prefab"
@@ -2960,7 +3158,7 @@
                       "Height": 384
                     },
                     {
-                      "Id": 20,
+                      "Id": 5,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/wheelbarrow.prefab"

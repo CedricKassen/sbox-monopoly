@@ -2,15 +2,14 @@
   "RootObject": {
     "__guid": "822791bd-beaa-46c0-8d6b-e0a730b625a1",
     "Flags": 0,
-    "Name": "WorldUI",
-    "Position": "0,0,0",
+    "Name": "card_informations_bottom",
     "Enabled": true,
     "Children": [
       {
         "__guid": "9096d1fa-09b8-4dda-9729-cbf27ff19d30",
         "Flags": 0,
         "Name": "Price",
-        "Position": "-18,0.00003202243,0.4999731",
+        "Position": "-14.69286,0.00003231157,0.4999764",
         "Rotation": "0.7071068,0.00000003090862,0.7071068,-0.00000003090862",
         "Enabled": true,
         "Components": [
@@ -20,7 +19,7 @@
             "HorizontalAlign": "Center",
             "InteractionRange": 1000,
             "LookAtCamera": false,
-            "PanelSize": "512,160",
+            "PanelSize": "650,250",
             "RenderScale": 1,
             "VerticalAlign": "Center"
           },
@@ -34,7 +33,7 @@
         "__guid": "f5711a4c-bc7a-410f-bf6a-000e505ba7e4",
         "Flags": 0,
         "Name": "Name",
-        "Position": "6.5,0.00001467367,0.5",
+        "Position": "8,0.00001489895,0.4999918",
         "Rotation": "0.7071068,0.00000003090862,0.7071068,-0.00000003090862",
         "Enabled": true,
         "Components": [
@@ -44,7 +43,7 @@
             "HorizontalAlign": "Center",
             "InteractionRange": 1000,
             "LookAtCamera": false,
-            "PanelSize": "650,448",
+            "PanelSize": "650,480",
             "RenderScale": 1,
             "VerticalAlign": "Center"
           },
@@ -55,7 +54,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
