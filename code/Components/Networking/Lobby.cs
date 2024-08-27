@@ -94,6 +94,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 		Log.Info(Networking.IsHost ? "Lobby created!" : $"Player '{conn.DisplayName}' joined!");
 
 		if (GameActive) {
+			JoinInActiveGame();
 			return;
 		}
 
@@ -193,6 +194,13 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 		}
 	}
 
+	[Broadcast]
+	public void JoinInActiveGame() {
+		if (!Players.Exists(player => player.SteamId == (ulong)Game.SteamId)) {
+			Log.Error("You are spectating an active game!");
+			LobbyPanel.Navigate("/ingame");
+		}
+	}
 
 	public void EmitStartGame() {
 		Game.ActiveScene.Dispatch(new GameStartEvent());

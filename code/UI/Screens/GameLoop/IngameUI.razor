@@ -216,26 +216,35 @@
 		break;
 }
 
-
 @switch (_player.localUiState) {
 	case LocalUIStates.Bank:
-		<Modal OnClose=@CloseLocalModal Name="Bank">
+		<Modal OnClose=@CloseLocalModal Name="Mortgage">
 			<Content>
 				<div class="table">
-					@foreach (var curLocation in _locations.FindAll(loc => CanMortgage(loc, (ulong)Game.SteamId))) {
-						<div class="row">
-							<div class="ownership-dot @(curLocation.Color.ToClass())"></div>
-							<p> @curLocation.Name </p>
-							<p> Mortgage: $@(curLocation.Price / 2)</p>
-							<div>
-								@if (!curLocation.Mortgaged) {
-									<button onclick=@(() => Mortgage(curLocation.PropertyIndex))> Mortgage </button>
-								}
-								else {
-									<button onclick=@(() => PayMortgage(curLocation.PropertyIndex))> Pay Mortgage </button>
-								}
-							</div>
-						</div>
+					
+					@if (true) {
+						var locations = _locations.FindAll(loc => CanMortgage(loc, (ulong)Game.SteamId));
+
+						@if (locations.Count <= 0) {
+							<p>It seems like you don't own any property you can put an mortgage on.</p>
+						}
+						else {
+							@foreach (var curLocation in _locations.FindAll(loc => CanMortgage(loc, (ulong)Game.SteamId))) {
+								<div class="row">
+									<div class="ownership-dot @(curLocation.Color.ToClass())"></div>
+									<p> @curLocation.Name </p>
+									<p> Mortgage: $@(curLocation.Price / 2)</p>
+									<div>
+										@if (!curLocation.Mortgaged) {
+											<button onclick=@(() => Mortgage(curLocation.PropertyIndex))> Mortgage </button>
+										}
+										else {
+											<button onclick=@(() => PayMortgage(curLocation.PropertyIndex))> Pay Mortgage </button>
+										}
+									</div>
+								</div>
+							}
+						}
 					}
 				</div>
 			</Content>
@@ -245,19 +254,33 @@
 		<Modal OnClose=@CloseLocalModal Name="Building">
 			<Content>
 				<div class="table">
-					@foreach (var curLocation in _locations.FindAll(loc => CanBuildOn(loc, (ulong)Game.SteamId))) {
-						if (curLocation.Type.Equals(GameLocation.PropertyType.Normal)) {
-							<div class="row">
-								<div class="ownership-dot @(curLocation.Color.ToClass())"></div>
-								<p> @curLocation.Name </p>
-								<p> Cost: $@(curLocation.House_Cost)</p>
-								<div>
-									<button disabled="@(curLocation.Houses == 5)" onclick=@(() => BuildHouse(curLocation.PropertyIndex))> Add </button>
-									<button disabled="@(curLocation.Houses == 0)" onclick=@(() => DestroyHouse(curLocation.PropertyIndex))> Destroy </button>
-								</div>
-							</div>
+					@if (true) {
+						var locations = _locations.FindAll(loc => CanBuildOn(loc, (ulong)Game.SteamId));
+						
+						@if (locations.Count <= 0) {
+							<p>It seems like you don't have any property you can build on</p>
 						}
+						else {
+							@foreach (var curLocation in locations) {
+								if (curLocation.Type.Equals(GameLocation.PropertyType.Normal)) {
+									<div class="row">
+										<div class="ownership-dot @(curLocation.Color.ToClass())"></div>
+										<p> @curLocation.Name </p>
+										<p> Cost: $@(curLocation.House_Cost)</p>
+										<div>
+											<button disabled="@(curLocation.Houses == 5)" onclick=@(() => BuildHouse(curLocation.PropertyIndex))> Add </button>
+											<button disabled="@(curLocation.Houses == 0)" onclick=@(() => DestroyHouse(curLocation.PropertyIndex))> Destroy </button>
+										</div>
+									</div>
+								}
+							}
+						}				
+		
+
 					}
+					
+
+
 				</div>
 			</Content>
 		</Modal>
@@ -456,16 +479,6 @@
 	private LocalUIStates _localUiStateCache = LocalUIStates.None;
 
 	private bool _showRoll;
-
-	public override void Tick() {
-		if (Input.Down("Jump")) {
-			EmitDebugEvent(1);
-		}
-	}
-
-	private void EmitDebugEvent(int id) {
-		_turnManager.EmitDebugEvent(id);
-	}
 
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt

@@ -18,7 +18,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<BuildHouseEvent>, IGameEventHandler<DestroyHouseEvent>,
                                 IGameEventHandler<GoToJailEvent>, IGameEventHandler<LandOnJailEvent>,
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
-                                IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
+                                IGameEventHandler<UseJailCardEvent>,
                                 IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent>,
                                 IGameEventHandler<PlayerBankruptEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
@@ -362,10 +362,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			// Force player to use card or pay caution
 			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Jail);
 		}
-	}
-
-	public void OnGameEvent(DebugEvent eventArgs) {
-		IngameStateManager.State = IngameUI.IngameUiStates.EndScreen;
 	}
 
 
