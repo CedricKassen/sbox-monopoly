@@ -18,7 +18,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<BuildHouseEvent>, IGameEventHandler<DestroyHouseEvent>,
                                 IGameEventHandler<GoToJailEvent>, IGameEventHandler<LandOnJailEvent>,
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
-                                IGameEventHandler<UseJailCardEvent>, IGameEventHandler<DebugEvent>,
+                                IGameEventHandler<UseJailCardEvent>,
                                 IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent>,
                                 IGameEventHandler<PlayerBankruptEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
@@ -364,10 +364,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 	}
 
-	public void OnGameEvent(DebugEvent eventArgs) {
-		IngameStateManager.State = IngameUI.IngameUiStates.EndScreen;
-	}
-
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
 		var currentLobbyPlayers = TurnManager.CurrentLobby.Players;
@@ -508,11 +504,16 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			// refactor auction event so its gets an array/list of properties to handle
 
 			foreach (var (key, value) in IngameStateManager.OwnedFields) {
-				if (key.Contains("Jail") && value == eventArgs.PlayerId) {
+				if (key.Contains("Jail") && value != eventArgs.PlayerId) {
 					continue;
 				}
 
-				var gameLocation = locations.Children.First(go => go.Name.Equals(key)).Components.Get<GameLocation>();
+				var gameLocation = locations.Children.First(go => {
+					// more logging because somewhere here an exception came
+					var x = go.Name.Equals(key);
+					Log.Info(x);
+					return x;
+				}).Components.Get<GameLocation>();
 				gameLocation.Houses = 0;
 				_auctionLocations.Push(gameLocation.PropertyIndex);
 			}
