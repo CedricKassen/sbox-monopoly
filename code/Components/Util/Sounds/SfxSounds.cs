@@ -1,3 +1,5 @@
 ﻿namespace EnumExtensions.Util;
 
-public enum SfxSounds { }
+public enum SfxSounds {
+	Dice
+}

@@ -1,4 +1,5 @@
 using System;
+using EnumExtensions.Util;
 
 public sealed class Dice : Component, Component.ICollisionListener {
 	public bool IsRolling { get; private set; }
@@ -33,8 +34,8 @@ public sealed class Dice : Component, Component.ICollisionListener {
 		Rigidbody.Velocity += Vector3.Up * new Random().Next(400, 700);
 		Rigidbody.AngularVelocity +=
 			new Vector3(GetRandomFloat() * 1.2f, GetRandomFloat() * 1.2f, GetRandomFloat() * 0.5f);
-		var sound = Sound.Play("dice", Transform.World.Position);
-		sound.Volume = 1f;
+
+		GameSounds.PlaySFX(SfxSounds.Dice, 5);
 	}
 
 	private float GetRandomFloat() {

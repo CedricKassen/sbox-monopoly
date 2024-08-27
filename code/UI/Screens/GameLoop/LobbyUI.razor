@@ -89,10 +89,10 @@
 
 	public void Start() {
 		if (!EveryPlayerHasSelected()) {
-			GameSounds.PlayUI(UiSounds.BTN_DENY);
+			GameSounds.PlayUI(UiSounds.BtnDeny);
 			return;
 		}
-		GameSounds.PlayUI(UiSounds.BTN_SUCCESS);
+		GameSounds.PlayUI(UiSounds.BtnSuccess);
 		Lobby.InitializePlayers();
 		Lobby.StartGame();
 	}

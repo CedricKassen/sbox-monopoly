@@ -527,25 +527,15 @@
 	private Player GetPlayer(ulong playerId) {
 		return playerId is 1 or 2 ? null : Lobby.Players.First(p => p.SteamId == playerId);
 	}
-
-	private void ChangeGameUIState(IngameUiStates newState) {
-		if (!_turnManager.CurrentPhase.Equals(TurnManager.Phase.PlayerAction)) {
-			// Disabled sound
-			return;
-		}
-
-		// Btn click sound
-		_stateManager.State = newState;
-	}
-
+	
 	private void ChangeLocalUIState(LocalUIStates newState) {
 		
 		if (!CanOpenUI() || newState.Equals(LocalUIStates.Trade) && !SetLocalTradeState()) {
-			GameSounds.PlayUI(UiSounds.BTN_DISABLED);
+			GameSounds.PlayUI(UiSounds.BtnDisabled);
 			return;
 		}
 		
-		GameSounds.PlayUI(UiSounds.BTN_PRESS);
+		GameSounds.PlayUI(UiSounds.BtnPress);
 		if (_player.localUiState != LocalUIStates.Trade) {
 			_player.localUiStateCache = _player.localUiState;
 		}
@@ -562,53 +552,52 @@
 			_player.localUiState = LocalUIStates.Trade;
 		}
 		else {
-			// Disabled sound
+			GameSounds.PlayUI(UiSounds.BtnDisabled);
 			return false;
 		}
+		GameSounds.PlayUI(UiSounds.BtnPress);
 
 		_player.LocalUiOpen = true;
 		return true;
 	}
-
-	private void LeaveLobby() {
-		_stateManager.State = IngameUiStates.None;
-		GameNetworkSystem.Disconnect();
-	}
-
+	
 
 	private void JailRoll() {
 		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
+			GameSounds.PlayUI(UiSounds.BtnDisabled);
 			return;
 		}
-
+		GameSounds.PlayUI(UiSounds.BtnPress);
 		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.Rolling);
 		_turnManager.EmitStartRollEvent();
 	}
 
 	private void PayFine() {
 		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
+			GameSounds.PlayUI(UiSounds.BtnDisabled);
 			return;
 		}
-
+		GameSounds.PlayUI(UiSounds.BtnPress);
 		_turnManager.EmitPayJailFineEvent(_player.SteamId);
 	}
 
 	private void UseJailCard() {
 		if (!IsCurrentPlayer() && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
+			GameSounds.PlayUI(UiSounds.BtnDisabled);
 			return;
 		}
-
+		GameSounds.PlayUI(UiSounds.BtnPress);
 		_turnManager.EmitUseJailCardEvent(_player.SteamId);
 	}
 
 	private async void Roll() {
 		if (!IsCurrentPlayer() || _turnManager.CurrentPhase != TurnManager.Phase.Rolling) {
+			GameSounds.PlayUI(UiSounds.BtnDisabled);
 			return;
 		}
-
+		GameSounds.PlayUI(UiSounds.BtnPress);
 
 		foreach (var dice in _dice) {
-			Log.Info(dice.GameObject.Network.OwnerConnection.DisplayName);
 			dice.Roll();
 		}
 
@@ -627,11 +616,13 @@
 	}
 
 	private void Buy() {
+		GameSounds.PlayUI(UiSounds.BtnPress);
 		_turnManager.EmitPropertyAquiredEvent((ulong)Game.SteamId, Lobby.Players[_turnManager.CurrentPlayerIndex].CurrentField, false);
 		CloseLocalModal();
 	}
 
 	private void Auction() {
+		GameSounds.PlayUI(UiSounds.BtnPress);
 		var player = Lobby.Players[_turnManager.CurrentPlayerIndex];
 		_turnManager.EmitPropertyAuctionEvent(player.CurrentField, player.SteamId);
 
@@ -640,10 +631,12 @@
 	}
 
 	private void EndTurn() {
+		GameSounds.PlayUI(UiSounds.BtnPress);
 		_turnManager.EmitTurnFinishedEvent();
 	}
 
 	private void CloseLocalModal() {
+		GameSounds.PlayUI(UiSounds.BtnPress);
 		_player.LocalUiOpen = false;
 		_player.localUiState = _player.localUiStateCache;
 		_player.localUiStateCache = LocalUIStates.None;
@@ -651,17 +644,26 @@
 
 	private void CloseGlobalModal(IngameUiStates state = IngameUiStates.None) {
 		if (!state.Equals(IngameUiStates.None) && IsCurrentPlayer()) {
+			GameSounds.PlayUI(UiSounds.BtnPress);
 			var card = _stateManager.Data as Card;
 			_turnManager.EmitEventCardClosedEvent(card.ActionId, (ulong)Game.SteamId, state.Equals(IngameUiStates.Chance));
 			_stateManager.State = IngameUiStates.None;
+		}
+		else {
+			GameSounds.PlayUI(UiSounds.BtnDisabled);
 		}
 	}
 
 
 	private void BidAmount(int amount) {
 		var currentMax = _stateManager.GetSortedBiddings()[0].Value;
-		if (_player.Money >= currentMax + amount)
+		if (_player.Money >= currentMax + amount) {
+			GameSounds.PlayUI(UiSounds.BtnSuccess);
 			_turnManager.EmitAuctionBidEvent(_player.SteamId, amount);
+		}
+		else {
+			GameSounds.PlayUI(UiSounds.BtnDeny);
+		}
 	}
 
 	private void Mortgage(int propertyIndex) {
