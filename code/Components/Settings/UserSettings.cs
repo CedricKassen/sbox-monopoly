@@ -31,6 +31,9 @@ public class UserSettings {
 public class UserSettingsSystem {
 	private static UserSettings current { get; set; }
 
+	public static bool Loaded { get; private set; } = false;
+
+
 	public static UserSettings Current {
 		get {
 			if (current is null) {
@@ -54,6 +57,7 @@ public class UserSettingsSystem {
 		Current = FileSystem.Data.ReadJson(FilePath, new UserSettings());
 
 		ApplyMixer();
+		Loaded = true;
 	}
 
 

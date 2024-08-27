@@ -1,4 +1,5 @@
-﻿using Sandbox.Constants;
+﻿using EnumExtensions.Util;
+using Sandbox.Constants;
 using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 using Sandbox.ModelEditor;
@@ -163,6 +164,7 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void EmitPayJailFineEvent(ulong playerId) {
+		// Money sound so every one knows player payed
 		GameParentObject.Dispatch(new PayJailFineEvent(playerId));
 	}
 
@@ -179,12 +181,14 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void EmitTradingAcceptedEvent(ulong PlayerId) {
+		GameSounds.PlayUI(UiSounds.BtnSuccess);
 		GameParentObject.Dispatch(
 			new TradingAcceptedEvent() { playerId = PlayerId });
 	}
 
 	[Broadcast]
 	public void EmitTradingDeniedEvent(ulong PlayerId) {
+		GameSounds.PlayUI(UiSounds.BtnSuccess);
 		GameParentObject.Dispatch(
 			new TradingDeniedEvent() { playerId = PlayerId });
 	}

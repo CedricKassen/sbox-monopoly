@@ -658,7 +658,7 @@
 	private void BidAmount(int amount) {
 		var currentMax = _stateManager.GetSortedBiddings()[0].Value;
 		if (_player.Money >= currentMax + amount) {
-			GameSounds.PlayUI(UiSounds.BtnSuccess);
+			GameSounds.PlayUI(UiSounds.BtnPress);
 			_turnManager.EmitAuctionBidEvent(_player.SteamId, amount);
 		}
 		else {
@@ -676,6 +676,10 @@
 
 	private void BuildHouse(int propertyIndex) {
 		_turnManager.EmitBuildHouseEvent(propertyIndex, (ulong)Game.SteamId);
+	}
+	
+	private void DestroyHouse(int propertyIndex) {
+		_turnManager.EmitDestroyHouseEvent(propertyIndex, (ulong)Game.SteamId);
 	}
 
 	private bool OwnsJailCard() {
@@ -715,9 +719,6 @@
 		return true;
 	}
 
-	private void DestroyHouse(int propertyIndex) {
-		_turnManager.EmitDestroyHouseEvent(propertyIndex, (ulong)Game.SteamId);
-	}
 
 	private void CloseTradingModal() {
 		CloseLocalModal();
@@ -742,6 +743,7 @@
 	private void SubmitTrading() {
 		_waitingForTrading = true;
 		_tradeState.TradingCreator = _player;
+		GameSounds.PlayUI(UiSounds.BtnPress);
 		_turnManager.EmitTradingRequestedEvent((ulong)Game.SteamId, _tradeState.TradingPartner.SteamId);
 	}
 

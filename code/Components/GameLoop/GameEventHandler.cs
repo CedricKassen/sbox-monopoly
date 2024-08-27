@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using EnumExtensions.Settings;
+using EnumExtensions.Util;
 using Monopoly.UI.Screens.GameLoop;
 using Sandbox.Constants;
 using Sandbox.Events;
@@ -86,6 +87,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(BuildHouseEvent eventArgs) {
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
 		if (property.Houses == 5) {
+			GameSounds.PlayUI(UiSounds.BtnDeny);
 			Log.Error("Tried to add house to maxed out house!");
 			return;
 		}
@@ -94,19 +96,22 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		// Check if player can afford this house 
 		if (player.Money - property.House_Cost < 0) {
-			Log.Warning("Player can afford this house!");
+			GameSounds.PlayUI(UiSounds.BtnDeny);
+			Log.Error("Player cant afford this house!");
 			return;
 		}
 
 
 		// Check if player builds evenly
 		foreach (var member in property.GroupMembers) {
-			// If one street of the group got more houses then current street prevent destroying we cant go from 2 1 1 -> 3 1 1
+			// If one street of the group got more houses then current street prevent building we cant go from 2 1 1 -> 3 1 1
 			if (property.Houses > LocationContainer.Children[member].Components.Get<GameLocation>().Houses) {
+				GameSounds.PlayUI(UiSounds.BtnDeny);
 				return;
 			}
 		}
 
+		GameSounds.PlayUI(UiSounds.BtnPress);
 		TurnManager.EmitPlayerPaymentEvent(player.SteamId, 2, property.House_Cost, TurnManager.CurrentPhase);
 
 		property.Houses++;
@@ -115,6 +120,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(DestroyHouseEvent eventArgs) {
 		var property = GetLocationFromPropertyIndex(eventArgs.PropertyIndex);
 		if (property.Houses == 0) {
+			GameSounds.PlayUI(UiSounds.BtnDeny);
 			Log.Error("Tried to remove house from empty property!");
 			return;
 		}
@@ -123,11 +129,12 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		foreach (var member in property.GroupMembers) {
 			// If one street of the group got less houses then current street prevent building we cant go from 2 1 1 -> 2 1 0
 			if (property.Houses < LocationContainer.Children[member].Components.Get<GameLocation>().Houses) {
+				GameSounds.PlayUI(UiSounds.BtnDeny);
 				return;
 			}
 		}
 
-
+		GameSounds.PlayUI(UiSounds.BtnPress);
 		var player = GetPlayerFromEvent(eventArgs.PlayerId);
 
 		TurnManager.EmitPlayerPaymentEvent(2, player.SteamId, property.House_Cost, TurnManager.CurrentPhase);
@@ -319,12 +326,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		if (!property.Mortgaged) {
 			property.Mortgaged = true;
-
+			GameSounds.PlayUI(UiSounds.BtnPress);
 			if (Networking.IsHost) {
 				Game.ActiveScene.Dispatch(
 					new PlayerPaymentEvent(2, eventArgs.playerId, price, TurnManager.CurrentPhase));
 			}
 		}
+
+		GameSounds.PlayUI(UiSounds.BtnDeny);
 	}
 
 
@@ -339,8 +348,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 					new PlayerPaymentEvent(eventArgs.playerId, 2, price, TurnManager.CurrentPhase));
 			}
 
+			GameSounds.PlayUI(UiSounds.BtnPress);
 			property.Mortgaged = false;
 		}
+
+		GameSounds.PlayUI(UiSounds.BtnDeny);
 	}
 
 	public void OnGameEvent(RolledEvent eventArgs) {
