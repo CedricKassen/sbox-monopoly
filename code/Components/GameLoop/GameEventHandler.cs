@@ -41,14 +41,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
 		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex, true);
-		
+
 		TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, 2, eventArgs.Amount);
-		
+
 		if (_auctionLocations.Any()) {
 			TurnManager.EmitPropertyAuctionEvent(_auctionLocations.Pop(), eventArgs.playerId);
 			return;
 		}
-		
+
 		Player player = GetPlayerFromEvent(eventArgs.playerId);
 		if (player.EliminatedPosition <= 0) {
 			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
@@ -56,7 +56,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		else {
 			TurnManager.EmitTurnFinishedEvent();
 		}
-		
+
 
 		IngameStateManager.State = IngameUI.IngameUiStates.None;
 	}
@@ -287,26 +287,28 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(PropertyAuctionEvent eventArgs) {
 		bool anyPlayerHasEnoughFunds = false;
+
+		IngameStateManager.AuctionBiddings = new NetDictionary<ulong, int>();
 		foreach (var player in Lobby.Players) {
 			anyPlayerHasEnoughFunds = anyPlayerHasEnoughFunds || player.Money >= 20;
 			IngameStateManager.AuctionBiddings[player.SteamId] = 10;
 		}
 
 		if (!anyPlayerHasEnoughFunds) {
+			IngameStateManager.AuctionBiddings = new NetDictionary<ulong, int>();
 			Player player = GetPlayerFromEvent((ulong)Game.SteamId);
 
 			if (player.localUiStateCache.Equals(IngameUI.LocalUIStates.None)) {
 				_auctionLocations = new();
 				TurnManager.EmitTurnFinishedEvent();
 			}
-			
+
 			IngameStateManager.State = IngameUI.IngameUiStates.None;
 			player.localUiState = player.localUiStateCache;
 			player.localUiStateCache = IngameUI.LocalUIStates.None;
 			return;
 		}
 
-		IngameStateManager.AuctionBiddings = new NetDictionary<ulong, int>();
 		IngameStateManager.State = IngameUI.IngameUiStates.Auction;
 		IngameStateManager.Data = LocationContainer.Children[eventArgs.PropertyIndex].Components.Get<GameLocation>();
 	}
