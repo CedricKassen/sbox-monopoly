@@ -9,7 +9,7 @@ public static class GameSounds {
 	};
 
 	// Order as in UiSounds enum!!!
-	private static readonly string[] SFXSounds = { "sounds/dice", "sounds/ploop" };
+	private static readonly string[] SFXSounds = { "dice", "ploop" };
 
 	public static void PlayUI(UiSounds sound, float volumeOverwrite = -1f) {
 		var handle = Sound.Play(UISounds[sound.AsInt()], Mixer.Master.GetChildren()[2]);
