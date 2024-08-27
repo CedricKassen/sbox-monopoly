@@ -2211,34 +2211,41 @@
         {
           "__guid": "9dba19fd-6c2c-4169-b907-9c9c108e1381",
           "Flags": 0,
-          "Name": "Wall (3)",
-          "Position": "0,-175,0",
-          "Scale": "7,0.1,10",
+          "Name": "Forcefield1",
+          "Position": "0,-191.1332,0",
+          "Scale": "10.13333,2.366666,10",
+          "Tags": "dice_forcefield",
           "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.BoxCollider",
               "__guid": "4c50319f-de1c-4355-b693-980ff5892b53",
               "Center": "0,0,0",
-              "IsTrigger": false,
+              "IsTrigger": true,
               "Scale": "50,50,50",
               "Static": false
+            },
+            {
+              "__type": "GuardTrigger",
+              "__guid": "99b805e3-9503-497b-871c-5c140abad427"
             }
           ]
         },
         {
           "__guid": "83cd8dbd-2287-47c2-9857-6f5bde4b2b57",
           "Flags": 0,
-          "Name": "Wall (2)",
-          "Position": "0,175,0",
-          "Scale": "7,0.1,10",
+          "Name": "Forcefield2",
+          "Position": "0,195.9224,0",
+          "Rotation": "0,0,1,-0.00000004371139",
+          "Scale": "10.06666,2.033333,10",
+          "Tags": "dice_forcefield",
           "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.BoxCollider",
               "__guid": "6158c65d-940e-4c06-a295-df390659aebc",
               "Center": "0,0,0",
-              "IsTrigger": false,
+              "IsTrigger": true,
               "Scale": "50,50,50",
               "Static": false
             }
@@ -2247,16 +2254,18 @@
         {
           "__guid": "7c48c85c-40e5-4bf4-b346-b493b8b801fe",
           "Flags": 0,
-          "Name": "Wall (1)",
-          "Position": "175,0,0",
-          "Scale": "0.1,7,10",
+          "Name": "Forcefield3",
+          "Position": "-196.9324,-1.236628,0",
+          "Rotation": "0,0,0.7071068,-0.7071068",
+          "Scale": "10.06666,2.099999,10",
+          "Tags": "dice_forcefield",
           "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.BoxCollider",
               "__guid": "9ecdf768-38a6-49e2-ab92-a4fd6585e932",
               "Center": "0,0,0",
-              "IsTrigger": false,
+              "IsTrigger": true,
               "Scale": "50,50,50",
               "Static": false
             }
@@ -2265,14 +2274,95 @@
         {
           "__guid": "1c22704f-861e-43ea-b12b-e8f6741c367b",
           "Flags": 0,
-          "Name": "Wall",
-          "Position": "-175,0,0",
-          "Scale": "0.1,7,10",
+          "Name": "Forcefield4",
+          "Position": "208.7905,7.461865,0",
+          "Rotation": "0,0,0.7071068,0.7071068",
+          "Scale": "10.13333,2.1,10.66667",
+          "Tags": "dice_forcefield",
           "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.BoxCollider",
               "__guid": "44d62a83-1072-469b-8c40-bdd564dbb546",
+              "Center": "0,0,0",
+              "IsTrigger": true,
+              "Scale": "50,50,50",
+              "Static": false
+            }
+          ]
+        },
+        {
+          "__guid": "ad2c684c-9ac7-4710-86e6-7a5c6de96bd9",
+          "Flags": 0,
+          "Name": "Wall1",
+          "Position": "1.348309,246.0118,172.8609",
+          "Rotation": "0,0,1,-0.00000004371139",
+          "Scale": "10.75817,0.2202973,8.765697",
+          "Tags": "dice_wall",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "cc0cd83e-ff9f-472c-81b6-1fbad31c4fcf",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false
+            }
+          ]
+        },
+        {
+          "__guid": "5e87a7e4-6caf-41dd-b43f-1375c05d6cd5",
+          "Flags": 0,
+          "Name": "Wall2",
+          "Position": "1.348309,-244.5949,172.8609",
+          "Scale": "10.75817,0.2202973,8.765697",
+          "Tags": "dice_wall",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "eb00fb10-cee9-4778-8d2d-814b1b55d174",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false
+            }
+          ]
+        },
+        {
+          "__guid": "3c9ae5ca-b17f-4bd6-8162-342348787a2c",
+          "Flags": 0,
+          "Name": "Wall3",
+          "Position": "246.7584,-0.7381569,172.8609",
+          "Rotation": "0,0,0.7071068,0.7071068",
+          "Scale": "10.75817,0.2202973,8.765697",
+          "Tags": "dice_wall",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "729b3b87-af13-41fa-9563-41c101d42b3a",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false
+            }
+          ]
+        },
+        {
+          "__guid": "cf952233-54c8-4d82-a763-717c176003f6",
+          "Flags": 0,
+          "Name": "Wall4",
+          "Position": "-250.2747,-2.291411,172.8609",
+          "Rotation": "0,0,0.7071068,-0.7071068",
+          "Scale": "10.75817,0.2202973,8.765697",
+          "Tags": "dice_wall",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "f8802e7c-7386-4405-97c3-d30f2a3061eb",
               "Center": "0,0,0",
               "IsTrigger": false,
               "Scale": "50,50,50",
@@ -2379,6 +2469,27 @@
           "IsTrigger": false,
           "Scale": "100,100,10",
           "Static": false
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "0fac2e2d-597c-4024-84b2-43495e94a06f",
+          "Flags": 0,
+          "Name": "Cube",
+          "Position": "-0,-0,-4.611025",
+          "Scale": "2,2,0.18",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "8d247bb6-2dd6-4f26-9af5-0f71402ef109",
+              "BodyGroups": 18446744073709551615,
+              "MaterialOverride": "materials/generic/floor_wood_laminated.vmat",
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "On",
+              "Tint": "0.10233,0.04978,0.00381,1"
+            }
+          ]
         }
       ]
     },
@@ -2809,7 +2920,7 @@
                   "MaxPlayers": 5,
                   "PlayerPrefabs": [
                     {
-                      "Id": 1,
+                      "Id": 16,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/car.prefab"
@@ -2819,7 +2930,7 @@
                       "Height": 288
                     },
                     {
-                      "Id": 2,
+                      "Id": 17,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/ship.prefab"
@@ -2829,7 +2940,7 @@
                       "Height": 320
                     },
                     {
-                      "Id": 3,
+                      "Id": 18,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/timble.prefab"
@@ -2839,7 +2950,7 @@
                       "Height": 512
                     },
                     {
-                      "Id": 4,
+                      "Id": 19,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/tophat.prefab"
@@ -2849,7 +2960,7 @@
                       "Height": 384
                     },
                     {
-                      "Id": 5,
+                      "Id": 20,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/wheelbarrow.prefab"
@@ -2938,6 +3049,8 @@
   "Title": "minimal",
   "Description": "",
   "ResourceVersion": 1,
-  "__references": [],
+  "__references": [
+    "facepunch.floor_wood_laminated"
+  ],
   "__version": 1
 }
