@@ -1,7 +1,10 @@
 @namespace Monopoly.UI.Screens.GameLoop
 @inherits Sandbox.UI.Panel
+@using Sandbox.UI
 @using System
 @using EnumExtensions
+@using EnumExtensions.Settings
+@using EnumExtensions.Util
 @using Sandbox.Constants
 @using Sandbox.Events.TurnEvents
 @using Sandbox.Network
@@ -303,9 +306,32 @@
 		break;
 	case LocalUIStates.Options:
 		<Modal OnClose=@CloseLocalModal Name="Options">
-			<Content>
-				<button onclick=@LeaveLobby> Leave Game </button>
-			</Content>
+			<CustomModalBody>
+					<div class="settingsContainer">
+                		<div class="row">
+                	        <label>Master Volume:</label>
+                	        <SliderControl Value:bind="@UserSettingsSystem.Current.MasterVolume" Min=@(0) Max=@(100) Step=@(1) />
+                	    </div>
+                        <div class="row">
+                            <label>Music Volume:</label>
+                            <SliderControl Value:bind="@UserSettingsSystem.Current.MusicVolume" Min=@(0) Max=@(100) Step=@(1) />
+                        </div>
+                        <div class="row">
+                            <label>SFX Volume:</label>
+                            <SliderControl Value:bind="@UserSettingsSystem.Current.SFXVolume" Min=@(0) Max=@(100) Step=@(1) />
+                        </div>
+                        <div class="row">
+	                        <label>UI Volume:</label>
+	                        <SliderControl Value:bind="@UserSettingsSystem.Current.UIVolume" Min=@(0) Max=@(100) Step=@(1) />
+                        </div>
+                        
+                        <div class="buttons">
+	                        <button onclick="@UserSettingsSystem.Save">Save</button>
+	                        <button onclick="@CloseLocalModal">Close</button>
+                        </div>
+
+					</div>
+			</CustomModalBody>
 		</Modal>
 		break;
 	case LocalUIStates.Trade:
@@ -513,21 +539,18 @@
 	}
 
 	private void ChangeLocalUIState(LocalUIStates newState) {
-		if (!CanOpenUI()) {
+		
+		if (!CanOpenUI() || newState.Equals(LocalUIStates.Trade) && !SetLocalTradeState()) {
+			GameSounds.PlayUI(UiSounds.BTN_DISABLED);
 			return;
 		}
-
-		if (newState.Equals(LocalUIStates.Trade) && !SetLocalTradeState()) {
-			// Disabled sound
-			return;
-		}
-
-
-		// Btn click sound
+		
+		GameSounds.PlayUI(UiSounds.BTN_PRESS);
 		if (_player.localUiState != LocalUIStates.Trade) {
 			_player.localUiStateCache = _player.localUiState;
 		}
 
+		// Toggle ui on press of button that opens the currently open ui
 		_player.LocalUiOpen = true;
 		_player.localUiState = newState;
 	}
