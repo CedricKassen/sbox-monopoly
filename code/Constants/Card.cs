@@ -60,9 +60,11 @@ public static class CardActionHelper {
 
 
 			// Check if location can be owned and is owned by player 
-			if (location.Name == null) {
+			if (location.Name == null || location.Type.Equals(GameLocation.PropertyType.Event) &&
+			    location.EventId.Contains("tax")) {
 				continue;
 			}
+
 
 			var ownerId = stateManager.OwnedFields[locationObj.Name];
 			if (ownerId != player.SteamId) {
@@ -94,7 +96,8 @@ public static class CardActionHelper {
 	}
 
 	public static void PayToAll(Player player, int amount) {
-		List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>().Where(ply => ply.SteamId != player.SteamId));
+		List<Player> allPlayers =
+			new(Game.ActiveScene.GetAllComponents<Player>().Where(ply => ply.SteamId != player.SteamId));
 		allPlayers.ForEach(otherPlayer =>
 			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, otherPlayer.SteamId, amount)));
 	}

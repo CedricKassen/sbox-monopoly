@@ -216,6 +216,7 @@
 		break;
 }
 
+
 @switch (_player.localUiState) {
 	case LocalUIStates.Bank:
 		<Modal OnClose=@CloseLocalModal Name="Bank">
@@ -373,7 +374,7 @@
 						</h3>
 					</div>
 					<div style="width: 100%; gap: 16px">
-						<button style="flex-grow: 1; justify-content: center; align-items: center" class="giveup"> Give Up </button>
+						<button style="flex-grow: 1; justify-content: center; align-items: center" class="giveup" onclick=@(() => GoBankrupt(data.PlayerId, data.Recipient))> Give Up </button>
 
 						@if (_player.Money >= data.Debts) {
 							<button style="flex-grow: 1; justify-content: center; align-items: center" class="pay" onclick=@(() => PayDebts(data.PlayerId, data.Recipient, data.Debts))> Pay </button>

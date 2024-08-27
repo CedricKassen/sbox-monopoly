@@ -45,8 +45,7 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 
 		if (!senderIsBank) {
 			if (sender.Money - eventArgs.Amount < 0) {
-				Game.ActiveScene.Dispatch(
-					new NotEnoughFundsEvent(sender.SteamId, eventArgs.Recipient, eventArgs.Amount));
+				DispatchNotEnoughFunds(sender.SteamId, eventArgs.Recipient, eventArgs.Amount);
 				return;
 			}
 
@@ -68,5 +67,11 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 
 	private Player GetPlayerFromId(ulong playerId) {
 		return playerId == 1 ? null : Lobby.Players.Find(player => player.SteamId == playerId);
+	}
+
+	[Broadcast]
+	private void DispatchNotEnoughFunds(ulong sender, ulong recipient, int amount) {
+		Game.ActiveScene.Dispatch(
+			new NotEnoughFundsEvent(sender, recipient, amount));
 	}
 }

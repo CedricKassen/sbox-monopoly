@@ -1,7 +1,7 @@
 using Sandbox;
 
 public sealed class GuardTrigger : Component, Component.ITriggerListener {
-	private Collider _dice;
+	[Property] private Collider _dice { get; set; }
 
 	public void OnTriggerEnter(Collider other) {
 		if (other.Tags.Contains("dice")) {
