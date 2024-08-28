@@ -42,7 +42,16 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 	public List<Player> Players =>
 		new(Game.ActiveScene.GetAllComponents<Player>().Where(player => player.EliminatedPosition <= 0));
 
-	[Property] public List<Player> AllPlayers => new(Game.ActiveScene.GetAllComponents<Player>());
+	[Property]
+	public List<Player> AllPlayers {
+		get {
+			if (Game.ActiveScene.IsValid()) {
+				return new(Game.ActiveScene.GetAllComponents<Player>());
+			}
+
+			return new();
+		}
+	}
 
 	[Property] public GameObject SpawnLocation { get; set; }
 
