@@ -2446,6 +2446,10 @@
               "IsTrigger": true,
               "Scale": "50,50,50",
               "Static": false
+            },
+            {
+              "__type": "GuardTrigger",
+              "__guid": "fe74b9da-82e2-4975-907e-88c54db3496f"
             }
           ]
         },
@@ -2466,6 +2470,10 @@
               "IsTrigger": true,
               "Scale": "50,50,50",
               "Static": false
+            },
+            {
+              "__type": "GuardTrigger",
+              "__guid": "a28400ce-07fa-40d8-ab4a-08ab9333391e"
             }
           ]
         },
@@ -2486,6 +2494,10 @@
               "IsTrigger": true,
               "Scale": "50,50,50",
               "Static": false
+            },
+            {
+              "__type": "GuardTrigger",
+              "__guid": "a97228e9-53ae-4fb6-94ec-1d9c7aa6bf3a"
             }
           ]
         },
@@ -2824,6 +2836,7 @@
                   "AutoScreenScale": true,
                   "Opacity": 1,
                   "Scale": 1,
+                  "ScaleStrategy": "ConsistentHeight",
                   "ZIndex": 100
                 },
                 {
@@ -3107,10 +3120,12 @@
                 {
                   "__type": "Lobby",
                   "__guid": "a8157055-fe38-49f3-bca5-55572fc4d83f",
+                  "AllPlayers": [],
                   "DicePrefab": {
                     "_type": "gameobject",
                     "prefab": "prefabs/dice.prefab"
                   },
+                  "GameActive": false,
                   "LobbyPlayer": {
                     "_type": "gameobject",
                     "prefab": "prefabs/base_player.prefab"

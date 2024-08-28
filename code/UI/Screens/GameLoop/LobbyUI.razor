@@ -1,6 +1,7 @@
 @namespace Monopoly.UI.Screens.GameLoop
 @inherits Sandbox.UI.Panel
 @using System
+@using EnumExtensions.Util
 @using Sandbox.Events
 @using Sandbox.Events.LobbyEvents
 @using Sandbox.Network
@@ -53,13 +54,6 @@
 	@if (Networking.IsHost) {
 		<button style="position: relative; z-index: 2;" onclick=@Start>Start</button>
 	}
-
-	<div class="hub-buttons">
-		<button class="back icon" onclick="@PressBack">
-			keyboard_return
-		</button>
-	</div>
-
 	<div></div>
 </root>
 
@@ -93,20 +87,12 @@
 		return HashCode.Combine(Lobby);
 	}
 
-	void PressBack() {
-		GameNetworkSystem.Disconnect();
-		Game.ActiveScene.GetAllComponents<MusicManager>().First().StopSound();
-		Game.ActiveScene.LoadFromFile("scenes/game_menu.scene");
-	}
-
 	public void Start() {
 		if (!EveryPlayerHasSelected()) {
-			// TODO remove default click sound from button sound-in: unset/none won't work!
-			// somehow call the check in the ui to disable the button would be the best for now its here
-			PlaySound("ui.button.deny");
+			GameSounds.PlayUI(UiSounds.BtnDeny);
 			return;
 		}
-
+		GameSounds.PlayUI(UiSounds.BtnSuccess);
 		Lobby.InitializePlayers();
 		Lobby.StartGame();
 	}

@@ -23,6 +23,8 @@ public class PaymentEventHandler : Component, IGameEventHandler<PlayerPaymentEve
 
 
 	public void OnGameEvent(PlayerPaymentEvent eventArgs) {
+		Log.Info(eventArgs.PlayerId + " sent " + eventArgs.Amount + " to " + eventArgs.Recipient);
+
 		if (!Networking.IsHost) {
 			return;
 		}

@@ -1,15 +1,14 @@
 using System.Threading.Tasks;
+using EnumExtensions.Settings;
+using Sandbox.Audio;
 
 public sealed class MusicManager : BaseSoundComponent {
-	[Property]
-	public float SoundLength = 238.21062f;
+	[Property] public float SoundLength = 238.21062f;
 
 	public RealTimeSince Duration;
 	private SoundHandle TempSoundHandle;
 
-	[Property]
-	[Group("Sound")]
-	public float RepeatOffset { get; set; }
+	[Property] [Group("Sound")] public float RepeatOffset { get; set; }
 
 
 	protected override void OnDestroy() {
@@ -34,12 +33,13 @@ public sealed class MusicManager : BaseSoundComponent {
 
 
 	protected override void OnUpdate() {
-		if (SoundHandle is not null) ApplyOverrides(SoundHandle);
-
-		if (TempSoundHandle is not null) ApplyOverrides(TempSoundHandle);
+		if (!UserSettingsSystem.Loaded) {
+			UserSettingsSystem.Load();
+			return;
+		}
 
 		if (SoundHandle.IsValid() && SoundLength <= Duration.Relative + RepeatOffset) {
-			SoundEvent.Volume = Volume;
+			//SoundEvent.Volume = Volume;
 			Duration = 0;
 			TempSoundHandle = Sound.Play(SoundEvent);
 		}
@@ -49,7 +49,7 @@ public sealed class MusicManager : BaseSoundComponent {
 		}
 
 		if (!SoundHandle.IsValid() && !TempSoundHandle.IsValid()) {
-			SoundEvent.Volume = Volume;
+			//SoundEvent.Volume = Volume;
 			Duration = 0;
 			SoundHandle = Sound.Play(SoundEvent);
 		}
