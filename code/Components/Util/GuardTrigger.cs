@@ -1,7 +1,7 @@
 using Sandbox;
 
 public sealed class GuardTrigger : Component, Component.ITriggerListener {
-	[Property] private List<Collider> _dice { get; set; }
+	[Property] private List<Collider> _dice { get; set; } = new();
 
 	public void OnTriggerEnter(Collider other) {
 		if (other.Tags.Contains("dice")) {
@@ -20,6 +20,5 @@ public sealed class GuardTrigger : Component, Component.ITriggerListener {
 
 			dice.Rigidbody.Velocity = direction * 100f;
 		});
-		
 	}
 }
