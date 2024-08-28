@@ -25,7 +25,7 @@ public sealed class Dice : Component, Component.ICollisionListener {
 	}
 
 	protected override void OnUpdate() {
-		if (Rigidbody.Velocity == 0) {
+		if (Rigidbody.Velocity.IsNearZeroLength) {
 			IsRolling = false;
 		}
 	}
