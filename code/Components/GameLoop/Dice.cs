@@ -6,9 +6,14 @@ public sealed class Dice : Component, Component.ICollisionListener {
 
 	[Property] public Rigidbody Rigidbody { get; set; }
 
-	[Property] public TurnManager TurnManager { get; set; } = Game.ActiveScene.GetAllComponents<TurnManager>().First();
+	[Property] public TurnManager TurnManager { get; private set; }
+
 
 	private readonly TurnManager.Phase[] _rollPhases = { TurnManager.Phase.Rolling, TurnManager.Phase.Jail };
+
+	protected override void OnStart() {
+		TurnManager = Game.ActiveScene.GetAllComponents<TurnManager>().First();
+	}
 
 	public void OnCollisionStart(Collision collision) {
 		if (collision.Other.GameObject.Tags.Contains("dice_wall")) {
