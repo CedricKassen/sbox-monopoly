@@ -53,7 +53,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 
 
 	public override int GetHashCode() {
-		return HashCode.Combine(Players, SelectedPawns.Values);
+		return HashCode.Combine(AllPlayers, SelectedPawns.Values);
 	}
 
 	public void OnGameEvent(ChangePawnSelectionEvent eventArgs) {
