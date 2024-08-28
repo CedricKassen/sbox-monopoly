@@ -10,22 +10,22 @@ public class UserSettings {
 	[Title("Master")]
 	[Description("The overall volume")]
 	[Range(0, 100, 1)]
-	public float MasterVolume { get; set; } = 100;
+	public float MasterVolume { get; set; } = 50;
 
 	[Title("Music")]
 	[Description("How loud any music will play")]
 	[Range(0, 100, 1)]
-	public float MusicVolume { get; set; } = 100;
+	public float MusicVolume { get; set; } = 30;
 
 	[Title("SFX")]
 	[Description("Most effects in the game")]
 	[Range(0, 100, 1)]
-	public float SFXVolume { get; set; } = 100;
+	public float SFXVolume { get; set; } = 80;
 
 	[Title("UI")]
 	[Description("interface sounds")]
 	[Range(0, 100, 1)]
-	public float UIVolume { get; set; } = 100;
+	public float UIVolume { get; set; } = 80;
 }
 
 public class UserSettingsSystem {
