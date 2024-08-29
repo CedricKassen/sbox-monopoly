@@ -1,6 +1,24 @@
 using System;
 using EnumExtensions.Util;
 
+/*
+ * We are using an Enum for the dice Faces so we can represent other faces more readable in the code.
+ */
+public enum DiceFace {
+	Zero,
+	One,
+	Two,
+	Three,
+	Four,
+	Five,
+	Six,
+	Seven,
+	Eight,
+	Nine,
+	Bus,
+	Forward
+}
+
 public sealed class Dice : Component, Component.ICollisionListener {
 	public bool IsRolling { get; private set; }
 
@@ -9,9 +27,22 @@ public sealed class Dice : Component, Component.ICollisionListener {
 	[Property] public TurnManager TurnManager { get; private set; }
 
 
+	[Property,
+	 Description(
+		 "Represented on what axis (positive) an specific side correlate with. Used as Index to access the face.")]
+	public Vector3Int DirectionValues { get; set; }
+
+	[Property, Description("Automatically calculated from the positive dice values. Used as Index to access the face.")]
+	public Vector3Int OpposingDirectionValues { get; set; }
+
+	[Property, Description("Define all 6 sides of the dice!")]
+	public DiceFace[] Faces { get; set; }
+
+
 	private readonly TurnManager.Phase[] _rollPhases = { TurnManager.Phase.Rolling, TurnManager.Phase.Jail };
 
 	protected override void OnStart() {
+		OpposingDirectionValues = 7 * Vector3Int.One - DirectionValues;
 		TurnManager = Game.ActiveScene.GetAllComponents<TurnManager>().First();
 	}
 

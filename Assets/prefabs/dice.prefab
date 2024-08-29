@@ -10,22 +10,33 @@
     "NetworkOrphaned": 1,
     "Components": [
       {
+        "__type": "Dice",
+        "__guid": "4f27df2c-cf72-428a-8d3f-5b372458cacc",
+        "DirectionValues": "3,2,6",
+        "Faces": [
+          "ONE",
+          "TWO",
+          "THREE",
+          "FOUR",
+          "FIVE",
+          "SIX"
+        ],
+        "OpposingDirectionValues": "0,0,0",
+        "Rigidbody": {
+          "_type": "component",
+          "component_id": "358c8ea7-27e9-4243-891c-aded97e6e6f9",
+          "go": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0",
+          "component_type": "Rigidbody"
+        },
+        "RolledValue": 0
+      },
+      {
         "__type": "Sandbox.ModelRenderer",
         "__guid": "d4c3dfb5-33a2-4d68-95a5-71a2b2a083f7",
         "BodyGroups": 18446744073709551615,
         "Model": "models/dice/dice.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
-      },
-      {
-        "__type": "Dice",
-        "__guid": "3f886b06-46f1-49e2-862e-f0c352b8a570",
-        "Rigidbody": {
-          "_type": "component",
-          "component_id": "358c8ea7-27e9-4243-891c-aded97e6e6f9",
-          "go": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0",
-          "component_type": "Rigidbody"
-        }
       },
       {
         "__type": "Sandbox.ModelCollider",
