@@ -77,7 +77,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			await Task.DelayRealtimeSeconds(0.5f);
 		}
 
-		TurnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRollValue(), _dice[1].GetRollValue());
+		// No speed dice
+		if (_dice.Count == 2) {
+			TurnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(), _dice[1].GetRoll().AsInt());
+		}
 	}
 
 	public void OnGameEvent(TurnActionDoneEvent eventArgs) {

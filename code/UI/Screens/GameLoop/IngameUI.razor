@@ -82,7 +82,10 @@
 
 <div style="position: absolute; top: 50%; left: 50%">
 	@if (_showRoll) {
-		<h1> @_dice.Aggregate(0, (accumulator, dice) => dice.GetRollValue() + accumulator) </h1>
+		if (_dice.Count == 2) {
+			<h1> @_dice.Aggregate(0, (accumulator, dice) => dice.GetRoll().AsInt() + accumulator) </h1>
+		}
+
 	}
 </div>
 
@@ -608,7 +611,10 @@
 			await Task.DelayRealtimeSeconds(0.5f);
 		}
 
-		_turnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRollValue(), _dice[1].GetRollValue());
+		// No speed dice
+		if (_dice.Count == 2) {
+			_turnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(), _dice[1].GetRoll().AsInt());
+		}
 
 		_showRoll = true;
 		await Task.DelayRealtimeSeconds(2f);
