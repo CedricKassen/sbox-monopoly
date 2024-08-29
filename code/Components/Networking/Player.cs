@@ -38,7 +38,7 @@ public sealed class Player : Component {
 	[Property] public IngameUI.LocalUIStates localUiState { get; set; } = IngameUI.LocalUIStates.None;
 	[Property] public IngameUI.LocalUIStates localUiStateCache { get; set; } = IngameUI.LocalUIStates.None;
 
-	[Property] public int LastDiceCount { get; set; } = 0;
+	[Property, HostSync] public int LastDiceCount { get; set; } = 0;
 
 	[Property] public int DoublesCount { get; set; } = 0;
 
