@@ -39,9 +39,10 @@ public sealed class MusicManager : BaseSoundComponent {
 		}
 
 		if (SoundHandle.IsValid() && SoundLength <= Duration.Relative + RepeatOffset) {
-			//SoundEvent.Volume = Volume;
 			Duration = 0;
 			TempSoundHandle = Sound.Play(SoundEvent);
+			TempSoundHandle.TargetMixer = Mixer.FindMixerByName("music");
+			UserSettingsSystem.Load();
 		}
 
 		if (SoundHandle.IsValid() && SoundHandle.IsPlaying) {
@@ -49,9 +50,10 @@ public sealed class MusicManager : BaseSoundComponent {
 		}
 
 		if (!SoundHandle.IsValid() && !TempSoundHandle.IsValid()) {
-			//SoundEvent.Volume = Volume;
 			Duration = 0;
 			SoundHandle = Sound.Play(SoundEvent);
+			SoundHandle.TargetMixer = Mixer.FindMixerByName("music");
+			UserSettingsSystem.Load();
 		}
 
 		if (SoundHandle is { IsPlaying: false }) {

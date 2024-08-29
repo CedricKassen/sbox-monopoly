@@ -15,7 +15,7 @@ public class UserSettings {
 	[Title("Music")]
 	[Description("How loud any music will play")]
 	[Range(0, 100, 1)]
-	public float MusicVolume { get; set; } = 30;
+	public float MusicVolume { get; set; } = 20;
 
 	[Title("SFX")]
 	[Description("Most effects in the game")]
