@@ -8,13 +8,7 @@ using Sandbox.Network;
 using Sandbox.UI;
 
 public class PawnWrapper {
-	private static int IdCounter;
-
-	public PawnWrapper() {
-		Id = ++IdCounter;
-	}
-
-	public int Id { get; }
+	public int Id { get; set; }
 	public GameObject Prefab { get; set; }
 	public string ImgPath { get; set; }
 
@@ -60,10 +54,6 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 	[Property] public GameObject DicePrefab { get; set; }
 	[Property, HostSync] private bool GameActive { get; set; } = false;
 
-
-	public override int GetHashCode() {
-		return HashCode.Combine(AllPlayers, SelectedPawns.Values);
-	}
 
 	public void OnGameEvent(ChangePawnSelectionEvent eventArgs) {
 		// Only host should change this stuff
