@@ -71,6 +71,11 @@ public sealed class Dice : Component, Component.ICollisionListener {
 		Rigidbody.AngularVelocity +=
 			new Vector3(GetRandomFloat() * 1.2f, GetRandomFloat() * 1.2f, GetRandomFloat() * 0.5f);
 
+		// Add force to center
+		Vector3 direction = new Vector3(0, 0, 0) - Transform.Position;
+		direction = direction.Normal;
+		Rigidbody.Velocity += direction * 100f;
+
 		GameSounds.PlaySFX(SfxSounds.Dice, 5);
 	}
 
@@ -79,46 +84,60 @@ public sealed class Dice : Component, Component.ICollisionListener {
 		return rng.Next(4, 7) * (1 + rng.NextSingle());
 	}
 
-	public Vector3 GetRotation() {
-		return GameObject.Transform.Rotation.Angles().AsVector3();
-	}
 
-	public int GetRollValue() {
-		var rotation = GetRotation();
+	public DiceFace GetRoll() {
+		// Credits to Shade
+		Transform diceTransform = Rigidbody.PhysicsBody.Transform;
 
-		if (Math.Abs(rotation.z - 0f) <= 44) {
-			if (Math.Abs(rotation.x - 0) <= 44) {
-				return 6;
-			}
 
-			if (Math.Abs(rotation.x - 90) <= 44) {
-				return 4;
-			}
+		float[] scalarProducts = new float[3];
 
-			if (Math.Abs(rotation.x + 90) <= 44) {
-				return 3;
-			}
-		}
+		// get axis products
+		scalarProducts[0] = Vector3.Dot(Vector3.Up, diceTransform.Left);
+		scalarProducts[1] = Vector3.Dot(Vector3.Up, diceTransform.Forward);
+		scalarProducts[2] = Vector3.Dot(Vector3.Up, diceTransform.Up);
 
-		if (Math.Abs(rotation.z - 90f) <= 44) {
-			if (Math.Abs(rotation.x - 0) <= 44) {
-				return 2;
+		float maxScalar = 0;
+		int maxIndex = 0;
+
+
+		// biggest axis should be the one at top
+		for (var i = 0; i < scalarProducts.Length; i++) {
+			if (Math.Abs(maxScalar) < Math.Abs(scalarProducts[i])) {
+				maxIndex = i;
+				maxScalar = scalarProducts[i];
 			}
 		}
 
-		if (Math.Abs(rotation.z + 90f) <= 44) {
-			if (Math.Abs(rotation.x - 0) <= 44) {
-				return 5;
+		int direction;
+
+		// Check which side of axis is on top 
+		if (maxIndex == 0) { // Right
+			if (maxScalar >= 0) {
+				direction = DirectionValues.y;
+			}
+			else {
+				direction = OpposingDirectionValues.y;
+			}
+		}
+		else if (maxIndex == 1) { // Forward
+			if (maxScalar >= 0) {
+				direction = DirectionValues.x;
+			}
+			else {
+				direction = OpposingDirectionValues.x;
+			}
+		}
+		else { // Up
+			if (maxScalar >= 0) {
+				direction = DirectionValues.z;
+			}
+			else {
+				direction = OpposingDirectionValues.z;
 			}
 		}
 
-		if (Math.Abs(rotation.z - 180f) <= 44 || Math.Abs(rotation.z + 180f) <= 30) {
-			if (Math.Abs(rotation.x - 0) <= 44) {
-				return 1;
-			}
-		}
 
-
-		return 0;
+		return Faces[direction - 1];
 	}
 }
