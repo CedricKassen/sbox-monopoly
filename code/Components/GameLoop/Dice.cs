@@ -12,9 +12,6 @@ public enum DiceFace {
 	Four,
 	Five,
 	Six,
-	Seven,
-	Eight,
-	Nine,
 	Bus,
 	Forward
 }
