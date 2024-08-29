@@ -1,0 +1,23 @@
+@using System
+@using EnumExtensions.Settings
+@using Sandbox;
+@using Sandbox.Components.GameLoop
+@using Sandbox.UI;
+@inherits PanelComponent
+
+@if (LobbySettingsSystem.Current.CollectFreeParking) {
+	<h1 class="title">$@PaymentEventHandler.BankBalance</h1>
+}
+
+
+
+@code
+{
+	
+	[Property] PaymentEventHandler PaymentEventHandler { get; set; }
+
+	protected override int BuildHash() {
+		return HashCode.Combine(PaymentEventHandler.BankBalance);
+	}
+
+}

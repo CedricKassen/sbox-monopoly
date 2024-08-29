@@ -1,0 +1,12 @@
+Bank {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .title {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 150px;
+    color: #fff;
+    text-stroke: 5px #000000;
+  }
+}

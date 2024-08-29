@@ -2425,7 +2425,8 @@
             },
             {
               "__type": "GuardTrigger",
-              "__guid": "99b805e3-9503-497b-871c-5c140abad427"
+              "__guid": "99b805e3-9503-497b-871c-5c140abad427",
+              "_dice": []
             }
           ]
         },
@@ -2449,7 +2450,8 @@
             },
             {
               "__type": "GuardTrigger",
-              "__guid": "fe74b9da-82e2-4975-907e-88c54db3496f"
+              "__guid": "fe74b9da-82e2-4975-907e-88c54db3496f",
+              "_dice": []
             }
           ]
         },
@@ -2473,7 +2475,8 @@
             },
             {
               "__type": "GuardTrigger",
-              "__guid": "a28400ce-07fa-40d8-ab4a-08ab9333391e"
+              "__guid": "a28400ce-07fa-40d8-ab4a-08ab9333391e",
+              "_dice": []
             }
           ]
         },
@@ -2497,7 +2500,8 @@
             },
             {
               "__type": "GuardTrigger",
-              "__guid": "a97228e9-53ae-4fb6-94ec-1d9c7aa6bf3a"
+              "__guid": "a97228e9-53ae-4fb6-94ec-1d9c7aa6bf3a",
+              "_dice": []
             }
           ]
         },
@@ -3133,7 +3137,7 @@
                   "MaxPlayers": 5,
                   "PlayerPrefabs": [
                     {
-                      "Id": 1,
+                      "Id": 16,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/car.prefab"
@@ -3143,7 +3147,7 @@
                       "Height": 288
                     },
                     {
-                      "Id": 2,
+                      "Id": 17,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/ship.prefab"
@@ -3153,7 +3157,7 @@
                       "Height": 320
                     },
                     {
-                      "Id": 3,
+                      "Id": 18,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/timble.prefab"
@@ -3163,7 +3167,7 @@
                       "Height": 512
                     },
                     {
-                      "Id": 4,
+                      "Id": 19,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/tophat.prefab"
@@ -3173,7 +3177,7 @@
                       "Height": 384
                     },
                     {
-                      "Id": 5,
+                      "Id": 20,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/wheelbarrow.prefab"
@@ -3236,6 +3240,36 @@
       "Flags": 0,
       "Name": "GameObject",
       "Enabled": true
+    },
+    {
+      "__guid": "9412876e-5c74-4ee2-8fd7-d802b8279f50",
+      "Flags": 0,
+      "Name": "Bank",
+      "Position": "182.6444,182.3556,14",
+      "Rotation": "0,-0,-0.9238795,0.3826834",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.WorldPanel",
+          "__guid": "f06b3292-2e00-42c8-af2a-71c7fa6ecce6",
+          "HorizontalAlign": "Center",
+          "InteractionRange": 1000,
+          "LookAtCamera": true,
+          "PanelSize": "1040,280",
+          "RenderScale": 1,
+          "VerticalAlign": "Center"
+        },
+        {
+          "__type": "Bank",
+          "__guid": "e6bde2ff-e8f5-4014-9d5a-3f5363d796f4",
+          "PaymentEventHandler": {
+            "_type": "component",
+            "component_id": "8a8483a5-7600-4779-8d68-3603d311dfcf",
+            "go": "4d880113-7b4d-4756-ad95-7eed4744d084",
+            "component_type": "PaymentEventHandler"
+          }
+        }
+      ]
     }
   ],
   "SceneProperties": {
