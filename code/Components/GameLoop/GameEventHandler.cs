@@ -366,6 +366,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		// Player should not be in jail!
 		if (player.JailTurnCounter <= 0) {
+			player.LastDiceCount = eventArgs.Number;
+
 			TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InMovement);
 			if (player.DoublesCount < 3) {
 				MovementManager.StartMovement(player, eventArgs.Number);
@@ -378,7 +380,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			return;
 		}
 
-		player.LastDiceCount = eventArgs.Number;
 
 		// Release player if he rolls double
 		if (player.DoublesCount > 0) {
