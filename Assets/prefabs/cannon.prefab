@@ -2,8 +2,7 @@
   "RootObject": {
     "__guid": "3bc7a68f-e0bb-48e1-b010-a10c36d76d2f",
     "Flags": 0,
-    "Name": "timble",
-    "Position": "0,0,2.226761",
+    "Name": "cannon",
     "Enabled": true,
     "Components": [
       {
@@ -43,6 +42,7 @@
         "__guid": "e10ccbfe-6a42-4b9f-aa5b-95d179ae675f",
         "Flags": 0,
         "Name": "base",
+        "Position": "0,-3.647614,9.4356",
         "Enabled": true,
         "__Prefab": "prefabs/base_player.prefab",
         "__PrefabVariables": {}
