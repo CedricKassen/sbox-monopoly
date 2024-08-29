@@ -1,5 +1,5 @@
 {
-  "__guid": "1484105f-a415-47cb-a6f0-0a5091a5eaaf",
+  "__guid": "d9ae1043-b8e9-4a69-9450-4edd59d7f1ad",
   "GameObjects": [
     {
       "__guid": "024eb414-bc10-4ad9-885d-eae5e42de48d",
@@ -3160,7 +3160,7 @@
                       "Id": 3,
                       "Prefab": {
                         "_type": "gameobject",
-                        "prefab": "prefabs/timble.prefab"
+                        "prefab": "prefabs/cannon.prefab"
                       },
                       "ImgPath": "ui\\game_pieces\\cannon.png",
                       "Width": 384,
