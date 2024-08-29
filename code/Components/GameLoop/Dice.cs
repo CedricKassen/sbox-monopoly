@@ -5,15 +5,14 @@ using EnumExtensions.Util;
  * We are using an Enum for the dice Faces so we can represent other faces more readable in the code.
  */
 public enum DiceFace {
-	Zero,
-	One,
-	Two,
-	Three,
-	Four,
-	Five,
-	Six,
-	Bus,
-	Forward
+	One = 1,
+	Two = 2,
+	Three = 3,
+	Four = 4,
+	Five = 5,
+	Six = 6,
+	Bus = 7,
+	Forward = 8
 }
 
 public sealed class Dice : Component, Component.ICollisionListener {
