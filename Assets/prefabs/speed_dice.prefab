@@ -21,6 +21,7 @@
           "Forward",
           "Bus"
         ],
+        "IsSpecialDice": true,
         "OpposingDirectionValues": "0,0,0",
         "Rigidbody": {
           "_type": "component",

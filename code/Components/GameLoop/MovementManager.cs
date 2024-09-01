@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using EnumExtensions.Util;
 using Monopoly;
 using Sandbox.Constants;
 using Sandbox.Events;
@@ -9,29 +10,21 @@ public sealed class MovementManager : Component {
 
 	private float _timer;
 
-	[Property]
-	private bool Backwards;
+	[Property] private bool Backwards;
 
-	[Property]
-	private int CurrentField;
+	[Property] private int CurrentField;
 
-	[Property]
-	private Player Player;
+	[Property] private Player Player;
 
-	[Property]
-	private Rigidbody PlayerBody;
+	[Property] private Rigidbody PlayerBody;
 
-	[Property]
-	private int ToTravel;
+	[Property] private int ToTravel;
 
-	[Property]
-	private int Travelled;
+	[Property] private int Travelled;
 
-	[Property]
-	public GameObject LocationContainer { get; set; }
+	[Property] public GameObject LocationContainer { get; set; }
 
-	[Property]
-	public float SpeedMultiplier { get; set; }
+	[Property] public float SpeedMultiplier { get; set; }
 
 
 	[Button("Go to next chance field")]
@@ -109,6 +102,9 @@ public sealed class MovementManager : Component {
 
 		if (CurrentField == 1) {
 			if (Networking.IsHost) {
+				// TODO: Toast message that player unlocked the speed dice if RoundCount is set to one and rule is activated
+				GameSounds.PlayUI(UiSounds.BtnSuccess);
+				Player.RoundCount++;
 				Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, Player.SteamId, 200, TurnManager.Phase.InMovement));
 			}
 		}

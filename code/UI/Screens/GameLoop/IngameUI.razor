@@ -2,6 +2,8 @@
 @inherits Sandbox.UI.Panel
 @using Sandbox.UI
 @using System
+@using System.ComponentModel.Design
+@using System.Net.NetworkInformation
 @using EnumExtensions
 @using EnumExtensions.Settings
 @using EnumExtensions.Util
@@ -81,12 +83,25 @@
 
 
 <div style="position: absolute; top: 50%; left: 50%">
-	@if (_showRoll) {
-		if (_dice.Count == 2) {
-			<h1> @_dice.Aggregate(0, (accumulator, dice) => dice.GetRoll().AsInt() + accumulator) </h1>
-		}
 
+	@if (_dice.Count == 2 || GetCurrentPlayer().RoundCount == 0) {
+		int amount = _dice[0].GetRoll().AsInt() + _dice[1].GetRoll().AsInt();
+		<h1> @amount </h1>
 	}
+	else {
+		int amount = _dice[0].GetRoll().AsInt() + _dice[1].GetRoll().AsInt();
+
+		if (_dice[0].GetRoll().AsInt() <= 3) {
+			amount += _dice[2].GetRoll().AsInt();
+			<h1> @amount </h1>
+		}
+		else {
+			<h1> @amount and @(_dice[2].GetRoll().Equals(DiceFace.Bus) ? " 🚌" : " 🏃‍♂️")</h1>
+		}
+		
+		
+	}
+
 </div>
 
 <div id="mainPanel">
@@ -587,7 +602,7 @@
 		}
 		GameSounds.PlayUI(UiSounds.BtnPress);
 		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.Rolling);
-		_turnManager.EmitStartRollEvent();
+		_turnManager.EmitStartRollEvent(GetCurrentPlayer().SteamId);
 	}
 
 	private void PayFine() {
@@ -615,27 +630,7 @@
 		}
 		GameSounds.PlayUI(UiSounds.BtnPress);
 
-		foreach (var dice in _dice) {
-			dice.Roll();
-		}
-
-		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InMovement);
-
-
-		while (_dice.Any(dice => dice.IsRolling)) {
-			await Task.DelayRealtimeSeconds(0.5f);
-		}
-
-		// No speed dice
-		if (_dice.Count == 2) {
-			Log.Info("Normal roll");
-			_turnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(), _dice[1].GetRoll().AsInt());
-		}
-		else {
-			Log.Info("Speed roll");
-			_turnManager.EmitRolledEventWithSpeedDice((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(),
-				_dice[1].GetRoll().AsInt(), _dice[2].GetRoll().AsInt());
-		}
+		_turnManager.EmitStartRollEvent(_player.SteamId);
 
 		_showRoll = true;
 		await Task.DelayRealtimeSeconds(2f);

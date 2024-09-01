@@ -71,7 +71,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		foreach (var dice in _dice) {
-			dice.Roll();
+			dice.Roll(GetPlayerFromEvent(eventArgs.PlayerId));
 		}
 
 		TurnManager.ChangePhase((ulong)Game.SteamId, TurnManager.Phase.InAction);
@@ -80,8 +80,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			await Task.DelayRealtimeSeconds(0.5f);
 		}
 
-		// No speed dice
-		if (_dice.Count == 2) {
+		// If no third speed dice is present OR if player does not have round count above 0 to activate speed dice
+		if (_dice.Count == 2 || GetPlayerFromEvent(eventArgs.PlayerId).RoundCount == 0) {
 			Log.Info("Normal roll");
 			TurnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(), _dice[1].GetRoll().AsInt());
 		}
@@ -372,13 +372,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	public void OnGameEvent(RolledEvent eventArgs) {
-		if (eventArgs.Bus) {
-			Log.Info("Bus rolled");
-		}
-		else if (eventArgs.Forward) {
-			Log.Info("Forward rolled");
-		}
-
 		Player player = GetPlayerFromEvent(eventArgs.playerId);
 
 

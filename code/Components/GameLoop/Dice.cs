@@ -19,6 +19,7 @@ public sealed class Dice : Component, Component.ICollisionListener {
 	public bool IsRolling { get; private set; }
 
 	[Property] public Rigidbody Rigidbody { get; set; }
+	[Property] public bool IsSpecialDice { get; set; }
 
 	[Property] public TurnManager TurnManager { get; private set; }
 
@@ -58,7 +59,12 @@ public sealed class Dice : Component, Component.ICollisionListener {
 	}
 
 
-	public void Roll() {
+	public void Roll(Player player) {
+		// If dice is special AND player is in first round around the board OR the current phase is Jail DON'T throw dice
+		if (IsSpecialDice && (player.RoundCount <= 0 || TurnManager.CurrentPhase.Equals(TurnManager.Phase.Jail))) {
+			return;
+		}
+
 		if (IsRolling || !_rollPhases.Any(phase => phase.Equals(TurnManager.CurrentPhase))) {
 			return;
 		}

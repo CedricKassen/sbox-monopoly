@@ -40,10 +40,11 @@ public sealed class Player : Component {
 
 	[Property, HostSync] public int LastDiceCount { get; set; } = 0;
 
-	[Property] public int DoublesCount { get; set; } = 0;
+	[Property, HostSync] public int DoublesCount { get; set; } = 0;
 
 	[Property] public bool LocalUiOpen { get; set; } = false;
-	[Property] public bool HasBonusMove { get; set; } = false;
+	[Property, HostSync] public bool HasBonusMove { get; set; } = false;
+	[Property, HostSync] public int RoundCount { get; set; }
 
 	[Property] public GameLocation CurrentHoverLocation { get; set; } = null;
 

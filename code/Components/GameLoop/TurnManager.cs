@@ -41,8 +41,9 @@ public class TurnManager : Component {
 
 	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
 
-	public void EmitStartRollEvent() {
-		GameParentObject.Dispatch(new StartRollEvent());
+	[Broadcast]
+	public void EmitStartRollEvent(ulong playerId) {
+		GameParentObject.Dispatch(new StartRollEvent(playerId));
 	}
 
 	[Broadcast]
