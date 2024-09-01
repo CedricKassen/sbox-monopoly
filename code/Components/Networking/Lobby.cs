@@ -175,6 +175,10 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 				player.SteamId = conn.SteamId;
 				player.Connection = conn;
 
+				if (LobbySettingsSystem.Current.SpeedDice) {
+					player.Money += 1000;
+				}
+
 				playerObj.NetworkSpawn(conn);
 
 				if (!diceSpawned) {
