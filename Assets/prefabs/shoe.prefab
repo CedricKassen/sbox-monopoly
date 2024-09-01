@@ -1,0 +1,58 @@
+{
+  "RootObject": {
+    "__guid": "3bc7a68f-e0bb-48e1-b010-a10c36d76d2f",
+    "Flags": 0,
+    "Name": "shoe",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "db256add-2260-4494-b166-fdb49ddd98a8",
+        "BodyGroups": 18446744073709551615,
+        "MaterialOverride": "materials/game_piece.vmat",
+        "Model": "models/shoe.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "f3ebaa7e-63ec-4286-8423-060d6b27ea21",
+        "Center": "0.4,3,5.133343",
+        "IsTrigger": false,
+        "Scale": "11.93333,22.66668,10.53334",
+        "Static": false
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "70d2e6a5-4623-477d-903a-9de69ef2c104",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassCenterOverride": "0,0,0",
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "OverrideMassCenter": false,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "e10ccbfe-6a42-4b9f-aa5b-95d179ae675f",
+        "Flags": 0,
+        "Name": "base",
+        "Enabled": true,
+        "__Prefab": "prefabs/base_player.prefab",
+        "__PrefabVariables": {}
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

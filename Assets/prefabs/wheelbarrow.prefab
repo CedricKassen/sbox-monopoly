@@ -18,7 +18,7 @@
       {
         "__type": "Sandbox.BoxCollider",
         "__guid": "f3ebaa7e-63ec-4286-8423-060d6b27ea21",
-        "Center": "-0.06666685,4.2,4.466669",
+        "Center": "-0.06666685,-4.2,4.466669",
         "IsTrigger": false,
         "Scale": "12.26666,29.8,8.466675",
         "Static": false
@@ -43,6 +43,7 @@
         "__guid": "e10ccbfe-6a42-4b9f-aa5b-95d179ae675f",
         "Flags": 0,
         "Name": "base",
+        "Position": "0,-2.654948,-5.302304",
         "Enabled": true,
         "__Prefab": "prefabs/base_player.prefab",
         "__PrefabVariables": {}
