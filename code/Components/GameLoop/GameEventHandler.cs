@@ -624,7 +624,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		MovementManager.StartMovement(player, eventArgs.Amount);
 	}
 
-	[Broadcast]
 	public void OnGameEvent(StartBonusMove eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.PlayerId);
 		int indexOfNextField = GetIndexOfNextFieldForSpeeddice(player.CurrentField, player.SteamId);
@@ -635,21 +634,23 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		var locations = LocationContainer.Children;
 
 		int indexToNextForeignOwnedField = -1;
+		Log.Info("CurrentField " + currentField);
 		// Solange i nicht bei currentField landet
 		for (var i = currentField + 1; Monopoly.Math.Mod(i, 40) != currentField; i++) {
-			GameLocation gl = locations[i].Components.Get<GameLocation>();
+			int modI = Monopoly.Math.Mod(i, 40);
+			GameLocation gl = locations[modI].Components.Get<GameLocation>();
 			if (gl.Type.Equals(GameLocation.PropertyType.Event)) {
 				continue;
 			}
 
-			ulong fieldOwner = IngameStateManager.OwnedFields[locations[i].Name];
+			ulong fieldOwner = IngameStateManager.OwnedFields[locations[modI].Name];
 			if (fieldOwner == 0) {
 				// if we find any location NOBODY owns we can interrupt this loop
-				return i;
+				return modI;
 			}
 
 			if (indexToNextForeignOwnedField == -1 && fieldOwner != playerId) {
-				indexToNextForeignOwnedField = i;
+				indexToNextForeignOwnedField = modI;
 			}
 		}
 
