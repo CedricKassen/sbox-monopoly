@@ -152,7 +152,7 @@ public static class Cards {
 	private static void Birthday(Player player, MovementManager move, TurnManager turnManager,
 	                             Dictionary<int, bool> blocked = null,
 	                             IngameStateManager stateManager = null, Card card = null) {
-		CardActionHelper.CollectFromAll(player, 10);
+		CardActionHelper.CollectFromAll(player, 10, turnManager);
 	}
 
 	private static void LoanMatures(Player player, MovementManager move, TurnManager turnManager,
@@ -188,7 +188,7 @@ public static class Cards {
 	private static void Chairman(Player player, MovementManager move, TurnManager turnManager,
 	                             Dictionary<int, bool> blocked = null,
 	                             IngameStateManager stateManager = null, Card card = null) {
-		CardActionHelper.PayToAll(player, 50);
+		CardActionHelper.PayToAll(player, 50, turnManager);
 	}
 
 	private static void RenovateHouses(Player player, MovementManager move, TurnManager turnManager,
