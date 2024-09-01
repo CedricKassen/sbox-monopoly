@@ -448,7 +448,7 @@
 		<p>You rolled an Bus! Choose your next turn: </p>
 		<button onclick=@(() => Move(value1))>@value1</button>
 		<button onclick=@(() => Move(value2))>@value2</button>
-		<button onclick=@(() => Move(value1 + value2))>@value1 + @value1</button>
+		<button onclick=@(() => Move(value1 + value2))>@(value1 + value2)</button>
 	}
 	else {
 		<p>Player is choosing his next move.</p>
@@ -473,7 +473,7 @@
 
 @if (IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.PlayerAction) {
 	<div class="endTurn">
-		<button onclick=@EndTurn> End Turn </button>
+		<button onclick=@EndTurn> @(LobbySettingsSystem.Current.SpeedDice && GetCurrentPlayer().HasBonusMove ? "Bonus move" : "End turn") </button>
 	</div>
 }
 
@@ -659,7 +659,15 @@
 
 	private void EndTurn() {
 		GameSounds.PlayUI(UiSounds.BtnPress);
-		_turnManager.EmitTurnFinishedEvent();
+
+		if (GetCurrentPlayer().HasBonusMove) {
+			_player.HasBonusMove = false;
+			_turnManager.EmitStartBonusMove(_player.SteamId);
+		}
+		else {
+			_turnManager.EmitTurnFinishedEvent();	
+		}
+
 	}
 
 	private void CloseLocalModal() {

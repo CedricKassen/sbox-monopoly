@@ -21,7 +21,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
                                 IGameEventHandler<UseJailCardEvent>,
                                 IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent>,
-                                IGameEventHandler<PlayerBankruptEvent>, IGameEventHandler<StartMovementEvent> {
+                                IGameEventHandler<PlayerBankruptEvent>, IGameEventHandler<StartMovementEvent>,
+                                IGameEventHandler<StartBonusMove> {
 	[Property] public GameObject LocationContainer { get; set; }
 
 	[Property] public Lobby Lobby { get; set; }
@@ -627,5 +628,38 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(StartMovementEvent eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.PlayerId);
 		MovementManager.StartMovement(player, eventArgs.Amount);
+	}
+
+	[Broadcast]
+	public void OnGameEvent(StartBonusMove eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.PlayerId);
+		int indexOfNextField = GetIndexOfNextFieldForSpeeddice(player.CurrentField, player.SteamId);
+		MovementManager.StartMovement(player, CardActionHelper.CalculateFieldsToTravel(player, indexOfNextField));
+	}
+
+	private int GetIndexOfNextFieldForSpeeddice(int currentField, ulong playerId) {
+		var locations = LocationContainer.Children;
+
+		int indexToNextForeignOwnedField = -1;
+		// Solange i nicht bei currentField landet
+		for (var i = currentField + 1; Monopoly.Math.Mod(i, 40) != currentField; i++) {
+			GameLocation gl = locations[i].Components.Get<GameLocation>();
+			if (gl.Type.Equals(GameLocation.PropertyType.Event)) {
+				continue;
+			}
+
+			ulong fieldOwner = IngameStateManager.OwnedFields[locations[i].Name];
+			if (fieldOwner == 0) {
+				// if we find any location NOBODY owns we can interrupt this loop
+				return i;
+			}
+
+			if (indexToNextForeignOwnedField == -1 && fieldOwner != playerId) {
+				indexToNextForeignOwnedField = i;
+			}
+		}
+
+		// If no next field with other owner or unowned field is found return current field so player does not move
+		return indexToNextForeignOwnedField != -1 ? indexToNextForeignOwnedField : currentField;
 	}
 }

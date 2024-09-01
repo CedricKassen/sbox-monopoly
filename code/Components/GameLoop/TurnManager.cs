@@ -176,8 +176,11 @@ public class TurnManager : Component {
 			CurrentPhase = Phase.Rolling;
 		}
 
+
 		if (phase.Equals(Phase.PlayerAction)) {
-			CurrentPhase = player.DoublesCount is > 0 and < 3 ? Phase.Rolling : Phase.PlayerAction;
+			CurrentPhase = player.DoublesCount is > 0 and < 3 && !player.HasBonusMove
+				? Phase.Rolling
+				: Phase.PlayerAction;
 			if (player.DoublesCount == 3) {
 				player.DoublesCount = 0;
 			}
@@ -232,5 +235,10 @@ public class TurnManager : Component {
 	[Broadcast]
 	public void EmitStartMove(ulong playerId, int amount) {
 		GameParentObject.Dispatch(new StartMovementEvent(playerId, amount));
+	}
+
+	[Broadcast]
+	public void EmitStartBonusMove(ulong playerId) {
+		GameParentObject.Dispatch(new StartBonusMove(playerId));
 	}
 }
