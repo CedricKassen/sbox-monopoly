@@ -117,7 +117,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		GameSounds.PlayUI(UiSounds.BtnPress);
-		TurnManager.EmitPlayerPaymentEvent(player.SteamId, 2, property.House_Cost, TurnManager.CurrentPhase);
+
+		if (Networking.IsHost) {
+			TurnManager.EmitPlayerPaymentEvent(player.SteamId, 2, property.House_Cost, TurnManager.CurrentPhase);
+		}
+
 
 		property.Houses++;
 	}
@@ -408,7 +412,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
-		var currentLobbyPlayers = TurnManager.CurrentLobby.Players;
+		var currentLobbyPlayers = TurnManager.CurrentLobby.AllPlayers;
 
 		Log.Info("Turn finished");
 		Log.Info("");
@@ -594,6 +598,5 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		player.localUiState = IngameUI.LocalUIStates.None;
-		player.GameObject.Enabled = false;
 	}
 }
