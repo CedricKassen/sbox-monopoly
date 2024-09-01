@@ -627,11 +627,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(StartBonusMove eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.PlayerId);
 		player.HasBonusMove = false;
-		int indexOfNextField = GetIndexOfNextFieldForSpeeddice(player.CurrentField, player.SteamId);
+		int indexOfNextField = GetIndexOfNextFieldForSpeedDice(player.CurrentField, player.SteamId);
 		MovementManager.StartMovement(player, CardActionHelper.CalculateFieldsToTravel(player, indexOfNextField));
 	}
 
-	private int GetIndexOfNextFieldForSpeeddice(int currentField, ulong playerId) {
+	private int GetIndexOfNextFieldForSpeedDice(int currentField, ulong playerId) {
 		var locations = LocationContainer.Children;
 
 		int indexToNextForeignOwnedField = -1;
