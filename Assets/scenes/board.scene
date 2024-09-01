@@ -3137,7 +3137,7 @@
                   "MaxPlayers": 5,
                   "PlayerPrefabs": [
                     {
-                      "Id": 16,
+                      "Id": 1,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/car.prefab"
@@ -3147,7 +3147,7 @@
                       "Height": 288
                     },
                     {
-                      "Id": 17,
+                      "Id": 2,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/ship.prefab"
@@ -3157,7 +3157,7 @@
                       "Height": 320
                     },
                     {
-                      "Id": 18,
+                      "Id": 3,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/timble.prefab"
@@ -3167,7 +3167,7 @@
                       "Height": 512
                     },
                     {
-                      "Id": 19,
+                      "Id": 4,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/tophat.prefab"
@@ -3177,7 +3177,7 @@
                       "Height": 384
                     },
                     {
-                      "Id": 20,
+                      "Id": 5,
                       "Prefab": {
                         "_type": "gameobject",
                         "prefab": "prefabs/wheelbarrow.prefab"

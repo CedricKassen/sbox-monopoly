@@ -144,6 +144,7 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void ChangePhase(ulong playerId, Phase phase) {
+		Log.Info("Changing phase to " + phase);
 		var player = CurrentLobby.Players.Find(player => player.SteamId == playerId);
 
 		if (player.EliminatedPosition > 0) {

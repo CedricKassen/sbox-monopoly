@@ -89,15 +89,25 @@ public static class CardActionHelper {
 		return 40 - currentField + targetField;
 	}
 
-	public static void CollectFromAll(Player player, int amount) {
+	public static void CollectFromAll(Player player, int amount, TurnManager turnManager) {
 		List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>());
+		if (allPlayers.Count <= 0) {
+			turnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
+			return;
+		}
+
 		allPlayers.ForEach(otherPlayer =>
 			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(otherPlayer.SteamId, player.SteamId, amount)));
 	}
 
-	public static void PayToAll(Player player, int amount) {
+	public static void PayToAll(Player player, int amount, TurnManager turnManager) {
 		List<Player> allPlayers =
 			new(Game.ActiveScene.GetAllComponents<Player>().Where(ply => ply.SteamId != player.SteamId));
+		if (allPlayers.Count <= 0) {
+			turnManager.ChangePhase(player.SteamId, TurnManager.Phase.PlayerAction);
+			return;
+		}
+
 		allPlayers.ForEach(otherPlayer =>
 			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, otherPlayer.SteamId, amount)));
 	}
