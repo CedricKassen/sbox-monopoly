@@ -74,7 +74,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			dice.Roll(GetPlayerFromEvent(eventArgs.PlayerId));
 		}
 
-		TurnManager.ChangePhase((ulong)Game.SteamId, TurnManager.Phase.InAction);
+		TurnManager.ChangePhase(eventArgs.PlayerId, TurnManager.Phase.InAction);
 
 		while (_dice.Any(dice => dice.IsRolling)) {
 			await Task.DelayRealtimeSeconds(0.5f);
@@ -90,6 +90,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			TurnManager.EmitRolledEventWithSpeedDice((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(),
 				_dice[1].GetRoll().AsInt(), _dice[2].GetRoll().AsInt());
 		}
+
+		IngameStateManager.ShowRoll = true;
+		await Task.DelayRealtimeSeconds(3f);
+		IngameStateManager.ShowRoll = false;
 	}
 
 	public void OnGameEvent(TurnActionDoneEvent eventArgs) {

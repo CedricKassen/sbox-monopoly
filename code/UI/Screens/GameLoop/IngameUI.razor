@@ -81,28 +81,36 @@
 	return;
 }
 
+@{
+	int roll1 = _dice[0].GetRoll().AsInt();
+	int roll2 = _dice[1].GetRoll().AsInt();
+	DiceFace roll3 = _dice[2].GetRoll();
+}
+@if (_stateManager.ShowRoll) {
+	int amount = roll1 + roll2;
+	<div style="position: absolute; top: 50%; left: 50%">
 
-<div style="position: absolute; top: 50%; left: 50%">
-
-	@if (_dice.Count == 2 || GetCurrentPlayer().RoundCount == 0) {
-		int amount = _dice[0].GetRoll().AsInt() + _dice[1].GetRoll().AsInt();
-		<h1> @amount </h1>
-	}
-	else {
-		int amount = _dice[0].GetRoll().AsInt() + _dice[1].GetRoll().AsInt();
-
-		if (_dice[0].GetRoll().AsInt() <= 3) {
-			amount += _dice[2].GetRoll().AsInt();
+		@if (roll1 == roll2) {
+			<p>Oh baby a double</p>
+		}
+		
+		@if (_dice.Count == 2 || GetCurrentPlayer().RoundCount == 0) {
 			<h1> @amount </h1>
 		}
 		else {
-			<h1> @amount and @(_dice[2].GetRoll().Equals(DiceFace.Bus) ? " 🚌" : " 🏃‍♂️")</h1>
+			if (roll3.AsInt() <= 3) {
+				amount += roll3.AsInt();
+				<h1> @amount </h1>
+			}
+			else {
+				<h1> @amount and @(roll3.Equals(DiceFace.Bus) ? " 🚌" : " 🏃‍♂️")</h1>
+			}
+		
+		
 		}
-		
-		
-	}
+	</div>
+}
 
-</div>
 
 <div id="mainPanel">
 	<div class="autogrow"></div>
@@ -458,7 +466,7 @@
 
 @if (_turnManager.CurrentPhase == TurnManager.Phase.ChooseMove) {
 	@if (IsCurrentPlayer()) {
-		var value1 = _dice[0].GetRoll().AsInt();
+		var value1 = roll1;
 		var value2 = _dice[1].GetRoll().AsInt();
 		<p>You rolled an Bus! Choose your next turn: </p>
 		<button onclick=@(() => Move(value1))>@value1</button>
@@ -536,8 +544,6 @@
 
 	private bool _waitingForTrading;
 
-	private bool _showRoll;
-
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
@@ -546,7 +552,7 @@
 			_player = Game.ActiveScene.GetAllComponents<Player>().First(player => player.SteamId == (ulong)Game.SteamId);
 		}
 
-		return HashCode.Combine(_showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data, _stateManager.OwnedFields, _player.localUiState, _stateManager.AuctionTimer);
+		return HashCode.Combine(_stateManager.ShowRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data, _stateManager.OwnedFields, _player.localUiState, _stateManager.AuctionTimer);
 	}
 
 	private bool IsCurrentPlayer() {
@@ -601,7 +607,6 @@
 			return;
 		}
 		GameSounds.PlayUI(UiSounds.BtnPress);
-		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.Rolling);
 		_turnManager.EmitStartRollEvent(GetCurrentPlayer().SteamId);
 	}
 
@@ -631,10 +636,6 @@
 		GameSounds.PlayUI(UiSounds.BtnPress);
 
 		_turnManager.EmitStartRollEvent(_player.SteamId);
-
-		_showRoll = true;
-		await Task.DelayRealtimeSeconds(2f);
-		_showRoll = false;
 	}
 
 	private void Buy() {
@@ -840,6 +841,7 @@
 	}
 	
 	private void Move(int toMove) {
+		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InAction);
 		_turnManager.EmitStartMove(GetCurrentPlayer().SteamId, toMove);
 	}
 	

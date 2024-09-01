@@ -119,6 +119,7 @@ public static class CardActionHelper {
 
 	public static void GoToJail(Player player, MovementManager movementManager) {
 		var currentPos = player.CurrentField;
+		player.HasBonusMove = false;
 
 		if (currentPos < 10) {
 			movementManager.StartMovement(player, CalculateFieldsToTravel(player, 10));
