@@ -91,6 +91,10 @@ public static class CardActionHelper {
 
 	public static void CollectFromAll(Player player, int amount) {
 		List<Player> allPlayers = new(Game.ActiveScene.GetAllComponents<Player>());
+		if (allPlayers.Count <= 0) {
+			return;
+		}
+
 		allPlayers.ForEach(otherPlayer =>
 			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(otherPlayer.SteamId, player.SteamId, amount)));
 	}
@@ -98,6 +102,10 @@ public static class CardActionHelper {
 	public static void PayToAll(Player player, int amount) {
 		List<Player> allPlayers =
 			new(Game.ActiveScene.GetAllComponents<Player>().Where(ply => ply.SteamId != player.SteamId));
+		if (allPlayers.Count <= 0) {
+			return;
+		}
+
 		allPlayers.ForEach(otherPlayer =>
 			Game.ActiveScene.Dispatch(new PlayerPaymentEvent(player.SteamId, otherPlayer.SteamId, amount)));
 	}
