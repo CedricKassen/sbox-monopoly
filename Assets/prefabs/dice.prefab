@@ -14,12 +14,12 @@
         "__guid": "4f27df2c-cf72-428a-8d3f-5b372458cacc",
         "DirectionValues": "3,2,6",
         "Faces": [
-          "ONE",
-          "TWO",
-          "THREE",
-          "FOUR",
-          "FIVE",
-          "SIX"
+          "One",
+          "Two",
+          "Three",
+          "Four",
+          "Five",
+          "Six"
         ],
         "OpposingDirectionValues": "0,0,0",
         "Rigidbody": {
@@ -27,8 +27,7 @@
           "component_id": "358c8ea7-27e9-4243-891c-aded97e6e6f9",
           "go": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0",
           "component_type": "Rigidbody"
-        },
-        "RolledValue": 0
+        }
       },
       {
         "__type": "Sandbox.ModelRenderer",

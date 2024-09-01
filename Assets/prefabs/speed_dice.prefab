@@ -17,9 +17,9 @@
           "One",
           "Two",
           "Three",
-          "Four",
-          "Five",
-          "Six"
+          "Forward",
+          "Forward",
+          "Bus"
         ],
         "OpposingDirectionValues": "0,0,0",
         "Rigidbody": {

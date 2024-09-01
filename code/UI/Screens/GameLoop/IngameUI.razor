@@ -615,7 +615,13 @@
 
 		// No speed dice
 		if (_dice.Count == 2) {
+			Log.Info("Normal roll");
 			_turnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(), _dice[1].GetRoll().AsInt());
+		}
+		else {
+			Log.Info("Speed roll");
+			_turnManager.EmitRolledEventWithSpeedDice((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(),
+				_dice[1].GetRoll().AsInt(), _dice[2].GetRoll().AsInt());
 		}
 
 		_showRoll = true;

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using EnumExtensions.Settings;
 using Sandbox.Components.GameLoop;
 using Sandbox.Events;
 using Sandbox.Events.GameStateEvents;
@@ -52,6 +53,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 	[Property] public Panel LobbyPanel { get; set; }
 
 	[Property] public GameObject DicePrefab { get; set; }
+	[Property] public GameObject SpeedDicePrefab { get; set; }
 	[Property, HostSync] private bool GameActive { get; set; } = false;
 
 
@@ -187,6 +189,13 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 					dice2.BreakFromPrefab();
 					dice2.NetworkSpawn(conn);
 					parent.Children[0].AddSibling(dice2, true);
+
+					if (LobbySettingsSystem.Current.SpeedDice) {
+						var speedDice = SpeedDicePrefab.Clone();
+						speedDice.BreakFromPrefab();
+						speedDice.NetworkSpawn(conn);
+						parent.Children[0].AddSibling(speedDice, true);
+					}
 
 					diceSpawned = true;
 				}

@@ -50,6 +50,29 @@ public class TurnManager : Component {
 	}
 
 	[Broadcast]
+	public void EmitRolledEventWithSpeedDice(ulong playerId, int dice1, int dice2, int speedDice) {
+		// Doubles can only be rolled with the 2 normal dices!
+		var doubles = dice1 == dice2;
+
+		int count = dice1 + dice2;
+		// Speed dice can only roll a maximal number of 3, if its more its a special dice face
+		if (speedDice < 4) {
+			count += speedDice;
+		}
+
+		bool bus = speedDice == DiceFace.Bus.AsInt();
+		bool forward = speedDice == DiceFace.Forward.AsInt();
+
+		GameParentObject.Dispatch(new RolledEvent {
+			playerId = playerId,
+			Number = count,
+			Doubles = doubles,
+			Bus = bus,
+			Forward = forward
+		});
+	}
+
+	[Broadcast]
 	public void EmitPropertyAquiredEvent(ulong playerId, int propertyIndex, bool fromAuction) {
 		GameParentObject.Dispatch(
 			new PropertyAquiredEvent { playerId = playerId, PropertyIndex = propertyIndex, FromAuction = fromAuction });
