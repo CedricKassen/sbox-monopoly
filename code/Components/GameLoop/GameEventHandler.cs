@@ -43,7 +43,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	public void OnGameEvent(AuctionFinishedEvent eventArgs) {
 		TurnManager.EmitPropertyAquiredEvent(eventArgs.playerId, eventArgs.PropertyIndex, true);
 
-		TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, 2, eventArgs.Amount);
+		if (Networking.IsHost) {
+			TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, 2, eventArgs.Amount);
+		}
 
 		if (_auctionLocations.Any()) {
 			TurnManager.EmitPropertyAuctionEvent(_auctionLocations.Pop(), eventArgs.playerId);
