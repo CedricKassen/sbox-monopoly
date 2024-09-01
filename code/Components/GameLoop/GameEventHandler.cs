@@ -117,7 +117,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		GameSounds.PlayUI(UiSounds.BtnPress);
-		TurnManager.EmitPlayerPaymentEvent(player.SteamId, 2, property.House_Cost, TurnManager.CurrentPhase);
+
+		if (Networking.IsHost) {
+			TurnManager.EmitPlayerPaymentEvent(player.SteamId, 2, property.House_Cost, TurnManager.CurrentPhase);
+		}
+
 
 		property.Houses++;
 	}
