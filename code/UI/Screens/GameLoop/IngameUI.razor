@@ -848,6 +848,11 @@
 	}
 	
 	private void Move(int toMove) {
+		if (toMove == 0) {
+			Log.Error("Move cannot be called with 0!");
+			return;
+		}
+		
 		if ((ulong) Game.SteamId == GetCurrentPlayer().SteamId) {
 			_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InAction);
 			_turnManager.EmitStartMove(GetCurrentPlayer().SteamId, toMove);

@@ -6,8 +6,6 @@ using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 
 public sealed class MovementManager : Component {
-	private readonly TaskCompletionSource<bool> tcs = new();
-
 	private float _timer;
 
 	[Property] private bool Backwards;
@@ -48,10 +46,7 @@ public sealed class MovementManager : Component {
 	[Button("Go to police field field")]
 	public void GoToPoliceField() {
 		var player = Game.ActiveScene.GetAllComponents<Player>().First();
-
-		var lines = new List<int> { 2, 17, 33 };
-		var next = lines.Find(field => player.CurrentField < field || (player.CurrentField > 33 && field == 2));
-		CardActionHelper.MoveTo(next, player, this);
+		CardActionHelper.MoveTo(30, player, this);
 	}
 
 	public void StartMovement(Player player, int fieldsToTravel) {
@@ -80,6 +75,14 @@ public sealed class MovementManager : Component {
 	private void UpdateMove() {
 		if (Player == null) {
 			return;
+		}
+
+		if (ToTravel <= 0) {
+			Log.Error("Something went wrong on Move. " + Player.Name + " tried to move zero fields from " +
+			          Player.CurrentField + ". More Detailed Info to " + Player);
+
+			Log.Info("Set fields to travel to 1 to prevent Softlock!");
+			ToTravel = 1;
 		}
 
 		if (_timer < 1 / SpeedMultiplier) {

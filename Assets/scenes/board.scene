@@ -2817,6 +2817,7 @@
                 "chanceJailFree": 0,
                 "communityJailFree": 0
               },
+              "ShowRoll": false,
               "State": "None",
               "TurnManager": {
                 "_type": "component",
