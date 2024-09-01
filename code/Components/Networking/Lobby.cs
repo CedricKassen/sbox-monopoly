@@ -186,17 +186,20 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 
 					var dice1 = DicePrefab.Clone();
 					dice1.BreakFromPrefab();
+					SetRandomRotation(dice1);
 					dice1.NetworkSpawn(conn);
 					parent.Children[0].AddSibling(dice1, true);
 
 					var dice2 = DicePrefab.Clone();
 					dice2.BreakFromPrefab();
+					SetRandomRotation(dice2);
 					dice2.NetworkSpawn(conn);
 					parent.Children[0].AddSibling(dice2, true);
 
 					if (LobbySettingsSystem.Current.SpeedDice) {
 						var speedDice = SpeedDicePrefab.Clone();
 						speedDice.BreakFromPrefab();
+						SetRandomRotation(speedDice);
 						speedDice.NetworkSpawn(conn);
 						parent.Children[0].AddSibling(speedDice, true);
 					}
@@ -208,6 +211,16 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 			GameActive = true;
 			EmitStartGame();
 		}
+	}
+
+	private void SetRandomRotation(GameObject go) {
+		Random rnd = new Random(go.GetHashCode());
+		Rotation newRot = new();
+		newRot.w = rnd.NextSingle();
+		newRot.x = rnd.NextSingle();
+		newRot.y = rnd.NextSingle();
+		newRot.z = rnd.NextSingle();
+		go.Transform.LocalRotation = newRot;
 	}
 
 	[Broadcast]

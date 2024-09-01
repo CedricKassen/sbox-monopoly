@@ -57,15 +57,18 @@ public sealed class Dice : Component, Component.ICollisionListener {
 		}
 	}
 
+
 	public void Roll() {
 		if (IsRolling || !_rollPhases.Any(phase => phase.Equals(TurnManager.CurrentPhase))) {
 			return;
 		}
 
 		IsRolling = true;
-		Rigidbody.Velocity += Vector3.Up * new Random().Next(400, 700);
+		Rigidbody.Velocity += Vector3.Up * GetRandomFloat(400, 650);
+		Rigidbody.Velocity += Vector3.Left * GetRandomFloat(5, 10);
+		Rigidbody.Velocity += Vector3.Backward * GetRandomFloat(5, 10);
 		Rigidbody.AngularVelocity +=
-			new Vector3(GetRandomFloat() * 1.2f, GetRandomFloat() * 1.2f, GetRandomFloat() * 0.5f);
+			new Vector3(GetRandomFloat() * 1.2f, GetRandomFloat() * 1.5f, GetRandomFloat() * 0.6f);
 
 		// Add force to center
 		Vector3 direction = new Vector3(0, 0, 0) - Transform.Position;
@@ -75,9 +78,9 @@ public sealed class Dice : Component, Component.ICollisionListener {
 		GameSounds.PlaySFX(SfxSounds.Dice, 5);
 	}
 
-	private float GetRandomFloat() {
-		var rng = new Random();
-		return rng.Next(4, 7) * (1 + rng.NextSingle());
+	private float GetRandomFloat(int min = 4, int max = 7) {
+		var rng = new Random(GameObject.GetHashCode());
+		return rng.Next(min, max) * (1 + rng.NextSingle());
 	}
 
 
