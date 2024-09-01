@@ -101,9 +101,12 @@ public sealed class MovementManager : Component {
 		_timer = 0;
 
 		if (CurrentField == 1) {
+			if (Player.RoundCount == 0) {
+				GameSounds.PlayUI(UiSounds.BtnSuccess);
+			}
+
 			if (Networking.IsHost) {
 				// TODO: Toast message that player unlocked the speed dice if RoundCount is set to one and rule is activated
-				GameSounds.PlayUI(UiSounds.BtnSuccess);
 				Player.RoundCount++;
 				Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, Player.SteamId, 200, TurnManager.Phase.InMovement));
 			}

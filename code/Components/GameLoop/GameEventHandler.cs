@@ -82,11 +82,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 		// If no third speed dice is present OR if player does not have round count above 0 to activate speed dice
 		if (_dice.Count == 2 || GetPlayerFromEvent(eventArgs.PlayerId).RoundCount == 0) {
-			Log.Info("Normal roll");
 			TurnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(), _dice[1].GetRoll().AsInt());
 		}
 		else {
-			Log.Info("Speed roll");
 			TurnManager.EmitRolledEventWithSpeedDice((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(),
 				_dice[1].GetRoll().AsInt(), _dice[2].GetRoll().AsInt());
 		}
@@ -425,7 +423,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		// 4 means the next turn would be the fourth turn in jail
-		Log.Info("Check if player beeing foreced out of jail " + player.JailTurnCounter);
 		if (player.JailTurnCounter == 4) {
 			// Force player to use card or pay caution
 			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Jail);

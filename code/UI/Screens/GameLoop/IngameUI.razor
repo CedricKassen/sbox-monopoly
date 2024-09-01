@@ -86,9 +86,9 @@
 	int roll2 = _dice[1].GetRoll().AsInt();
 	DiceFace roll3 = _dice[2].GetRoll();
 }
-@if (_stateManager.ShowRoll) {
+@if (_stateManager.ShowRoll && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.ChooseMove)) {
 	int amount = roll1 + roll2;
-	<div style="position: absolute; top: 50%; left: 50%">
+	<div style="position: absolute; align-items: center; justify-content: center; width: 100vw; height: 100vh;">
 
 		@if (roll1 == roll2) {
 			<p>Oh baby a double</p>
@@ -468,10 +468,18 @@
 	@if (IsCurrentPlayer()) {
 		var value1 = roll1;
 		var value2 = _dice[1].GetRoll().AsInt();
-		<p>You rolled an Bus! Choose your next turn: </p>
-		<button onclick=@(() => Move(value1))>@value1</button>
-		<button onclick=@(() => Move(value2))>@value2</button>
-		<button onclick=@(() => Move(value1 + value2))>@(value1 + value2)</button>
+		<div class="rollSelection">
+			<h2>🚌 Choose your next stop: </h2>
+			<div class="rollSelectionButtons">
+				@if (value1 != value2) {
+					<button onclick=@(() => Move(value1))>@value1</button>
+				}
+				<button onclick=@(() => Move(value2))>@value2</button>
+				<button onclick=@(() => Move(value1 + value2))>@(value1 + value2)</button>
+			</div>
+
+		</div>
+
 	}
 	else {
 		<p>Player is choosing his next move.</p>
@@ -841,8 +849,14 @@
 	}
 	
 	private void Move(int toMove) {
-		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InAction);
-		_turnManager.EmitStartMove(GetCurrentPlayer().SteamId, toMove);
+		if ((ulong) Game.SteamId == GetCurrentPlayer().SteamId) {
+			_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InAction);
+			_turnManager.EmitStartMove(GetCurrentPlayer().SteamId, toMove);
+			GameSounds.PlayUI(UiSounds.BtnPress);
+		}
+		else {
+			GameSounds.PlayUI(UiSounds.BtnDeny);
+		}
 	}
 	
 

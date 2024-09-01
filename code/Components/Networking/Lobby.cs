@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using EnumExtensions.Settings;
+using EnumExtensions.Util;
 using Sandbox.Components.GameLoop;
 using Sandbox.Events;
 using Sandbox.Events.GameStateEvents;
@@ -59,6 +60,10 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 
 	public void OnGameEvent(ChangePawnSelectionEvent eventArgs) {
 		// Only host should change this stuff
+		if ((ulong)Game.SteamId == eventArgs.callerSteamId) {
+			GameSounds.PlaySFX(SfxSounds.Ploop);
+		}
+
 		if (!Networking.IsHost) {
 			return;
 		}

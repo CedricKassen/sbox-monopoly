@@ -61,9 +61,6 @@ public sealed class Dice : Component, Component.ICollisionListener {
 
 	public void Roll(Player player) {
 		// If dice is special AND player is in first round around the board OR the current phase is Jail DON'T throw dice
-		Log.Info("DiceType " + IsSpecialDice);
-		Log.Info("RoundCount " + player.RoundCount);
-		Log.Info("Phase " + TurnManager.CurrentPhase);
 		if (IsSpecialDice && (player.RoundCount <= 0 || TurnManager.CurrentPhase.Equals(TurnManager.Phase.Jail))) {
 			return;
 		}
