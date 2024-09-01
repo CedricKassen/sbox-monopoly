@@ -37,6 +37,7 @@ public class TurnManager : Component {
 	[Property] public Lobby CurrentLobby { get; set; }
 
 	[Property] public CardActionManager CardActionManager { get; set; }
+	[Property] public MovementManager MovementManager { get; set; }
 
 	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
 
@@ -226,5 +227,10 @@ public class TurnManager : Component {
 	[Broadcast]
 	public void EmitPlayerBankruptEvent(ulong player, ulong recipient) {
 		GameParentObject.Dispatch(new PlayerBankruptEvent(player, recipient));
+	}
+
+	[Broadcast]
+	public void EmitStartMove(ulong playerId, int amount) {
+		GameParentObject.Dispatch(new StartMovementEvent(playerId, amount));
 	}
 }

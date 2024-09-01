@@ -441,6 +441,19 @@
 		break;
 }
 
+@if (_turnManager.CurrentPhase == TurnManager.Phase.ChooseMove) {
+	@if (IsCurrentPlayer()) {
+		var value1 = _dice[0].GetRoll().AsInt();
+		var value2 = _dice[1].GetRoll().AsInt();
+		<p>You rolled an Bus! Choose your next turn: </p>
+		<button onclick=@(() => Move(value1))>@value1</button>
+		<button onclick=@(() => Move(value2))>@value2</button>
+		<button onclick=@(() => Move(value1 + value2))>@value1 + @value1</button>
+	}
+	else {
+		<p>Player is choosing his next move.</p>
+	}
+}
 
 @if (IsCurrentPlayer() && _turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
 	<div class="jailDecision">
@@ -822,6 +835,11 @@
 	private void Quit() {
 		Game.Disconnect();
 	}
+	
+	private void Move(int toMove) {
+		_turnManager.EmitStartMove(GetCurrentPlayer().SteamId, toMove);
+	}
+	
 
 
 }

@@ -21,7 +21,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
                                 IGameEventHandler<UseJailCardEvent>,
                                 IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent>,
-                                IGameEventHandler<PlayerBankruptEvent> {
+                                IGameEventHandler<PlayerBankruptEvent>, IGameEventHandler<StartMovementEvent> {
 	[Property] public GameObject LocationContainer { get; set; }
 
 	[Property] public Lobby Lobby { get; set; }
@@ -622,5 +622,10 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		player.localUiState = IngameUI.LocalUIStates.None;
+	}
+
+	public void OnGameEvent(StartMovementEvent eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.PlayerId);
+		MovementManager.StartMovement(player, eventArgs.Amount);
 	}
 }
