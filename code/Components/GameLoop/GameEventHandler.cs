@@ -412,7 +412,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 
 	public void OnGameEvent(TurnFinishedEvent eventArgs) {
-		var currentLobbyPlayers = TurnManager.CurrentLobby.Players;
+		var currentLobbyPlayers = TurnManager.CurrentLobby.AllPlayers;
 
 		Log.Info("Turn finished");
 		Log.Info("");
@@ -598,6 +598,5 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		player.localUiState = IngameUI.LocalUIStates.None;
-		player.GameObject.Enabled = false;
 	}
 }
