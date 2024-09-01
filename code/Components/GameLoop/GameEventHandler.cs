@@ -378,7 +378,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			Log.Info("Forward rolled");
 		}
 
-		var player = GetPlayerFromEvent(eventArgs.playerId);
+		Player player = GetPlayerFromEvent(eventArgs.playerId);
 
 
 		player.DoublesCount = eventArgs.Doubles ? player.DoublesCount + 1 : 0;
@@ -388,13 +388,24 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			player.LastDiceCount = eventArgs.Number;
 
 			TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InMovement);
-			if (player.DoublesCount < 3) {
-				MovementManager.StartMovement(player, eventArgs.Number);
-			}
-			else {
+			if (player.DoublesCount == 3) {
 				TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Police,
 					player.SteamId);
+				return;
 			}
+
+			// Show "Bonus move" instead of "End turn" after turn. Player move to next unowned or if nothing is
+			// unowned next location he has to pay on
+			player.HasBonusMove = eventArgs.Forward;
+			if (eventArgs.Bus) {
+				// Player can choose to move either the value of die one, two or both.
+				TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.ChooseMove);
+			}
+			else {
+				// Player moves given amount
+				MovementManager.StartMovement(player, eventArgs.Number);
+			}
+
 
 			return;
 		}

@@ -43,6 +43,7 @@ public sealed class Player : Component {
 	[Property] public int DoublesCount { get; set; } = 0;
 
 	[Property] public bool LocalUiOpen { get; set; } = false;
+	[Property] public bool HasBonusMove { get; set; } = false;
 
 	[Property] public GameLocation CurrentHoverLocation { get; set; } = null;
 
