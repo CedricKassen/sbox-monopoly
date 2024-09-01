@@ -626,6 +626,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	public void OnGameEvent(StartBonusMove eventArgs) {
 		Player player = GetPlayerFromEvent(eventArgs.PlayerId);
+		player.HasBonusMove = false;
 		int indexOfNextField = GetIndexOfNextFieldForSpeeddice(player.CurrentField, player.SteamId);
 		MovementManager.StartMovement(player, CardActionHelper.CalculateFieldsToTravel(player, indexOfNextField));
 	}

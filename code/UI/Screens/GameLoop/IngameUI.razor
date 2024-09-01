@@ -665,7 +665,6 @@
 		GameSounds.PlayUI(UiSounds.BtnPress);
 
 		if (GetCurrentPlayer().HasBonusMove) {
-			_player.HasBonusMove = false;
 			_turnManager.EmitStartBonusMove(_player.SteamId);
 		}
 		else {
