@@ -2975,7 +2975,7 @@
                     "go": "00e6060f-33c7-439f-87f4-209648b444c7",
                     "component_type": "Lobby"
                   },
-                  "CurrentPhase": "RoundAction",
+                  "CurrentPhase": "Rolling",
                   "CurrentPlayerIndex": 0,
                   "GameParentObject": {
                     "_type": "gameobject",
