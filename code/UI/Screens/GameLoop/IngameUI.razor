@@ -81,12 +81,9 @@
 	return;
 }
 
-@{
+@if (_stateManager.ShowRoll && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.ChooseMove)) {
 	int roll1 = _dice[0].GetRoll().AsInt();
 	int roll2 = _dice[1].GetRoll().AsInt();
-	DiceFace roll3 = _dice[2].GetRoll();
-}
-@if (_stateManager.ShowRoll && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.ChooseMove)) {
 	int amount = roll1 + roll2;
 	<div style="position: absolute; align-items: center; justify-content: center; width: 100vw; height: 100vh;">
 
@@ -98,6 +95,7 @@
 			<h1> @amount </h1>
 		}
 		else {
+			DiceFace roll3 = _dice[2].GetRoll();
 			if (roll3.AsInt() <= 3) {
 				amount += roll3.AsInt();
 				<h1> @amount </h1>
@@ -466,7 +464,7 @@
 
 @if (_turnManager.CurrentPhase == TurnManager.Phase.ChooseMove) {
 	@if (IsCurrentPlayer()) {
-		var value1 = roll1;
+		var value1 = _dice[0].GetRoll().AsInt();
 		var value2 = _dice[1].GetRoll().AsInt();
 		<div class="rollSelection">
 			<h2>🚌 Choose your next stop: </h2>
