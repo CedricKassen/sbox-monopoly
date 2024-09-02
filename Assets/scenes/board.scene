@@ -2583,6 +2583,14 @@
               "Static": false
             }
           ]
+        },
+        {
+          "__guid": "be219e98-61ec-46ee-a426-da869a3908b3",
+          "Flags": 0,
+          "Name": "SpeedDiceSpawner",
+          "Position": "-131.1538,122.4991,19.45305",
+          "Tags": "speed_dice_spawner",
+          "Enabled": true
         }
       ]
     },

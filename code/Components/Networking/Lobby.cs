@@ -206,9 +206,12 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 					parent.Children[0].AddSibling(dice2, true);
 
 					if (LobbySettingsSystem.Current.SpeedDice) {
+						GameObject spawner =
+							Game.ActiveScene.Children[1].Children.First(go => go.Tags.Contains("speed_dice_spawner"));
 						var speedDice = SpeedDicePrefab.Clone();
 						speedDice.BreakFromPrefab();
 						SetRandomRotation(speedDice);
+						speedDice.Transform.Position = spawner.Transform.Position;
 						speedDice.NetworkSpawn(conn);
 						parent.Children[0].AddSibling(speedDice, true);
 					}
