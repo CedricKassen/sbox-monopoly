@@ -57,7 +57,7 @@ public sealed class Dice : Component, Component.ICollisionListener {
 			IsRolling = false;
 		}
 		else if (Input.Down("Jump")) {
-			Log.Info(Rigidbody.Velocity.Length);
+			Log.Info(Math.Round(Rigidbody.Velocity.Length, 4));
 		}
 	}
 
