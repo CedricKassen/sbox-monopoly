@@ -220,7 +220,6 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 				}
 			}
 
-			TurnManager.CurrentPlayerIndex = new Random().Next(0, AllPlayers.Count);
 			GameActive = true;
 			EmitStartGame();
 		}
