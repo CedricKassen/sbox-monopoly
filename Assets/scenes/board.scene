@@ -3205,6 +3205,12 @@
                   "SpeedDicePrefab": {
                     "_type": "gameobject",
                     "prefab": "prefabs/speed_dice.prefab"
+                  },
+                  "TurnManager": {
+                    "_type": "component",
+                    "component_id": "3a3de850-0708-4654-ac37-0751891b2abc",
+                    "go": "4d880113-7b4d-4756-ad95-7eed4744d084",
+                    "component_type": "TurnManager"
                   }
                 }
               ]

@@ -29,7 +29,7 @@ public class PawnWrapper {
 public sealed class Lobby : Component, Component.INetworkListener, IGameEventHandler<ChangePawnSelectionEvent> {
 	[HostSync] public NetDictionary<int, ulong> SelectedPawns { get; set; } = new();
 
-	[Property] public long MaxPlayers { get; set; } = 5;
+	[Property] public long MaxPlayers { get; set; } = 6;
 
 	[Property] private GameObject LobbyPlayer { get; set; }
 	[Property] private TurnManager TurnManager { get; set; }
@@ -58,6 +58,9 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 	[Property] public GameObject SpeedDicePrefab { get; set; }
 	[Property, HostSync] private bool GameActive { get; set; } = false;
 
+	public override int GetHashCode() {
+		return HashCode.Combine(AllPlayers, Players);
+	}
 
 	public void OnGameEvent(ChangePawnSelectionEvent eventArgs) {
 		// Only host should change this stuff
@@ -214,7 +217,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 				}
 			}
 
-			TurnManager.CurrentPlayerIndex = new Random().Next(0, Players.Count);
+			TurnManager.CurrentPlayerIndex = new Random().Next(0, AllPlayers.Count);
 			GameActive = true;
 			EmitStartGame();
 		}
