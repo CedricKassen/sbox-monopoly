@@ -41,7 +41,6 @@ public class TurnManager : Component {
 
 	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
 
-	[Broadcast]
 	public void EmitStartRollEvent(ulong playerId) {
 		GameParentObject.Dispatch(new StartRollEvent(playerId));
 	}
@@ -170,6 +169,10 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void ChangePhase(ulong playerId, Phase phase) {
+		if (!Networking.IsHost) {
+			return;
+		}
+
 		Log.Info("Changing phase to " + phase);
 		var player = CurrentLobby.Players.Find(player => player.SteamId == playerId);
 

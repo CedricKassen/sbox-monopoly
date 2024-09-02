@@ -634,7 +634,7 @@
 		_turnManager.EmitUseJailCardEvent(_player.SteamId);
 	}
 
-	private async void Roll() {
+	private void Roll() {
 		if (!IsCurrentPlayer() || _turnManager.CurrentPhase != TurnManager.Phase.Rolling) {
 			GameSounds.PlayUI(UiSounds.BtnDisabled);
 			return;

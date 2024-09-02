@@ -89,6 +89,11 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				_dice[1].GetRoll().AsInt(), _dice[2].GetRoll().AsInt());
 		}
 
+		ShowDiceRoll();
+	}
+
+	[Broadcast]
+	private async void ShowDiceRoll() {
 		IngameStateManager.ShowRoll = true;
 		await Task.DelayRealtimeSeconds(3f);
 		IngameStateManager.ShowRoll = false;
@@ -628,6 +633,12 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		Player player = GetPlayerFromEvent(eventArgs.PlayerId);
 		player.HasBonusMove = false;
 		int indexOfNextField = GetIndexOfNextFieldForSpeedDice(player.CurrentField, player.SteamId);
+
+		if (indexOfNextField == 0) {
+			TurnManager.EmitTurnFinishedEvent();
+			return;
+		}
+
 		MovementManager.StartMovement(player, CardActionHelper.CalculateFieldsToTravel(player, indexOfNextField));
 	}
 
