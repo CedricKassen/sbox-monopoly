@@ -32,6 +32,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 	[Property] public long MaxPlayers { get; set; } = 5;
 
 	[Property] private GameObject LobbyPlayer { get; set; }
+	[Property] private TurnManager TurnManager { get; set; }
 	[Property] public List<PawnWrapper> PlayerPrefabs { get; set; }
 
 	[Property]
@@ -213,6 +214,7 @@ public sealed class Lobby : Component, Component.INetworkListener, IGameEventHan
 				}
 			}
 
+			TurnManager.CurrentPlayerIndex = new Random().Next(0, Players.Count);
 			GameActive = true;
 			EmitStartGame();
 		}

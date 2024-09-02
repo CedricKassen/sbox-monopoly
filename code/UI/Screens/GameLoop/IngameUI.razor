@@ -502,7 +502,7 @@
 
 @if (IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.PlayerAction) {
 	<div class="endTurn">
-		<button onclick=@EndTurn> @(LobbySettingsSystem.Current.SpeedDice && GetCurrentPlayer().HasBonusMove ? "Bonus move" : "End turn") </button>
+		<button onclick=@EndTurn> @(GetCurrentPlayer().HasBonusMove ? "Bonus move" : "End turn") </button>
 	</div>
 }
 

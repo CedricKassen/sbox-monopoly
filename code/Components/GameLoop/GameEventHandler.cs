@@ -160,7 +160,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		GameSounds.PlayUI(UiSounds.BtnPress);
 		var player = GetPlayerFromEvent(eventArgs.PlayerId);
 
-		TurnManager.EmitPlayerPaymentEvent(2, player.SteamId, property.House_Cost, TurnManager.CurrentPhase);
+		TurnManager.EmitLocalPlayerPaymentEvent(2, player.SteamId, property.House_Cost / 2, TurnManager.CurrentPhase);
 
 		property.Houses--;
 	}
@@ -211,14 +211,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 				Log.Info("Price " + price);
 
-				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, price);
+				TurnManager.EmitLocalPlayerPaymentEvent(eventArgs.playerId, fieldOwner, price);
 				return;
 			}
 
 			if (location.Type == GameLocation.PropertyType.Railroad) {
 				var railroadCount = IngameStateManager.OwnedFields
 				                                      .Count(f => f.Value == fieldOwner && f.Key.Contains("railroad"));
-				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
+				TurnManager.EmitLocalPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
 					location.Railroad_Rent[railroadCount - 1]);
 				return;
 			}
@@ -231,7 +231,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				Log.Info("Utilities owned: " + utilityCount);
 				Log.Info("Last throw: " + currentPlayer.LastDiceCount);
 
-				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
+				TurnManager.EmitLocalPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
 					location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount);
 				return;
 			}
@@ -264,7 +264,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		Player player = GetPlayerFromEvent(eventArgs.playerId);
 
 		TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.InAction);
-		TurnManager.EmitPlayerPaymentEvent(player.SteamId, 1, 50, TurnManager.Phase.Rolling);
+		TurnManager.EmitLocalPlayerPaymentEvent(player.SteamId, 1, 50, TurnManager.Phase.Rolling);
 		player.JailTurnCounter = 0;
 	}
 
@@ -527,9 +527,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			}
 		}
 
-		TurnManager.EmitPlayerPaymentEvent(TradeState.TradingCreator.SteamId, TradeState.TradingPartner.SteamId,
+		TurnManager.EmitLocalPlayerPaymentEvent(TradeState.TradingCreator.SteamId, TradeState.TradingPartner.SteamId,
 			TradeState.TradingOfferAmount);
-		TurnManager.EmitPlayerPaymentEvent(TradeState.TradingPartner.SteamId, TradeState.TradingCreator.SteamId,
+		TurnManager.EmitLocalPlayerPaymentEvent(TradeState.TradingPartner.SteamId, TradeState.TradingCreator.SteamId,
 			TradeState.TradingRequestAmount);
 
 		ResetTrading();
@@ -617,7 +617,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				playerWorth += gameLocation.House_Cost * gameLocation.Houses;
 			}
 
-			TurnManager.EmitPlayerPaymentEvent(eventArgs.PlayerId, eventArgs.Recipient, playerWorth);
+			TurnManager.EmitLocalPlayerPaymentEvent(eventArgs.PlayerId, eventArgs.Recipient, playerWorth);
 			TurnManager.EmitTurnFinishedEvent();
 		}
 

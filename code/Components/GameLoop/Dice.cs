@@ -71,8 +71,8 @@ public sealed class Dice : Component, Component.ICollisionListener {
 
 		IsRolling = true;
 		Rigidbody.Velocity += Vector3.Up * GetRandomFloat(400, 650);
-		Rigidbody.Velocity += Vector3.Left * GetRandomFloat(5, 10);
-		Rigidbody.Velocity += Vector3.Backward * GetRandomFloat(5, 10);
+		Rigidbody.Velocity += Vector3.Left * GetRandomFloat(2, 5);
+		Rigidbody.Velocity += Vector3.Backward * GetRandomFloat(2, 5);
 		Rigidbody.AngularVelocity +=
 			new Vector3(GetRandomFloat() * 1.2f, GetRandomFloat() * 1.5f, GetRandomFloat() * 0.6f);
 

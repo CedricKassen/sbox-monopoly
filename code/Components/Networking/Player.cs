@@ -24,12 +24,6 @@ public sealed class Player : Component {
 		}
 	}
 
-	public override string ToString() {
-		return Name + ": PlayerLastThrow(" + LastDiceCount + "), PlayerDoubles(" + DoublesCount +
-		       "), EliminatedPosition(" + EliminatedPosition + "), HasBonusMove(" + HasBonusMove + "), RoundCount(" +
-		       RoundCount + "), JailCounter(" + JailTurnCounter + "), Money(" + Money + ")";
-	}
-
 	public static int EliminatedCount { get; set; } = 0;
 
 	[HostSync, Property, HideIf("EliminatedPosition", 0)]

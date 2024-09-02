@@ -77,9 +77,9 @@ public sealed class MovementManager : Component {
 			return;
 		}
 
-		if (ToTravel <= 0) {
+		if (ToTravel == 0) {
 			Log.Error("Something went wrong on Move. " + Player.Name + " tried to move zero fields from " +
-			          Player.CurrentField + ". More Detailed Info to " + Player);
+			          Player.CurrentField);
 
 			Log.Info("Set fields to travel to 1 to prevent Softlock!");
 			ToTravel = 1;

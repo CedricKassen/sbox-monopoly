@@ -94,6 +94,11 @@ public class TurnManager : Component {
 		GameParentObject.Dispatch(new PlayerPaymentEvent(playerId, recipientId, amount, newPhase));
 	}
 
+	public void EmitLocalPlayerPaymentEvent(ulong playerId, ulong recipientId, int amount,
+	                                        Phase newPhase = Phase.PlayerAction) {
+		GameParentObject.Dispatch(new PlayerPaymentEvent(playerId, recipientId, amount, newPhase));
+	}
+
 	[Broadcast(NetPermission.HostOnly)]
 	public void EmitSpecialPropertyActionEvent(SpecialPropertyActionType type, ulong playerId) {
 		GameParentObject.Dispatch(new SpecialPropertyActionEvent());
