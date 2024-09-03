@@ -12,7 +12,8 @@ public class TurnManager : Component {
 		PlayerAction,
 		InAction,
 		Jail,
-		InMovement
+		InMovement,
+		ChooseMove
 	}
 
 	public enum PlayerActionType {
@@ -36,17 +37,41 @@ public class TurnManager : Component {
 	[Property] public Lobby CurrentLobby { get; set; }
 
 	[Property] public CardActionManager CardActionManager { get; set; }
+	[Property] public MovementManager MovementManager { get; set; }
 
 	[Property, HostSync] public int CurrentPlayerIndex { get; set; }
 
-	public void EmitStartRollEvent() {
-		GameParentObject.Dispatch(new StartRollEvent());
+	public void EmitStartRollEvent(ulong playerId) {
+		GameParentObject.Dispatch(new StartRollEvent(playerId));
 	}
 
 	[Broadcast]
 	public void EmitRolledEvent(ulong playerId, int dice1, int dice2) {
 		var doubles = dice1 == dice2;
 		GameParentObject.Dispatch(new RolledEvent { playerId = playerId, Number = dice1 + dice2, Doubles = doubles });
+	}
+
+	[Broadcast]
+	public void EmitRolledEventWithSpeedDice(ulong playerId, int dice1, int dice2, int speedDice) {
+		// Doubles can only be rolled with the 2 normal dices!
+		var doubles = dice1 == dice2;
+
+		int count = dice1 + dice2;
+		// Speed dice can only roll a maximal number of 3, if its more its a special dice face
+		if (speedDice < 4) {
+			count += speedDice;
+		}
+
+		bool bus = speedDice == DiceFace.Bus.AsInt();
+		bool forward = speedDice == DiceFace.Forward.AsInt();
+
+		GameParentObject.Dispatch(new RolledEvent {
+			playerId = playerId,
+			Number = count,
+			Doubles = doubles,
+			Bus = bus,
+			Forward = forward
+		});
 	}
 
 	[Broadcast]
@@ -66,6 +91,11 @@ public class TurnManager : Component {
 	[Broadcast]
 	public void EmitPlayerPaymentEvent(ulong playerId, ulong recipientId, int amount,
 	                                   Phase newPhase = Phase.PlayerAction) {
+		GameParentObject.Dispatch(new PlayerPaymentEvent(playerId, recipientId, amount, newPhase));
+	}
+
+	public void EmitLocalPlayerPaymentEvent(ulong playerId, ulong recipientId, int amount,
+	                                        Phase newPhase = Phase.PlayerAction) {
 		GameParentObject.Dispatch(new PlayerPaymentEvent(playerId, recipientId, amount, newPhase));
 	}
 
@@ -144,6 +174,10 @@ public class TurnManager : Component {
 
 	[Broadcast]
 	public void ChangePhase(ulong playerId, Phase phase) {
+		if (!Networking.IsHost) {
+			return;
+		}
+
 		Log.Info("Changing phase to " + phase);
 		var player = CurrentLobby.Players.Find(player => player.SteamId == playerId);
 
@@ -151,8 +185,11 @@ public class TurnManager : Component {
 			CurrentPhase = Phase.Rolling;
 		}
 
+
 		if (phase.Equals(Phase.PlayerAction)) {
-			CurrentPhase = player.DoublesCount is > 0 and < 3 ? Phase.Rolling : Phase.PlayerAction;
+			CurrentPhase = player.DoublesCount is > 0 and < 3 && !player.HasBonusMove
+				? Phase.Rolling
+				: Phase.PlayerAction;
 			if (player.DoublesCount == 3) {
 				player.DoublesCount = 0;
 			}
@@ -202,5 +239,15 @@ public class TurnManager : Component {
 	[Broadcast]
 	public void EmitPlayerBankruptEvent(ulong player, ulong recipient) {
 		GameParentObject.Dispatch(new PlayerBankruptEvent(player, recipient));
+	}
+
+	[Broadcast]
+	public void EmitStartMove(ulong playerId, int amount) {
+		GameParentObject.Dispatch(new StartMovementEvent(playerId, amount));
+	}
+
+	[Broadcast]
+	public void EmitStartBonusMove(ulong playerId) {
+		GameParentObject.Dispatch(new StartBonusMove(playerId));
 	}
 }

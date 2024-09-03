@@ -2,7 +2,7 @@
   "RootObject": {
     "__guid": "670c3aee-bdfd-45f3-9e16-9f1fb5b8a5a0",
     "Flags": 0,
-    "Name": "dice",
+    "Name": "speed_dice",
     "Scale": "2,2,2",
     "Tags": "dice",
     "Enabled": true,
@@ -18,11 +18,11 @@
           "One",
           "Two",
           "Three",
-          "Four",
-          "Five",
-          "Six"
+          "Forward",
+          "Forward",
+          "Bus"
         ],
-        "IsSpecialDice": false,
+        "IsSpecialDice": true,
         "OpposingDirectionValues": "0,0,0",
         "Rigidbody": {
           "_type": "component",
@@ -35,6 +35,7 @@
         "__type": "Sandbox.ModelRenderer",
         "__guid": "d4c3dfb5-33a2-4d68-95a5-71a2b2a083f7",
         "BodyGroups": 18446744073709551615,
+        "MaterialOverride": "materials/dice/speed_dice.vmat",
         "Model": "models/dice/dice.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"

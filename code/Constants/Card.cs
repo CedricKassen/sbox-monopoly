@@ -86,7 +86,12 @@ public static class CardActionHelper {
 			return targetField - currentField;
 		}
 
-		return 40 - currentField + targetField;
+		int result = 40 - currentField + targetField;
+		if (result == 0) {
+			Log.Error("Calculated movement distance was zero!");
+		}
+
+		return result;
 	}
 
 	public static void CollectFromAll(Player player, int amount, TurnManager turnManager) {
@@ -119,6 +124,7 @@ public static class CardActionHelper {
 
 	public static void GoToJail(Player player, MovementManager movementManager) {
 		var currentPos = player.CurrentField;
+		player.HasBonusMove = false;
 
 		if (currentPos < 10) {
 			movementManager.StartMovement(player, CalculateFieldsToTravel(player, 10));

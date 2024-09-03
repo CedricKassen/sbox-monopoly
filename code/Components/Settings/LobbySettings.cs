@@ -8,6 +8,10 @@ public class LobbySettings {
 	[Title("Payout on free parking")]
 	[Description("Collect all money that was payed into the bank. Taxes e.g.")]
 	public bool CollectFreeParking { get; set; } = false;
+
+	[Title("Speed dice")]
+	[Description("Dice to speed the game up.")]
+	public bool SpeedDice { get; set; } = false;
 }
 
 public class LobbySettingsSystem {

@@ -19,6 +19,7 @@ public sealed class Dice : Component, Component.ICollisionListener {
 	public bool IsRolling { get; private set; }
 
 	[Property] public Rigidbody Rigidbody { get; set; }
+	[Property] public bool IsSpecialDice { get; set; }
 
 	[Property] public TurnManager TurnManager { get; private set; }
 
@@ -52,20 +53,31 @@ public sealed class Dice : Component, Component.ICollisionListener {
 	}
 
 	protected override void OnUpdate() {
-		if (Rigidbody.Velocity.IsNearZeroLength) {
+		if (Rigidbody.Velocity.IsNearZeroLength || Rigidbody.Velocity.Length <= 0.005) {
 			IsRolling = false;
+		}
+		else if (Input.Down("Jump")) {
+			Log.Info(Math.Round(Rigidbody.Velocity.Length, 4));
 		}
 	}
 
-	public void Roll() {
+
+	public void Roll(Player player) {
+		// If dice is special AND player is in first round around the board OR the current phase is Jail DON'T throw dice
+		if (IsSpecialDice && (player.RoundCount <= 0 || TurnManager.CurrentPhase.Equals(TurnManager.Phase.Jail))) {
+			return;
+		}
+
 		if (IsRolling || !_rollPhases.Any(phase => phase.Equals(TurnManager.CurrentPhase))) {
 			return;
 		}
 
 		IsRolling = true;
-		Rigidbody.Velocity += Vector3.Up * new Random().Next(400, 700);
+		Rigidbody.Velocity += Vector3.Up * GetRandomFloat(400, 550);
+		Rigidbody.Velocity += Vector3.Left * GetRandomFloat(1, 3);
+		Rigidbody.Velocity += Vector3.Backward * GetRandomFloat(1, 3);
 		Rigidbody.AngularVelocity +=
-			new Vector3(GetRandomFloat() * 1.2f, GetRandomFloat() * 1.2f, GetRandomFloat() * 0.5f);
+			new Vector3(GetRandomFloat() * 1.2f, GetRandomFloat() * 1.5f, GetRandomFloat() * 0.6f);
 
 		// Add force to center
 		Vector3 direction = new Vector3(0, 0, 0) - Transform.Position;
@@ -75,9 +87,9 @@ public sealed class Dice : Component, Component.ICollisionListener {
 		GameSounds.PlaySFX(SfxSounds.Dice, 5);
 	}
 
-	private float GetRandomFloat() {
-		var rng = new Random();
-		return rng.Next(4, 7) * (1 + rng.NextSingle());
+	private float GetRandomFloat(int min = 4, int max = 7) {
+		var rng = new Random(GameObject.GetHashCode());
+		return rng.Next(min, max) * (1 + rng.NextSingle());
 	}
 
 

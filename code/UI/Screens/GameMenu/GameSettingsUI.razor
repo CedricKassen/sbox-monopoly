@@ -33,7 +33,18 @@
 				<p>Free parking</p>
 			</div>
 
-        	<p class="settingDesc">Collect money payed to bank on free parking!</p>
+			<p class="settingDesc">Collect money payed to bank on free parking!</p>
+		</div>
+		<div class="row">
+        	<div class="settingControl">
+        		<Checkbox
+        			Value:bind="@LobbySettingsSystem.Current.SpeedDice">
+
+        		</Checkbox>
+        		<p>Speed dice</p>
+        	</div>
+
+            <p class="settingDesc">Speed the game up! Activates the speed dice for the players if the finished their first round around the board.</p>
         </div>
 
 	</div>

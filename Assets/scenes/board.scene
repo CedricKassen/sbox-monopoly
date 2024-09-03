@@ -2583,6 +2583,14 @@
               "Static": false
             }
           ]
+        },
+        {
+          "__guid": "be219e98-61ec-46ee-a426-da869a3908b3",
+          "Flags": 0,
+          "Name": "SpeedDiceSpawner",
+          "Position": "-131.1538,122.4991,19.45305",
+          "Tags": "speed_dice_spawner",
+          "Enabled": true
         }
       ]
     },
@@ -2682,7 +2690,7 @@
           "Center": "0,0,-5",
           "IsTrigger": false,
           "Scale": "100,100,10",
-          "Static": false
+          "Static": true
         }
       ],
       "Children": [
@@ -2817,6 +2825,7 @@
                 "chanceJailFree": 0,
                 "communityJailFree": 0
               },
+              "ShowRoll": false,
               "State": "None",
               "TurnManager": {
                 "_type": "component",
@@ -3200,6 +3209,16 @@
                   "SpawnLocation": {
                     "_type": "gameobject",
                     "go": "69d2bf3c-4940-40d9-a192-d28075f7ebb6"
+                  },
+                  "SpeedDicePrefab": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/speed_dice.prefab"
+                  },
+                  "TurnManager": {
+                    "_type": "component",
+                    "component_id": "3a3de850-0708-4654-ac37-0751891b2abc",
+                    "go": "4d880113-7b4d-4756-ad95-7eed4744d084",
+                    "component_type": "TurnManager"
                   }
                 }
               ]

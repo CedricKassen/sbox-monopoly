@@ -1,37 +1,28 @@
 using System.Threading.Tasks;
+using EnumExtensions.Util;
 using Monopoly;
 using Sandbox.Constants;
 using Sandbox.Events;
 using Sandbox.Events.TurnEvents;
 
 public sealed class MovementManager : Component {
-	private readonly TaskCompletionSource<bool> tcs = new();
-
 	private float _timer;
 
-	[Property]
-	private bool Backwards;
+	[Property] private bool Backwards;
 
-	[Property]
-	private int CurrentField;
+	[Property] private int CurrentField;
 
-	[Property]
-	private Player Player;
+	[Property] private Player Player;
 
-	[Property]
-	private Rigidbody PlayerBody;
+	[Property] private Rigidbody PlayerBody;
 
-	[Property]
-	private int ToTravel;
+	[Property] private int ToTravel;
 
-	[Property]
-	private int Travelled;
+	[Property] private int Travelled;
 
-	[Property]
-	public GameObject LocationContainer { get; set; }
+	[Property] public GameObject LocationContainer { get; set; }
 
-	[Property]
-	public float SpeedMultiplier { get; set; }
+	[Property] public float SpeedMultiplier { get; set; }
 
 
 	[Button("Go to next chance field")]
@@ -55,10 +46,7 @@ public sealed class MovementManager : Component {
 	[Button("Go to police field field")]
 	public void GoToPoliceField() {
 		var player = Game.ActiveScene.GetAllComponents<Player>().First();
-
-		var lines = new List<int> { 2, 17, 33 };
-		var next = lines.Find(field => player.CurrentField < field || (player.CurrentField > 33 && field == 2));
-		CardActionHelper.MoveTo(next, player, this);
+		CardActionHelper.MoveTo(30, player, this);
 	}
 
 	public void StartMovement(Player player, int fieldsToTravel) {
@@ -89,6 +77,14 @@ public sealed class MovementManager : Component {
 			return;
 		}
 
+		if (ToTravel == 0) {
+			Log.Error("Something went wrong on Move. " + Player.Name + " tried to move zero fields from " +
+			          Player.CurrentField);
+
+			Log.Info("Set fields to travel to 1 to prevent Softlock!");
+			ToTravel = 1;
+		}
+
 		if (_timer < 1 / SpeedMultiplier) {
 			var location = LocationContainer.Children[CurrentField];
 			var position = location.Transform.World;
@@ -108,7 +104,13 @@ public sealed class MovementManager : Component {
 		_timer = 0;
 
 		if (CurrentField == 1) {
+			if (Player.RoundCount == 0) {
+				GameSounds.PlayUI(UiSounds.BtnSuccess);
+			}
+
 			if (Networking.IsHost) {
+				// TODO: Toast message that player unlocked the speed dice if RoundCount is set to one and rule is activated
+				Player.RoundCount++;
 				Game.ActiveScene.Dispatch(new PlayerPaymentEvent(2, Player.SteamId, 200, TurnManager.Phase.InMovement));
 			}
 		}

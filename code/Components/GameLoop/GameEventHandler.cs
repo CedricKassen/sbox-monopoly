@@ -21,7 +21,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
                                 IGameEventHandler<StartRollEvent>, IGameEventHandler<PayJailFineEvent>,
                                 IGameEventHandler<UseJailCardEvent>,
                                 IGameEventHandler<TurnActionDoneEvent>, IGameEventHandler<NotEnoughFundsEvent>,
-                                IGameEventHandler<PlayerBankruptEvent> {
+                                IGameEventHandler<PlayerBankruptEvent>, IGameEventHandler<StartMovementEvent>,
+                                IGameEventHandler<StartBonusMove> {
 	[Property] public GameObject LocationContainer { get; set; }
 
 	[Property] public Lobby Lobby { get; set; }
@@ -70,19 +71,32 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		foreach (var dice in _dice) {
-			dice.Roll();
+			dice.Roll(GetPlayerFromEvent(eventArgs.PlayerId));
 		}
 
-		TurnManager.ChangePhase((ulong)Game.SteamId, TurnManager.Phase.InAction);
+		TurnManager.ChangePhase(eventArgs.PlayerId, TurnManager.Phase.InAction);
 
 		while (_dice.Any(dice => dice.IsRolling)) {
 			await Task.DelayRealtimeSeconds(0.5f);
 		}
 
-		// No speed dice
-		if (_dice.Count == 2) {
+		// If no third speed dice is present OR if player does not have round count above 0 to activate speed dice
+		if (_dice.Count == 2 || GetPlayerFromEvent(eventArgs.PlayerId).RoundCount == 0) {
 			TurnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(), _dice[1].GetRoll().AsInt());
 		}
+		else {
+			TurnManager.EmitRolledEventWithSpeedDice((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(),
+				_dice[1].GetRoll().AsInt(), _dice[2].GetRoll().AsInt());
+		}
+
+		ShowDiceRoll();
+	}
+
+	[Broadcast]
+	private async void ShowDiceRoll() {
+		IngameStateManager.ShowRoll = true;
+		await Task.DelayRealtimeSeconds(3f);
+		IngameStateManager.ShowRoll = false;
 	}
 
 	public void OnGameEvent(TurnActionDoneEvent eventArgs) {
@@ -146,7 +160,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		GameSounds.PlayUI(UiSounds.BtnPress);
 		var player = GetPlayerFromEvent(eventArgs.PlayerId);
 
-		TurnManager.EmitPlayerPaymentEvent(2, player.SteamId, property.House_Cost, TurnManager.CurrentPhase);
+		TurnManager.EmitLocalPlayerPaymentEvent(2, player.SteamId, property.House_Cost / 2, TurnManager.CurrentPhase);
 
 		property.Houses--;
 	}
@@ -197,14 +211,14 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 				Log.Info("Price " + price);
 
-				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner, price);
+				TurnManager.EmitLocalPlayerPaymentEvent(eventArgs.playerId, fieldOwner, price);
 				return;
 			}
 
 			if (location.Type == GameLocation.PropertyType.Railroad) {
 				var railroadCount = IngameStateManager.OwnedFields
 				                                      .Count(f => f.Value == fieldOwner && f.Key.Contains("railroad"));
-				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
+				TurnManager.EmitLocalPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
 					location.Railroad_Rent[railroadCount - 1]);
 				return;
 			}
@@ -217,7 +231,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				Log.Info("Utilities owned: " + utilityCount);
 				Log.Info("Last throw: " + currentPlayer.LastDiceCount);
 
-				TurnManager.EmitPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
+				TurnManager.EmitLocalPlayerPaymentEvent(eventArgs.playerId, fieldOwner,
 					location.Utility_Rent_Multiplier[utilityCount - 1] * currentPlayer.LastDiceCount);
 				return;
 			}
@@ -250,7 +264,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		Player player = GetPlayerFromEvent(eventArgs.playerId);
 
 		TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.InAction);
-		TurnManager.EmitPlayerPaymentEvent(player.SteamId, 1, 50, TurnManager.Phase.Rolling);
+		TurnManager.EmitLocalPlayerPaymentEvent(player.SteamId, 1, 50, TurnManager.Phase.Rolling);
 		player.JailTurnCounter = 0;
 	}
 
@@ -365,7 +379,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	}
 
 	public void OnGameEvent(RolledEvent eventArgs) {
-		var player = GetPlayerFromEvent(eventArgs.playerId);
+		Player player = GetPlayerFromEvent(eventArgs.playerId);
 
 
 		player.DoublesCount = eventArgs.Doubles ? player.DoublesCount + 1 : 0;
@@ -375,13 +389,24 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			player.LastDiceCount = eventArgs.Number;
 
 			TurnManager.ChangePhase(eventArgs.playerId, TurnManager.Phase.InMovement);
-			if (player.DoublesCount < 3) {
-				MovementManager.StartMovement(player, eventArgs.Number);
-			}
-			else {
+			if (player.DoublesCount == 3) {
 				TurnManager.EmitSpecialPropertyActionEvent(TurnManager.SpecialPropertyActionType.Police,
 					player.SteamId);
+				return;
 			}
+
+			// Show "Bonus move" instead of "End turn" after turn. Player move to next unowned or if nothing is
+			// unowned next location he has to pay on
+			player.HasBonusMove = eventArgs.Forward;
+			if (eventArgs.Bus) {
+				// Player can choose to move either the value of die one, two or both.
+				TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.ChooseMove);
+			}
+			else {
+				// Player moves given amount
+				MovementManager.StartMovement(player, eventArgs.Number);
+			}
+
 
 			return;
 		}
@@ -403,7 +428,6 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		// 4 means the next turn would be the fourth turn in jail
-		Log.Info("Check if player beeing foreced out of jail " + player.JailTurnCounter);
 		if (player.JailTurnCounter == 4) {
 			// Force player to use card or pay caution
 			TurnManager.ChangePhase(player.SteamId, TurnManager.Phase.Jail);
@@ -453,7 +477,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	[Broadcast]
 	private void SetCurrentPlayersJailState() {
-		Player currentPlayer = TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex];
+		Player currentPlayer = TurnManager.CurrentLobby.AllPlayers[TurnManager.CurrentPlayerIndex];
 
 
 		if (currentPlayer.JailTurnCounter > 0) {
@@ -473,7 +497,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			_dice = new(Game.ActiveScene.GetAllComponents<Dice>());
 		}
 
-		Player currentPlayer = Lobby.Players[TurnManager.CurrentPlayerIndex];
+		Player currentPlayer = Lobby.AllPlayers[TurnManager.CurrentPlayerIndex];
 		_dice.ForEach(dice => dice.GameObject.Network.AssignOwnership(currentPlayer.Connection));
 	}
 
@@ -503,9 +527,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			}
 		}
 
-		TurnManager.EmitPlayerPaymentEvent(TradeState.TradingCreator.SteamId, TradeState.TradingPartner.SteamId,
+		TurnManager.EmitLocalPlayerPaymentEvent(TradeState.TradingCreator.SteamId, TradeState.TradingPartner.SteamId,
 			TradeState.TradingOfferAmount);
-		TurnManager.EmitPlayerPaymentEvent(TradeState.TradingPartner.SteamId, TradeState.TradingCreator.SteamId,
+		TurnManager.EmitLocalPlayerPaymentEvent(TradeState.TradingPartner.SteamId, TradeState.TradingCreator.SteamId,
 			TradeState.TradingRequestAmount);
 
 		ResetTrading();
@@ -593,10 +617,56 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 				playerWorth += gameLocation.House_Cost * gameLocation.Houses;
 			}
 
-			TurnManager.EmitPlayerPaymentEvent(eventArgs.PlayerId, eventArgs.Recipient, playerWorth);
+			TurnManager.EmitLocalPlayerPaymentEvent(eventArgs.PlayerId, eventArgs.Recipient, playerWorth);
 			TurnManager.EmitTurnFinishedEvent();
 		}
 
 		player.localUiState = IngameUI.LocalUIStates.None;
+	}
+
+	public void OnGameEvent(StartMovementEvent eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.PlayerId);
+		MovementManager.StartMovement(player, eventArgs.Amount);
+	}
+
+	public void OnGameEvent(StartBonusMove eventArgs) {
+		Player player = GetPlayerFromEvent(eventArgs.PlayerId);
+		player.HasBonusMove = false;
+		int indexOfNextField = GetIndexOfNextFieldForSpeedDice(player.CurrentField, player.SteamId);
+
+		if (indexOfNextField == 0) {
+			TurnManager.EmitTurnFinishedEvent();
+			return;
+		}
+
+		MovementManager.StartMovement(player, CardActionHelper.CalculateFieldsToTravel(player, indexOfNextField));
+	}
+
+	private int GetIndexOfNextFieldForSpeedDice(int currentField, ulong playerId) {
+		var locations = LocationContainer.Children;
+
+		int indexToNextForeignOwnedField = -1;
+		Log.Info("CurrentField " + currentField);
+		// Solange i nicht bei currentField landet
+		for (var i = currentField + 1; Monopoly.Math.Mod(i, 40) != currentField; i++) {
+			int modI = Monopoly.Math.Mod(i, 40);
+			GameLocation gl = locations[modI].Components.Get<GameLocation>();
+			if (gl.Type.Equals(GameLocation.PropertyType.Event)) {
+				continue;
+			}
+
+			ulong fieldOwner = IngameStateManager.OwnedFields[locations[modI].Name];
+			if (fieldOwner == 0) {
+				// if we find any location NOBODY owns we can interrupt this loop
+				return modI;
+			}
+
+			if (indexToNextForeignOwnedField == -1 && fieldOwner != playerId) {
+				indexToNextForeignOwnedField = modI;
+			}
+		}
+
+		// If no next field with other owner or unowned field is found return current field so player does not move
+		return indexToNextForeignOwnedField != -1 ? indexToNextForeignOwnedField : currentField;
 	}
 }

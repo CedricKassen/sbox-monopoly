@@ -2,6 +2,8 @@
 @inherits Sandbox.UI.Panel
 @using Sandbox.UI
 @using System
+@using System.ComponentModel.Design
+@using System.Net.NetworkInformation
 @using EnumExtensions
 @using EnumExtensions.Settings
 @using EnumExtensions.Util
@@ -79,15 +81,34 @@
 	return;
 }
 
+@if (_stateManager.ShowRoll && !_turnManager.CurrentPhase.Equals(TurnManager.Phase.ChooseMove)) {
+	int roll1 = _dice[0].GetRoll().AsInt();
+	int roll2 = _dice[1].GetRoll().AsInt();
+	int amount = roll1 + roll2;
+	<div style="position: absolute; align-items: center; justify-content: center; width: 100vw; height: 100vh;">
 
-<div style="position: absolute; top: 50%; left: 50%">
-	@if (_showRoll) {
-		if (_dice.Count == 2) {
-			<h1> @_dice.Aggregate(0, (accumulator, dice) => dice.GetRoll().AsInt() + accumulator) </h1>
+		@if (roll1 == roll2) {
+			<p>Oh baby a double</p>
 		}
+		
+		@if (_dice.Count == 2 || GetCurrentPlayer().RoundCount == 0) {
+			<h1> @amount </h1>
+		}
+		else {
+			DiceFace roll3 = _dice[2].GetRoll();
+			if (roll3.AsInt() <= 3) {
+				amount += roll3.AsInt();
+				<h1> @amount </h1>
+			}
+			else {
+				<h1> @amount and @(roll3.Equals(DiceFace.Bus) ? " 🚌" : " 🏃‍♂️")</h1>
+			}
+		
+		
+		}
+	</div>
+}
 
-	}
-</div>
 
 <div id="mainPanel">
 	<div class="autogrow"></div>
@@ -441,6 +462,27 @@
 		break;
 }
 
+@if (_turnManager.CurrentPhase == TurnManager.Phase.ChooseMove) {
+	@if (IsCurrentPlayer()) {
+		var value1 = _dice[0].GetRoll().AsInt();
+		var value2 = _dice[1].GetRoll().AsInt();
+		<div class="rollSelection">
+			<h2>🚌 Choose your next stop: </h2>
+			<div class="rollSelectionButtons">
+				@if (value1 != value2) {
+					<button onclick=@(() => Move(value1))>@value1</button>
+				}
+				<button onclick=@(() => Move(value2))>@value2</button>
+				<button onclick=@(() => Move(value1 + value2))>@(value1 + value2)</button>
+			</div>
+
+		</div>
+
+	}
+	else {
+		<p>Player is choosing his next move.</p>
+	}
+}
 
 @if (IsCurrentPlayer() && _turnManager.CurrentPhase.Equals(TurnManager.Phase.Jail)) {
 	<div class="jailDecision">
@@ -460,7 +502,7 @@
 
 @if (IsCurrentPlayer() && _turnManager.CurrentPhase == TurnManager.Phase.PlayerAction) {
 	<div class="endTurn">
-		<button onclick=@EndTurn> End Turn </button>
+		<button onclick=@EndTurn> @(GetCurrentPlayer().HasBonusMove ? "Bonus move" : "End turn") </button>
 	</div>
 }
 
@@ -508,8 +550,6 @@
 
 	private bool _waitingForTrading;
 
-	private bool _showRoll;
-
 	/// <summary>
 	///     the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
 	/// </summary>
@@ -518,7 +558,7 @@
 			_player = Game.ActiveScene.GetAllComponents<Player>().First(player => player.SteamId == (ulong)Game.SteamId);
 		}
 
-		return HashCode.Combine(_showRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data, _stateManager.OwnedFields, _player.localUiState, _stateManager.AuctionTimer);
+		return HashCode.Combine(_stateManager.ShowRoll, _turnManager.CurrentPhase, _turnManager.CurrentPlayerIndex, _stateManager.State, _stateManager.Data, _stateManager.OwnedFields, _player.localUiState, _stateManager.AuctionTimer);
 	}
 
 	private bool IsCurrentPlayer() {
@@ -526,7 +566,7 @@
 	}
 
 	private Player GetCurrentPlayer() {
-		return Lobby.Players[_turnManager.CurrentPlayerIndex];
+		return Lobby.AllPlayers[_turnManager.CurrentPlayerIndex];
 	}
 
 	private Player GetPlayer(ulong playerId) {
@@ -573,8 +613,7 @@
 			return;
 		}
 		GameSounds.PlayUI(UiSounds.BtnPress);
-		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.Rolling);
-		_turnManager.EmitStartRollEvent();
+		_turnManager.EmitStartRollEvent(GetCurrentPlayer().SteamId);
 	}
 
 	private void PayFine() {
@@ -595,43 +634,25 @@
 		_turnManager.EmitUseJailCardEvent(_player.SteamId);
 	}
 
-	private async void Roll() {
+	private void Roll() {
 		if (!IsCurrentPlayer() || _turnManager.CurrentPhase != TurnManager.Phase.Rolling) {
 			GameSounds.PlayUI(UiSounds.BtnDisabled);
 			return;
 		}
 		GameSounds.PlayUI(UiSounds.BtnPress);
 
-		foreach (var dice in _dice) {
-			dice.Roll();
-		}
-
-		_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InMovement);
-
-
-		while (_dice.Any(dice => dice.IsRolling)) {
-			await Task.DelayRealtimeSeconds(0.5f);
-		}
-
-		// No speed dice
-		if (_dice.Count == 2) {
-			_turnManager.EmitRolledEvent((ulong)Game.SteamId, _dice[0].GetRoll().AsInt(), _dice[1].GetRoll().AsInt());
-		}
-
-		_showRoll = true;
-		await Task.DelayRealtimeSeconds(2f);
-		_showRoll = false;
+		_turnManager.EmitStartRollEvent(_player.SteamId);
 	}
 
 	private void Buy() {
 		GameSounds.PlayUI(UiSounds.BtnPress);
-		_turnManager.EmitPropertyAquiredEvent((ulong)Game.SteamId, Lobby.Players[_turnManager.CurrentPlayerIndex].CurrentField, false);
+		_turnManager.EmitPropertyAquiredEvent((ulong)Game.SteamId, Lobby.AllPlayers[_turnManager.CurrentPlayerIndex].CurrentField, false);
 		CloseLocalModal();
 	}
 
 	private void Auction() {
 		GameSounds.PlayUI(UiSounds.BtnPress);
-		var player = Lobby.Players[_turnManager.CurrentPlayerIndex];
+		var player = Lobby.AllPlayers[_turnManager.CurrentPlayerIndex];
 		_turnManager.EmitPropertyAuctionEvent(player.CurrentField, player.SteamId);
 
 		player.localUiStateCache = LocalUIStates.Building;
@@ -640,7 +661,14 @@
 
 	private void EndTurn() {
 		GameSounds.PlayUI(UiSounds.BtnPress);
-		_turnManager.EmitTurnFinishedEvent();
+
+		if (GetCurrentPlayer().HasBonusMove) {
+			_turnManager.EmitStartBonusMove(_player.SteamId);
+		}
+		else {
+			_turnManager.EmitTurnFinishedEvent();	
+		}
+
 	}
 
 	private void CloseLocalModal() {
@@ -766,7 +794,7 @@
 	private bool CanOpenUI(LocalUIStates? state = null) {
 		var allowedPhases = new List<TurnManager.Phase>() { TurnManager.Phase.PlayerAction, TurnManager.Phase.InAction, TurnManager.Phase.Rolling };
 
-		var isCurrentPlayer = Lobby.Players[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId;
+		var isCurrentPlayer = Lobby.AllPlayers[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId;
 		var isAllowedPhase = allowedPhases.Contains(_turnManager.CurrentPhase);
 
 		return (isCurrentPlayer && isAllowedPhase || state == LocalUIStates.Options) && !_player.LocalUiOpen;
@@ -816,6 +844,23 @@
 	private void Quit() {
 		Game.Disconnect();
 	}
+	
+	private void Move(int toMove) {
+		if (toMove == 0) {
+			Log.Error("Move cannot be called with 0!");
+			return;
+		}
+		
+		if ((ulong) Game.SteamId == GetCurrentPlayer().SteamId) {
+			_turnManager.ChangePhase(GetCurrentPlayer().SteamId, TurnManager.Phase.InAction);
+			_turnManager.EmitStartMove(GetCurrentPlayer().SteamId, toMove);
+			GameSounds.PlayUI(UiSounds.BtnPress);
+		}
+		else {
+			GameSounds.PlayUI(UiSounds.BtnDeny);
+		}
+	}
+	
 
 
 }
