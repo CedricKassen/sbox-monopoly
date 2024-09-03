@@ -477,7 +477,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 
 	[Broadcast]
 	private void SetCurrentPlayersJailState() {
-		Player currentPlayer = TurnManager.CurrentLobby.Players[TurnManager.CurrentPlayerIndex];
+		Player currentPlayer = TurnManager.CurrentLobby.AllPlayers[TurnManager.CurrentPlayerIndex];
 
 
 		if (currentPlayer.JailTurnCounter > 0) {
@@ -497,7 +497,7 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 			_dice = new(Game.ActiveScene.GetAllComponents<Dice>());
 		}
 
-		Player currentPlayer = Lobby.Players[TurnManager.CurrentPlayerIndex];
+		Player currentPlayer = Lobby.AllPlayers[TurnManager.CurrentPlayerIndex];
 		_dice.ForEach(dice => dice.GameObject.Network.AssignOwnership(currentPlayer.Connection));
 	}
 

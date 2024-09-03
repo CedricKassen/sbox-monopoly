@@ -7,6 +7,7 @@
     "Tags": "dice",
     "Enabled": true,
     "NetworkMode": 1,
+    "NetworkInterpolation": false,
     "NetworkOrphaned": 1,
     "Components": [
       {

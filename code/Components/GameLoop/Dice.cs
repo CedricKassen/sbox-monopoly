@@ -53,7 +53,7 @@ public sealed class Dice : Component, Component.ICollisionListener {
 	}
 
 	protected override void OnUpdate() {
-		if (Rigidbody.Velocity.IsNearZeroLength || Rigidbody.Velocity.Length == 0) {
+		if (Rigidbody.Velocity.IsNearZeroLength || Rigidbody.Velocity.Length <= 0.005) {
 			IsRolling = false;
 		}
 		else if (Input.Down("Jump")) {
