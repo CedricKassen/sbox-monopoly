@@ -646,13 +646,13 @@
 
 	private void Buy() {
 		GameSounds.PlayUI(UiSounds.BtnPress);
-		_turnManager.EmitPropertyAquiredEvent((ulong)Game.SteamId, Lobby.AllPlayers[_turnManager.CurrentPlayerIndex].CurrentField, false);
+		_turnManager.EmitPropertyAquiredEvent((ulong)Game.SteamId, GetCurrentPlayer().CurrentField, false);
 		CloseLocalModal();
 	}
 
 	private void Auction() {
 		GameSounds.PlayUI(UiSounds.BtnPress);
-		var player = Lobby.AllPlayers[_turnManager.CurrentPlayerIndex];
+		var player = GetCurrentPlayer();
 		_turnManager.EmitPropertyAuctionEvent(player.CurrentField, player.SteamId);
 
 		player.localUiStateCache = LocalUIStates.Building;
@@ -794,7 +794,7 @@
 	private bool CanOpenUI(LocalUIStates? state = null) {
 		var allowedPhases = new List<TurnManager.Phase>() { TurnManager.Phase.PlayerAction, TurnManager.Phase.InAction, TurnManager.Phase.Rolling };
 
-		var isCurrentPlayer = Lobby.AllPlayers[_turnManager.CurrentPlayerIndex].SteamId == (ulong)Game.SteamId;
+		var isCurrentPlayer = GetCurrentPlayer().SteamId == (ulong)Game.SteamId;
 		var isAllowedPhase = allowedPhases.Contains(_turnManager.CurrentPhase);
 
 		return (isCurrentPlayer && isAllowedPhase || state == LocalUIStates.Options) && !_player.LocalUiOpen;
