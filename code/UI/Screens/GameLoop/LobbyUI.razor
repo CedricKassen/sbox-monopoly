@@ -44,7 +44,7 @@
 		<div class="player-container">
 			@foreach (var player in Lobby.Players) {
 				<div class="player">
-					<img src=@($"avatar:{player.SteamId}")/>
+					<img src=@($"avatarbig:{player.SteamId}")/>
 					<h3>@player.Name</h3>
 				</div>
 			}

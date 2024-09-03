@@ -28,17 +28,17 @@
 			<div class="column">
 				<div class="pedestal">
 					<div class="pillar">
-						<img src=@($"avatar:{second?.SteamId}")>
+						<img src=@($"avatarbig:{second?.SteamId}")>
 						<p>@second?.Name</p>
 						<div></div>
 					</div>
 					<div class="pillar">
-						<img src=@($"avatar:{first?.SteamId}")>
+						<img src=@($"avatarbig:{first?.SteamId}")>
 						<p>@first?.Name</p>
 						<div></div>
 					</div>
 					<div class="pillar">
-						<img src=@($"avatar:{third?.SteamId}")>
+						<img src=@($"avatarbig:{third?.SteamId}")>
 						<p>@third?.Name</p>
 						<div></div>
 					</div>
@@ -52,7 +52,7 @@
 				@if (forth != null) {
 					<div class="player">
 						<p> 4 </p>
-						<img src=@($"avatar:{forth.SteamId}")>
+						<img src=@($"avatarbig:{forth.SteamId}")>
 						<p>@forth.Name</p>
 					</div>
 				}
@@ -60,7 +60,7 @@
 				@if (fifth != null) {
 					<div class="player">
 						<p> 5 </p>
-						<img src=@($"avatar:{fifth.SteamId}")>
+						<img src=@($"avatarbig:{fifth.SteamId}")>
 						<p>@fifth.Name</p>
 					</div>
 				}
@@ -88,7 +88,7 @@
 	<div style="position: absolute; align-items: center; justify-content: center; width: 100vw; height: 100vh;">
 
 		@if (roll1 == roll2) {
-			<p>Oh baby a double</p>
+			<p>You throw doubles!</p>
 		}
 		
 		@if (_dice.Count == 2 || GetCurrentPlayer().RoundCount == 0) {
@@ -202,7 +202,7 @@
 									var player = Lobby.Players.First(p => p.SteamId == bid.Key);
 
 									<div class="playerBid">
-										<img src=@($"avatar:{bid.Key}") style="height: 100%; aspect-ratio: 1 / 1"/>
+										<img src=@($"avatarbig:{bid.Key}") style="height: 100%; aspect-ratio: 1 / 1"/>
 										<div style="flex-direction: column">
 											<p style="font-weight: bold; font-size: 24px">@player.Name</p>
 											<p>$@bid.Value</p>
@@ -373,7 +373,7 @@
 						<div style="gap: 32px">
 							@foreach (var player in Lobby.Players.Where(pl => Lobby.Players.Count == 1 || pl.SteamId != (ulong)Game.SteamId)) {
 								<div onclick=@(() => { _tradeState.Network.TakeOwnership(); _tradeState.TradingPartner = player; }) class="container playerCard">
-									<img src=@($"avatar:{player.SteamId}")/>
+									<img src=@($"avatarbig:{player.SteamId}")/>
 									<h3> @player.Name </h3>
 								</div>
 							}
@@ -436,7 +436,7 @@
 					<div class="container column" style="width: 600px">
 						<div style="width: 100%">
 							@if (recipient != null) {
-								<img src=@($"avatar:{data.Recipient}") style="width: 120px; aspect-ratio: 1/1; border-radius: 8px"/>
+								<img src=@($"avatarbig:{data.Recipient}") style="width: 120px; aspect-ratio: 1/1; border-radius: 8px"/>
 							}
 							<div style="flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; height: 120px;">
 								<h3> You owe @(recipient != null ? recipient.Name : "Bank"): </h3>

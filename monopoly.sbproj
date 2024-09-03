@@ -2,7 +2,7 @@
   "Title": "Monopoly",
   "Type": "game",
   "Org": "freshgaming",
-  "Ident": "monopolydev",
+  "Ident": "monopoly",
   "Schema": 1,
   "IncludeSourceFiles": false,
   "Resources": "\nui/game_pieces/*\nui/*",
