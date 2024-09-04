@@ -539,7 +539,8 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 	private void CloseLocalUIForEveryPlayer() {
 		foreach (var player in Lobby.Players) {
 			player.LocalUiOpen = false;
-			player.localUiState = IngameUI.LocalUIStates.None;
+			player.localUiState = player.localUiStateCache;
+			player.localUiStateCache = IngameUI.LocalUIStates.None;
 		}
 	}
 
