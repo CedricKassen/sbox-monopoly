@@ -528,9 +528,9 @@ public class GameEventHandler : Component, IGameEventHandler<RolledEvent>, IGame
 		}
 
 		TurnManager.EmitLocalPlayerPaymentEvent(TradeState.TradingCreator.SteamId, TradeState.TradingPartner.SteamId,
-			TradeState.TradingOfferAmount);
+			TradeState.TradingOfferAmount, TurnManager.CurrentPhase);
 		TurnManager.EmitLocalPlayerPaymentEvent(TradeState.TradingPartner.SteamId, TradeState.TradingCreator.SteamId,
-			TradeState.TradingRequestAmount);
+			TradeState.TradingRequestAmount, TurnManager.CurrentPhase);
 
 		ResetTrading();
 		CloseLocalUIForEveryPlayer();
