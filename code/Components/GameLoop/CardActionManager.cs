@@ -54,6 +54,11 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 	[Broadcast]
 	private void FillCommunityCards() {
 		CommunityCards = new();
+
+		if (CommunityCardsOrder == null) {
+			Log.Error("Community cards could not be filled!");
+		}
+
 		foreach (var index in CommunityCardsOrder) {
 			Card card = Cards.CommunityChest_Standard[index];
 			if (BlockedCards.ContainsKey(card.ActionId)) {
@@ -67,6 +72,11 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 	[Broadcast]
 	private void FillChanceCards() {
 		ChanceCards = new();
+
+		if (ChanceCardsOrder == null) {
+			Log.Error("Chance cards could not be filled!");
+		}
+
 		foreach (var index in ChanceCardsOrder) {
 			Card card = Cards.Chance_Standard[index];
 
