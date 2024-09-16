@@ -680,9 +680,13 @@
 
 	private void CloseGlobalModal(IngameUiStates state = IngameUiStates.None) {
 		if (!state.Equals(IngameUiStates.None) && IsCurrentPlayer()) {
+			
+			// Run action if state manager has card data
+			if (_stateManager is { Data: Card card }) {
+				_turnManager.EmitEventCardClosedEvent(card.ActionId, (ulong)Game.SteamId, state.Equals(IngameUiStates.Chance));
+			}
+			
 			GameSounds.PlayUI(UiSounds.BtnPress);
-			var card = _stateManager.Data as Card;
-			_turnManager.EmitEventCardClosedEvent(card.ActionId, (ulong)Game.SteamId, state.Equals(IngameUiStates.Chance));
 			_stateManager.State = IngameUiStates.None;
 		}
 		else {
