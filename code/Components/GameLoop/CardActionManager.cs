@@ -57,6 +57,7 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 
 		if (CommunityCardsOrder == null) {
 			Log.Error("Community cards could not be filled!");
+			return;
 		}
 
 		foreach (var index in CommunityCardsOrder) {
@@ -75,6 +76,7 @@ public sealed class CardActionManager : Component, IGameEventHandler<GameStartEv
 
 		if (ChanceCardsOrder == null) {
 			Log.Error("Chance cards could not be filled!");
+			return;
 		}
 
 		foreach (var index in ChanceCardsOrder) {
